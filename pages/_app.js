@@ -1,9 +1,8 @@
-import "../styles/globals.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
-}
+import "remixicon/fonts/remixicon.css";
+import "styles/main.scss";
 
-export default MyApp;
+const App = ({ Component, pageProps }) => <Component {...pageProps} />;
 
-// git push -u origin master
+export default App;

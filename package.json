@@ -1,6 +1,6 @@
 {
   "name": "pc_hub_app",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,8 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^9.5.5",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "next": "9.5.0",
+    "next-routes": "^1.4.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-resize-detector": "^5.0.6",
+    "react-toastify": "^6.0.8",
+    "reactstrap": "^8.5.1",
+    "remixicon": "^2.5.0",
+    "sass": "^1.26.10"
   }
 }
