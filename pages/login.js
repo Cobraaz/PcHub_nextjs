@@ -1,12 +1,17 @@
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
-import SignInForm from "components/LoginForm";
+import SignInForm from "components/auth/LoginForm";
 import Link from "next/link";
 import Redirect from "components/shared/Redirect";
 import { Row, Col, UncontrolledAlert, Spinner } from "reactstrap";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  const handleSubmit = async (e, userData) => {
+    e.preventDefault();
+    console.log(userData);
+  };
+
   return (
     <BaseLayout>
       <BasePage className="signin-page wrapper">
@@ -18,7 +23,7 @@ const Login = () => {
           >
             <div className="form-wrapper">
               <h1 className="mb-3">Sign In</h1>
-              <SignInForm />
+              <SignInForm onSubmit={handleSubmit} />
               <p className="mx-3">
                 You don't have a account
                 <Link href="/register">

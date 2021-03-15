@@ -1,12 +1,34 @@
+import { useContext } from "react";
+import Link from "next/link";
+import { Row, Col } from "reactstrap";
+
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
-import RegisterForm from "components/RegisterForm";
-import Link from "next/link";
-import Redirect from "components/shared/Redirect";
-import { Row, Col, UncontrolledAlert, Spinner } from "reactstrap";
-import { toast } from "react-toastify";
+import RegisterForm from "components/auth/RegisterForm";
+
+import valid from "../utils/valid";
+
+import { DataContext } from "../store/GlobalState";
+import { postData } from "utils/fetchData";
 
 const Register = () => {
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
+
+  const handleSubmit = async (e, userData) => {
+    e.preventDefault();
+    const { name, email, password, cf_password } = userData;
+    const errMsg = valid(name, email, password, cf_password);
+    if (errMsg) return dispatch({ type: "NOTIFY", payload: { error: errMsg } });
+    // dispatch({ type: "NOTIFY", payload: { loading: true } });
+    const res = await postData("auth/register", userData);
+    console.log(res);
+    if (res.err)
+      return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+    return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+  };
+
   return (
     <BaseLayout>
       <BasePage className="signin-page wrapper">
@@ -18,7 +40,7 @@ const Register = () => {
           >
             <div className="form-wrapper">
               <h1 className="mb-3">Sign Up</h1>
-              <RegisterForm />
+              <RegisterForm onSubmit={handleSubmit} />
               <p className="mx-3">
                 Already have a account
                 <Link href="/login">

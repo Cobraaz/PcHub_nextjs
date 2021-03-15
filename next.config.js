@@ -1,3 +1,5 @@
 module.exports = {
-  env: {},
+  env: {
+    BASE_URL: process.env.BASE_URL,
+  },
 };

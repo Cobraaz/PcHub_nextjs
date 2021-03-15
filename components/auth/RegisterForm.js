@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   InputGroup,
@@ -7,11 +8,22 @@ import {
 } from "reactstrap";
 
 const SignInForm = ({ onSubmit }) => {
+  const initialState = {
+    name: "",
+    email: "",
+    password: "",
+    cf_password: "",
+  };
+  const [userData, setUserData] = useState(initialState);
+  const { name, email, password, cf_password } = userData;
+
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
   return (
-    <form
-      className="mt-3"
-      // onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="mt-3" onSubmit={(e) => onSubmit(e, userData)}>
       <InputGroup>
         <InputGroupAddon addonType="prepend">
           <InputGroupText>
@@ -23,6 +35,8 @@ const SignInForm = ({ onSubmit }) => {
           name="name"
           placeholder="Name"
           required
+          value={name}
+          onChange={handleChangeInput}
         />
       </InputGroup>
       <InputGroup className="mt-3">
@@ -36,6 +50,8 @@ const SignInForm = ({ onSubmit }) => {
           type="email"
           placeholder="Email"
           name="email"
+          value={email}
+          onChange={handleChangeInput}
           required
         />
       </InputGroup>
@@ -50,6 +66,8 @@ const SignInForm = ({ onSubmit }) => {
           type="password"
           placeholder="password"
           name="password"
+          value={password}
+          onChange={handleChangeInput}
           required
         />
       </InputGroup>
@@ -64,6 +82,8 @@ const SignInForm = ({ onSubmit }) => {
           type="password"
           placeholder="Confirm password"
           name="cf_password"
+          value={cf_password}
+          onChange={handleChangeInput}
           required
         />
       </InputGroup>
