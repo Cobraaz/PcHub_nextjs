@@ -25,7 +25,7 @@ export const BsNavBrand = () => (
 );
 
 export const LoginLink = () => (
-  <a className="nav-link port-navbar-link" href="/login">
+  <a className="nav-link port-navbar-link" href="/api/v1/login">
     Login
   </a>
 );
