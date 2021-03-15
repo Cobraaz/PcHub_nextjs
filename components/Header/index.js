@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import ReactResizeDetector from "react-resize-detector";
 
 import {
@@ -7,11 +8,27 @@ import {
   Brands,
   BsNavBrand,
   Categories,
+  LoggedInUser,
 } from "components/Header/Header.helpers";
+import { DataContext } from "store/GlobalState";
+import { useRouter } from "next/router";
+import Cookie from "js-cookie";
 
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 
 const Header = ({ isOpen, toggle }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
+  const router = useRouter();
+
+  const handleLogout = () => {
+    Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
+    localStorage.removeItem("firstLogin");
+    dispatch({ type: "AUTH", payload: {} });
+    dispatch({ type: "NOTIFY", payload: { success: "Logged out!" } });
+    return router.push("/");
+  };
+
   return (
     <ReactResizeDetector handleWidth>
       {({ width }) => (
@@ -36,13 +53,11 @@ const Header = ({ isOpen, toggle }) => {
               </NavItem>
             </Nav>
             <Nav navbar>
-              <NavItem className="port-navbar-item">
-                <LogoutLink />
-              </NavItem>
-
-              <NavItem className="port-navbar-item">
+              {Object.keys(auth).length === 0 ? (
                 <LoginLink />
-              </NavItem>
+              ) : (
+                <LoggedInUser auth={auth} handleLogout={handleLogout} />
+              )}
             </Nav>
           </Collapse>
         </Navbar>

@@ -19,7 +19,6 @@ export default async (req, res) => {
 const register = async (req, res) => {
   try {
     const { name, email, password, cf_password } = req.body;
-    console.log({ name, email, password, cf_password });
     const errMsg = valid(name, email, password, cf_password);
     if (errMsg) return res.status(400).json({ err: errMsg });
 
@@ -36,7 +35,7 @@ const register = async (req, res) => {
     };
 
     const activation_token = createActivationToken(newUser);
-    console.log(activation_token);
+
     const url = `${process.env.BASE_URL}/user/activate/${activation_token}`;
     sendMail(email, url, "Verify your email address");
 

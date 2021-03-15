@@ -1,15 +1,41 @@
+import { useContext } from "react";
+import { Row, Col } from "reactstrap";
+import Link from "next/link";
+import Cookie from "js-cookie";
+
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import SignInForm from "components/auth/LoginForm";
-import Link from "next/link";
-import Redirect from "components/shared/Redirect";
-import { Row, Col, UncontrolledAlert, Spinner } from "reactstrap";
-import { toast } from "react-toastify";
+import { DataContext } from "../store/GlobalState";
+import { postData } from "utils/fetchData";
 
 const Login = () => {
+  const { state, dispatch } = useContext(DataContext);
+
   const handleSubmit = async (e, userData) => {
     e.preventDefault();
-    console.log(userData);
+
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    const res = await postData("auth/login", userData);
+
+    if (res.err)
+      return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+    dispatch({
+      type: "AUTH",
+      payload: {
+        token: res.access_token,
+        user: res.user,
+      },
+    });
+
+    Cookie.set("refreshtoken", res.refresh_token, {
+      path: "api/auth/accessToken",
+      expires: 7,
+    });
+
+    localStorage.setItem("firstLogin", true);
+    return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
 
   return (

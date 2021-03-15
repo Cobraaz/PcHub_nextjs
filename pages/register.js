@@ -2,12 +2,11 @@ import { useContext } from "react";
 import Link from "next/link";
 import { Row, Col } from "reactstrap";
 
+
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import RegisterForm from "components/auth/RegisterForm";
-
 import valid from "../utils/valid";
-
 import { DataContext } from "../store/GlobalState";
 import { postData } from "utils/fetchData";
 
@@ -18,11 +17,13 @@ const Register = () => {
   const handleSubmit = async (e, userData) => {
     e.preventDefault();
     const { name, email, password, cf_password } = userData;
+
     const errMsg = valid(name, email, password, cf_password);
     if (errMsg) return dispatch({ type: "NOTIFY", payload: { error: errMsg } });
-    // dispatch({ type: "NOTIFY", payload: { loading: true } });
+
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+
     const res = await postData("auth/register", userData);
-    console.log(res);
     if (res.err)
       return dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
