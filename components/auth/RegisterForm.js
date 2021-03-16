@@ -74,7 +74,7 @@ const SignInForm = ({ onSubmit }) => {
       <InputGroup className="mt-3">
         <InputGroupAddon addonType="prepend">
           <InputGroupText>
-            <i className="ri-lock-2-fill"></i>
+            <i className="ri-lock-password-fill"></i>
           </InputGroupText>
         </InputGroupAddon>
         <input

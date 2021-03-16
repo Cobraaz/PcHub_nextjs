@@ -2,12 +2,11 @@ import { useContext } from "react";
 import Link from "next/link";
 import { Row, Col } from "reactstrap";
 
-
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import RegisterForm from "components/auth/RegisterForm";
-import valid from "../utils/valid";
-import { DataContext } from "../store/GlobalState";
+import valid from "utils/valid";
+import { DataContext } from "store/GlobalState";
 import { postData } from "utils/fetchData";
 
 const Register = () => {

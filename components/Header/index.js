@@ -24,7 +24,6 @@ const Header = ({ isOpen, toggle }) => {
     Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
     localStorage.removeItem("firstLogin");
     dispatch({ type: "AUTH", payload: {} });
-    dispatch({ type: "NOTIFY", payload: { success: "Logged out!" } });
     return router.push("/");
   };
 

@@ -6,10 +6,11 @@ import Cookie from "js-cookie";
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import SignInForm from "components/auth/LoginForm";
-import { DataContext } from "../store/GlobalState";
+import { DataContext } from "store/GlobalState";
 import { postData } from "utils/fetchData";
-
+import { useRouter } from "next/router";
 const Login = () => {
+  const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
 
   const handleSubmit = async (e, userData) => {
@@ -35,7 +36,11 @@ const Login = () => {
     });
 
     localStorage.setItem("firstLogin", true);
-    return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+    dispatch({
+      type: "NOTIFY",
+      payload: { success: res.msg },
+    });
+    return router.push("/");
   };
 
   return (
@@ -50,7 +55,15 @@ const Login = () => {
             <div className="form-wrapper">
               <h1 className="mb-3">Sign In</h1>
               <SignInForm onSubmit={handleSubmit} />
-              <p className="mx-3">
+              <Link href="/user/forgot_password">
+                <a
+                  style={{ float: "right", textAlign: "end" }}
+                  className="mx-3"
+                >
+                  Forgot your password?
+                </a>
+              </Link>
+              <p className="mx-3 mt-2">
                 You don't have a account
                 <Link href="/register">
                   <a style={{ color: "crimson" }}> Register Now</a>

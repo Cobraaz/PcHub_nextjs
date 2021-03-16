@@ -29,6 +29,7 @@ const SignInForm = ({ onSubmit }) => {
         <input
           className="form-control"
           placeholder="Email"
+          type="email"
           name="email"
           value={email}
           onChange={handleChangeInput}

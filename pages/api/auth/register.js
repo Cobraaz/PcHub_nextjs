@@ -3,7 +3,6 @@ import Users from "models/userModel";
 import valid from "utils/valid";
 import { createActivationToken } from "utils/generateToken";
 import bcrypt from "bcrypt";
-// const sendMail = require("./sendMail");
 import sendMail from "utils/sendMail";
 
 connectDB();
