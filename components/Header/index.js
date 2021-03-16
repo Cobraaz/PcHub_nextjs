@@ -4,7 +4,6 @@ import ReactResizeDetector from "react-resize-detector";
 import {
   BsNavLink,
   LoginLink,
-  LogoutLink,
   Brands,
   BsNavBrand,
   Categories,
@@ -54,7 +53,9 @@ const Header = ({ isOpen, toggle }) => {
             </Nav>
             <Nav navbar>
               {Object.keys(auth).length === 0 ? (
-                <LoginLink />
+                <NavItem className="port-navbar-item">
+                  <LoginLink />
+                </NavItem>
               ) : (
                 <LoggedInUser auth={auth} handleLogout={handleLogout} />
               )}

@@ -8,14 +8,19 @@ const BaseLayout = (props) => {
   const toggle = () => setIsOpen(!isOpen);
   const { className, children } = props;
   return (
-    <div className="layout-container">
-      <Header toggle={toggle} isOpen={isOpen} />
-      <Notify />
-      <main onClick={() => isOpen && toggle()} className={`cover ${className}`}>
-        <div className="wrapper">{children}</div>
-      </main>
+    <>
+      <div className="layout-container">
+        <Header toggle={toggle} isOpen={isOpen} />
+        <Notify />
+        <main
+          onClick={() => isOpen && toggle()}
+          className={`cover ${className}`}
+        >
+          <div className="wrapper">{children}</div>
+        </main>
+      </div>
       <ToastContainer />
-    </div>
+    </>
   );
 };
 

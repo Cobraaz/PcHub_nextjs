@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       default: "user",
+      enum: ["user", "admin", "root"],
     },
     root: {
       type: Boolean,
@@ -26,7 +27,7 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
       default:
-        "https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png",
+        "https://res.cloudinary.com/cobraaz/image/upload/v1595762337/gez4i626tlesoe3plwn7.jpg",
     },
   },
   {
