@@ -18,6 +18,7 @@
     "next": "9.5.0",
     "next-routes": "^1.4.2",
     "nodemailer": "^6.5.0",
+    "nookies": "^2.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-resize-detector": "^5.0.6",

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Row, Col } from "reactstrap";
 import Link from "next/link";
 import Cookie from "js-cookie";
+import { parseCookies } from "nookies";
 
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
@@ -9,6 +10,8 @@ import SignInForm from "components/auth/LoginForm";
 import { DataContext } from "store/GlobalState";
 import { postData } from "utils/fetchData";
 import { useRouter } from "next/router";
+import { withAuth } from "utils/auth";
+
 const Login = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
@@ -32,6 +35,10 @@ const Login = () => {
 
     Cookie.set("refreshtoken", res.refresh_token, {
       path: "api/auth/accessToken",
+      expires: 7,
+    });
+
+    Cookie.set("user", res.user, {
       expires: 7,
     });
 
@@ -76,5 +83,19 @@ const Login = () => {
     </BaseLayout>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  // some auth logic here
+  const { res } = ctx;
+  const { user } = parseCookies(ctx);
+  const isAuth = user ? JSON.parse(user) : false;
+  if (isAuth) {
+    withAuth(res, "/");
+  }
+
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
 
 export default Login;
