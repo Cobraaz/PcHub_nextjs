@@ -11,6 +11,7 @@ import { DataContext } from "store/GlobalState";
 import { postData } from "utils/fetchData";
 import { useRouter } from "next/router";
 import { withAuth } from "utils/auth";
+import { validateEmail as isEmail, isLength } from "utils/valid";
 
 const Login = () => {
   const router = useRouter();
@@ -18,6 +19,19 @@ const Login = () => {
 
   const handleSubmit = async (e, userData) => {
     e.preventDefault();
+    const { email, password } = userData;
+
+    if (!isEmail(email))
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Invalid emails." },
+      });
+
+    if (isLength(password))
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Password must be at least 6 characters." },
+      });
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
     const res = await postData("auth/login", userData);

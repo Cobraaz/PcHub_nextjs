@@ -8,26 +8,34 @@ const Notify = () => {
   const { notify } = state;
 
   const handleShow = () => dispatch({ type: "NOTIFY", payload: {} });
+
+  const displayToast = (err) => {
+    err;
+    return;
+  };
   return (
     <>
       {notify.loading && <Loading />}
       {notify.error &&
-        toast.error(notify.error, {
-          autoClose: 3000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          onClose: handleShow,
-        })}
-      {notify.success && (
-        <div onClick={() => dispatch({ type: "NOTIFY", payload: {} })}>
-          {toast.success(notify.success, {
+        displayToast(
+          toast.error(notify.error, {
             autoClose: 3000,
             closeOnClick: true,
             pauseOnHover: true,
             onClose: handleShow,
-          })}
-        </div>
-      )}
+            toastId: "custom-id-error",
+          })
+        )}
+      {notify.success &&
+        displayToast(
+          toast.success(notify.success, {
+            autoClose: 3000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            onClose: handleShow,
+            toastId: "custom-id-success",
+          })
+        )}
     </>
   );
 };

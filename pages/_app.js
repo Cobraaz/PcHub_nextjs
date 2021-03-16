@@ -4,11 +4,15 @@ import "remixicon/fonts/remixicon.css";
 import "react-toastify/dist/ReactToastify.css";
 import "styles/main.scss";
 import { DataProvider } from "store/GlobalState";
-
+import Layout from "components/layouts";
 const App = ({ Component, pageProps }) => (
-  <DataProvider>
-    <Component {...pageProps} />
-  </DataProvider>
+  <>
+    <DataProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </DataProvider>
+  </>
 );
 
 export default App;

@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import Cookie from "js-cookie";
 
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import { postData } from "utils/fetchData";
+import { DataContext } from "store/GlobalState";
 
 const ActivationEmail = () => {
   const router = useRouter();
   const { activation_token } = router.query;
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState("");
+  const { state, dispatch } = useContext(DataContext);
 
   useEffect(() => {
     if (activation_token) {
@@ -20,9 +23,39 @@ const ActivationEmail = () => {
           });
           if (res.err) {
             setErr(res.err);
+            return dispatch({
+              type: "NOTIFY",
+              payload: { error: res.err },
+            });
           }
 
+          dispatch({
+            type: "AUTH",
+            payload: {
+              token: res.access_token,
+              user: res.user,
+            },
+          });
+
+          Cookie.set("refreshtoken", res.refresh_token, {
+            path: "api/auth/accessToken",
+            expires: 7,
+          });
+
+          Cookie.set("user", res.user, {
+            expires: 7,
+          });
+
+          localStorage.setItem("firstLogin", true);
+
           setSuccess(res.msg);
+          dispatch({
+            type: "NOTIFY",
+            payload: { success: res.msg },
+          });
+          await setTimeout(() => {
+            router.push("/");
+          }, 2000);
         } catch (err) {
           setErr(err);
         }
