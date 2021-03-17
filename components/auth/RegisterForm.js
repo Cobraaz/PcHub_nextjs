@@ -23,7 +23,7 @@ const SignInForm = ({ onSubmit }) => {
   };
 
   return (
-    <form className="mt-3" onSubmit={(e) => onSubmit(e, userData)}>
+    <form onSubmit={(e) => onSubmit(e, userData)}>
       <InputGroup>
         <InputGroupAddon addonType="prepend">
           <InputGroupText>

@@ -42,13 +42,13 @@ const Register = () => {
           >
             <div className="form-wrapper">
               <h1 className="mb-3">Sign Up</h1>
-              <RegisterForm onSubmit={handleSubmit} />
-              <p className="mx-3">
+              <p className="mx-3 mb-0">
                 Already have a account
                 <Link href="/login">
-                  <a style={{ color: "crimson" }}> Login Now</a>
+                  <a className="account-text"> Login Now</a>
                 </Link>
               </p>
+              <RegisterForm onSubmit={handleSubmit} />
             </div>
           </Col>
         </Row>

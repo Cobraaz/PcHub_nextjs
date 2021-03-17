@@ -145,13 +145,13 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
             title="Profile"
           />
         </DropdownItem>
-        <DropdownItem>
+        {/* <DropdownItem>
           <BsNavLink
             className="port-dropdown-item"
             href="#"
             title="Keyboards"
           />
-        </DropdownItem>
+        </DropdownItem> */}
         <DropdownItem divider />
         <DropdownItem onClick={handleLogout}>
           <BsNavLink className="port-dropdown-item" href="" title="Logout" />

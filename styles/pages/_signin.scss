@@ -38,6 +38,60 @@
   .btn-signin {
     background-color: #f47625;
   }
+
+  /* ---------- Facebook / Google ---------------- */
+  .hr {
+    margin: 15px 0;
+    color: crimson;
+  }
+
+  .social button {
+    width: 100%;
+    margin: 10px 0;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 200;
+    text-transform: capitalize;
+    letter-spacing: 1.3px;
+    box-shadow: 0 2px 4px #777;
+  }
+
+  .social-media {
+    display: flex;
+    justify-content: center;
+  }
+
+  .social-icon {
+    height: 46px;
+    width: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.45rem;
+    color: #333;
+    border-radius: 50%;
+    border: 1px solid #333;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    color: #096fb9;
+  }
+
+  .social-icon:hover {
+    color: #d193e6;
+    border-color: #d193e6;
+  }
+
+  .account-text {
+    color: #b122e0;
+    border-bottom: none;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+  .account-text:hover {
+    color: #d193e6;
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 900px) {
