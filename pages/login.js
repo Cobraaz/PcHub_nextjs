@@ -12,7 +12,9 @@ import { postData } from "utils/fetchData";
 import { useRouter } from "next/router";
 import { withAuth } from "utils/auth";
 import { validateEmail as isEmail, isLength } from "utils/valid";
-
+import { GoogleLogin } from "react-google-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+// import FacebookLogin from "react-facebook-login";
 const Login = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
@@ -64,6 +66,82 @@ const Login = () => {
     return router.push("/");
   };
 
+  const responseGoogle = async (response) => {
+    try {
+      const res = await postData("auth/google_login", {
+        tokenId: response.tokenId,
+      });
+
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+      dispatch({
+        type: "AUTH",
+        payload: {
+          token: res.access_token,
+          user: res.user,
+        },
+      });
+
+      Cookie.set("refreshtoken", res.refresh_token, {
+        path: "api/auth/accessToken",
+        expires: 7,
+      });
+
+      Cookie.set("user", res.user, {
+        expires: 7,
+      });
+
+      localStorage.setItem("firstLogin", true);
+      dispatch({
+        type: "NOTIFY",
+        payload: { success: res.msg },
+      });
+      return router.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const responseFacebook = async (response) => {
+    console.log(response);
+    try {
+      const { accessToken, userID } = response;
+      const res = await postData("auth/facebook_login", {
+        accessToken,
+        userID,
+      });
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+      dispatch({
+        type: "AUTH",
+        payload: {
+          token: res.access_token,
+          user: res.user,
+        },
+      });
+
+      Cookie.set("refreshtoken", res.refresh_token, {
+        path: "api/auth/accessToken",
+        expires: 7,
+      });
+
+      Cookie.set("user", res.user, {
+        expires: 7,
+      });
+
+      localStorage.setItem("firstLogin", true);
+      dispatch({
+        type: "NOTIFY",
+        payload: { success: res.msg },
+      });
+      return router.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <BaseLayout>
       <BasePage className="signin-page wrapper">
@@ -75,21 +153,66 @@ const Login = () => {
           >
             <div className="form-wrapper">
               <h1 className="mb-3">Sign In</h1>
+              <p className="mx-3">
+                You don't have a account
+                <Link href="/register">
+                  <a className="account-text"> Register Now</a>
+                </Link>
+              </p>
               <SignInForm onSubmit={handleSubmit} />
               <Link href="/user/forgot_password">
                 <a
                   style={{ float: "right", textAlign: "end" }}
-                  className="mx-3"
+                  className="mx-3 account-text"
                 >
                   Forgot your password?
                 </a>
               </Link>
-              <p className="mx-3 mt-2">
-                You don't have a account
-                <Link href="/register">
-                  <a style={{ color: "crimson" }}> Register Now</a>
-                </Link>
-              </p>
+              <div className="mt-4 text-center">
+                Or Sign in with social platforms
+                <div className="social-media mt-3">
+                  <GoogleLogin
+                    clientId="438860565442-tcm0msfhmq279l9tc2neuk2ggctcm4mm.apps.googleusercontent.com"
+                    render={(renderProps) => (
+                      <div className="social-media">
+                        <div
+                          onClick={renderProps.onClick}
+                          disabled={renderProps.disabled}
+                          className="social-icon"
+                        >
+                          <i
+                            className="ri-google-fill"
+                            style={{ fontSize: "1.6em" }}
+                          ></i>
+                        </div>
+                      </div>
+                    )}
+                    onSuccess={responseGoogle}
+                    cookiePolicy={"single_host_origin"}
+                  />
+
+                  <FacebookLogin
+                    appId="796904754565274"
+                    autoLoad={false}
+                    callback={responseFacebook}
+                    render={(renderProps) => (
+                      <div className="social-media">
+                        <div
+                          onClick={renderProps.onClick}
+                          disabled={renderProps.disabled}
+                          className="social-icon"
+                          // style={{ fontSize: "1.3em" }}
+                        >
+                          <i
+                            className="ri-facebook-fill"
+                            style={{ fontSize: "1.6em" }}
+                          ></i>
+                        </div>
+                      </div>
+                    )}
+                  />
+                </div>
+              </div>
             </div>
           </Col>
         </Row>
