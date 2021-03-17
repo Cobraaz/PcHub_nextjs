@@ -172,7 +172,7 @@ const Login = () => {
                 Or Sign in with social platforms
                 <div className="social-media mt-3">
                   <GoogleLogin
-                    clientId="438860565442-tcm0msfhmq279l9tc2neuk2ggctcm4mm.apps.googleusercontent.com"
+                    clientId={process.env.GOOGLE_CLIENT_ID}
                     render={(renderProps) => (
                       <div className="social-media">
                         <div
@@ -192,7 +192,7 @@ const Login = () => {
                   />
 
                   <FacebookLogin
-                    appId="796904754565274"
+                    appId={process.env.FACEBOOK_CLIENT_ID}
                     autoLoad={false}
                     callback={responseFacebook}
                     render={(renderProps) => (
@@ -201,7 +201,6 @@ const Login = () => {
                           onClick={renderProps.onClick}
                           disabled={renderProps.disabled}
                           className="social-icon"
-                          // style={{ fontSize: "1.3em" }}
                         >
                           <i
                             className="ri-facebook-fill"
