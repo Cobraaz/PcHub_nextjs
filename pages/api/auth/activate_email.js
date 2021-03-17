@@ -44,7 +44,6 @@ const activateEmail = async (req, res) => {
         email: result.email,
         role: result.role,
         avatar: result.avatar,
-        root: result.root,
       },
     });
   } catch (err) {

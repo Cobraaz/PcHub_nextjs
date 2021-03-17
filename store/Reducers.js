@@ -13,6 +13,11 @@ const reducers = (state, action) => {
         ...state,
         auth: action.payload,
       };
+    case ACTIONS.GET_ALL_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
 
     default:
       return state;

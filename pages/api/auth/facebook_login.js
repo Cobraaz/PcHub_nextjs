@@ -50,7 +50,6 @@ const facebookLogin = async (req, res) => {
           email: user.email,
           role: user.role,
           avatar: user.avatar,
-          root: user.root,
         },
       });
     } else {
@@ -75,7 +74,6 @@ const facebookLogin = async (req, res) => {
           email: result.email,
           role: result.role,
           avatar: result.avatar,
-          root: result.root,
         },
       });
     }

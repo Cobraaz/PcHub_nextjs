@@ -10,7 +10,7 @@ import {
 
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
-import { postData } from "utils/fetchData";
+import { patchData } from "utils/fetchData";
 import { isLength, isMatch } from "utils/valid";
 import { DataContext } from "store/GlobalState";
 
@@ -51,7 +51,7 @@ const ResetPassword = () => {
       });
 
     try {
-      const res = await postData(
+      const res = await patchData(
         "auth/reset_password",
         { password },
         reset_token

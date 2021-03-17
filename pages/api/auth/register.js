@@ -36,6 +36,7 @@ const register = async (req, res) => {
     const activation_token = createActivationToken(newUser);
 
     const url = `${process.env.BASE_URL}/user/activate/${activation_token}`;
+    console.log(url);
     sendMail(email, url, "Verify your email address");
 
     res.json({

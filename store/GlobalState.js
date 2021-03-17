@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-
+import Cookie from "js-cookie";
 import { getData } from "../utils/fetchData";
 import reducers from "./Reducers";
 export const DataContext = createContext();
@@ -8,6 +8,7 @@ export const DataProvider = ({ children }) => {
   const initialState = {
     notify: {},
     auth: {},
+    users: [],
   };
   const [state, dispatch] = useReducer(reducers, initialState);
 
@@ -15,7 +16,11 @@ export const DataProvider = ({ children }) => {
     const firstLogin = localStorage.getItem("firstLogin");
     if (firstLogin) {
       getData("auth/access_token").then((res) => {
-        if (res.err) return localStorage.removeItem("firstLogin");
+        if (res.err) {
+          Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
+          Cookie.remove("user");
+          return localStorage.removeItem("firstLogin");
+        }
         dispatch({
           type: "AUTH",
           payload: {

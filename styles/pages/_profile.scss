@@ -1,0 +1,89 @@
+.profile-page {
+  .avatar {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    margin: 15px auto;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+  .avatar span {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #fff8;
+    text-align: center;
+    font-weight: 400;
+    color: rgb(255, 140, 45);
+    transition: 0.3 ease-in-out;
+  }
+  .avatar:hover span {
+    bottom: -15%;
+  }
+  #file_up {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  ::-webkit-file-upload-button {
+    cursor: pointer;
+  }
+
+  /* ------------ Table------------ */
+  .customers {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .customers td,
+  .customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    min-width: 100px;
+  }
+  .customers tr:nth-child(even) {
+    background: #f2f2f2;
+  }
+  .customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background: #555;
+    color: white;
+  }
+  .customers i {
+    cursor: pointer;
+  }
+  .customers .ri-check-double-fill {
+    color: green;
+  }
+  .customers .ri-close-fill {
+    color: red;
+  }
+  .customers .ri-pencil-fill {
+    background: whitesmoke;
+    padding: 7px;
+    color: #555;
+    font-size: 10px;
+  }
+  .customers .ri-delete-bin-line {
+    background: red;
+    padding: 7px;
+    color: white;
+    font-size: 10px;
+    margin-left: 7px;
+  }
+}

@@ -35,7 +35,6 @@ const register = async (req, res) => {
         email: user.email,
         role: user.role,
         avatar: user.avatar,
-        root: user.root,
       },
     });
   } catch (err) {

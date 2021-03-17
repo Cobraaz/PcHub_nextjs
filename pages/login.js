@@ -14,7 +14,7 @@ import { withAuth } from "utils/auth";
 import { validateEmail as isEmail, isLength } from "utils/valid";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-// import FacebookLogin from "react-facebook-login";
+
 const Login = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);

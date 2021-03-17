@@ -20,10 +20,6 @@ const userSchema = new mongoose.Schema(
       default: "user",
       enum: ["user", "admin", "root"],
     },
-    root: {
-      type: Boolean,
-      default: false,
-    },
     avatar: {
       type: String,
       default:

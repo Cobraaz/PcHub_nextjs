@@ -141,7 +141,7 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
         <DropdownItem>
           <BsNavLink
             className="port-dropdown-item"
-            href="/profile"
+            href="/user/profile"
             title="Profile"
           />
         </DropdownItem>

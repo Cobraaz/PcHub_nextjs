@@ -25,6 +25,7 @@ const Header = ({ isOpen, toggle }) => {
     Cookie.remove("user");
     localStorage.removeItem("firstLogin");
     dispatch({ type: "AUTH", payload: {} });
+    dispatch({ type: "GET_ALL_USERS", payload: {} });
     dispatch({ type: "NOTIFY", payload: { success: "Logged out!" } });
     return router.push("/");
   };
