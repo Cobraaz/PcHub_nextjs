@@ -6,12 +6,14 @@ import {
   InputGroupText,
   InputGroupAddon,
 } from "reactstrap";
+import { parseCookies } from "nookies";
 
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import { postData } from "utils/fetchData";
 import { validateEmail as isEmail } from "utils/valid";
 import { DataContext } from "store/GlobalState";
+import { withAuth } from "utils/auth";
 
 const ForgotPassword = () => {
   const { state, dispatch } = useContext(DataContext);
@@ -41,7 +43,6 @@ const ForgotPassword = () => {
 
     try {
       const res = await postData("auth/forgot_password", { email });
-      console.log(res);
       if (res.err) {
         setErr(res.err);
       }
@@ -117,5 +118,19 @@ const ForgotPassword = () => {
     </BaseLayout>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  // some auth logic here
+  const { res } = ctx;
+  const { user } = parseCookies(ctx);
+  const isAuth = user ? JSON.parse(user) : false;
+  if (!isAuth) {
+    withAuth(res, "/");
+  }
+
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
 
 export default ForgotPassword;

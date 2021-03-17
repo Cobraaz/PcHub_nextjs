@@ -118,23 +118,12 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Dropdown
-      className="port-navbar-link port-dropdown-menu"
+      className="port-navbar-link port-dropdown-menu  mr-3"
       nav
       isOpen={isOpen}
       toggle={() => setIsOpen(!isOpen)}
     >
       <DropdownToggle className="port-dropdown-toggle" nav caret>
-        <img
-          src={auth.user.avatar}
-          alt={auth.user.avatar}
-          style={{
-            borderRadius: "50%",
-            width: "30px",
-            height: "30px",
-            transform: "translateY(-3px)",
-            marginRight: "3px",
-          }}
-        />
         {auth.user.name}
       </DropdownToggle>
       <DropdownMenu>
@@ -160,41 +149,3 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
     </Dropdown>
   );
 };
-
-// const loggedRouter = ({ auth }) => {
-//   return (
-//     <li className="nav-item dropdown">
-//       <a
-//         className="nav-link dropdown-toggle"
-//         href="#"
-//         id="navbarDropdownMenuLink"
-//         data-toggle="dropdown"
-//         aria-haspopup="true"
-//         aria-expanded="false"
-//       >
-//         <img
-//           src={auth.user.avatar}
-//           alt={auth.user.avatar}
-//           style={{
-//             borderRadius: "50%",
-//             width: "30px",
-//             height: "30px",
-//             transform: "translateY(-3px)",
-//             marginRight: "3px",
-//           }}
-//         />{" "}
-//         {auth.user.name}
-//       </a>
-
-//       <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-//         <Link href="/profile">
-//           <a className="dropdown-item">Profile</a>
-//         </Link>
-//         <div className="dropdown-divider"></div>
-//         <button className="dropdown-item" onClick={handleLogout}>
-//           Logout
-//         </button>
-//       </div>
-//     </li>
-//   );
-// };

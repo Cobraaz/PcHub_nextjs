@@ -16,7 +16,6 @@ export default async (req, res) => {
 const getAllUsers = Authenticated(
   AuthenticatedRoot(async (req, res) => {
     try {
-      console.log("from getAlluser");
       const users = await Users.find().select("-password");
       res.json(users);
     } catch (err) {

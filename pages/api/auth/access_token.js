@@ -8,7 +8,6 @@ connectDB();
 export default async (req, res) => {
   try {
     const rf_token = req.cookies.refreshtoken;
-    console.log(rf_token);
     if (!rf_token) return res.status(400).json({ err: "Please login now!" });
 
     const result = jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET);

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Link from "next/link";
 import { Row, Col } from "reactstrap";
 import { parseCookies } from "nookies";
@@ -14,6 +14,10 @@ import { withAuth } from "utils/auth";
 const Register = () => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
+
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push("/");
+  }, [auth]);
 
   const handleSubmit = async (e, userData) => {
     e.preventDefault();

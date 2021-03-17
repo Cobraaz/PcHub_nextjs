@@ -37,12 +37,12 @@ const ActivationEmail = () => {
             },
           });
 
+          const { name, email: emailNew, role } = res.user;
+
+          Cookie.set("user", { name, email: emailNew, role }, { expires: 7 });
+
           Cookie.set("refreshtoken", res.refresh_token, {
             path: "api/auth/accessToken",
-            expires: 7,
-          });
-
-          Cookie.set("user", res.user, {
             expires: 7,
           });
 

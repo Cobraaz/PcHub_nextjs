@@ -1,10 +1,13 @@
 import { useState, useContext, useEffect } from "react";
+import { parseCookies } from "nookies";
+import imageCompression from "browser-image-compression";
 
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import { DataContext } from "store/GlobalState";
 import valid from "utils/valid";
 import { getData, patchData } from "utils/fetchData";
+import { withAuth } from "utils/auth";
 
 const Profile = () => {
   const initialState = {
@@ -35,7 +38,6 @@ const Profile = () => {
       getData("user/all_infor", auth.token).then((res) => {
         if (res.err)
           return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-        console.log(res);
         dispatch({
           type: "GET_ALL_USERS",
           payload: res,
@@ -77,7 +79,13 @@ const Profile = () => {
     });
 
   const changeAvatar = async (e) => {
-    const file = e.target.files[0];
+    let file;
+    file = await imageCompression(e.target.files[0], {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+      initialQuality: 0.3, // optional, initial quality value between 0 and 1 (default: 1)
+    });
     if (!file)
       return dispatch({
         type: "NOTIFY",
@@ -97,8 +105,9 @@ const Profile = () => {
         type: "NOTIFY",
         payload: { error: "Image format is incorrect." },
       });
-    const file2 = await toBase64(file);
-    setData({ ...data, avatar: file2 });
+
+    file = await toBase64(file);
+    setData({ ...data, avatar: file });
   };
 
   const updateInfor = async () => {
@@ -272,5 +281,19 @@ const Profile = () => {
     </BaseLayout>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  // some auth logic here
+  const { res } = ctx;
+  const { user } = parseCookies(ctx);
+  const isAuth = user ? JSON.parse(user) : false;
+  if (!isAuth) {
+    withAuth(res, "/");
+  }
+
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
 
 export default Profile;

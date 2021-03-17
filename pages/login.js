@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Row, Col } from "reactstrap";
 import Link from "next/link";
 import Cookie from "js-cookie";
@@ -18,6 +18,11 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 const Login = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
+
+  useEffect(() => {
+    if (Object.keys(auth).length !== 0) router.push("/");
+  }, [auth]);
 
   const handleSubmit = async (e, userData) => {
     e.preventDefault();
@@ -49,12 +54,12 @@ const Login = () => {
       },
     });
 
+    const { name, email: emailNew, role } = res.user;
+
+    Cookie.set("user", { name, email: emailNew, role }, { expires: 7 });
+
     Cookie.set("refreshtoken", res.refresh_token, {
       path: "api/auth/accessToken",
-      expires: 7,
-    });
-
-    Cookie.set("user", res.user, {
       expires: 7,
     });
 
@@ -104,7 +109,6 @@ const Login = () => {
   };
 
   const responseFacebook = async (response) => {
-    console.log(response);
     try {
       const { accessToken, userID } = response;
       const res = await postData("auth/facebook_login", {

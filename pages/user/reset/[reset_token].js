@@ -56,13 +56,6 @@ const ResetPassword = () => {
         { password },
         reset_token
       );
-      //   const res = await axios.post(
-      //     "/user/reset_password",
-      //     { password },
-      //     {
-      //       headers: { Authorization: reset_token },
-      //     }
-      //   );
 
       return setSuccess(res.msg);
     } catch (err) {

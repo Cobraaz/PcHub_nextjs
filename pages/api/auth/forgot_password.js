@@ -15,7 +15,6 @@ export default async (req, res) => {
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    console.log(email);
     const user = await Users.findOne({ email });
     if (!user)
       return res.status(400).json({ err: "This email does not exist." });
