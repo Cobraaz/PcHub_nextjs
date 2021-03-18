@@ -40,6 +40,7 @@ const activateEmail = async (req, res) => {
       refresh_token,
       access_token,
       user: {
+        id: result._id,
         name: result.name,
         email: result.email,
         role: result.role,

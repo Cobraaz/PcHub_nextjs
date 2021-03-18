@@ -24,6 +24,7 @@ const uploadInfor = Authenticated(async (req, res) => {
     res.json({
       msg: "Update Success!",
       user: {
+        id: newUser._id,
         name,
         avatar,
         email: newUser.email,

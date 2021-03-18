@@ -6,8 +6,9 @@ import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import { DataContext } from "store/GlobalState";
 import valid from "utils/valid";
-import { getData, patchData } from "utils/fetchData";
+import { deleteData, getData, patchData } from "utils/fetchData";
 import { withAuth } from "utils/auth";
+import Link from "next/link";
 
 const Profile = () => {
   const initialState = {
@@ -18,6 +19,7 @@ const Profile = () => {
   };
 
   const [data, setData] = useState(initialState);
+  const [callback, setCallback] = useState(false);
   const { avatar, cf_password, name, password } = data;
 
   const { state, dispatch } = useContext(DataContext);
@@ -44,7 +46,7 @@ const Profile = () => {
         });
       });
     }
-  }, [auth.token, auth.user]);
+  }, [auth.token, auth.user, callback]);
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
@@ -133,6 +135,21 @@ const Profile = () => {
       });
       return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
     });
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      if (auth.user.id !== id) {
+        if (window.confirm("Are you sure you want to delete this account?")) {
+          dispatch({ type: "NOTIFY", payload: { loading: true } });
+          const res = await deleteData(`user/delete_user/${id}`, auth.token);
+          dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+          setCallback(!callback);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   if (!auth.user) return null;
@@ -258,16 +275,24 @@ const Profile = () => {
                                 <i className="ri-close-fill" title="User"></i>
                               )}
                             </td>
-                            <td>
-                              {/* <Link to={`/edit_user/${user._id}`}> */}
-                              <i className="ri-pencil-fill" title="Edit"></i>
-                              {/* </Link> */}
-                              <i
-                                className="ri-delete-bin-line"
-                                title="Remove"
-                                // onClick={() => handleDelete(user._id)}
-                              ></i>
-                            </td>
+                            {auth.user.id !== user._id && (
+                              <td>
+                                <Link
+                                  // to={`/edit_user/${user._id}`}
+                                  href={`/user/profile/edit_user/${user._id}`}
+                                >
+                                  <i
+                                    className="ri-pencil-fill"
+                                    title="Edit"
+                                  ></i>
+                                </Link>
+                                <i
+                                  className="ri-delete-bin-line"
+                                  title="Remove"
+                                  onClick={() => handleDelete(user._id)}
+                                ></i>
+                              </td>
+                            )}
                           </tr>
                         ))}
                     </tbody>
