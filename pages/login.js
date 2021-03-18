@@ -14,6 +14,8 @@ import { withAuth } from "utils/auth";
 import { validateEmail as isEmail, isLength } from "utils/valid";
 import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import GitHubLogin from "react-github-login";
+import parse from "html-react-parser";
 
 const Login = () => {
   const router = useRouter();
@@ -24,59 +26,8 @@ const Login = () => {
     if (Object.keys(auth).length !== 0) router.push("/");
   }, [auth]);
 
-  const handleSubmit = async (e, userData) => {
-    e.preventDefault();
-    const { email, password } = userData;
-
-    if (!isEmail(email))
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Invalid emails." },
-      });
-
-    if (isLength(password))
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Password must be at least 6 characters." },
-      });
-
-    dispatch({ type: "NOTIFY", payload: { loading: true } });
-    const res = await postData("auth/login", userData);
-
-    if (res.err)
-      return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-
-    dispatch({
-      type: "AUTH",
-      payload: {
-        token: res.access_token,
-        user: res.user,
-      },
-    });
-
-    const { name, email: emailNew, role } = res.user;
-
-    Cookie.set("user", { name, email: emailNew, role }, { expires: 7 });
-
-    Cookie.set("refreshtoken", res.refresh_token, {
-      path: "api/auth/accessToken",
-      expires: 7,
-    });
-
-    localStorage.setItem("firstLogin", true);
-    dispatch({
-      type: "NOTIFY",
-      payload: { success: res.msg },
-    });
-    return router.push("/");
-  };
-
-  const responseGoogle = async (response) => {
+  const onLogin = (res) => {
     try {
-      const res = await postData("auth/google_login", {
-        tokenId: response.tokenId,
-      });
-
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
@@ -88,12 +39,12 @@ const Login = () => {
         },
       });
 
+      const { name, email: emailNew, role } = res.user;
+
+      Cookie.set("user", { name, email: emailNew, role }, { expires: 7 });
+
       Cookie.set("refreshtoken", res.refresh_token, {
         path: "api/auth/accessToken",
-        expires: 7,
-      });
-
-      Cookie.set("user", res.user, {
         expires: 7,
       });
 
@@ -103,6 +54,44 @@ const Login = () => {
         payload: { success: res.msg },
       });
       return router.push("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = async (e, userData) => {
+    e.preventDefault();
+    try {
+      const { email, password } = userData;
+
+      if (!isEmail(email))
+        return dispatch({
+          type: "NOTIFY",
+          payload: { error: "Invalid emails." },
+        });
+
+      if (isLength(password))
+        return dispatch({
+          type: "NOTIFY",
+          payload: { error: "Password must be at least 6 characters." },
+        });
+
+      dispatch({ type: "NOTIFY", payload: { loading: true } });
+      const res = await postData("auth/login", userData);
+
+      onLogin(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const responseGoogle = async (response) => {
+    try {
+      dispatch({ type: "NOTIFY", payload: { loading: true } });
+      const res = await postData("auth/google_login", {
+        tokenId: response.tokenId,
+      });
+      onLogin(res);
     } catch (err) {
       console.log(err);
     }
@@ -110,41 +99,31 @@ const Login = () => {
 
   const responseFacebook = async (response) => {
     try {
+      dispatch({ type: "NOTIFY", payload: { loading: true } });
       const { accessToken, userID } = response;
       const res = await postData("auth/facebook_login", {
         accessToken,
         userID,
       });
-      if (res.err)
-        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-
-      dispatch({
-        type: "AUTH",
-        payload: {
-          token: res.access_token,
-          user: res.user,
-        },
-      });
-
-      Cookie.set("refreshtoken", res.refresh_token, {
-        path: "api/auth/accessToken",
-        expires: 7,
-      });
-
-      Cookie.set("user", res.user, {
-        expires: 7,
-      });
-
-      localStorage.setItem("firstLogin", true);
-      dispatch({
-        type: "NOTIFY",
-        payload: { success: res.msg },
-      });
-      return router.push("/");
+      onLogin(res);
     } catch (err) {
       console.log(err);
     }
   };
+
+  const responseGithub = async (response) => {
+    try {
+      dispatch({ type: "NOTIFY", payload: { loading: true } });
+      const res = await postData("auth/github_login", { code: response.code });
+      onLogin(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    document.getElementById("github").className = "ri-github-fill";
+    document.getElementById("github").style.fontSize = "1.6em";
+  }, []);
 
   return (
     <BaseLayout>
@@ -193,6 +172,14 @@ const Login = () => {
                     )}
                     onSuccess={responseGoogle}
                     cookiePolicy={"single_host_origin"}
+                  />
+
+                  <GitHubLogin
+                    clientId={process.env.GITHUB_CLIENT_ID}
+                    redirectUri=""
+                    onSuccess={responseGithub}
+                    className="social-icon"
+                    buttonText={parse(`<i id="github"></i>`)}
                   />
 
                   <FacebookLogin
