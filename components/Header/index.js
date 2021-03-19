@@ -34,9 +34,9 @@ const Header = ({ isOpen, toggle }) => {
     <ReactResizeDetector handleWidth>
       {({ width }) => (
         <Navbar
-          className={`port-navbar port-default absolute with-bg ${
-            width < 768 && isOpen ? "is-open" : "is-close"
-          }`}
+          className={`port-navbar port-default absolute ${
+            router.asPath === "/" ? "transparent" : "with-bg"
+          } ${width < 768 && isOpen ? "is-open" : "is-close"}`}
           dark
           expand="md"
         >

@@ -27,9 +27,11 @@
     "react-github-login": "^1.0.3",
     "react-google-login": "^5.2.2",
     "react-resize-detector": "^5.0.6",
+    "react-slideshow-image": "^3.4.3",
     "react-toastify": "^6.0.8",
     "reactstrap": "^8.5.1",
     "remixicon": "^2.5.0",
-    "sass": "^1.26.10"
+    "sass": "^1.26.10",
+    "unsplash-js": "^7.0.8"
   }
 }
