@@ -7,6 +7,8 @@ import Masthead from "components/shared/Masthead";
 import { fakeProductsData } from "populate/FakeData";
 import ProductItem from "components/product/ProductItem";
 import { shuffle } from "utils/helper.functions";
+import Col from "reactstrap/lib/Col";
+import Row from "reactstrap/lib/Row";
 
 const Home = ({ slideImages }) => {
   const [products] = useState(fakeProductsData);
@@ -15,17 +17,17 @@ const Home = ({ slideImages }) => {
     <BaseLayout className="blog-listing-page">
       <Masthead slideImages={slideImages} />
       <BasePage indexPage className="home-page">
-        <div className="cooover">
-          <div className="products">
-            {products.length === 0 ? (
-              <h2>No Products</h2>
-            ) : (
-              products.map((product, index) => (
+        <Row className="mt-3 mb-5">
+          {products.length === 0 ? (
+            <h2>No Products</h2>
+          ) : (
+            products.map((product, index) => (
+              <Col key={index} lg="4" md="6" className="mb-5">
                 <ProductItem key={index} product={product} />
-              ))
-            )}
-          </div>
-        </div>
+              </Col>
+            ))
+          )}
+        </Row>
       </BasePage>
     </BaseLayout>
   );
@@ -35,7 +37,7 @@ export async function getStaticProps() {
   const api = createApi({
     accessKey: process.env.UNSPLASH_ACCESS_KEY,
   });
-  const slideImages = ["/images/alienware_desktop.jpg"];
+  const slideImages = [];
 
   const unsplashResult = await api.search.getPhotos({
     query: "gaming setup",
@@ -44,9 +46,14 @@ export async function getStaticProps() {
   });
   if (unsplashResult) {
     unsplashResult.response.results.map((photo) =>
-      slideImages.push(photo.urls.full)
+      slideImages.push(photo.urls.regular)
     );
     shuffle(slideImages);
+    slideImages.unshift(
+      "/images/homepage_masthead.jpg",
+      "/images/homepage_masthead2.jpg",
+      "/images/homepage_masthead3.jpg"
+    );
   }
 
   return {

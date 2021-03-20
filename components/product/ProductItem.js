@@ -1,55 +1,51 @@
 import Link from "next/link";
-import { useContext } from "react";
+import React from "react";
+import {
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+} from "reactstrap";
 import { numberWithCommas } from "utils/helper.functions";
-import { DataContext } from "../../store/GlobalState";
-// import { addToCart } from "../../store/Actions";
 
-const ProductItem = ({ product }) => {
-  const { state, dispatch } = useContext(DataContext);
-  const { cart, auth } = state;
-
-  const userLink = () => {
-    return (
-      <>
-        <button
-          className="btn btn-dark float-right px-3"
-          style={{ marginRight: "5px", flex: 1 }}
-          disabled={product.inStock === 0 ? true : false}
-        >
-          Buy
-        </button>
-      </>
-    );
-  };
-
+const CardItem = ({ product }) => {
   return (
-    <div className="card-Ab" style={{ width: "18rem" }}>
-      <img
-        className="card-img-top"
-        src={product.images[0]}
-        alt="Product Image"
-      />
-      <div className="card-body">
-        <h5 className="card-title text-capitalize" title={product.title}>
-          {product.title}
-        </h5>
+    <div>
+      <Card className="card-body-wrapper-Ab">
+        <CardImg
+          className="card-img-top-Ab"
+          top
+          width="100%"
+          src={product.images[0]}
+          alt="Product Image"
+        />
+        <CardBody>
+          <CardTitle className="card-title-Ab mb-2" title={product.title}>
+            {product.title.split(" ").slice(0, 2).join(" ")}
+          </CardTitle>
+          <CardSubtitle tag="h6" className="mb-2 text-muted">
+            <div className="row justify-content-between mx-0">
+              <h6 className="text-danger">{numberWithCommas(product.price)}</h6>
+              {product.inStock > 0 ? (
+                <h6 className="text-danger">In Stock: {product.inStock}</h6>
+              ) : (
+                <h6 className="text-danger">Out Stock</h6>
+              )}
+            </div>
+          </CardSubtitle>
+          <CardText className="card-text-Ab" title={product.description}>
+            {product.description}
+          </CardText>
+        </CardBody>
 
-        <div className="row justify-content-between mx-0">
-          <h6 className="text-danger">{numberWithCommas(product.price)}</h6>
-          {product.inStock > 0 ? (
-            <h6 className="text-danger">In Stock: {product.inStock}</h6>
-          ) : (
-            <h6 className="text-danger">Out Stock</h6>
-          )}
-        </div>
-
-        <p className="card-text" title={product.description}>
-          {product.description}
-        </p>
-        <div className=" justify-content-between mx-0 ">{userLink()}</div>
-      </div>
+        <Link href="/">
+          <a className="card-button-Ab">Add to cart</a>
+        </Link>
+      </Card>
     </div>
   );
 };
 
-export default ProductItem;
+export default CardItem;

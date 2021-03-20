@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
+import { Row, Col } from "reactstrap";
+
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import { fakeProductsData } from "populate/FakeData";
@@ -33,115 +35,117 @@ const Home = () => {
     if (tab === index) return " active-img";
     return "";
   };
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTab(tab > 2 ? 0 : tab + 1);
+    }, 3000);
+    return () => clearInterval(id);
+  }, [tab]);
 
   return (
     <BaseLayout>
       <BasePage indexPage className="product-detail-page">
         <Head>
           <title>Product Card/Page</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-            integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-            crossOrigin="anonymous"
-          />
         </Head>
-        <div>
-          <div className="card-wrapper">
-            <div className="card">
-              {/* <!-- card left --> */}
-              <div className="product-imgs">
-                <div className="img-display">
-                  <div className="img-showcase">
-                    <img
-                      src={product.images[tab]}
-                      alt={product.images[tab]}
-                      alt="shoe image"
-                      style={{ height: "450px" }}
-                    />
-                  </div>
-                </div>
-                <div className="img-select">
-                  {product.images.map((img, index) => (
-                    <div className="img-item" data-id="1" key={index}>
-                      <img
-                        src={img}
-                        alt={img}
-                        alt="shoe image"
-                        className={`img-thumbnail rounded ${isActive(index)}`}
-                        onClick={() => setTab(index)}
-                      />
-                    </div>
-                  ))}
+
+        <div className="card-wrapper">
+          <div className="card-product-detail">
+            {/* <!-- card left --> */}
+            <div className="product-imgs">
+              <div className="img-display">
+                <div className="img-showcase">
+                  <img
+                    src={product.images[tab]}
+                    alt={product.images[tab]}
+                    alt="shoe image"
+                    style={{ height: "450px" }}
+                  />
                 </div>
               </div>
-              {/* <!-- card right --> */}
-              <div className="product-content">
-                <h2 className="product-title">
-                  {product.title.split(" ").slice(0, 2).join(" ")}
-                  {countWords(product.title) > 2 && "..."}
-                </h2>
+              <div className="img-select">
+                {product.images.map((img, index) => (
+                  <div className="img-item" data-id="1" key={index}>
+                    <img
+                      src={img}
+                      alt={img}
+                      alt="shoe image"
+                      className={`img-thumbnail rounded ${isActive(index)} `}
+                      style={{ height: "100px" }}
+                      onClick={() => setTab(index)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* <!-- card right --> */}
+            <div className="product-content">
+              <h2 className="product-title">
+                {product.title.split(" ").slice(0, 2).join(" ")}
+                {countWords(product.title) > 2 && "..."}
+              </h2>
 
-                <div className="product-price">
-                  <p className="new-price">
-                    Price: <span>{numberWithCommas(product.price)}</span>
-                  </p>
-                </div>
+              <div className="product-price">
+                <p className="new-price">
+                  Price: <span>{numberWithCommas(product.price)}</span>
+                </p>
+              </div>
 
-                <div className="product-detail">
-                  <h2>about this item: </h2>
-                  <p>{product.content.split(" ").slice(0, 40).join(" ")}</p>
-                  <p>
-                    {product.description.split(" ").slice(0, 30).join(" ")}...
-                  </p>
-                  <ul>
-                    <li>
-                      In Stock:{" "}
-                      <span className="text-danger">
-                        {product.inStock} pieces
-                      </span>
-                    </li>
-                    <li>
-                      Available: <span className="text-info">in stock</span>
-                    </li>
-                    <li>
-                      Sold: <span className="text-danger">{product.sold}</span>
-                    </li>
-                  </ul>
-                </div>
+              <div className="product-detail">
+                <h2>about this item: </h2>
+                <p>{product.content.split(" ").slice(0, 40).join(" ")}</p>
+                <p>
+                  {product.description.split(" ").slice(0, 30).join(" ")}...
+                </p>
+                <ul>
+                  <li>
+                    In Stock:{" "}
+                    <span className="text-danger">
+                      {product.inStock} pieces
+                    </span>
+                  </li>
+                  <li>
+                    Available: <span className="text-info">in stock</span>
+                  </li>
+                  <li>
+                    Sold: <span className="text-danger">{product.sold}</span>
+                  </li>
+                </ul>
+              </div>
 
-                <div className="purchase-info">
-                  <input
-                    type="number"
-                    min="0"
-                    //   value="1"
-                  />
-                  <button type="button" className="btn">
-                    Add to Cart{" "}
-                    <i
-                      className="ri-shopping-cart-fill"
-                      style={{
-                        fontSize: "1.2em",
-                        verticalAlign: "middle",
-                      }}
-                    ></i>
-                  </button>
-                </div>
+              <div className="purchase-info">
+                <input
+                  type="number"
+                  min="0"
+                  //   value="1"
+                />
+                <button type="button" className="btn">
+                  Add to Cart{" "}
+                  <i
+                    className="ri-shopping-cart-fill"
+                    style={{
+                      fontSize: "1.2em",
+                      verticalAlign: "middle",
+                    }}
+                  ></i>
+                </button>
               </div>
             </div>
           </div>
-          <h1 className="related-product-title">Related Products</h1>
-          <div className="products">
-            {products.length === 0 ? (
-              <h2>No Products</h2>
-            ) : (
-              products.map((product, index) => (
-                <ProductItem key={index} product={product} />
-              ))
-            )}
-          </div>
         </div>
+
+        <h1 className="related-product-title">Related Products</h1>
+        <Row className="mt-3 mb-5">
+          {products.length === 0 ? (
+            <h2>No Products</h2>
+          ) : (
+            products.map((product, index) => (
+              <Col key={index} lg="4" md="6" className="mb-5">
+                <ProductItem key={index} product={product} />
+              </Col>
+            ))
+          )}
+        </Row>
       </BasePage>
     </BaseLayout>
   );

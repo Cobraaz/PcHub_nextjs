@@ -14,11 +14,11 @@
     max-width: 1100px;
     margin: 0 auto;
     padding-top: 40px !important;
-    
+
     // border-style: none !important;
   }
 
-  .card {
+  .card-product-detail {
     border-style: none;
   }
 
@@ -197,7 +197,7 @@
   .product-detail-page {
     padding-top: 0px !important;
     overflow: hidden;
-    .card {
+    .card-product-detail {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 1.5rem;
