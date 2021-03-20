@@ -96,28 +96,4 @@ export const fakeProductsData = [
       "Welcome to our channel Dev AT. Here you can learn web designing, UI/UX designing, html css tutorials, css animations and css effects, javascript and jquery tutorials and related so on.",
     category: "5faa35a88fdff228384d51d8",
   },
-  {
-    images: [
-      {
-        public_id: "nextjs_media/pb8fnxyickqqe9krov82",
-        url:
-          "https://res.cloudinary.com/devatchannel/image/upload/v1605263280/nextjs_media/pb8fnxyickqqe9krov82.jpg",
-      },
-      {
-        public_id: "nextjs_media/irfwxjz56x4xa6pdwoks",
-        url:
-          "https://res.cloudinary.com/devatchannel/image/upload/v1605263281/nextjs_media/irfwxjz56x4xa6pdwoks.jpg",
-      },
-    ],
-    checked: false,
-    inStock: 500,
-    sold: 0,
-    title: "animal",
-    price: 5,
-    description:
-      "How to and tutorial videos of cool CSS effect, Web Design ideas,JavaScript libraries, Node.",
-    content:
-      "Welcome to our channel Dev AT. Here you can learn web designing, UI/UX designing, html css tutorials, css animations and css effects, javascript and jquery tutorials and related so on.",
-    category: "5faa35a88fdff228384d51d8",
-  },
 ];
