@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useContext } from "react";
+import { numberWithCommas } from "utils/helper.functions";
 import { DataContext } from "../../store/GlobalState";
 // import { addToCart } from "../../store/Actions";
 
@@ -25,7 +26,7 @@ const ProductItem = ({ product }) => {
     <div className="card-Ab" style={{ width: "18rem" }}>
       <img
         className="card-img-top"
-        src={product.images[0].url}
+        src={product.images[0]}
         alt="Product Image"
       />
       <div className="card-body">
@@ -34,7 +35,7 @@ const ProductItem = ({ product }) => {
         </h5>
 
         <div className="row justify-content-between mx-0">
-          <h6 className="text-danger">${product.price}</h6>
+          <h6 className="text-danger">{numberWithCommas(product.price)}</h6>
           {product.inStock > 0 ? (
             <h6 className="text-danger">In Stock: {product.inStock}</h6>
           ) : (

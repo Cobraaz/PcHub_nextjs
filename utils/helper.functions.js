@@ -17,3 +17,14 @@ export function shuffle(array) {
 
   return array;
 }
+
+export function numberWithCommas(x) {
+  return "₹ " + x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function countWords(str) {
+  str = str.replace(/(^\s*)|(\s*$)/gi, "");
+  str = str.replace(/[ ]{2,}/gi, " ");
+  str = str.replace(/\n /, "\n");
+  return str.split(" ").length;
+}

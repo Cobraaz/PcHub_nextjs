@@ -4,42 +4,28 @@ import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import { fakeProductsData } from "populate/FakeData";
 import ProductItem from "components/product/ProductItem";
+import { numberWithCommas, countWords } from "utils/helper.functions";
 
 const Home = () => {
   const [products] = useState(fakeProductsData);
   const [tab, setTab] = useState(0);
   const product = {
     images: [
-      {
-        public_id: "nextjs_media/u8qltexka25minj2rj46",
-        url:
-          "https://res.cloudinary.com/devatchannel/image/upload/v1605318879/nextjs_media/u8qltexka25minj2rj46.jpg",
-      },
-      {
-        public_id: "nextjs_media/wb5osprab71emsxp3ibm",
-        url:
-          "https://res.cloudinary.com/devatchannel/image/upload/v1605318910/nextjs_media/wb5osprab71emsxp3ibm.jpg",
-      },
-      {
-        public_id: "nextjs_media/nelvbtwdbk1vjvhufort",
-        url:
-          "https://res.cloudinary.com/devatchannel/image/upload/v1605318911/nextjs_media/nelvbtwdbk1vjvhufort.jpg",
-      },
-      {
-        public_id: "nextjs_media/bnyeto9vaz40yfts92we",
-        url:
-          "https://res.cloudinary.com/devatchannel/image/upload/v1605318913/nextjs_media/bnyeto9vaz40yfts92we.jpg",
-      },
+      "https://images-na.ssl-images-amazon.com/images/I/61yUru0KU0L._SL1324_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/614JgEzGhdL._SL1360_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/61Z5WdyPRRL._SL1416_.jpg",
+      "https://images-na.ssl-images-amazon.com/images/I/612tmLKVQ9L._SL1500_.jpg",
     ],
     checked: false,
-    inStock: 153,
-    sold: 5,
-    title: "laptop",
-    price: 25,
+    inStock: 200,
+    sold: 10,
+    title:
+      "Thermaltake H200 Tempered Glass Snow Edition RGB Light Strip ATX Mid Tower Case with One 120mm Rear Fan Pre-Installed CA-1M3-00M6WN-00",
+    price: 135000,
     description:
-      "How to and tutorial videos of cool CSS effect, Web Design ideas,JavaScript libraries, Node.",
+      "The H200 TG RGB is designed for PC builders who want a clean and sleek look but crave for good cooling performance and tempered glass at the same time With an unique RGB light bar, the front panel of H200 TG RGB presents a smooth and elegant style Tempered Glass Window The tempered-glass hinge door is designed with a smart lock security system which secures the inner components of your case",
     content:
-      "Welcome to our channel Dev AT. Here you can learn web designing, UI/UX designing, html css tutorials, css animations and css effects, javascript and jquery tutorials and related so on.",
+      "Superior Hardware Support The H200 TG RGB has outstanding expandability with support for a tower CPU cooler with maximum height 180mm, a dual VGA expansion slot of up to 320mm in length Excellent Cooling Capability Optimized for excellent cooling capability with one 120mm fan preinstalled",
     category: "5faa35a88fdff228384d51d8",
   };
 
@@ -49,7 +35,7 @@ const Home = () => {
   };
 
   return (
-    <BaseLayout className="">
+    <BaseLayout>
       <BasePage indexPage className="product-detail-page">
         <Head>
           <title>Product Card/Page</title>
@@ -69,9 +55,10 @@ const Home = () => {
                 <div className="img-display">
                   <div className="img-showcase">
                     <img
-                      src={product.images[tab].url}
-                      alt={product.images[tab].url}
+                      src={product.images[tab]}
+                      alt={product.images[tab]}
                       alt="shoe image"
+                      style={{ height: "450px" }}
                     />
                   </div>
                 </div>
@@ -79,8 +66,8 @@ const Home = () => {
                   {product.images.map((img, index) => (
                     <div className="img-item" data-id="1" key={index}>
                       <img
-                        src={img.url}
-                        alt={img.url}
+                        src={img}
+                        alt={img}
                         alt="shoe image"
                         className={`img-thumbnail rounded ${isActive(index)}`}
                         onClick={() => setTab(index)}
@@ -91,18 +78,23 @@ const Home = () => {
               </div>
               {/* <!-- card right --> */}
               <div className="product-content">
-                <h2 className="product-title">{product.title}</h2>
+                <h2 className="product-title">
+                  {product.title.split(" ").slice(0, 2).join(" ")}
+                  {countWords(product.title) > 2 && "..."}
+                </h2>
 
                 <div className="product-price">
                   <p className="new-price">
-                    Price: <span>${product.price}</span>
+                    Price: <span>{numberWithCommas(product.price)}</span>
                   </p>
                 </div>
 
                 <div className="product-detail">
                   <h2>about this item: </h2>
-                  <p>{product.content}</p>
-                  <p>{product.description}</p>
+                  <p>{product.content.split(" ").slice(0, 40).join(" ")}</p>
+                  <p>
+                    {product.description.split(" ").slice(0, 30).join(" ")}...
+                  </p>
                   <ul>
                     <li>
                       In Stock:{" "}
