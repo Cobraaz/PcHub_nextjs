@@ -1,7 +1,6 @@
 export const withAuth = (res, location) => {
-  res.writeHead(302, {
-    Location: location,
-  });
-  res.end();
+  res.setHeader("Location", location);
+  res.statusCode = 302;
+  // res.end();
   return { props: {} }; // stop execution
 };

@@ -1,6 +1,7 @@
 .signin-page {
   padding-top: 130px;
   // text-align: center;
+  border-style: none !important;
 
   .form-wrapper {
     // width: 400px;
@@ -75,6 +76,7 @@
     font-size: 1.1rem;
     transition: 0.3s;
     color: #096fb9;
+    background-color: transparent;
   }
 
   .social-icon:hover {
@@ -92,6 +94,9 @@
     color: #d193e6;
     border-bottom: none;
   }
+}
+.signin-page * {
+  border-style: none !important;
 }
 
 @media (max-width: 900px) {

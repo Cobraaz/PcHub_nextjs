@@ -84,6 +84,7 @@ const ForgotPassword = () => {
                       name="email"
                       value={email}
                       onChange={handleChangeInput}
+                      placeholder="Email Address"
                       required
                     />
                   </InputGroup>
@@ -123,8 +124,8 @@ export async function getServerSideProps(ctx) {
   // some auth logic here
   const { res } = ctx;
   const { user } = parseCookies(ctx);
-  const isAuth = user ? JSON.parse(user) : false;
-  if (!isAuth) {
+  const isAuth = user ? true : false;
+  if (isAuth) {
     withAuth(res, "/");
   }
 

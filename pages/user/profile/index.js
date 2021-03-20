@@ -311,7 +311,7 @@ export async function getServerSideProps(ctx) {
   // some auth logic here
   const { res } = ctx;
   const { user } = parseCookies(ctx);
-  const isAuth = user ? JSON.parse(user) : false;
+  const isAuth = user ? true : false;
   if (!isAuth) {
     withAuth(res, "/");
   }
