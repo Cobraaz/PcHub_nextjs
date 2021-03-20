@@ -15,7 +15,7 @@ const Home = ({ slideImages }) => {
     <BaseLayout className="blog-listing-page">
       <Masthead slideImages={slideImages} />
       <BasePage indexPage className="home-page">
-        <div className="pt-5">
+        <div className="cooover">
           <div className="products">
             {products.length === 0 ? (
               <h2>No Products</h2>
