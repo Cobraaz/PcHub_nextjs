@@ -64,9 +64,11 @@ export async function getStaticProps() {
     );
     shuffle(slideImages);
     slideImages.unshift(
-      "/images/homepage_masthead.jpg",
-      "/images/homepage_masthead2.jpg",
-      "/images/homepage_masthead3.jpg"
+      ...shuffle([
+        "/images/homepage_masthead.jpg",
+        "/images/homepage_masthead2.jpg",
+        "/images/homepage_masthead3.jpg",
+      ])
     );
   }
 

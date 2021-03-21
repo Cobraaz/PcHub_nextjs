@@ -6,6 +6,24 @@ import {
   InputGroupAddon,
   Input,
 } from "reactstrap";
+import { motion } from "framer-motion";
+
+let easing = [0.6, -0.05, 0.01, 0.99];
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+};
 
 const SignInForm = ({ onSubmit }) => {
   const initialState = {
@@ -23,7 +41,7 @@ const SignInForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={(e) => onSubmit(e, userData)}>
+    <motion.form variants={fadeInUp} onSubmit={(e) => onSubmit(e, userData)}>
       <InputGroup>
         <InputGroupAddon addonType="prepend">
           <InputGroupText>
@@ -88,91 +106,17 @@ const SignInForm = ({ onSubmit }) => {
         />
       </InputGroup>
       <InputGroup>
-        <Button type="submit" className="btn-signin mt-3" block>
+        <motion.button
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.9 }}
+          type="submit"
+          className="btn-signin mt-3 btn btn-secondary btn-block"
+        >
           Submit
-        </Button>
+        </motion.button>
       </InputGroup>
-    </form>
+    </motion.form>
   );
 };
 
 export default SignInForm;
-
-// import {
-//   Button,
-//   InputGroup,
-//   InputGroupText,
-//   InputGroupAddon,
-//   Input,
-// } from "reactstrap";
-
-// const SignInForm = ({ onSubmit }) => {
-//   return (
-//     <form
-//     // onSubmit={handleSubmit(onSubmit)}
-//     >
-//       <InputGroup>
-//         <InputGroupAddon addonType="prepend">
-//           <InputGroupText>
-//             <i className="ri-user-fill"></i>
-//           </InputGroupText>
-//         </InputGroupAddon>
-//         <input
-//           className="form-control"
-//           name="fullName"
-//           placeholder="FullName"
-//           required
-//         />
-//       </InputGroup>
-//       <InputGroup>
-//         <InputGroupAddon addonType="prepend">
-//           <InputGroupText>
-//             <i className="ri-mail-send-fill"></i>
-//           </InputGroupText>
-//         </InputGroupAddon>
-//         <input
-//           className="form-control"
-//           placeholder="Email"
-//           name="email"
-//           required
-//         />
-//       </InputGroup>
-//       <InputGroup>
-//         <InputGroupAddon addonType="prepend">
-//           <InputGroupText>
-//             <i className="ri-smartphone-fill"></i>
-//           </InputGroupText>
-//         </InputGroupAddon>
-//         <input
-//           className="form-control"
-//           placeholder="Phone no."
-//           name="phoneno"
-//           required
-//         />
-//       </InputGroup>
-//       <InputGroup>
-//         <InputGroupAddon addonType="prepend">
-//           <InputGroupText>
-//             <i className="ri-message-3-fill"></i>
-//           </InputGroupText>
-//         </InputGroupAddon>
-//         <input
-//           className="form-control"
-//           type="textarea"
-//           name="text"
-//           id="exampleText"
-//           placeholder="Message"
-//           name="message"
-//           required
-//         />
-//       </InputGroup>
-//       <InputGroup>
-//         <Button type="submit" className="btn-signin" block>
-//           <i className="ri-save-2-line" style={{ float: "left" }}></i> Submit
-//         </Button>
-//       </InputGroup>
-//     </form>
-//   );
-// };
-
-// export default SignInForm;

@@ -4,8 +4,25 @@ import {
   InputGroup,
   InputGroupText,
   InputGroupAddon,
-  Input,
 } from "reactstrap";
+import { motion } from "framer-motion";
+
+let easing = [0.6, -0.05, 0.01, 0.99];
+const fadeInUp = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: easing },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: easing,
+    },
+  },
+};
 
 const SignInForm = ({ onSubmit }) => {
   const initialState = {
@@ -19,7 +36,7 @@ const SignInForm = ({ onSubmit }) => {
     setUserData({ ...userData, [name]: value });
   };
   return (
-    <form onSubmit={(e) => onSubmit(e, userData)}>
+    <motion.form variants={fadeInUp} onSubmit={(e) => onSubmit(e, userData)}>
       <InputGroup>
         <InputGroupAddon addonType="prepend">
           <InputGroupText>
@@ -53,11 +70,16 @@ const SignInForm = ({ onSubmit }) => {
         />
       </InputGroup>
       <InputGroup>
-        <Button type="submit" className="btn-signin mt-3" block>
+        <motion.button
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.9 }}
+          type="submit"
+          className="btn-signin mt-3 btn btn-secondary btn-block"
+        >
           Submit
-        </Button>
+        </motion.button>
       </InputGroup>
-    </form>
+    </motion.form>
   );
 };
 
