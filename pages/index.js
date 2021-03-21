@@ -9,25 +9,39 @@ import ProductItem from "components/product/ProductItem";
 import { shuffle } from "utils/helper.functions";
 import Col from "reactstrap/lib/Col";
 import Row from "reactstrap/lib/Row";
+import { motion } from "framer-motion";
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 const Home = ({ slideImages }) => {
   const [products] = useState(fakeProductsData);
 
   return (
     <BaseLayout className="blog-listing-page">
-      <Masthead slideImages={slideImages} />
+      <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
+        <Masthead slideImages={slideImages} />
+      </motion.div>
       <BasePage indexPage className="home-page">
-        <Row className="mt-3 mb-5">
-          {products.length === 0 ? (
-            <h2>No Products</h2>
-          ) : (
-            products.map((product, index) => (
-              <Col key={index} lg="4" md="6" className="mb-5">
-                <ProductItem key={index} product={product} />
-              </Col>
-            ))
-          )}
-        </Row>
+        <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
+          <motion.div variants={stagger}>
+            <Row className="mt-3 mb-5">
+              {products.length === 0 ? (
+                <h2>No Products</h2>
+              ) : (
+                products.map((product, index) => (
+                  <Col key={index} lg="4" md="6" className="mb-5">
+                    <ProductItem key={index} product={product} />
+                  </Col>
+                ))
+              )}
+            </Row>
+          </motion.div>
+        </motion.div>
       </BasePage>
     </BaseLayout>
   );

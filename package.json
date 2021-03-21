@@ -13,6 +13,7 @@
     "bcrypt": "^5.0.1",
     "bootstrap": "^4.5.0",
     "browser-image-compression": "^1.0.14",
+    "framer-motion": "^4.0.0",
     "googleapis": "^67.1.1",
     "html-react-parser": "^1.2.4",
     "js-cookie": "^2.2.1",

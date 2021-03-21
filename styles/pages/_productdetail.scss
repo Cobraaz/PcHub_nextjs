@@ -146,12 +146,11 @@
   .purchase-info .btn {
     cursor: pointer;
     color: #fff;
-  }
-  .purchase-info .btn:first-of-type {
-    background: #256eff;
+    margin-left: 1rem;
+    margin-top: 1rem;
   }
   .purchase-info .btn:last-of-type {
-    background: #f64749;
+    background: #256eff;
   }
   .purchase-info .btn:hover {
     opacity: 0.9;
