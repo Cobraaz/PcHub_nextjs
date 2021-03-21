@@ -40,3 +40,61 @@ body {
 .absolute {
   position: absolute;
 }
+
+.page-footer {
+  border-top: 0.1px solid;
+  border-color: #cccccc;
+  min-height: 10vh;
+  padding: 15px;
+  background-color: #ecedee;
+  font-size: 20px;
+  text-align: center;
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: 0.3s;
+
+  .social-media {
+    display: flex;
+    justify-content: center;
+  }
+
+  i {
+    height: 46px;
+    width: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.2rem;
+    color: #333;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: 0.4s;
+    color: #096fb9;
+    background-color: transparent;
+  }
+
+  .nounderline {
+    text-decoration: none !important;
+  }
+
+  i:hover {
+    color: #d193e6;
+  }
+  i {
+    font-size: 1.6em;
+  }
+  .ri-mail-fill {
+    color: #db4437;
+  }
+  .ri-facebook-fill {
+    color: #4285f4;
+  }
+  .ri-chrome-fill {
+    color: #ffcd46;
+  }
+  .ri-github-fill {
+    color: #1da462;
+  }
+}
