@@ -134,7 +134,7 @@ const ForgotPassword = () => {
                             whileTap={{ scale: 0.9 }}
                             type="submit"
                             className="btn-signin mt-3 btn btn-secondary btn-block"
-                            block
+                      
                           >
                             Verify your email
                           </motion.button>
