@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import Image from "next/image";
 import { Row, Col } from "reactstrap";
 
 import BaseLayout from "components/layouts/BaseLayout";
@@ -89,7 +90,20 @@ const Home = () => {
               >
                 <div className="img-display">
                   <div className="img-showcase">
-                    <motion.img
+                    <motion.div
+                      animate={{ x: 0, opacity: 1 }}
+                      initial={{ x: 200, opacity: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <Image
+                        src={product.images[tab]}
+                        alt="shoe image"
+                        // style={{ height: "450px" }}
+                        width={500}
+                        height={400}
+                      />
+                      {/* <motion.img
                       src={product.images[tab]}
                       alt={product.images[tab]}
                       alt="shoe image"
@@ -98,8 +112,10 @@ const Home = () => {
                       initial={{ x: 200, opacity: 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ delay: 0.2 }}
-                    />
+                    /> */}
+                    </motion.div>
                   </div>
+                  <br />
                 </div>
                 <div className="img-select">
                   {product.images.map((img, index) => (
@@ -116,16 +132,15 @@ const Home = () => {
                       <motion.div
                         transition={{ delay: 1.5, duration: 2 }}
                         whileHover={{ scale: 1.2 }}
+                        className={`img-thumbnail rounded ${isActive(index)} `}
                       >
-                        <img
+                        <Image
                           src={img}
-                          alt={img}
                           alt="shoe image"
-                          className={`img-thumbnail rounded ${isActive(
-                            index
-                          )} `}
-                          style={{ height: "100px" }}
                           onClick={() => setTab(index)}
+                          width={120}
+                          height={100}
+                          quality={25}
                         />
                       </motion.div>
                     </motion.div>

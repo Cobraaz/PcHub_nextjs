@@ -7,4 +7,11 @@ module.exports = {
     UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY,
     MONGODB_URL: process.env.MONGODB_URL,
   },
+  images: {
+    domains: [
+      "images-na.ssl-images-amazon.com",
+      "lh3.googleusercontent.com",
+      "res.cloudinary.com",
+    ],
+  },
 };

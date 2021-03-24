@@ -7,6 +7,7 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { numberWithCommas } from "utils/helper.functions";
@@ -42,15 +43,21 @@ const ProductItem = ({ product }) => {
             initial={{ x: 60, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="view overlay"
+            // className="view overlay"
           >
-            <CardImg
-              className="card-img-top-Ab"
-              top
-              width="100%"
-              src={product.images[0]}
-              alt="Product Image"
-            />
+            <div className="card-img-top-Ab">
+              <Image
+                className="card-img-top-Ab"
+                top="true"
+                // width="100%"
+                src={product.images[0]}
+                alt="Product Image"
+                // layout=""
+                width={300}
+                height={230}
+                quality={25}
+              />
+            </div>
             <CardBody>
               <CardTitle className="card-title-Ab mb-2" title={product.title}>
                 {product.title.split(" ").slice(0, 2).join(" ")}

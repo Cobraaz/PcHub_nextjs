@@ -187,9 +187,13 @@
   }
 
   .active-img {
-    border-style: solid !important;
-    border-color: orangered;
-    padding: 2px;
+    padding: 0.25rem !important;
+    background-color: #fff !important;
+    border: 0.1px solid orangered !important;
+    border-radius: 0.25rem !important;
+  }
+  .product-imgs {
+    max-width: 500px;
   }
 }
 @media screen and (min-width: 992px) {

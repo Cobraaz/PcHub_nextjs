@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from "react";
+import Image from "next/image";
 import { parseCookies } from "nookies";
 import imageCompression from "browser-image-compression";
 
@@ -168,7 +169,12 @@ const Profile = () => {
         <section className="row text-secondary my-3">
           <div className="col-md-4">
             <div className="avatar">
-              <img src={avatar ? avatar : auth.user.avatar} alt="avatar" />
+              <Image
+                src={avatar ? avatar : auth.user.avatar}
+                alt="avatar"
+                layout="fill"
+                quality={25}
+              />
               <span>
                 <i className="fas fa-camera"></i>
                 <p>Change</p>

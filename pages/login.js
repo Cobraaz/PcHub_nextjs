@@ -209,7 +209,7 @@ const Login = () => {
                                 className="social-icon"
                               >
                                 <i
-                                  className="ri-google-fill"
+                                  className="ri-google-fill clickable"
                                   style={{ fontSize: "1.6em" }}
                                 ></i>
                               </div>
@@ -239,7 +239,7 @@ const Login = () => {
                                 className="social-icon"
                               >
                                 <i
-                                  className="ri-facebook-fill"
+                                  className="ri-facebook-fill clickable"
                                   style={{ fontSize: "1.6em" }}
                                 ></i>
                               </div>
