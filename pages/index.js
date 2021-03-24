@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { createApi } from "unsplash-js";
+import { Row, Col } from "reactstrap";
+import { motion } from "framer-motion";
 
 import BaseLayout from "components/layouts/BaseLayout";
 import BasePage from "components/layouts/BasePage";
 import Masthead from "components/shared/Masthead";
-import { fakeProductsData } from "populate/FakeData";
 import ProductItem from "components/product/ProductItem";
 import { shuffle } from "utils/helper.functions";
-import Col from "reactstrap/lib/Col";
-import Row from "reactstrap/lib/Row";
-import { motion } from "framer-motion";
+import { productsFromDB } from "pages/api/product/all_products";
+
 const stagger = {
   animate: {
     transition: {
@@ -18,9 +18,28 @@ const stagger = {
   },
 };
 
-const Home = ({ slideImages }) => {
-  const [products] = useState(fakeProductsData);
-
+const Home = ({ slideImages, products: resProducts, status }) => {
+  const [products] = useState(resProducts);
+  if (!status === "success") {
+    return (
+      <>
+        <BaseLayout>
+          <BasePage className="signin-page wrapper">
+            <div className="errMsg">{status}</div>
+          </BasePage>
+        </BaseLayout>
+        <style jsx>{`
+          .errMsg {
+            background: rgb(214, 10, 10);
+            color: #fff9;
+            text-align: center;
+            padding: 10px 0;
+            letter-spacing: 1.3px;
+          }
+        `}</style>
+      </>
+    );
+  }
   return (
     <BaseLayout className="blog-listing-page">
       <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
@@ -47,7 +66,7 @@ const Home = ({ slideImages }) => {
   );
 };
 
-export async function getStaticProps() {
+const getPhotoUnsplash = async () => {
   const api = createApi({
     accessKey: process.env.UNSPLASH_ACCESS_KEY,
   });
@@ -70,11 +89,33 @@ export async function getStaticProps() {
         "/images/homepage_masthead3.jpg",
       ])
     );
+    return slideImages;
   }
+  return slideImages.unshift(
+    ...shuffle([
+      "/images/homepage_masthead.jpg",
+      "/images/homepage_masthead2.jpg",
+      "/images/homepage_masthead3.jpg",
+    ])
+  );
+};
 
+// * This function is called during the build time
+// * Improved performance of page,
+// * It will create static page with dynamic data
+
+export async function getStaticProps() {
+  const { status, result, productsResponse: products } = JSON.parse(
+    JSON.stringify(await productsFromDB())
+  );
   return {
-    props: { slideImages },
-    revalidate: 60,
+    props: {
+      slideImages: await getPhotoUnsplash(),
+      status,
+      result,
+      products,
+    },
+    revalidate: 1,
   };
 }
 

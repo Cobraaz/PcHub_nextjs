@@ -56,4 +56,61 @@ export const fakeProductsData = [
       "Processor: Ryzen 5 Pro 4650G 6-Core 3.7GHz (4.20 GHz Max Turbo) Memory & Storage: 16GB DDR4 RAM with integrated Raedon graphics| Storage: 1TB HDD, 256GB NVME ",
     category: "5faa35a88fdff228384d51d8",
   },
+  {
+    images: [
+      "https://rukminim1.flixcart.com/image/416/416/kl421e80/cpu/b/r/g/rgb-i5-9th-8gb-1tb-120gb-2gb-gaming-1-connect-infotech-original-imagyag2fjhfdg2g.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/kl421e80/cpu/s/a/w/rgb-i5-9th-8gb-1tb-120gb-2gb-gaming-1-connect-infotech-original-imagyag2s5gbah3t.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/kl421e80/cpu/v/q/o/rgb-i5-9th-8gb-1tb-120gb-2gb-gaming-1-connect-infotech-original-imagyag2zzvmkwhv.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/kl175ow0/cpu/3/t/s/gaming-cpu-i5-9th-generation-1-connect-infotech-original-imagy98etusesr2c.jpeg?q=70",
+    ],
+    checked: false,
+    inStock: 7,
+    sold: 12,
+    title:
+      "Connect Infotech i5 9th Generation (8 RAM/GT GeForce 1030 Graphics/1 TB Hard Disk/120 GB SSD Capacity/Windows 10 (64-bit)/2 GB Graphics Memory) Gaming Tower  (RGB i5 9th 8GB 1TB 120GB 2GB Gaming)",
+    price: 100000,
+    description:
+      "( Intel Processor ) (Gigabyte, Asus, Motherboard ) ( Adata, Crucial RAM ) ( WD, Seagate Hard Disk ) (Iball, Finger, Antec gaming Cabinet With SMPS ) We use as per above company’s device for Assemble Computer. Image may different from original product. Installed Windows OS is trial version",
+    content:
+      "( Intel Processor ) (Gigabyte, Asus, Motherboard ) ( Adata, Crucial RAM ) ( WD, Seagate Hard Disk ) (Iball, Finger, Antec gaming Cabinet With SMPS ) We use as per above company’s device for Assemble Computer. Image may different from original product. Installed Windows OS is trial version",
+    category: "5faa35a88fdff228384d51d8",
+  },
+  {
+    images: [
+      "https://rukminim1.flixcart.com/image/416/416/k1v1h8w0/cpu/z/x/a/gl10cs-in063t-asus-original-imafgvg6hsadfbbe.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/k1v1h8w0/cpu/z/x/a/gl10cs-in063t-asus-original-imafgvg6hjeyungf.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/k1v1h8w0/cpu/z/x/a/gl10cs-in063t-asus-original-imafgvg6evubcppu.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/k1v1h8w0/cpu/z/x/a/gl10cs-in063t-asus-original-imafgvg6zgmgzjhd.jpeg?q=70",
+    ],
+    checked: false,
+    inStock: 9,
+    sold: 14,
+    title:
+      "ASUS Core i7 (9700K) (8 GB RAM/NVIDIA GeForce GTX 1650 Graphics/256 GB SSD Capacity/Windows 10 (64-bit)/4 GB Graphics Memory) Gaming Tower  (ROG (GL10CS-IN036T))",
+    price: 76990,
+    content:
+      "Take your computing experience to the next level with this ASUS CPU. With its elegant design, featuring clean lines and sharp creases, this CPU looks sleek and solid.",
+    description:
+      "Its 9th Generation Intel Core i7 processor and NVIDIA Geforce GTX 1650 graphics will ensure smooth and fast loading speeds, while the customizable Aura Sync lighting of this CPU will enhance your overall gaming experience.",
+    category: "5faa35a88fdff228384d51d8",
+  },
+  {
+    images: [
+      "https://rukminim1.flixcart.com/image/416/416/kawtvgw0/cpu/t/w/k/rog-strix-g15dh-in006t-asus-original-imafsdbjkugyrsb4.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/kawtvgw0/cpu/p/a/x/rog-strix-g15dh-in008t-asus-original-imafsdbgw2fugvme.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/kawtvgw0/cpu/p/a/x/rog-strix-g15dh-in008t-asus-original-imafsdbjjfd4kzzf.jpeg?q=70",
+      "https://rukminim1.flixcart.com/image/416/416/kawtvgw0/cpu/p/a/x/rog-strix-g15dh-in008t-asus-original-imafsdbgaxztgqwg.jpeg?q=70",
+    ],
+    checked: false,
+    inStock: 8,
+    sold: 13,
+    title:
+      "ASUS Ryzen 5 (3600X) (8 GB RAM/NVIDIA GeForce GTX 1660 Graphics/1 TB SSD Capacity/Windows 10 (64-bit)/6 GB Graphics Memory) Gaming Tower  (ROG Strix (G15DH-IN006T))",
+    price: 84990,
+    content:
+      "The Asus GA15 is a battle-ready gaming machine that comes with a powerful AMD Ryzen 5-3600X 6-core processor and an 8 GB of RAM that makes gaming as well as other computing tasks an enjoyable experience. With an advanced cooling system, this gaming tower is designed inside and out for a thrilling gaming experience. It has thoughtful features like a handgrip that allows you to carry it around. ",
+    description:
+      "The robust headphone hook allows you to hang your gaming headset conveniently and keep your battle station clear of any hurdles so that you can use the free space efficiently for your mouse. Get home the Asus GA15 and give yourself a competitive edge over your gaming rivals.",
+    category: "5faa35a88fdff228384d51d8",
+  },
 ];

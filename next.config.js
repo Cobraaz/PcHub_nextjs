@@ -12,6 +12,7 @@ module.exports = {
       "images-na.ssl-images-amazon.com",
       "lh3.googleusercontent.com",
       "res.cloudinary.com",
+      "rukminim1.flixcart.com",
     ],
   },
 };
