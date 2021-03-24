@@ -104,7 +104,22 @@ const getPhotoUnsplash = async () => {
 // * Improved performance of page,
 // * It will create static page with dynamic data
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+//   const { status, result, productsResponse: products } = JSON.parse(
+//     JSON.stringify(await productsFromDB())
+//   );
+//   return {
+//     props: {
+//       slideImages: await getPhotoUnsplash(),
+//       status,
+//       result,
+//       products,
+//     },
+//     revalidate: 1,
+//   };
+// }
+
+export async function getServerSideProps() {
   const { status, result, productsResponse: products } = JSON.parse(
     JSON.stringify(await productsFromDB())
   );
@@ -115,7 +130,6 @@ export async function getStaticProps() {
       result,
       products,
     },
-    revalidate: 1,
   };
 }
 
