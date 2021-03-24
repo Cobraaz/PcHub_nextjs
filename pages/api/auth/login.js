@@ -1,7 +1,7 @@
 import connectDB from "utils/connectDB";
 import Users from "models/userModel";
 import { createAccessToken, createRefreshToken } from "utils/generateToken";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 connectDB();
 

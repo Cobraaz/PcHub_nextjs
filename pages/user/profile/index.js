@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import { parseCookies } from "nookies";
 import imageCompression from "browser-image-compression";
@@ -12,6 +13,7 @@ import { withAuth } from "utils/auth";
 import Link from "next/link";
 
 const Profile = () => {
+  const router = useRouter();
   const initialState = {
     avatar: "",
     name: "",
@@ -29,6 +31,10 @@ const Profile = () => {
   useEffect(() => {
     if (auth.user) setData({ ...data, name: auth.user.name });
   }, [auth.user]);
+
+  useEffect(() => {
+    if (Object.keys(auth).length === 0) router.push("/");
+  }, [auth]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
