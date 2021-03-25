@@ -89,110 +89,111 @@ const ResetPassword = () => {
   };
 
   return (
-    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <BaseLayout>
-        <motion.div variants={stagger}>
-          <motion.div variants={fadeInUp}>
-            <BasePage className="signin-page wrapper">
-              {err && <div className="errMsg">{err}</div>}
-              {success && <div className="successMsg">{success}</div>}
-              <div className="mt-5">
-                <Row>
-                  <Col
-                    md={{ size: 6, offset: 3 }}
-                    sm={{ size: 6, offset: 3 }}
-                    xs={{ size: 12 }}
-                  >
-                    <div className="form-wrapper">
-                      <motion.h2
-                        animate={{ x: 0, opacity: 1 }}
-                        initial={{ x: 200, opacity: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="mb-3"
+    <BaseLayout>
+      <BasePage className="signin-page wrapper">
+        {err && <div className="errMsg">{err}</div>}
+        {success && <div className="successMsg">{success}</div>}
+        <div className="mt-5">
+          <Row>
+            <Col
+              md={{ size: 6, offset: 3 }}
+              sm={{ size: 6, offset: 3 }}
+              xs={{ size: 12 }}
+            >
+              <div className="form-wrapper">
+                <motion.div
+                  initial="initial"
+                  animate="animate"
+                  exit={{ opacity: 0 }}
+                  variants={stagger}
+                >
+                  <motion.h2 variants={fadeInUp} className="mb-3">
+                    Reset Your Password
+                  </motion.h2>
+                  <form className="mt-3" onSubmit={handleResetPassword}>
+                    <motion.label
+                      variants={fadeInUp}
+                      className="text-capitalize font-weight-bold mx-3"
+                      htmlFor="email"
+                    >
+                      Enter your New Password
+                    </motion.label>
+                    <motion.div
+                      variants={fadeInUp}
+                      className="input-group mt-3"
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="ri-lock-2-fill"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <input
+                        className="form-control"
+                        type="password"
+                        placeholder="password"
+                        name="password"
+                        value={password}
+                        onChange={handleChangeInput}
+                        required
+                      />
+                    </motion.div>
+                    <motion.div
+                      variants={fadeInUp}
+                      className="input-group mt-3"
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="ri-lock-password-fill"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <input
+                        className="form-control"
+                        type="password"
+                        placeholder="Confirm password"
+                        name="cf_password"
+                        value={cf_password}
+                        onChange={handleChangeInput}
+                        required
+                      />
+                    </motion.div>
+                    <motion.div
+                      variants={fadeInUp}
+                      className="input-group mt-3"
+                    >
+                      <motion.button
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.9 }}
+                        type="submit"
+                        className="btn-signin mt-3"
                       >
-                        Reset Your Password
-                      </motion.h2>
-                      <motion.form
-                        variants={fadeInUp}
-                        className="mt-3"
-                        onSubmit={handleResetPassword}
-                      >
-                        <label
-                          className="text-capitalize font-weight-bold mx-3"
-                          htmlFor="email"
-                        >
-                          Enter your New Password
-                        </label>
-                        <InputGroup className="mt-3">
-                          <InputGroupAddon addonType="prepend">
-                            <InputGroupText>
-                              <i className="ri-lock-2-fill"></i>
-                            </InputGroupText>
-                          </InputGroupAddon>
-                          <input
-                            className="form-control"
-                            type="password"
-                            placeholder="password"
-                            name="password"
-                            value={password}
-                            onChange={handleChangeInput}
-                            required
-                          />
-                        </InputGroup>
-                        <InputGroup className="mt-3">
-                          <InputGroupAddon addonType="prepend">
-                            <InputGroupText>
-                              <i className="ri-lock-password-fill"></i>
-                            </InputGroupText>
-                          </InputGroupAddon>
-                          <input
-                            className="form-control"
-                            type="password"
-                            placeholder="Confirm password"
-                            name="cf_password"
-                            value={cf_password}
-                            onChange={handleChangeInput}
-                            required
-                          />
-                        </InputGroup>
-                        <InputGroup>
-                          <motion.button
-                            whileHover={{ scale: 1.01 }}
-                            whileTap={{ scale: 0.9 }}
-                            type="submit"
-                            className="btn-signin mt-3"
-                          >
-                            Reset Password
-                          </motion.button>
-                        </InputGroup>
-                      </motion.form>
-                    </div>
-                  </Col>
-                </Row>
+                        Reset Password
+                      </motion.button>
+                    </motion.div>
+                  </form>
+                </motion.div>
               </div>
-            </BasePage>
-          </motion.div>
-        </motion.div>
-        <style jsx>{`
-          .errMsg {
-            background: rgb(214, 10, 10);
-            color: #fff9;
-            text-align: center;
-            padding: 10px 0;
-            letter-spacing: 1.3px;
-          }
+            </Col>
+          </Row>
+        </div>
+      </BasePage>
+      <style jsx>{`
+        .errMsg {
+          background: rgb(214, 10, 10);
+          color: #fff9;
+          text-align: center;
+          padding: 10px 0;
+          letter-spacing: 1.3px;
+        }
 
-          .successMsg {
-            background: rgb(9, 158, 54);
-            color: #fff9;
-            text-align: center;
-            padding: 10px 0;
-            letter-spacing: 1.3px;
-          }
-        `}</style>
-      </BaseLayout>
-    </motion.div>
+        .successMsg {
+          background: rgb(9, 158, 54);
+          color: #fff9;
+          text-align: center;
+          padding: 10px 0;
+          letter-spacing: 1.3px;
+        }
+      `}</style>
+    </BaseLayout>
   );
 };
 

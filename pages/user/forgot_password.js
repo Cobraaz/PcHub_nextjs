@@ -78,94 +78,85 @@ const ForgotPassword = () => {
   };
 
   return (
-    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <BaseLayout>
-        <motion.div variants={stagger}>
-          <motion.div variants={fadeInUp}>
-            <BasePage className="signin-page wrapper">
-              {err && <div className="errMsg">{err}</div>}
-              {success && <div className="successMsg">{success}</div>}
-              <div className="mt-5">
-                <Row>
-                  <Col
-                    md={{ size: 6, offset: 3 }}
-                    sm={{ size: 6, offset: 3 }}
-                    xs={{ size: 12 }}
-                  >
-                    <div className="form-wrapper">
-                      <motion.h2
-                        animate={{ x: 0, opacity: 1 }}
-                        initial={{ x: 200, opacity: 0 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="mb-3"
+    <BaseLayout>
+      <BasePage className="signin-page wrapper">
+        {err && <div className="errMsg">{err}</div>}
+        {success && <div className="successMsg">{success}</div>}
+        <div className="mt-5">
+          <Row>
+            <Col
+              md={{ size: 6, offset: 3 }}
+              sm={{ size: 6, offset: 3 }}
+              xs={{ size: 12 }}
+            >
+              <div className="form-wrapper">
+                <motion.div
+                  initial="initial"
+                  animate="animate"
+                  exit={{ opacity: 0 }}
+                  variants={stagger}
+                >
+                  <motion.h2 variants={fadeInUp} className="mb-3">
+                    Forgot Your Password?
+                  </motion.h2>
+                  <form className="mt-3" onSubmit={forgotPassword}>
+                    <motion.label
+                      variants={fadeInUp}
+                      className="text-capitalize font-weight-bold mx-3"
+                      htmlFor="email"
+                    >
+                      Enter your email address
+                    </motion.label>
+                    <motion.div variants={fadeInUp} className="input-group">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="ri-mail-send-fill"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <input
+                        className="form-control"
+                        name="email"
+                        value={email}
+                        onChange={handleChangeInput}
+                        placeholder="Email Address"
+                        required
+                      />
+                    </motion.div>
+                    <motion.div variants={fadeInUp} className="input-group">
+                      <motion.button
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.9 }}
+                        type="submit"
+                        className="btn-signin mt-3 btn btn-secondary btn-block"
                       >
-                        Forgot Your Password?
-                      </motion.h2>
-                      <motion.form
-                        variants={fadeInUp}
-                        className="mt-3"
-                        onSubmit={forgotPassword}
-                      >
-                        <label
-                          className="text-capitalize font-weight-bold mx-3"
-                          htmlFor="email"
-                        >
-                          Enter your email address
-                        </label>
-                        <InputGroup>
-                          <InputGroupAddon addonType="prepend">
-                            <InputGroupText>
-                              <i className="ri-mail-send-fill"></i>
-                            </InputGroupText>
-                          </InputGroupAddon>
-                          <input
-                            className="form-control"
-                            name="email"
-                            value={email}
-                            onChange={handleChangeInput}
-                            placeholder="Email Address"
-                            required
-                          />
-                        </InputGroup>
-                        <InputGroup>
-                          <motion.button
-                            whileHover={{ scale: 1.01 }}
-                            whileTap={{ scale: 0.9 }}
-                            type="submit"
-                            className="btn-signin mt-3 btn btn-secondary btn-block"
-                      
-                          >
-                            Verify your email
-                          </motion.button>
-                        </InputGroup>
-                      </motion.form>
-                    </div>
-                  </Col>
-                </Row>
+                        Verify your email
+                      </motion.button>
+                    </motion.div>
+                  </form>
+                </motion.div>
               </div>
-            </BasePage>
-          </motion.div>
-        </motion.div>
-        <style jsx>{`
-          .errMsg {
-            background: rgb(214, 10, 10);
-            color: #fff9;
-            text-align: center;
-            padding: 10px 0;
-            letter-spacing: 1.3px;
-          }
+            </Col>
+          </Row>
+        </div>
+      </BasePage>
+      <style jsx>{`
+        .errMsg {
+          background: rgb(214, 10, 10);
+          color: #fff9;
+          text-align: center;
+          padding: 10px 0;
+          letter-spacing: 1.3px;
+        }
 
-          .successMsg {
-            background: rgb(9, 158, 54);
-            color: #fff9;
-            text-align: center;
-            padding: 10px 0;
-            letter-spacing: 1.3px;
-          }
-        `}</style>
-      </BaseLayout>
-    </motion.div>
+        .successMsg {
+          background: rgb(9, 158, 54);
+          color: #fff9;
+          text-align: center;
+          padding: 10px 0;
+          letter-spacing: 1.3px;
+        }
+      `}</style>
+    </BaseLayout>
   );
 };
 

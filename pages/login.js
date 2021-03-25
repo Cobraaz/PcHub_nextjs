@@ -16,6 +16,7 @@ import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import GitHubLogin from "react-github-login";
 import parse from "html-react-parser";
+
 import { motion } from "framer-motion";
 let easing = [0.6, -0.05, 0.01, 0.99];
 
@@ -152,110 +153,101 @@ const Login = () => {
   }, []);
 
   return (
-    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <BaseLayout>
-        <motion.div variants={stagger}>
-          <motion.div variants={fadeInUp}>
-            <BasePage className="signin-page wrapper">
-              <Row>
-                <Col
-                  md={{ size: 6, offset: 3 }}
-                  sm={{ size: 6, offset: 3 }}
-                  xs={{ size: 12 }}
-                >
-                  <div className="form-wrapper">
-                    <motion.h1
-                      animate={{ x: 0, opacity: 1 }}
-                      initial={{ x: 200, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="mb-3"
+    <BaseLayout>
+      <BasePage className="signin-page wrapper">
+        <Row>
+          <Col
+            md={{ size: 6, offset: 3 }}
+            sm={{ size: 6, offset: 3 }}
+            xs={{ size: 12 }}
+          >
+            <div className="form-wrapper">
+              <motion.div
+                initial="initial"
+                animate="animate"
+                exit={{ opacity: 0 }}
+                variants={stagger}
+              >
+                <motion.h1 variants={fadeInUp} className="mb-3">
+                  Sign In
+                </motion.h1>
+                <motion.p variants={fadeInUp} className="mx-3">
+                  You don't have a account
+                  <Link href="/register">
+                    <a className="account-text"> Register Now</a>
+                  </Link>
+                </motion.p>
+                <motion.div variants={fadeInUp}>
+                  <SignInForm onSubmit={handleSubmit} />
+                </motion.div>
+                <motion.div variants={fadeInUp}>
+                  <Link href="/user/forgot_password">
+                    <a
+                      style={{ float: "right", textAlign: "end" }}
+                      className="mx-3 account-text"
                     >
-                      Sign In
-                    </motion.h1>
-                    <p className="mx-3">
-                      You don't have a account
-                      <Link href="/register">
-                        <a className="account-text"> Register Now</a>
-                      </Link>
-                    </p>
-                    {/* <motion.div variants={stagger}> */}
-                    <SignInForm onSubmit={handleSubmit} />
-                    {/* </motion.div> */}
-                    <Link href="/user/forgot_password">
-                      <a
-                        style={{ float: "right", textAlign: "end" }}
-                        className="mx-3 account-text"
-                      >
-                        Forgot your password?
-                      </a>
-                    </Link>
-                    <motion.div
-                      variants={fadeInUp}
-                      className="mt-4 text-center"
-                    >
-                      Or Sign in with social platforms
-                      <motion.div
-                        variants={fadeInUp}
-                        className="social-media mt-3"
-                      >
-                        <GoogleLogin
-                          clientId={process.env.GOOGLE_CLIENT_ID}
-                          render={(renderProps) => (
-                            <div className="social-media">
-                              <div
-                                onClick={renderProps.onClick}
-                                disabled={renderProps.disabled}
-                                className="social-icon"
-                              >
-                                <i
-                                  className="ri-google-fill clickable"
-                                  style={{ fontSize: "1.6em" }}
-                                ></i>
-                              </div>
-                            </div>
-                          )}
-                          onSuccess={responseGoogle}
-                          cookiePolicy={"single_host_origin"}
-                        />
+                      Forgot your password?
+                    </a>
+                  </Link>
+                </motion.div>
+                <motion.div variants={fadeInUp} className="mt-4 text-center">
+                  Or Sign in with social platforms
+                  <div className="social-media mt-3">
+                    <GoogleLogin
+                      clientId={process.env.GOOGLE_CLIENT_ID}
+                      render={(renderProps) => (
+                        <div className="social-media">
+                          <div
+                            onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            className="social-icon"
+                          >
+                            <i
+                              className="ri-google-fill"
+                              style={{ fontSize: "1.6em" }}
+                            ></i>
+                          </div>
+                        </div>
+                      )}
+                      onSuccess={responseGoogle}
+                      cookiePolicy={"single_host_origin"}
+                    />
 
-                        <GitHubLogin
-                          clientId={process.env.GITHUB_CLIENT_ID}
-                          redirectUri=""
-                          onSuccess={responseGithub}
-                          className="social-icon"
-                          buttonText={parse(`<i id="github"></i>`)}
-                        />
+                    <GitHubLogin
+                      clientId={process.env.GITHUB_CLIENT_ID}
+                      redirectUri=""
+                      onSuccess={responseGithub}
+                      className="social-icon"
+                      buttonText={parse(`<i id="github"></i>`)}
+                    />
 
-                        <FacebookLogin
-                          appId={process.env.FACEBOOK_CLIENT_ID}
-                          autoLoad={false}
-                          callback={responseFacebook}
-                          render={(renderProps) => (
-                            <div className="social-media">
-                              <div
-                                onClick={renderProps.onClick}
-                                disabled={renderProps.disabled}
-                                className="social-icon"
-                              >
-                                <i
-                                  className="ri-facebook-fill clickable"
-                                  style={{ fontSize: "1.6em" }}
-                                ></i>
-                              </div>
-                            </div>
-                          )}
-                        />
-                      </motion.div>
-                    </motion.div>
+                    <FacebookLogin
+                      appId={process.env.FACEBOOK_CLIENT_ID}
+                      autoLoad={false}
+                      callback={responseFacebook}
+                      render={(renderProps) => (
+                        <div className="social-media">
+                          <div
+                            onClick={renderProps.onClick}
+                            disabled={renderProps.disabled}
+                            className="social-icon"
+                          >
+                            <i
+                              className="ri-facebook-fill"
+                              style={{ fontSize: "1.6em" }}
+                            ></i>
+                          </div>
+                        </div>
+                      )}
+                    />
                   </div>
-                </Col>
-              </Row>
-            </BasePage>
-          </motion.div>
-        </motion.div>
-      </BaseLayout>
-    </motion.div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </Col>
+        </Row>
+      </BasePage>
+    </BaseLayout>
   );
 };
 

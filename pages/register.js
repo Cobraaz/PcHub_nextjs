@@ -62,42 +62,39 @@ const Register = () => {
   };
 
   return (
-    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <BaseLayout>
-        <motion.div variants={stagger}>
-          <motion.div variants={fadeInUp}>
-            <BasePage className="signin-page wrapper">
-              <Row>
-                <Col
-                  md={{ size: 6, offset: 3 }}
-                  sm={{ size: 6, offset: 3 }}
-                  xs={{ size: 12 }}
-                >
-                  <div className="form-wrapper">
-                    <motion.h1
-                      animate={{ x: 0, opacity: 1 }}
-                      initial={{ x: 200, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="mb-3"
-                    >
-                      Sign Up
-                    </motion.h1>
-                    <p className="mx-3 mb-0">
-                      Already have a account
-                      <Link href="/login">
-                        <a className="account-text"> Login Now</a>
-                      </Link>
-                    </p>
-                    <RegisterForm onSubmit={handleSubmit} />
-                  </div>
-                </Col>
-              </Row>
-            </BasePage>
-          </motion.div>
-        </motion.div>
-      </BaseLayout>
-    </motion.div>
+    <BaseLayout>
+      <BasePage className="signin-page wrapper">
+        <Row>
+          <Col
+            md={{ size: 6, offset: 3 }}
+            sm={{ size: 6, offset: 3 }}
+            xs={{ size: 12 }}
+          >
+            <div className="form-wrapper">
+              <motion.div
+                initial="initial"
+                animate="animate"
+                exit={{ opacity: 0 }}
+                variants={stagger}
+              >
+                <motion.h1 variants={fadeInUp} className="mb-3">
+                  Sign Up
+                </motion.h1>
+                <motion.p variants={fadeInUp} className="mx-3 mb-0">
+                  Already have a account
+                  <Link href="/login">
+                    <a className="account-text"> Login Now</a>
+                  </Link>
+                </motion.p>
+                <motion.div variants={fadeInUp}>
+                  <RegisterForm onSubmit={handleSubmit} />
+                </motion.div>
+              </motion.div>
+            </div>
+          </Col>
+        </Row>
+      </BasePage>
+    </BaseLayout>
   );
 };
 

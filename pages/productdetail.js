@@ -71,166 +71,153 @@ const Home = () => {
   }, [tab]);
 
   return (
-    <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-      <BaseLayout>
-        <BasePage indexPage className="product-detail-page">
-          <Head>
-            <title>Product Card/Page</title>
-          </Head>
+    <BaseLayout>
+      <BasePage indexPage className="product-detail-page">
+        <Head>
+          <title>Product Card/Page</title>
+        </Head>
 
-          <div className="card-wrapper">
-            <div className="card-product-detail">
-              {/* <!-- card left --> */}
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit={{ opacity: 0 }}
+          variants={stagger}
+          className="card-wrapper"
+        >
+          <div className="card-product-detail">
+            {/* <!-- card left --> */}
 
-              <motion.div
-                className="img"
-                animate={{ opacity: 1 }}
-                initial={{ opacity: 0 }}
-                className="product-imgs"
-              >
-                <div className="img-display">
-                  <div className="img-showcase">
+            <motion.div
+              className="img"
+              animate={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
+              className="product-imgs"
+            >
+              <div className="img-display">
+                <div className="img-showcase">
+                  <motion.div variants={fadeInUp}>
+                    <Image
+                      src={product.images[tab]}
+                      alt="shoe image"
+                      width={500}
+                      height={400}
+                    />
+                  </motion.div>
+                </div>
+                <br />
+              </div>
+              <div className="img-select">
+                {product.images.map((img, index) => (
+                  <motion.div
+                    className="img-item"
+                    data-id="1"
+                    key={index}
+                    variants={fadeInUp}
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: 0.2 }}
+                    whileHover={{ scale: 1.2 }}
+                  >
                     <motion.div
-                      animate={{ x: 0, opacity: 1 }}
-                      initial={{ x: 200, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.2 }}
+                      transition={{ delay: 1.5, duration: 2 }}
+                      whileHover={{ scale: 1.2 }}
+                      className={`img-thumbnail rounded ${isActive(index)} `}
                     >
                       <Image
-                        src={product.images[tab]}
+                        src={img}
                         alt="shoe image"
-                        // style={{ height: "450px" }}
-                        width={500}
-                        height={400}
+                        onClick={() => setTab(index)}
+                        width={120}
+                        height={100}
+                        quality={25}
                       />
-                      {/* <motion.img
-                      src={product.images[tab]}
-                      alt={product.images[tab]}
-                      alt="shoe image"
-                      style={{ height: "450px" }}
-                      animate={{ x: 0, opacity: 1 }}
-                      initial={{ x: 200, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.2 }}
-                    /> */}
                     </motion.div>
-                  </div>
-                  <br />
-                </div>
-                <div className="img-select">
-                  {product.images.map((img, index) => (
-                    <motion.div
-                      className="img-item"
-                      data-id="1"
-                      key={index}
-                      animate={{ x: 0, opacity: 1 }}
-                      initial={{ x: 200, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ delay: 0.2 }}
-                      whileHover={{ scale: 1.2 }}
-                    >
-                      <motion.div
-                        transition={{ delay: 1.5, duration: 2 }}
-                        whileHover={{ scale: 1.2 }}
-                        className={`img-thumbnail rounded ${isActive(index)} `}
-                      >
-                        <Image
-                          src={img}
-                          alt="shoe image"
-                          onClick={() => setTab(index)}
-                          width={120}
-                          height={100}
-                          quality={25}
-                        />
-                      </motion.div>
-                    </motion.div>
-                  ))}
-                </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+            {/* <!-- card right --> */}
+            <div className="product-content">
+              <motion.h2 variants={fadeInUp} className="product-title">
+                {product.title.split(" ").slice(0, 2).join(" ")}
+                {countWords(product.title) > 2 && "..."}
+              </motion.h2>
+
+              <motion.div variants={fadeInUp} className="product-price">
+                <p className="new-price">
+                  Price: <span>{numberWithCommas(product.price)}</span>
+                </p>
               </motion.div>
-              {/* <!-- card right --> */}
-              <motion.div variants={stagger} className="product-content">
-                <motion.h2 variants={fadeInUp} className="product-title">
-                  {product.title.split(" ").slice(0, 2).join(" ")}
-                  {countWords(product.title) > 2 && "..."}
-                </motion.h2>
 
-                <motion.div variants={fadeInUp} className="product-price">
-                  <p className="new-price">
-                    Price: <span>{numberWithCommas(product.price)}</span>
-                  </p>
-                </motion.div>
+              <div className="product-detail">
+                <motion.h2 variants={fadeInUp}>about this item: </motion.h2>
+                <motion.p variants={fadeInUp}>
+                  {product.content.split(" ").slice(0, 40).join(" ")}
+                </motion.p>
+                <motion.p variants={fadeInUp}>
+                  {product.description.split(" ").slice(0, 30).join(" ")}...
+                </motion.p>
+                <motion.ul variants={fadeInUp}>
+                  <li>
+                    In Stock:{" "}
+                    <span className="text-danger">
+                      {product.inStock} pieces
+                    </span>
+                  </li>
+                  <li>
+                    Available: <span className="text-info">in stock</span>
+                  </li>
+                  <li>
+                    Sold: <span className="text-danger">{product.sold}</span>
+                  </li>
+                </motion.ul>
+              </div>
 
-                <div className="product-detail">
-                  <motion.h2 variants={fadeInUp}>about this item: </motion.h2>
-                  <motion.p variants={fadeInUp}>
-                    {product.content.split(" ").slice(0, 40).join(" ")}
-                  </motion.p>
-                  <motion.p variants={fadeInUp}>
-                    {product.description.split(" ").slice(0, 30).join(" ")}...
-                  </motion.p>
-                  <motion.ul variants={fadeInUp}>
-                    <li>
-                      In Stock:{" "}
-                      <span className="text-danger">
-                        {product.inStock} pieces
-                      </span>
-                    </li>
-                    <li>
-                      Available: <span className="text-info">in stock</span>
-                    </li>
-                    <li>
-                      Sold: <span className="text-danger">{product.sold}</span>
-                    </li>
-                  </motion.ul>
-                </div>
-
-                <motion.div variants={fadeInUp} className="purchase-info">
-                  <input
-                    type="number"
-                    min="0"
-                    //   value="1"
-                  />
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    type="button"
-                    className="btn"
-                  >
-                    Add to Cart{" "}
-                    <i
-                      className="ri-shopping-cart-fill"
-                      style={{
-                        fontSize: "1.2em",
-                        verticalAlign: "middle",
-                      }}
-                    ></i>
-                  </motion.button>
-                </motion.div>
+              <motion.div variants={fadeInUp} className="purchase-info">
+                <input
+                  type="number"
+                  min="0"
+                  //   value="1"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  type="button"
+                  className="btn"
+                >
+                  Add to Cart{" "}
+                  <i
+                    className="ri-shopping-cart-fill"
+                    style={{
+                      fontSize: "1.2em",
+                      verticalAlign: "middle",
+                    }}
+                  ></i>
+                </motion.button>
               </motion.div>
             </div>
           </div>
+        </motion.div>
 
-          <motion.h1
-            animate={{ opacity: 1 }}
-            initial={{ opacity: 0 }}
-            className="related-product-title"
-          >
-            Related Products
-          </motion.h1>
-          <Row className="mt-3 mb-5">
-            {products.length === 0 ? (
-              <h2>No Products</h2>
-            ) : (
-              products.map((product, index) => (
-                <Col key={index} lg="4" md="6" className="mb-5">
-                  <ProductItem key={index} product={product} />
-                </Col>
-              ))
-            )}
-          </Row>
-        </BasePage>
-      </BaseLayout>
-    </motion.div>
+        <motion.h1
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          className="related-product-title"
+        >
+          Related Products
+        </motion.h1>
+        <Row className="mt-3 mb-5">
+          {products.length === 0 ? (
+            <h2>No Products</h2>
+          ) : (
+            products.map((product, index) => (
+              <Col key={index} lg="4" md="6" className="mb-5">
+                <ProductItem key={index} product={product} />
+              </Col>
+            ))
+          )}
+        </Row>
+      </BasePage>
+    </BaseLayout>
   );
 };
 

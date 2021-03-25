@@ -43,24 +43,25 @@ const Home = ({ slideImages, products: resProducts, status }) => {
   }
   return (
     <BaseLayout header_bg="transparent" className="blog-listing-page">
-      <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-        <Masthead slideImages={slideImages} />
-      </motion.div>
+      <Masthead slideImages={slideImages} />
       <BasePage indexPage className="home-page">
-        <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
-          <motion.div variants={stagger}>
-            <Row className="mt-3 mb-5">
-              {products.length === 0 ? (
-                <h2>No Products</h2>
-              ) : (
-                products.map((product, index) => (
-                  <Col key={index} lg="4" md="6" className="mb-5">
-                    <ProductItem key={index} product={product} />
-                  </Col>
-                ))
-              )}
-            </Row>
-          </motion.div>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          exit={{ opacity: 0 }}
+          variants={stagger}
+        >
+          <Row className="mt-3 mb-5">
+            {products.length === 0 ? (
+              <h2>No Products</h2>
+            ) : (
+              products.map((product, index) => (
+                <Col key={index} lg="4" md="6" className="mb-5">
+                  <ProductItem key={index} product={product} />
+                </Col>
+              ))
+            )}
+          </Row>
         </motion.div>
       </BasePage>
     </BaseLayout>

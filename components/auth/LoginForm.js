@@ -1,13 +1,9 @@
 import { useState } from "react";
-import {
-  Button,
-  InputGroup,
-  InputGroupText,
-  InputGroupAddon,
-} from "reactstrap";
+import { InputGroupText, InputGroupAddon } from "reactstrap";
 import { motion } from "framer-motion";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
+
 const fadeInUp = {
   initial: {
     y: 60,
@@ -36,8 +32,12 @@ const SignInForm = ({ onSubmit }) => {
     setUserData({ ...userData, [name]: value });
   };
   return (
-    <motion.form variants={fadeInUp} onSubmit={(e) => onSubmit(e, userData)}>
-      <InputGroup>
+    <motion.form
+      initial="initial"
+      animate="animate"
+      onSubmit={(e) => onSubmit(e, userData)}
+    >
+      <motion.div variants={fadeInUp} className="input-group">
         <InputGroupAddon addonType="prepend">
           <InputGroupText>
             <i className="ri-mail-send-fill"></i>
@@ -52,8 +52,8 @@ const SignInForm = ({ onSubmit }) => {
           onChange={handleChangeInput}
           required
         />
-      </InputGroup>
-      <InputGroup className="mt-3">
+      </motion.div>
+      <motion.div variants={fadeInUp} className="input-group mt-3">
         <InputGroupAddon addonType="prepend">
           <InputGroupText>
             <i className="ri-lock-2-fill"></i>
@@ -68,8 +68,8 @@ const SignInForm = ({ onSubmit }) => {
           onChange={handleChangeInput}
           required
         />
-      </InputGroup>
-      <InputGroup>
+      </motion.div>
+      <motion.div variants={fadeInUp} className="input-group mt-3">
         <motion.button
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.9 }}
@@ -78,7 +78,7 @@ const SignInForm = ({ onSubmit }) => {
         >
           Submit
         </motion.button>
-      </InputGroup>
+      </motion.div>
     </motion.form>
   );
 };
