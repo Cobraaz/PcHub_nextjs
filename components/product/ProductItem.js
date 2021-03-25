@@ -11,6 +11,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { numberWithCommas } from "utils/helper.functions";
+import { useRouter } from "next/router";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const fadeInUp = {
@@ -30,18 +31,23 @@ const fadeInUp = {
 };
 
 const ProductItem = ({ product }) => {
+  const router = useRouter();
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <motion.div
         variants={fadeInUp}
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.95 }}
+
         // className="card-body-wrapper"
       >
-        <Card className="card-body-wrapper-Ab">
+        <div className="card-body-wrapper-Ab card">
           <motion.div
             variants={fadeInUp}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.95 }}
             // className="view overlay"
+            onClick={() =>
+              router.push("/product/[id]", `/product/${product._id}`)
+            }
           >
             <motion.div variants={fadeInUp} className="card-img-top-Ab">
               <Image
@@ -85,10 +91,12 @@ const ProductItem = ({ product }) => {
             </motion.div>
           </motion.div>
 
-          <Link href="/">
-            <a className="card-button-Ab">Add to cart</a>
-          </Link>
-        </Card>
+          {/* <div> */}
+          <motion.a whileTap={{ scale: 0.85 }} className="card-button-Ab">
+            Add to cart
+          </motion.a>
+          {/* </div> */}
+        </div>
       </motion.div>
     </motion.div>
   );

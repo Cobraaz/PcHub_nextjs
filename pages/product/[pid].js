@@ -37,7 +37,7 @@ const fadeInUp = {
   },
 };
 
-const Home = ({ product }) => {
+const DetailProduct = ({ product }) => {
   const [products] = useState(fakeProductsData);
   const [tab, setTab] = useState(0);
 
@@ -51,7 +51,7 @@ const Home = ({ product }) => {
     }, 3000);
     return () => clearInterval(id);
   }, [tab]);
-
+  if (!product) return null;
   return (
     <BaseLayout>
       <BasePage indexPage className="product-detail-page">
@@ -203,30 +203,29 @@ const Home = ({ product }) => {
   );
 };
 
-// export async function getStaticPaths() {
-//   const { status, result, products } = await getData("product/all_products");
+export async function getStaticPaths() {
+  const { status, result, products } = await getData("product/all_products");
 
-//   const paths = products.map((product) => {
-//     return {
-//       params: { id: product._id },
-//     };
-//   });
-
-//   return { paths, fallback: true };
-// }
-
-// export async function getStaticProps({ params: { id } }) {
-//   const { product } = await getData(`product/get_by_id/${id}`);
-
-//   return { props: { product }, revalidate: 1 };
-// }
-
-export async function getServerSideProps({ params: { id } }) {
-  const { product } = await getData(`product/get_by_id/${id}`);
-  // server side rendering
-  return {
-    props: { product }, // will be passed to the page component as props
-  };
+  const paths = products.map((product) => {
+    return {
+      params: { pid: product._id },
+    };
+  });
+  return { paths, fallback: true };
 }
 
-export default Home;
+export async function getStaticProps({ params: { pid } }) {
+  const { product } = await getData(`product/get_by_id/${pid}`);
+  // console.log(product);
+  return { props: { product }, revalidate: 1 };
+}
+
+// export async function getServerSideProps({ params: { id } }) {
+//   const { product } = await getData(`product/get_by_id/${id}`);
+// server side rendering
+//   return {
+//     props: { product }, // will be passed to the page component as props
+//   };
+// }
+
+export default DetailProduct;
