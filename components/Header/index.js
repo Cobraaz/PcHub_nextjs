@@ -15,7 +15,7 @@ import Cookie from "js-cookie";
 
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 
-const Header = ({ isOpen, toggle, bg_header }) => {
+const Header = ({ isOpen, toggle, header_bg }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const router = useRouter();
@@ -34,11 +34,9 @@ const Header = ({ isOpen, toggle, bg_header }) => {
     <ReactResizeDetector handleWidth>
       {({ width }) => (
         <Navbar
-          className={`port-navbar port-default absolute ${
-            Object.keys(bg_header).length
-              ? `${bg_header.header_background}`
-              : "with-bg"
-          } ${width < 768 && isOpen ? "is-open" : "is-close"}`}
+          className={`port-navbar port-default absolute ${header_bg} ${
+            width < 768 && isOpen ? "is-open" : "is-close"
+          }`}
           dark
           expand="md"
         >

@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
 import { createApi } from "unsplash-js";
 import { Row, Col } from "reactstrap";
 import { motion } from "framer-motion";
@@ -10,7 +10,6 @@ import ProductItem from "components/product/ProductItem";
 import { shuffle } from "utils/helper.functions";
 // import { productsFromDB } from "pages/api/product/all_products";
 import { getData } from "utils/fetchData";
-import { DataContext } from "store/GlobalState";
 
 const stagger = {
   animate: {
@@ -21,24 +20,6 @@ const stagger = {
 };
 
 const Home = ({ slideImages, products: resProducts, status }) => {
-  const { state, dispatch } = useContext(DataContext);
-
-  useEffect(() => {
-    dispatch({
-      type: "BG_HEADER",
-      payload: {
-        header_background: "transparent",
-      },
-    });
-
-    return () => {
-      dispatch({
-        type: "BG_HEADER",
-        payload: {},
-      });
-    };
-  }, []);
-
   const [products] = useState(resProducts);
   if (!status === "success") {
     return (
@@ -61,7 +42,7 @@ const Home = ({ slideImages, products: resProducts, status }) => {
     );
   }
   return (
-    <BaseLayout className="blog-listing-page">
+    <BaseLayout header_bg="transparent" className="blog-listing-page">
       <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
         <Masthead slideImages={slideImages} />
       </motion.div>
