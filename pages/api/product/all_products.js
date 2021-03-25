@@ -30,7 +30,7 @@ export const productsFromDB = async () => {
 
 const getAllProducts = async (req, res) => {
   try {
-    const products = await productsFromDB();
+    const products = await Products.find();
     res.json({ status: "success", result: products.length, products });
   } catch (err) {
     console.log(err);
