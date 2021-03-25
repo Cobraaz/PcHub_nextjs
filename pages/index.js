@@ -8,7 +8,7 @@ import BasePage from "components/layouts/BasePage";
 import Masthead from "components/shared/Masthead";
 import ProductItem from "components/product/ProductItem";
 import { shuffle } from "utils/helper.functions";
-// import { productsFromDB } from "pages/api/product/all_products";
+import { productsFromDB } from "pages/api/product/all_products";
 import { getData } from "utils/fetchData";
 
 const stagger = {
@@ -120,24 +120,9 @@ const getPhotoUnsplash = async () => {
 //   };
 // }
 
-export async function getStaticProps() {
-  const { status, result, products } = await getData("product/all_products");
+// export async function getStaticProps() {
+//   const { status, result, products } = await getData("product/all_products");
 
-  return {
-    props: {
-      slideImages: await getPhotoUnsplash(),
-      status,
-      result,
-      products,
-    },
-    revalidate: 1,
-  };
-}
-
-// export async function getServerSideProps() {
-//   const { status, result, productsResponse: products } = JSON.parse(
-//     JSON.stringify(await productsFromDB())
-//   );
 //   return {
 //     props: {
 //       slideImages: await getPhotoUnsplash(),
@@ -145,7 +130,22 @@ export async function getStaticProps() {
 //       result,
 //       products,
 //     },
+//     revalidate: 1,
 //   };
 // }
+
+export async function getServerSideProps() {
+  const { status, result, productsResponse: products } = JSON.parse(
+    JSON.stringify(await productsFromDB())
+  );
+  return {
+    props: {
+      slideImages: await getPhotoUnsplash(),
+      status,
+      result,
+      products,
+    },
+  };
+}
 
 export default Home;
