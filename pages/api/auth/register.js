@@ -37,7 +37,7 @@ const register = async (req, res) => {
 
     const url = `${process.env.BASE_URL}/user/activate/${activation_token}`;
     console.log(url);
-    sendMail(email, url, "Verify your email address");
+    await sendMail(email, url, "Verify your email address");
 
     res.json({
       msg: "Register Success! Please activate your email to start.",

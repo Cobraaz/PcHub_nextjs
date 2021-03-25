@@ -22,7 +22,7 @@ const forgotPassword = async (req, res) => {
     const access_token = createAccessToken({ id: user._id });
     const url = `${process.env.BASE_URL}/user/reset/${access_token}`;
 
-    sendMail(email, url, "Reset your password");
+    await sendMail(email, url, "Reset your password");
     res.json({ msg: "Re-send the password, please check your email." });
   } catch (err) {
     console.log(err);

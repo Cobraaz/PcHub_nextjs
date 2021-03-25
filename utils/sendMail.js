@@ -1,43 +1,16 @@
-const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
-const { OAuth2 } = google.auth;
-const OAUTH_PLAYGROUND = "https://developers.google.com/oauthplayground";
+var nodemailer = require("nodemailer");
 
-const {
-  MAILING_SERVICE_CLIENT_ID,
-  MAILING_SERVICE_CLIENT_SECRET,
-  MAILING_SERVICE_REFRESH_TOKEN,
-  SENDER_EMAIL_ADDRESS,
-} = process.env;
-
-const oauth2Client = new OAuth2(
-  MAILING_SERVICE_CLIENT_ID,
-  MAILING_SERVICE_CLIENT_SECRET,
-  MAILING_SERVICE_REFRESH_TOKEN,
-  OAUTH_PLAYGROUND
-);
-
-// send mail
 const sendEmail = (to, url, txt) => {
-  oauth2Client.setCredentials({
-    refresh_token: MAILING_SERVICE_REFRESH_TOKEN,
-  });
-
-  const accessToken = oauth2Client.getAccessToken();
-  const smtpTransport = nodemailer.createTransport({
+  var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      type: "OAuth2",
-      user: SENDER_EMAIL_ADDRESS,
-      clientId: MAILING_SERVICE_CLIENT_ID,
-      clientSecret: MAILING_SERVICE_CLIENT_SECRET,
-      refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
-      accessToken,
+      user: process.env.SENDER_EMAIL_ADDRESS,
+      pass: process.env.SENDER_EMAIL_PASSWORD,
     },
   });
 
-  const mailOptions = {
-    from: SENDER_EMAIL_ADDRESS,
+  var mailOptions = {
+    from: process.env.SENDER_EMAIL_ADDRESS,
     to: to,
     subject: "PcHub Store",
     html: `
@@ -56,9 +29,12 @@ const sendEmail = (to, url, txt) => {
         `,
   };
 
-  smtpTransport.sendMail(mailOptions, (err, infor) => {
-    if (err) return err;
-    return infor;
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
   });
 };
 
