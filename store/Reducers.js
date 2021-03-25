@@ -18,6 +18,11 @@ const reducers = (state, action) => {
         ...state,
         users: action.payload,
       };
+    case ACTIONS.BG_HEADER:
+      return {
+        ...state,
+        bg_header: action.payload,
+      };
 
     default:
       return state;

@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Notify from "components/shared/Notify";
 import { ToastContainer } from "react-toastify";
 import Header from "components/Header";
+import { DataContext } from "store/GlobalState";
 const Layout = ({ children }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { bg_header } = state;
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   return (
     <>
       <Notify />
-      <Header toggle={toggle} isOpen={isOpen} />
+      <Header bg_header={bg_header} toggle={toggle} isOpen={isOpen} />
       <main onClick={() => isOpen && toggle()}>{children}</main>
       <ToastContainer
         position="top-right"
