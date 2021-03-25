@@ -13,6 +13,7 @@ module.exports = {
       "lh3.googleusercontent.com",
       "res.cloudinary.com",
       "rukminim1.flixcart.com",
+      "avatars.githubusercontent.com",
     ],
   },
 };
