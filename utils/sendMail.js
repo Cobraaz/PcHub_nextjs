@@ -3,14 +3,17 @@ var nodemailer = require("nodemailer");
 const sendEmail = (to, url, txt) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
+    host: "smtp.example.com",
+    port: 587,
+    secure: false,
     auth: {
-      user: process.env.SENDER_EMAIL_ADDRESS,
+      user: "anujbansal077@gmail.com",
       pass: process.env.SENDER_EMAIL_PASSWORD,
     },
   });
 
   var mailOptions = {
-    from: process.env.SENDER_EMAIL_ADDRESS,
+    from: "anujbansal077@gmail.com",
     to: to,
     subject: "PcHub Store",
     html: `
