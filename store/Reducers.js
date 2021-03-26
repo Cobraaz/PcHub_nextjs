@@ -18,6 +18,11 @@ const reducers = (state, action) => {
         ...state,
         users: action.payload,
       };
+    case ACTIONS.ADD_CART:
+      return {
+        ...state,
+        cart: action.payload,
+      };
 
     default:
       return state;

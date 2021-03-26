@@ -3,14 +3,24 @@ import Header from "components/Header";
 import Footer from "components/Footer";
 const BaseLayout = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [cartDropdownHidden, setCartDropdownHidden] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
   const { className, children, header_bg = "with-bg" } = props;
   return (
     <>
-      <Header header_bg={header_bg} toggle={toggle} isOpen={isOpen} />
+      <Header
+        header_bg={header_bg}
+        toggle={toggle}
+        isOpen={isOpen}
+        cartDropdownHidden={cartDropdownHidden}
+        setCartDropdownHidden={setCartDropdownHidden}
+      />
       <div className="layout-container">
         <main
-          onClick={() => isOpen && toggle()}
+          onClick={() => {
+            isOpen && toggle();
+            !cartDropdownHidden && setCartDropdownHidden(!cartDropdownHidden);
+          }}
           className={`cover ${className}`}
         >
           <div className="wrapper">{children}</div>

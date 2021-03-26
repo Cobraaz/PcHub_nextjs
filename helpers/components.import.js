@@ -1,9 +1,9 @@
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import Masthead from "components/shared/Masthead";
-import ProductItem from "components/product/ProductItem";
-import SignInForm from "components/auth/LoginForm";
-import RegisterForm from "components/auth/RegisterForm";
+import BaseLayout from "components/Layouts/BaseLayout";
+import BasePage from "components/Layouts/BasePage";
+import Masthead from "components/Shared/Masthead";
+import ProductItem from "components/Product/ProductItem";
+import SignInForm from "components/Auth/LoginForm";
+import RegisterForm from "components/Auth/RegisterForm";
 
 export {
   BaseLayout,

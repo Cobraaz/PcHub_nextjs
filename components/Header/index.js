@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ReactResizeDetector from "react-resize-detector";
 
 import {
@@ -14,8 +14,16 @@ import { useRouter } from "next/router";
 import Cookie from "js-cookie";
 
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
+import CartIcon from "components/Header/Cart/CartIcon";
+import CartDropdown from "components/Header/Cart/CartDropdown";
 
-const Header = ({ isOpen, toggle, header_bg }) => {
+const Header = ({
+  isOpen,
+  toggle,
+  header_bg,
+  cartDropdownHidden,
+  setCartDropdownHidden,
+}) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const router = useRouter();
@@ -41,7 +49,12 @@ const Header = ({ isOpen, toggle, header_bg }) => {
           expand="md"
         >
           <BsNavBrand />
-          <NavbarToggler onClick={toggle} />
+          <NavbarToggler
+            onClick={() => {
+              toggle();
+              !cartDropdownHidden && setCartDropdownHidden(!cartDropdownHidden);
+            }}
+          />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto ml-auto" navbar>
               <NavItem className="port-navbar-item">
@@ -54,6 +67,11 @@ const Header = ({ isOpen, toggle, header_bg }) => {
               </NavItem>
             </Nav>
             <Nav navbar>
+              <NavItem className="port-navbar-item">
+                <div onClick={() => setCartDropdownHidden(!cartDropdownHidden)}>
+                  <CartIcon />
+                </div>
+              </NavItem>
               {Object.keys(auth).length === 0 ? (
                 <NavItem className="port-navbar-item">
                   <LoginLink />
@@ -63,6 +81,12 @@ const Header = ({ isOpen, toggle, header_bg }) => {
               )}
             </Nav>
           </Collapse>
+          {cartDropdownHidden ? null : (
+            <CartDropdown
+              setCartDropdownHidden={setCartDropdownHidden}
+              cartDropdownHidden={cartDropdownHidden}
+            />
+          )}
         </Navbar>
       )}
     </ReactResizeDetector>

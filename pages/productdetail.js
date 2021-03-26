@@ -3,10 +3,10 @@ import Head from "next/head";
 import Image from "next/image";
 import { Row, Col } from "reactstrap";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
+import BaseLayout from "components/Layouts/BaseLayout";
+import BasePage from "components/Layouts/BasePage";
 import { fakeProductsData } from "populate/FakeData";
-import ProductItem from "components/product/ProductItem";
+import ProductItem from "components/Product/ProductItem";
 import { numberWithCommas, countWords } from "utils/helper.functions";
 import { motion } from "framer-motion";
 

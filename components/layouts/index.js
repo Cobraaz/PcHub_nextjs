@@ -1,4 +1,4 @@
-import Notify from "components/shared/Notify";
+import Notify from "components/Shared/Notify";
 import { ToastContainer } from "react-toastify";
 
 const Layout = ({ children }) => {
