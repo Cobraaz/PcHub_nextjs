@@ -113,24 +113,9 @@ const getPhotoUnsplash = async () => {
 //   };
 // }
 
-export async function getStaticProps() {
-  const { status, result, products } = await getData("product/all_products");
+// export async function getStaticProps() {
+//   const { status, result, products } = await getData("product/all_products");
 
-  return {
-    props: {
-      slideImages: await getPhotoUnsplash(),
-      status,
-      result,
-      products,
-    },
-    revalidate: 1,
-  };
-}
-
-// export async function getServerSideProps() {
-//   const { status, result, productsResponse: products } = JSON.parse(
-//     JSON.stringify(await productsFromDB())
-//   );
 //   return {
 //     props: {
 //       slideImages: await getPhotoUnsplash(),
@@ -138,7 +123,22 @@ export async function getStaticProps() {
 //       result,
 //       products,
 //     },
+//     revalidate: 1,
 //   };
 // }
+
+export async function getServerSideProps() {
+  const { status, result, productsResponse: products } = JSON.parse(
+    JSON.stringify(await productsFromDB())
+  );
+  return {
+    props: {
+      slideImages: await getPhotoUnsplash(),
+      status,
+      result,
+      products,
+    },
+  };
+}
 
 export default Home;
