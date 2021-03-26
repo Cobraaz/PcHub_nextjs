@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-slideshow-image/dist/styles.css";
 import "styles/main.scss";
 import { DataProvider } from "store/GlobalState";
-import Layout from "components/Layouts/index";
+import Layout from "components/Layouts";
 const App = ({ Component, pageProps }) => (
   <>
     <DataProvider>
