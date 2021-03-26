@@ -195,28 +195,27 @@ const DetailProduct = ({ product }) => {
   );
 };
 
-// export async function getStaticPaths() {
-//   const { status, result, products } = await getData("product/all_products");
-
-//   const paths = products.map((product) => {
-//     return {
-//       params: { pid: product._id },
-//     };
-//   });
-//   return { paths, fallback: true };
-// }
-
-// export async function getStaticProps({ params: { pid } }) {
-//   const { product } = await getData(`product/get_by_id/${pid}`);
-//   // console.log(product);
-//   return { props: { product }, revalidate: 1 };
-// }
-
-export async function getServerSideProps({ params: { id } }) {
-  const { product } = await getData(`product/get_by_id/${id}`); // server side rendering
-  return {
-    props: { product }, // will be passed to the page component as props
-  };
+export async function getStaticPaths() {
+  const { status, result, products } = await getData("product/all_products");
+  const paths = products.map((product) => {
+    return {
+      params: { pid: product._id },
+    };
+  });
+  return { paths, fallback: true };
 }
+
+export async function getStaticProps({ params: { pid } }) {
+  const { product } = await getData(`product/get_by_id/${pid}`);
+  // console.log(product);
+  return { props: { product }, revalidate: 1 };
+}
+
+// export async function getServerSideProps({ params: { id } }) {
+//   const { product } = await getData(`product/get_by_id/${id}`); // server side rendering
+//   return {
+//     props: { product }, // will be passed to the page component as props
+//   };
+// }
 
 export default DetailProduct;
