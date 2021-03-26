@@ -17,12 +17,11 @@ const cartItems = [
   },
 ];
 
-export const CartDropdown = (
-  {
-    //   cartItems,
-    // , history, dispatch
-  }
-) => (
+export const CartDropdown = ({
+  //   cartItems,
+  router,
+  //  dispatch
+}) => (
   <div className="CartDropdownContainer">
     <div className="CartItemsContainer">
       {cartItems.length ? (
@@ -35,12 +34,13 @@ export const CartDropdown = (
     </div>
     <button
       className="btn-signin mt-3 btn btn-secondary btn-block"
-      //   onClick={() => {
-      // history.push("/checkout");
-      // dispatch(toggleCartHidden());
-      //   }}
+      disabled={cartItems.length === 0 ? true : false}
+      onClick={() => {
+        router.push("/checkout");
+        // dispatch(toggleCartHidden());
+      }}
     >
-      GO TO CHECKOUT
+      {cartItems.length === 0 ? "NO ITEM IN CART" : "GO TO CHECKOUT"}
     </button>
     <style jsx>{`
       .CartDropdownContainer {

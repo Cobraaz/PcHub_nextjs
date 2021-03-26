@@ -85,6 +85,7 @@ const Header = ({
             <CartDropdown
               setCartDropdownHidden={setCartDropdownHidden}
               cartDropdownHidden={cartDropdownHidden}
+              router={router}
             />
           )}
         </Navbar>

@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head";
 import { createApi } from "unsplash-js";
 import {
   Row,
@@ -13,7 +15,7 @@ import {
   Input,
 } from "reactstrap";
 import { motion } from "framer-motion";
-import Link from "next/link";
+
 import Cookie from "js-cookie";
 import { parseCookies } from "nookies";
 import { GoogleLogin } from "react-google-login";
@@ -28,6 +30,7 @@ export {
   useContext,
   useRouter,
   Link,
+  Head,
   Image,
   createApi,
   Row,

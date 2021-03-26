@@ -1,43 +1,28 @@
-import { useState, useEffect } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import { Row, Col } from "reactstrap";
-
-import BaseLayout from "components/Layouts/BaseLayout";
-import BasePage from "components/Layouts/BasePage";
+import {
+  useState,
+  useContext,
+  useEffect,
+  Row,
+  Col,
+  motion,
+  Head,
+  Image,
+} from "helpers/package.import";
+import { BaseLayout, BasePage, ProductItem } from "helpers/components.import";
+import {
+  stagger,
+  DataContext,
+  fadeInUp,
+  getData,
+  numberWithCommas,
+  countWords,
+  addToCart,
+} from "helpers/helper.functions";
 import { fakeProductsData } from "populate/FakeData";
-import ProductItem from "components/Product/ProductItem";
-import { numberWithCommas, countWords } from "utils/helper.functions";
-import { motion } from "framer-motion";
-import { getData } from "utils/fetchData";
-
-let easing = [0.6, -0.05, 0.01, 0.99];
-
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
-
-const fadeInUp = {
-  initial: {
-    y: 60,
-    opacity: 0,
-    transition: { duration: 0.6, ease: easing },
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-};
 
 const DetailProduct = ({ product }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
   const [products] = useState(fakeProductsData);
   const [tab, setTab] = useState(0);
 
@@ -165,6 +150,13 @@ const DetailProduct = ({ product }) => {
                   whileTap={{ scale: 0.9 }}
                   type="button"
                   className="btn"
+                  disabled={product.inStock === 0 ? true : false}
+                  onClick={() => {
+                    dispatch(addToCart(product, cart));
+                    setTimeout(() => {
+                      dispatch({ type: "NOTIFY", payload: {} });
+                    }, 0);
+                  }}
                 >
                   Add to Cart{" "}
                   <i

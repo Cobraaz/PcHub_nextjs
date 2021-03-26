@@ -156,7 +156,10 @@
     text-decoration: none;
   }
 }
-
+.card-button-Ab:disabled {
+  background: #f3bb98;
+  box-shadow: none;
+}
 .card-body-wrapper-Ab {
   background-color: #fff;
   border-radius: 15px;

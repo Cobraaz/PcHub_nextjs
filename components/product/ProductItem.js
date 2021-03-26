@@ -1,8 +1,15 @@
-import { motion, Image, useRouter } from "helpers/package.import";
+import { motion, Image, useRouter, useContext } from "helpers/package.import";
 
-import { fadeInUp, numberWithCommas } from "helpers/helper.functions";
+import {
+  fadeInUp,
+  numberWithCommas,
+  DataContext,
+  addToCart,
+} from "helpers/helper.functions";
 
 const ProductItem = ({ product }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
   const router = useRouter();
   return (
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
@@ -63,9 +70,20 @@ const ProductItem = ({ product }) => {
           </motion.div>
 
           {/* <div> */}
-          <motion.a whileTap={{ scale: 0.85 }} className="card-button-Ab">
+          <motion.button
+            whileTap={{ scale: 0.85 }}
+            disabled={product.inStock === 0 ? true : false}
+            onClick={() => {
+              dispatch(addToCart(product, cart));
+              setTimeout(() => {
+                dispatch({ type: "NOTIFY", payload: {} });
+              }, 0);
+            }}
+            style={{ outline: "none" }}
+            className=" card-button-Ab border-0"
+          >
             Add to cart
-          </motion.a>
+          </motion.button>
           {/* </div> */}
         </div>
       </motion.div>
