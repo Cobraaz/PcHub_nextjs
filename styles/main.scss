@@ -1,6 +1,7 @@
 // Components
 @import "./components/header";
 @import "./components/loading";
+@import "./components/cartItem";
 
 // Pages
 @import "./pages/about";
@@ -29,6 +30,8 @@ body {
   color: black;
   background-color: #ecedee;
   min-height: 100vh;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 
   .page-header-title {
     font-weight: bold;
@@ -36,6 +39,11 @@ body {
     margin-bottom: 20px;
   }
 }
+
+.base-page::-webkit-scrollbar {
+  display: none !important;
+}
+
 .index-page {
   min-height: 100vh;
 }

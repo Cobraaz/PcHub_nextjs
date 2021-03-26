@@ -25,7 +25,7 @@ const Header = ({
   setCartDropdownHidden,
 }) => {
   const { state, dispatch } = useContext(DataContext);
-  const { auth } = state;
+  const { cart, auth } = state;
   const router = useRouter();
 
   const handleLogout = () => {
@@ -86,6 +86,7 @@ const Header = ({
               setCartDropdownHidden={setCartDropdownHidden}
               cartDropdownHidden={cartDropdownHidden}
               router={router}
+              cartItems={cart}
             />
           )}
         </Navbar>

@@ -2,11 +2,11 @@ import React from "react";
 
 import { Image } from "helpers/package.import";
 
-const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
+const CartItem = ({ item: { images, price, title, quantity } }) => (
   <div className="CartItemContainer">
-    <Image src={imageUrl} alt="item" width={70} height={80} />
+    <Image src={images[0]} alt="item" width={70} height={80} />
     <div className="ItemDetailsContainer">
-      <span>{name}</span>
+      <span>{title.split(" ").slice(0, 2).join(" ")}</span>
       <span>
         {quantity} x ${price}
       </span>
