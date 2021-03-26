@@ -1,48 +1,29 @@
-import { useContext, useEffect } from "react";
-import { Row, Col } from "reactstrap";
-import Link from "next/link";
-import Cookie from "js-cookie";
-import { parseCookies } from "nookies";
+import {
+  useContext,
+  useEffect,
+  useRouter,
+  Row,
+  Col,
+  Link,
+  Cookie,
+  parseCookies,
+  motion,
+  GoogleLogin,
+  FacebookLogin,
+  GitHubLogin,
+  parse,
+} from "helpers/package.import";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import SignInForm from "components/auth/LoginForm";
-import { DataContext } from "store/GlobalState";
-import { postData } from "utils/fetchData";
-import { useRouter } from "next/router";
-import { withAuth } from "utils/auth";
-import { validateEmail as isEmail, isLength } from "utils/valid";
-import { GoogleLogin } from "react-google-login";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import GitHubLogin from "react-github-login";
-import parse from "html-react-parser";
-
-import { motion } from "framer-motion";
-let easing = [0.6, -0.05, 0.01, 0.99];
-
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
-
-const fadeInUp = {
-  initial: {
-    y: 60,
-    opacity: 0,
-    transition: { duration: 0.6, ease: easing },
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-};
+import { BaseLayout, BasePage, SignInForm } from "helpers/components.import";
+import {
+  stagger,
+  postData,
+  DataContext,
+  fadeInUp,
+  withAuth,
+  validateEmail as IsEmail,
+  isLength,
+} from "helpers/helper.functions";
 
 const Login = () => {
   const router = useRouter();

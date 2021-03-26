@@ -1,11 +1,14 @@
-import { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
-import Cookie from "js-cookie";
+import {
+  useContext,
+  useState,
+  useEffect,
+  useRouter,
+  Cookie,
+} from "helpers/package.import";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import { postData } from "utils/fetchData";
-import { DataContext } from "store/GlobalState";
+import { BaseLayout, BasePage } from "helpers/components.import";
+
+import { postData, DataContext } from "helpers/helper.functions";
 
 const ActivationEmail = () => {
   const router = useRouter();

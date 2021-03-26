@@ -1,41 +1,23 @@
-import { useContext, useEffect } from "react";
-import Link from "next/link";
-import { Row, Col } from "reactstrap";
-import { parseCookies } from "nookies";
+import {
+  useContext,
+  useEffect,
+  Row,
+  Col,
+  Link,
+  parseCookies,
+  motion,
+} from "helpers/package.import";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import RegisterForm from "components/auth/RegisterForm";
-import valid from "utils/valid";
-import { DataContext } from "store/GlobalState";
-import { postData } from "utils/fetchData";
-import { withAuth } from "utils/auth";
-import { motion } from "framer-motion";
-let easing = [0.6, -0.05, 0.01, 0.99];
+import { BaseLayout, BasePage, RegisterForm } from "helpers/components.import";
 
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
-
-const fadeInUp = {
-  initial: {
-    y: 60,
-    opacity: 0,
-    transition: { duration: 0.6, ease: easing },
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-};
+import {
+  stagger,
+  postData,
+  DataContext,
+  fadeInUp,
+  withAuth,
+  valid,
+} from "helpers/helper.functions";
 
 const Register = () => {
   const { state, dispatch } = useContext(DataContext);

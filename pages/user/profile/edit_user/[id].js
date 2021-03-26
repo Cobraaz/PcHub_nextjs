@@ -1,20 +1,21 @@
-import { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
-import { Row, Col } from "reactstrap";
 import {
-  Button,
-  InputGroup,
+  useState,
+  useContext,
+  useEffect,
+  useRouter,
+  Row,
+  Col,
   InputGroupText,
   InputGroupAddon,
-} from "reactstrap";
+  Button,
+  InputGroup,
+  Label,
+  Input,
+} from "helpers/package.import";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import { getData, patchData } from "utils/fetchData";
-import { isLength, isMatch } from "utils/valid";
-import { DataContext } from "store/GlobalState";
-import Label from "reactstrap/lib/Label";
-import Input from "reactstrap/lib/Input";
+import { BaseLayout, BasePage } from "helpers/components.import";
+
+import { DataContext, getData, patchData } from "helpers/helper.functions";
 
 const ResetPassword = () => {
   const router = useRouter();

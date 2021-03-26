@@ -1,23 +1,15 @@
-import { useState } from "react";
-import { createApi } from "unsplash-js";
-import { Row, Col } from "reactstrap";
-import { motion } from "framer-motion";
+import { useState, createApi, Row, Col, motion } from "helpers/package.import";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import Masthead from "components/shared/Masthead";
-import ProductItem from "components/product/ProductItem";
-import { shuffle } from "utils/helper.functions";
+import {
+  BaseLayout,
+  BasePage,
+  Masthead,
+  ProductItem,
+} from "helpers/components.import";
+
 // import { productsFromDB } from "pages/api/product/all_products";
-import { getData } from "utils/fetchData";
 
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
+import { shuffle, getData, stagger } from "helpers/helper.functions";
 
 const Home = ({ slideImages, products: resProducts, status }) => {
   const [products] = useState(resProducts);

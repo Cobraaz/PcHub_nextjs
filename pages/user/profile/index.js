@@ -1,16 +1,24 @@
-import { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import { parseCookies } from "nookies";
-import imageCompression from "browser-image-compression";
+import {
+  useState,
+  useContext,
+  useEffect,
+  useRouter,
+  Link,
+  Image,
+  parseCookies,
+  imageCompression,
+} from "helpers/package.import";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import { DataContext } from "store/GlobalState";
-import valid from "utils/valid";
-import { deleteData, getData, patchData } from "utils/fetchData";
-import { withAuth } from "utils/auth";
-import Link from "next/link";
+import { BaseLayout, BasePage } from "helpers/components.import";
+
+import {
+  DataContext,
+  withAuth,
+  valid,
+  deleteData,
+  getData,
+  patchData,
+} from "helpers/helper.functions";
 
 const Profile = () => {
   const router = useRouter();

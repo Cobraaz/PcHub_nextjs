@@ -1,34 +1,6 @@
-import Link from "next/link";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-} from "reactstrap";
-import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, Image, useRouter } from "helpers/package.import";
 
-import { numberWithCommas } from "utils/helper.functions";
-import { useRouter } from "next/router";
-
-let easing = [0.6, -0.05, 0.01, 0.99];
-const fadeInUp = {
-  initial: {
-    y: 60,
-    opacity: 0,
-    transition: { duration: 0.6, ease: easing },
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-};
+import { fadeInUp, numberWithCommas } from "helpers/helper.functions";
 
 const ProductItem = ({ product }) => {
   const router = useRouter();
@@ -36,14 +8,13 @@ const ProductItem = ({ product }) => {
     <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
       <motion.div
         variants={fadeInUp}
-
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.95 }}
         // className="card-body-wrapper"
       >
         <div className="card-body-wrapper-Ab card">
           <motion.div
             variants={fadeInUp}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.95 }}
             // className="view overlay"
             onClick={() =>
               router.push("/product/[id]", `/product/${product._id}`)

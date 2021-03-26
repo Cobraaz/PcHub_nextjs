@@ -1,43 +1,24 @@
-import { useState, useContext } from "react";
-import { useRouter } from "next/router";
-import { Row, Col } from "reactstrap";
 import {
-  Button,
-  InputGroup,
+  useState,
+  useContext,
+  useRouter,
+  Row,
+  Col,
+  motion,
   InputGroupText,
   InputGroupAddon,
-} from "reactstrap";
+} from "helpers/package.import";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import { patchData } from "utils/fetchData";
-import { isLength, isMatch } from "utils/valid";
-import { DataContext } from "store/GlobalState";
-import { motion } from "framer-motion";
-let easing = [0.6, -0.05, 0.01, 0.99];
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
+import { BaseLayout, BasePage } from "helpers/components.import";
 
-const fadeInUp = {
-  initial: {
-    y: 60,
-    opacity: 0,
-    transition: { duration: 0.6, ease: easing },
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-};
+import {
+  patchData,
+  stagger,
+  DataContext,
+  fadeInUp,
+  isLength,
+  isMatch,
+} from "helpers/helper.functions";
 
 const ResetPassword = () => {
   const { state, dispatch } = useContext(DataContext);

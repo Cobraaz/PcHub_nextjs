@@ -1,44 +1,24 @@
-import { useState, useContext } from "react";
-import { Row, Col } from "reactstrap";
 import {
-  Button,
-  InputGroup,
+  useState,
+  useContext,
+  Row,
+  Col,
+  motion,
+  parseCookies,
   InputGroupText,
   InputGroupAddon,
-} from "reactstrap";
-import { parseCookies } from "nookies";
+} from "helpers/package.import";
 
-import BaseLayout from "components/layouts/BaseLayout";
-import BasePage from "components/layouts/BasePage";
-import { postData } from "utils/fetchData";
-import { validateEmail as isEmail } from "utils/valid";
-import { DataContext } from "store/GlobalState";
-import { withAuth } from "utils/auth";
-import { motion } from "framer-motion";
-let easing = [0.6, -0.05, 0.01, 0.99];
-const stagger = {
-  animate: {
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
+import { BaseLayout, BasePage } from "helpers/components.import";
 
-const fadeInUp = {
-  initial: {
-    y: 60,
-    opacity: 0,
-    transition: { duration: 0.6, ease: easing },
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: easing,
-    },
-  },
-};
+import {
+  stagger,
+  DataContext,
+  fadeInUp,
+  validateEmail as isEmail,
+  postData,
+  withAuth,
+} from "helpers/helper.functions";
 
 const ForgotPassword = () => {
   const { state, dispatch } = useContext(DataContext);
