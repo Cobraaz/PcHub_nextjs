@@ -9,7 +9,7 @@ import {
 } from "utils/fetchData";
 import { DataContext } from "store/GlobalState";
 import { withAuth } from "utils/auth";
-import { validateEmail, isLength } from "utils/valid";
+import { validateEmail, isLength, isMatch } from "utils/valid";
 import valid from "utils/valid";
 import { numberWithCommas } from "utils/helper.functions";
 
@@ -50,6 +50,7 @@ export {
   withAuth,
   valid,
   validateEmail,
+  isMatch,
   isLength,
   numberWithCommas,
 };
