@@ -1,6 +1,16 @@
-import { useContext, useState, useRouter, Link } from "helpers/package.import";
+import {
+  useContext,
+  useState,
+  useRouter,
+  Link,
+  useEffect,
+} from "helpers/package.import";
 import { BaseLayout, BasePage } from "helpers/components.import";
-import { DataContext } from "helpers/helper.functions";
+import {
+  DataContext,
+  numberWithCommas,
+  getData,
+} from "helpers/helper.functions";
 import CartItem from "components/CartIem";
 const Checkout = () => {
   const { state, dispatch } = useContext(DataContext);
@@ -11,6 +21,50 @@ const Checkout = () => {
   const [mobile, setMobile] = useState("");
 
   const [callback, setCallback] = useState(false);
+
+  useEffect(() => {
+    const getTotal = () => {
+      const res = cart.reduce((prev, item) => {
+        return prev + item.price * item.quantity;
+      }, 0);
+
+      setTotal(res);
+    };
+
+    getTotal();
+  }, [cart]);
+
+  useEffect(() => {
+    const cartLocal = JSON.parse(
+      localStorage.getItem("__next__cart01__cobraaz")
+    );
+    if (cartLocal && cartLocal.length > 0) {
+      let newArr = [];
+
+      const updateCart = async () => {
+        for (const item of cartLocal) {
+          const res = await getData(`product/get_by_id/${item._id}`);
+          console.log(res.product);
+          const { _id, title, images, price, inStock, sold } = res.product;
+          if (inStock > 0) {
+            newArr.push({
+              _id,
+              title,
+              images,
+              price,
+              inStock,
+              sold,
+              quantity: item.quantity > inStock ? 1 : item.quantity,
+            });
+          }
+        }
+
+        dispatch({ type: "ADD_CART", payload: newArr });
+      };
+
+      updateCart();
+    }
+  }, []);
 
   const router = useRouter();
 
@@ -39,7 +93,7 @@ const Checkout = () => {
                 <div className="HeaderBlockContainer">
                   <span>Product</span>
                 </div>
-                <div className="HeaderBlockContainer">
+                <div className="HeaderBlockContainer mr-2">
                   <span>Description</span>
                 </div>
                 <div className="HeaderBlockContainer">
@@ -90,7 +144,8 @@ const Checkout = () => {
               </form>
 
               <h3>
-                Total: <span className="text-danger">${total}</span>
+                Total:{" "}
+                <span className="text-danger">{numberWithCommas(total)}</span>
               </h3>
 
               <Link href={auth.user ? "#!" : "/signin"}>

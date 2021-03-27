@@ -1,6 +1,6 @@
 import { Link, Image } from "helpers/package.import";
-
-const CartItem = ({ item }) => {
+import { decrease, increase, numberWithCommas } from "helpers/helper.functions";
+const CartItem = ({ item, dispatch, cart }) => {
   const { title, images, price, quantity, _id } = item;
   return (
     <div className="CheckoutItemContainer">
@@ -15,14 +15,26 @@ const CartItem = ({ item }) => {
         </Link>
       </span>
       <div className="HeaderBlockContainer ">
-        <div className="QuantityContainer ">
-          <div>&#10094;</div>
+        <div className="QuantityContainer btnArrow">
+          <button
+            onClick={() => dispatch(decrease(cart, item._id))}
+            disabled={item.quantity === 1 ? true : false}
+            className="btnArrow"
+          >
+            &#10094;
+          </button>
           <span>{quantity}</span>
-          <div>&#10095;</div>
+          <button
+            onClick={() => dispatch(increase(cart, item._id))}
+            disabled={item.quantity === item.inStock ? true : false}
+            className="btnArrow"
+          >
+            &#10095;
+          </button>
         </div>
       </div>
       <div className="HeaderBlockContainer font-weight-bold">
-        <span>{price}</span>
+        <span>{numberWithCommas(item.quantity * item.price)}</span>
       </div>
       <div className="HeaderBlockContainer">
         <div className="RemoveButtonContainer float-right">

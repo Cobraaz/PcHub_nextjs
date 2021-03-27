@@ -1,4 +1,3 @@
-import { shuffle, addToCart } from "utils/helper.functions";
 // import { productsFromDB } from "pages/api/product/all_products";
 import {
   getData,
@@ -11,7 +10,14 @@ import { DataContext } from "store/GlobalState";
 import { withAuth } from "utils/auth";
 import { validateEmail, isLength, isMatch } from "utils/valid";
 import valid from "utils/valid";
-import { numberWithCommas, countWords } from "utils/helper.functions";
+import {
+  numberWithCommas,
+  countWords,
+  shuffle,
+  addToCart,
+  decrease,
+  increase,
+} from "utils/helper.functions";
 
 const stagger = {
   animate: {
@@ -55,4 +61,6 @@ export {
   numberWithCommas,
   addToCart,
   countWords,
+  decrease,
+  increase,
 };
