@@ -1,11 +1,11 @@
 import CartItem from "components/Header/Cart/CartItemDropdown";
 
-export const CartDropdown = ({ router, cartItems }) => (
+export const CartDropdown = ({ router, cartItems, HeaderToggler }) => (
   <div className="CartDropdownContainer">
     <div className="CartItemsContainer">
       {cartItems.length ? (
         cartItems.map((cartItem) => (
-          <CartItem key={cartItem.id} item={cartItem} />
+          <CartItem key={cartItem._id} item={cartItem} />
         ))
       ) : (
         <span className="EmptyMessageContainer">Your cart is empty</span>
@@ -16,7 +16,7 @@ export const CartDropdown = ({ router, cartItems }) => (
       disabled={cartItems.length === 0 ? true : false}
       onClick={() => {
         router.push("/checkout");
-        // dispatch(toggleCartHidden());
+        HeaderToggler();
       }}
     >
       {cartItems.length === 0 ? "NO ITEM IN CART" : "GO TO CHECKOUT"}

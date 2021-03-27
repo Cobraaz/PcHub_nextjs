@@ -38,6 +38,7 @@
     text-transform: capitalize;
     width: 23%;
     font-size: 18px;
+    font-weight: 600;
 
     &:last-child {
       width: 8%;
@@ -68,6 +69,7 @@
   .ImageContainer {
     width: 23%;
     padding-right: 35px;
+    cursor: pointer;
 
     img {
       width: 100%;

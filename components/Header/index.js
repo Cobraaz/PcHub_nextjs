@@ -38,6 +38,11 @@ const Header = ({
     return router.push("/");
   };
 
+  const HeaderToggler = () => {
+    toggle();
+    !cartDropdownHidden && setCartDropdownHidden(!cartDropdownHidden);
+  };
+
   return (
     <ReactResizeDetector handleWidth>
       {({ width }) => (
@@ -49,14 +54,9 @@ const Header = ({
           expand="md"
         >
           <BsNavBrand />
-          <NavbarToggler
-            onClick={() => {
-              toggle();
-              !cartDropdownHidden && setCartDropdownHidden(!cartDropdownHidden);
-            }}
-          />
+          <NavbarToggler onClick={HeaderToggler} />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto ml-auto" navbar>
+            <Nav className="mr-auto ml-auto" navbar onClick={HeaderToggler}>
               <NavItem className="port-navbar-item">
                 <BsNavLink href="/" title="Home" />
               </NavItem>
@@ -69,7 +69,7 @@ const Header = ({
             <Nav navbar>
               <NavItem className="port-navbar-item">
                 <div onClick={() => setCartDropdownHidden(!cartDropdownHidden)}>
-                  <CartIcon />
+                  <CartIcon cartLength={cart.length} />
                 </div>
               </NavItem>
               {Object.keys(auth).length === 0 ? (
@@ -87,6 +87,7 @@ const Header = ({
               cartDropdownHidden={cartDropdownHidden}
               router={router}
               cartItems={cart}
+              HeaderToggler={HeaderToggler}
             />
           )}
         </Navbar>

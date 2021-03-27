@@ -1,9 +1,5 @@
-export const CartIcon = () => (
-  // { toggleCartHidden, itemCount }
-  <div
-    className="cartContainer"
-    //  onClick={toggleCartHidden}
-  >
+export const CartIcon = ({ cartLength }) => (
+  <div className="cartContainer">
     <img
       src="/shopping-bag.svg"
       style={{
@@ -12,7 +8,7 @@ export const CartIcon = () => (
         color: "white",
       }}
     />
-    <span className="ItemCountContainer">{/* {itemCount} */}5</span>
+    <span className="ItemCountContainer">{cartLength}</span>
     <style jsx>{`
       .cartContainer {
         width: 45px;
