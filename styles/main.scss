@@ -18,6 +18,11 @@ body {
   height: 100%;
   width: 100%;
   font-family: "Montserrat", "Helvetica" !important;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }
 
 .clickable {
@@ -30,18 +35,12 @@ body {
   color: black;
   background-color: #ecedee;
   min-height: 100vh;
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
 
   .page-header-title {
     font-weight: bold;
     display: inline-block;
     margin-bottom: 20px;
   }
-}
-
-.base-page::-webkit-scrollbar {
-  display: none !important;
 }
 
 .index-page {

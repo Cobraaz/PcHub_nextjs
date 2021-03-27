@@ -1,5 +1,5 @@
-export const CartIcon = ({ cartLength }) => (
-  <div className="cartContainer">
+export const CartIcon = ({ cartLength, className }) => (
+  <div className="CartIconContainer">
     <img
       src="/shopping-bag.svg"
       style={{
@@ -8,25 +8,7 @@ export const CartIcon = ({ cartLength }) => (
         color: "white",
       }}
     />
-    <span className="ItemCountContainer">{cartLength}</span>
-    <style jsx>{`
-      .cartContainer {
-        width: 45px;
-        height: 45px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-      }
-      .ItemCountContainer {
-        position: absolute;
-        font-size: 10px;
-        font-weight: bold;
-        bottom: 12px;
-        color: white;
-      }
-    `}</style>
+    <span className="CartIconItemCountContainer">{cartLength}</span>
   </div>
 );
 

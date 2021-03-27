@@ -1,10 +1,12 @@
 import Notify from "components/Shared/Notify";
+
 import { ToastContainer } from "react-toastify";
 
 const Layout = ({ children }) => {
   return (
     <>
       <Notify />
+
       <main>{children}</main>
       <ToastContainer
         position="top-right"

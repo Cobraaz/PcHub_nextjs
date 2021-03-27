@@ -17,6 +17,7 @@ import {
   addToCart,
   decrease,
   increase,
+  deleteItem,
 } from "utils/helper.functions";
 
 const stagger = {
@@ -63,4 +64,5 @@ export {
   countWords,
   decrease,
   increase,
+  deleteItem,
 };

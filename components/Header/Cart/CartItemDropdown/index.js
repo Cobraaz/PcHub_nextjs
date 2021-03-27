@@ -1,32 +1,17 @@
 import React from "react";
 
 import { Image } from "helpers/package.import";
+import { numberWithCommas } from "helpers/helper.functions";
 
 const CartItem = ({ item: { images, price, title, quantity } }) => (
-  <div className="CartItemContainer">
-    <Image src={images[0]} alt="item" width={70} height={80} />
-    <div className="ItemDetailsContainer">
+  <div className="CartItemDropdownContainer">
+    <Image src={images[0]} alt="item" width={90} height={80} />
+    <div className="CartItemDropdownDetailsContainer">
       <span>{title.split(" ").slice(0, 2).join(" ")}</span>
       <span>
-        {quantity} x ${price}
+        {quantity} x {numberWithCommas(price)}
       </span>
     </div>
-    <style jsx>{`
-      .CartItemContainer {
-        width: 100%;
-        display: flex;
-        height: 80px;
-        margin-bottom: 15px;
-      }
-      .ItemDetailsContainer {
-        width: 70%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        padding: 10px 20px;
-      }
-    `}</style>
   </div>
 );
 

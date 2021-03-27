@@ -54,12 +54,21 @@ const Header = ({
           expand="md"
         >
           <BsNavBrand />
+          {width < 768 && (
+            <div
+              className="text-right cart-icon-mobile"
+              onClick={() => setCartDropdownHidden(!cartDropdownHidden)}
+            >
+              <CartIcon cartLength={cart.length} />
+            </div>
+          )}
           <NavbarToggler
             onClick={() => {
               toggle();
               !cartDropdownHidden && setCartDropdownHidden(!cartDropdownHidden);
             }}
           />
+
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto ml-auto" navbar>
               <NavItem
@@ -77,11 +86,15 @@ const Header = ({
               </NavItem>
             </Nav>
             <Nav navbar>
-              <NavItem className="port-navbar-item">
-                <div onClick={() => setCartDropdownHidden(!cartDropdownHidden)}>
-                  <CartIcon cartLength={cart.length} />
-                </div>
-              </NavItem>
+              {width > 768 && (
+                <NavItem className="port-navbar-item">
+                  <div
+                    onClick={() => setCartDropdownHidden(!cartDropdownHidden)}
+                  >
+                    <CartIcon cartLength={cart.length} />
+                  </div>
+                </NavItem>
+              )}
               {Object.keys(auth).length === 0 ? (
                 <NavItem className="port-navbar-item">
                   <LoginLink />

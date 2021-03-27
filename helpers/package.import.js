@@ -14,7 +14,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Cookie from "js-cookie";
 import { parseCookies } from "nookies";
@@ -49,4 +49,5 @@ export {
   Label,
   Input,
   imageCompression,
+  AnimatePresence,
 };

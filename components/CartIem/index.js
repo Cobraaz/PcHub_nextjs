@@ -1,7 +1,8 @@
-import { Link, Image } from "helpers/package.import";
+import { Link, Image, useState } from "helpers/package.import";
 import { decrease, increase, numberWithCommas } from "helpers/helper.functions";
-const CartItem = ({ item, dispatch, cart }) => {
+const CartItem = ({ item, dispatch, cart, toggleModal }) => {
   const { title, images, price, quantity, _id } = item;
+
   return (
     <div className="CheckoutItemContainer">
       <Link href={`/product/${item._id}`}>
@@ -37,7 +38,21 @@ const CartItem = ({ item, dispatch, cart }) => {
         <span>{numberWithCommas(item.quantity * item.price)}</span>
       </div>
       <div className="HeaderBlockContainer">
-        <div className="RemoveButtonContainer float-right">
+        <div
+          onClick={() => {
+            toggleModal();
+            dispatch({
+              type: "ADD_MODAL",
+              payload: {
+                data: cart,
+                id: item._id,
+                title: item.title,
+                type: "ADD_CART",
+              },
+            });
+          }}
+          className="RemoveButtonContainer float-right"
+        >
           <i className="ri-close-circle-fill"></i>
         </div>
       </div>

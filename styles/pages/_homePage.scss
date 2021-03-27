@@ -139,13 +139,14 @@
   background-color: #f47625;
   border-color: hsl(210, 5%, 36%);
   box-shadow: 0 5px 0 #be5f23;
-  bottom: -45px;
+  bottom: -10px;
   position: absolute;
   right: 1.5rem;
   -webkit-transition: -webkit-transform 0.2s;
   transition: -webkit-transform 0.2s;
   transition: transform 0.2s;
   transition: transform 0.2s, -webkit-transform 0.2s;
+  margin-right: 10px;
 
   &:hover {
     background-color: #f47625;
