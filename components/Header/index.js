@@ -39,7 +39,7 @@ const Header = ({
   };
 
   const HeaderToggler = () => {
-    toggle();
+    isOpen && toggle();
     !cartDropdownHidden && setCartDropdownHidden(!cartDropdownHidden);
   };
 
@@ -54,10 +54,20 @@ const Header = ({
           expand="md"
         >
           <BsNavBrand />
-          <NavbarToggler onClick={HeaderToggler} />
+          <NavbarToggler
+            onClick={() => {
+              toggle();
+              !cartDropdownHidden && setCartDropdownHidden(!cartDropdownHidden);
+            }}
+          />
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto ml-auto" navbar onClick={HeaderToggler}>
-              <NavItem className="port-navbar-item">
+            <Nav className="mr-auto ml-auto" navbar>
+              <NavItem
+                className="port-navbar-item"
+                onClick={() => {
+                  width < 768 && isOpen && toggle();
+                }}
+              >
                 <BsNavLink href="/" title="Home" />
               </NavItem>
               <Brands />
