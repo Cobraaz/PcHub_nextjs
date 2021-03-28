@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "components/Header";
-import Footer from "components/Footer";
+import Footer from "components/Shared/Footer";
 const BaseLayout = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartDropdownHidden, setCartDropdownHidden] = useState(true);

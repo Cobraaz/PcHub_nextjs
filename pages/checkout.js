@@ -18,6 +18,8 @@ import {
   getData,
 } from "helpers/helper.functions";
 
+import currency from "currency-converter-module";
+
 const Checkout = () => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth, orders, modal } = state;
@@ -29,13 +31,23 @@ const Checkout = () => {
   const toggleModal = () => setShowModal(!showModal);
   const [callback, setCallback] = useState(false);
   const [payment, setPayment] = useState(false);
+  const [usdTotal, setUsdTotal] = useState(0);
+
+  const currcencyConvert = async (price) => {
+    var convertedValue = await currency.convertCurrencyByCode(
+      { value: price, code: "INR" },
+      { code: "USD" }
+    );
+    return await convertedValue;
+  };
 
   useEffect(() => {
-    const getTotal = () => {
+    const getTotal = async () => {
       const res = cart.reduce((prev, item) => {
         return prev + item.price * item.quantity;
       }, 0);
-
+      const usdTotal = Math.round(await currcencyConvert(res));
+      setUsdTotal(usdTotal);
       setTotal(res);
     };
 
@@ -179,10 +191,21 @@ const Checkout = () => {
                   <span className="text-danger">{numberWithCommas(total)}</span>
                 </h3>
                 {payment ? (
-                  <PaypalBtn />
+                  <PaypalBtn
+                    total={usdTotal}
+                    address={address}
+                    mobile={mobile}
+                    dispatch={dispatch}
+                    state={state}
+                  />
                 ) : (
                   <Link href={auth.user ? "#!" : "/signin"}>
-                    <a className="btn btn-dark my-2" onClick={handlePayment}>
+                    <a
+                      className="btn btn-dark my-2"
+                      onClick={() => {
+                        handlePayment();
+                      }}
+                    >
                       Proceed with payment
                     </a>
                   </Link>
