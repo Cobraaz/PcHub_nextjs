@@ -1,7 +1,21 @@
-import { Link, Image, useState } from "helpers/package.import";
+import { Link, Image } from "helpers/package.import";
 import { decrease, increase, numberWithCommas } from "helpers/helper.functions";
+// import currency from "currency-converter-module";
+
 const CartItem = ({ item, dispatch, cart, toggleModal }) => {
   const { title, images, price, quantity, _id } = item;
+
+  // const currcencyConvert = async () => {
+  //   var convertedValue = await currency.convertCurrencyByCode(
+  //     { value: price, code: "INR" },
+  //     { code: "USD" }
+  //   );
+  //   console.log(await convertedValue);
+  // };
+
+  // useEffect(() => {
+  //   currcencyConvert();
+  // }, [cart]);
 
   return (
     <div className="CheckoutItemContainer">

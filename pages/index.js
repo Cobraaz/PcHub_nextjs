@@ -34,7 +34,7 @@ const Home = ({ slideImages, products: resProducts, status }) => {
     );
   }
   return (
-    <BaseLayout header_bg="transparent" className="blog-listing-page">
+    <BaseLayout header_bg="transparent">
       <Masthead slideImages={slideImages} />
       <BasePage indexPage className="home-page">
         <motion.div

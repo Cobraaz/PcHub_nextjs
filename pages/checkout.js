@@ -4,17 +4,19 @@ import {
   useRouter,
   Link,
   useEffect,
-  Head,
 } from "helpers/package.import";
-import { BaseLayout, BasePage } from "helpers/components.import";
+import {
+  BaseLayout,
+  BasePage,
+  CartItem,
+  Modal,
+  PaypalBtn,
+} from "helpers/components.import";
 import {
   DataContext,
   numberWithCommas,
   getData,
 } from "helpers/helper.functions";
-import CartItem from "components/CartIem";
-import Modal from "components/Shared/Modal";
-import PaypalBtn from "components/Shared/paypalBtn";
 
 const Checkout = () => {
   const { state, dispatch } = useContext(DataContext);
@@ -99,11 +101,11 @@ const Checkout = () => {
 
   return (
     <div onClick={() => showModal && toggleModal()}>
-      <Head>
+      {/* <Head>
         <script
           src={`https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}`}
         ></script>
-      </Head>
+      </Head> */}
       <BaseLayout>
         <BasePage className=" wrapper cart-item-AB ">
           <Modal
