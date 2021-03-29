@@ -34,7 +34,7 @@ const Profile = () => {
   const { avatar, cf_password, name, password } = data;
 
   const { state, dispatch } = useContext(DataContext);
-  const { auth, notify, users } = state;
+  const { auth, notify, users, orders } = state;
 
   useEffect(() => {
     if (auth.user) setData({ ...data, name: auth.user.name });
@@ -190,7 +190,10 @@ const Profile = () => {
                 quality={25}
               />
               <span>
-                <i className="fas fa-camera"></i>
+                <i
+                  className="ri-camera-2-line"
+                  style={{ fontSize: "1.3rem" }}
+                ></i>
                 <p>Change</p>
                 <input
                   type="file"
@@ -313,6 +316,54 @@ const Profile = () => {
                                 ></i>
                               </td>
                             )}
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+            {orders.length > 0 && (
+              <>
+                <h3 className="text-uppercase">Orders</h3>
+                <div className="my-3 table-responsive">
+                  <table className="customers">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Delivered</th>
+                        <th>Paid</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders &&
+                        orders.map((order) => (
+                          <tr key={order._id}>
+                            <td>
+                              <Link href={`/order/${order._id}`}>
+                                <a className="anchor-custom">{order._id}</a>
+                              </Link>
+                            </td>
+                            <td>
+                              {new Date(order.createdAt).toLocaleDateString()}
+                            </td>
+                            <td>{order.total}</td>
+                            <td>
+                              {order.delivered ? (
+                                <i className="ri-check-double-fill text-success"></i>
+                              ) : (
+                                <i className="ri-close-fill text-danger"></i>
+                              )}
+                            </td>
+                            <td>
+                              {order.paid ? (
+                                <i className="ri-check-double-fill text-success"></i>
+                              ) : (
+                                <i className="ri-close-fill text-danger"></i>
+                              )}
+                            </td>
                           </tr>
                         ))}
                     </tbody>

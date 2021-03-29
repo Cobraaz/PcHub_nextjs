@@ -21,7 +21,7 @@ import {
   DataContext,
   fadeInUp,
   withAuth,
-  validateEmail as IsEmail,
+  validateEmail as isEmail,
   isLength,
 } from "helpers/helper.functions";
 

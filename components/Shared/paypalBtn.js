@@ -1,10 +1,16 @@
-import { useEffect, useRef } from "react";
-import { postData } from "helpers/helper.functions";
-const paypalBtn = ({ total, address, mobile, dispatch, state }) => {
+import { useEffect, useRef, useContext } from "helpers/package.import";
+import {
+  patchData,
+  updateItem,
+  DataContext,
+  postData,
+} from "helpers/helper.functions";
+
+const paypalBtn = ({ order }) => {
   const refPaypalBtn = useRef();
-  // const { state, dispatch } = useContext(DataContext);
-  const { auth, cart } = state;
-  console.log("total", total);
+  const { state, dispatch } = useContext(DataContext);
+  const { auth, orders } = state;
+  // console.log("total", total);
   useEffect(() => {
     paypal
       .Buttons({
@@ -14,7 +20,7 @@ const paypalBtn = ({ total, address, mobile, dispatch, state }) => {
             purchase_units: [
               {
                 amount: {
-                  value: total,
+                  value: order.total,
                 },
               },
             ],
@@ -28,17 +34,30 @@ const paypalBtn = ({ total, address, mobile, dispatch, state }) => {
           // This function captures the funds from the transaction.
           return actions.order.capture().then(function (details) {
             // This function shows a transaction success message to your buyer.
-            // console.log(data);
-            postData(
-              "order",
-              { address, mobile, cart, total },
-              auth.token
-            ).then((res) => {
+            console.log("details", details);
+            patchData(`order/${order._id}`, null, auth.token).then((res) => {
               if (res.err)
                 dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
-              dispatch({ type: "ADD_CART", payload: [] });
-              dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+              dispatch(
+                updateItem(
+                  orders,
+                  order._id,
+                  {
+                    ...order,
+                    paid: true,
+                    dateOfPayment: details.create_time,
+                    paymentId: details.payer.payer_id,
+                    method: "Paypal",
+                  },
+                  "ADD_ORDERS"
+                )
+              );
+
+              return dispatch({
+                type: "NOTIFY",
+                payload: { success: res.msg },
+              });
             });
             alert("Transaction completed by " + details.payer.name.given_name);
           });

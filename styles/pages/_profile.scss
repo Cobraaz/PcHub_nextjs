@@ -23,7 +23,7 @@
     bottom: -100%;
     left: 0;
     width: 100%;
-    height: 50%;
+    height: 55%;
     background: #fff8;
     text-align: center;
     font-weight: 400;
@@ -88,5 +88,17 @@
     color: white;
     font-size: 10px;
     margin-left: 7px;
+  }
+
+  .anchor-custom {
+    color: green;
+    text-decoration: none;
+  }
+
+  .anchor-custom:hover,
+  .anchor-custom:focus,
+  .anchor-custom:active,
+  .anchor-custom.active {
+    color: hotpink;
   }
 }

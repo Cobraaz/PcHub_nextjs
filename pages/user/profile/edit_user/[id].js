@@ -91,7 +91,7 @@ const ResetPassword = () => {
             onClick={() => router.back()}
             className="go_back btn btn-dark"
           >
-            <i className="ri-arrow-go-back-fill"></i>
+            <i className="ri-arrow-left-fill"></i>
             Go Back
           </button>
           <Row>

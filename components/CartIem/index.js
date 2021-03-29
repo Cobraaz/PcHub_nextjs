@@ -2,33 +2,33 @@ import { Link, Image } from "helpers/package.import";
 import { decrease, increase, numberWithCommas } from "helpers/helper.functions";
 
 const CartItem = ({ item, dispatch, cart, toggleModal }) => {
-  const { title, images, price, quantity, _id } = item;
+  const { title, images, price, quantity, _id, inStock } = item;
 
   return (
     <div className="CheckoutItemContainer">
-      <Link href={`/product/${item._id}`}>
+      <Link href={`/product/${_id}`}>
         <div className="ImageContainer">
           <Image width={500} height={500} src={images[0]} alt="item" />
         </div>
       </Link>
-      <span href={`/product/${item._id}`} className="TextContainer mr-2">
-        <Link href={`/product/${item._id}`}>
+      <span href={`/product/${_id}`} className="TextContainer mr-2">
+        <Link href={`/product/${_id}`}>
           <a> {title.split(" ").slice(0, 2).join(" ")}</a>
         </Link>
       </span>
       <div className="HeaderBlockContainer ">
         <div className="QuantityContainer btnArrow">
           <button
-            onClick={() => dispatch(decrease(cart, item._id))}
-            disabled={item.quantity === 1 ? true : false}
+            onClick={() => dispatch(decrease(cart, _id))}
+            disabled={quantity === 1 ? true : false}
             className="btnArrow"
           >
             &#10094;
           </button>
           <span>{quantity}</span>
           <button
-            onClick={() => dispatch(increase(cart, item._id))}
-            disabled={item.quantity === item.inStock ? true : false}
+            onClick={() => dispatch(increase(cart, _id))}
+            disabled={quantity === inStock ? true : false}
             className="btnArrow"
           >
             &#10095;
@@ -36,7 +36,7 @@ const CartItem = ({ item, dispatch, cart, toggleModal }) => {
         </div>
       </div>
       <div className="HeaderBlockContainer font-weight-bold">
-        <span>{numberWithCommas(item.quantity * item.price)}</span>
+        <span>{numberWithCommas(quantity * price)}</span>
       </div>
       <div className="HeaderBlockContainer">
         <div
@@ -46,8 +46,8 @@ const CartItem = ({ item, dispatch, cart, toggleModal }) => {
               type: "ADD_MODAL",
               payload: {
                 data: cart,
-                id: item._id,
-                title: item.title,
+                id: _id,
+                title: title,
                 type: "ADD_CART",
               },
             });

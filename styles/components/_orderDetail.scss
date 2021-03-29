@@ -1,0 +1,91 @@
+.Order-detail-AB {
+  background-color: white !important;
+  .order-detail-AB-container {
+    width: 100%;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  .order-detail-AB-header-container {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgrey;
+  }
+
+  .order-detail-AB-block-container {
+    text-transform: capitalize;
+    width: 23%;
+    font-size: 18px;
+    font-weight: 600;
+
+    @media screen and (max-width: 800px) {
+      width: 22%;
+      font-size: 12px;
+    }
+  }
+
+  .order-detail-AB-item-container {
+    width: 100%;
+    display: flex;
+    min-height: 100px;
+    border-bottom: 1px solid darkgrey;
+    padding: 15px 0;
+    font-size: 20px;
+    align-items: center;
+    font-weight: bold;
+
+    @media screen and (max-width: 800px) {
+      font-size: 18px;
+    }
+  }
+  .image-container {
+    width: 23%;
+    padding-right: 35px;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    @media screen and (max-width: 800px) {
+      padding-right: 35px;
+    }
+  }
+  .text-container {
+    width: 23%;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+
+    a {
+      text-decoration: none;
+    }
+
+    a:link {
+      color: red;
+    }
+
+    a:visited {
+      color: green;
+    }
+
+    a:hover {
+      color: hotpink;
+    }
+
+    a:active {
+      color: blue;
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 22%;
+      font-size: 13px;
+    }
+  }
+}

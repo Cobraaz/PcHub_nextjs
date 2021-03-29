@@ -18,6 +18,8 @@ import {
   decrease,
   increase,
   deleteItem,
+  updateItem,
+  currcencyConvert,
 } from "utils/helper.functions";
 
 const stagger = {
@@ -65,4 +67,6 @@ export {
   decrease,
   increase,
   deleteItem,
+  updateItem,
+  currcencyConvert,
 };

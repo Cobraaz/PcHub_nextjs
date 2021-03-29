@@ -1,3 +1,5 @@
+import currency from "currency-converter-module";
+
 export function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue,
@@ -77,4 +79,12 @@ export const deleteItem = (data, id, type) => {
 export const updateItem = (data, id, post, type) => {
   const newData = data.map((item) => (item._id === id ? post : item));
   return { type, payload: newData };
+};
+
+export const currcencyConvert = async (price) => {
+  var convertedValue = await currency.convertCurrencyByCode(
+    { value: price, code: "INR" },
+    { code: "USD" }
+  );
+  return await convertedValue;
 };

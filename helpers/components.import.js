@@ -7,6 +7,7 @@ import RegisterForm from "components/Auth/RegisterForm";
 import CartItem from "components/CartIem";
 import Modal from "components/Shared/Modal";
 import PaypalBtn from "components/Shared/paypalBtn";
+import OrderDetail from "components/Order/OrderDetail";
 
 export {
   BaseLayout,
@@ -18,4 +19,5 @@ export {
   CartItem,
   Modal,
   PaypalBtn,
+  OrderDetail,
 };

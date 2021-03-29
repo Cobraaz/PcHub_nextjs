@@ -10,44 +10,32 @@ import {
   BasePage,
   CartItem,
   Modal,
-  PaypalBtn,
 } from "helpers/components.import";
 import {
   DataContext,
   numberWithCommas,
   getData,
+  postData,
 } from "helpers/helper.functions";
-
-import currency from "currency-converter-module";
 
 const Checkout = () => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth, orders, modal } = state;
+  const router = useRouter();
 
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState("");
   const [mobile, setMobile] = useState("");
+  const [callback, setCallback] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
-  const [callback, setCallback] = useState(false);
-  const [payment, setPayment] = useState(false);
-  const [usdTotal, setUsdTotal] = useState(0);
-
-  const currcencyConvert = async (price) => {
-    var convertedValue = await currency.convertCurrencyByCode(
-      { value: price, code: "INR" },
-      { code: "USD" }
-    );
-    return await convertedValue;
-  };
 
   useEffect(() => {
     const getTotal = async () => {
       const res = cart.reduce((prev, item) => {
         return prev + item.price * item.quantity;
       }, 0);
-      const usdTotal = Math.round(await currcencyConvert(res));
-      setUsdTotal(usdTotal);
+
       setTotal(res);
     };
 
@@ -83,9 +71,7 @@ const Checkout = () => {
 
       updateCart();
     }
-  }, []);
-
-  const router = useRouter();
+  }, [callback]);
 
   const handlePayment = async () => {
     if (!address || !mobile)
@@ -93,7 +79,43 @@ const Checkout = () => {
         type: "NOTIFY",
         payload: { error: "Please add your address and mobile." },
       });
-    setPayment(true);
+
+    let newCart = [];
+    for (const item of cart) {
+      const res = await getData(`product/get_by_id/${item._id}`);
+      if (res.product.inStock - item.quantity >= 0) {
+        newCart.push(item);
+      }
+    }
+
+    if (newCart.length < cart.length) {
+      setCallback(!callback);
+      return dispatch({
+        type: "NOTIFY",
+        payload: {
+          error: "The product is out of stock or the quantity is insufficient.",
+        },
+      });
+    }
+
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+
+    postData("order", { address, mobile, cart, total }, auth.token).then(
+      (res) => {
+        if (res.err)
+          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+        dispatch({ type: "ADD_CART", payload: [] });
+
+        const newOrder = {
+          ...res.newOrder,
+          user: auth.user,
+        };
+        dispatch({ type: "ADD_ORDERS", payload: [...orders, newOrder] });
+        dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+        return router.push(`/order/${res.newOrder._id}`);
+      }
+    );
   };
 
   if (cart.length === 0)
@@ -113,11 +135,6 @@ const Checkout = () => {
 
   return (
     <div onClick={() => showModal && toggleModal()}>
-      {/* <Head>
-        <script
-          src={`https://www.paypal.com/sdk/js?client-id=${process.env.PAYPAL_CLIENT_ID}`}
-        ></script>
-      </Head> */}
       <BaseLayout>
         <BasePage className=" wrapper cart-item-AB ">
           <Modal
@@ -190,26 +207,16 @@ const Checkout = () => {
                   Total:{" "}
                   <span className="text-danger">{numberWithCommas(total)}</span>
                 </h3>
-                {payment ? (
-                  <PaypalBtn
-                    total={usdTotal}
-                    address={address}
-                    mobile={mobile}
-                    dispatch={dispatch}
-                    state={state}
-                  />
-                ) : (
-                  <Link href={auth.user ? "#!" : "/signin"}>
-                    <a
-                      className="btn btn-dark my-2"
-                      onClick={() => {
-                        handlePayment();
-                      }}
-                    >
-                      Proceed with payment
-                    </a>
-                  </Link>
-                )}
+                <Link href={auth.user ? "#!" : "/signin"}>
+                  <a
+                    className="btn btn-dark my-2"
+                    onClick={() => {
+                      handlePayment();
+                    }}
+                  >
+                    Proceed with payment
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -10,8 +10,30 @@ export default async (req, res) => {
     case "POST":
       await createOrder(req, res);
       break;
+    case "GET":
+      await getOrders(req, res);
+      break;
   }
 };
+
+const getOrders = Authenticated(async (req, res) => {
+  try {
+    let orders;
+    if (req.user.role !== "admin" || req.user.role !== "root") {
+      orders = await Orders.find({ user: req.user.id }).populate(
+        "user",
+        "-password"
+      );
+    } else {
+      orders = await Orders.find().populate("user", "-password");
+    }
+
+    res.json({ orders });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ err: err.message });
+  }
+});
 
 const createOrder = Authenticated(async (req, res) => {
   try {
