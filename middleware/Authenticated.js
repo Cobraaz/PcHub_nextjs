@@ -3,6 +3,7 @@ import Users from "models/userModel";
 const Authenticated = (icomponent) => {
   return async (req, res) => {
     const { authorization: token } = req.headers;
+
     if (!token) {
       return res.status(401).json({ error: "you must logged in" });
     }
@@ -12,7 +13,6 @@ const Authenticated = (icomponent) => {
         return res.status(400).json({ err: "Invalid Authentication." });
 
       const user = await Users.findOne({ _id: decoded.id });
-
       req.user = { id: user._id, role: user.role };
       return icomponent(req, res);
     } catch (err) {

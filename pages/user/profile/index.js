@@ -18,6 +18,7 @@ import {
   deleteData,
   getData,
   patchData,
+  formatDate,
 } from "helpers/helper.functions";
 
 const Profile = () => {
@@ -298,10 +299,9 @@ const Profile = () => {
                                 <i className="ri-close-fill" title="User"></i>
                               )}
                             </td>
-                            {auth.user.id !== user._id && (
+                            {auth.user.id !== user._id ? (
                               <td>
                                 <Link
-                                  // to={`/edit_user/${user._id}`}
                                   href={`/user/profile/edit_user/${user._id}`}
                                 >
                                   <i
@@ -315,6 +315,8 @@ const Profile = () => {
                                   onClick={() => handleDelete(user._id)}
                                 ></i>
                               </td>
+                            ) : (
+                              <td></td>
                             )}
                           </tr>
                         ))}
@@ -346,9 +348,7 @@ const Profile = () => {
                                 <a className="anchor-custom">{order._id}</a>
                               </Link>
                             </td>
-                            <td>
-                              {new Date(order.createdAt).toLocaleDateString()}
-                            </td>
+                            <td>{formatDate(order.createdAt)}</td>
                             <td>{order.total}</td>
                             <td>
                               {order.delivered ? (

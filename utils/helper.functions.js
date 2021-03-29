@@ -1,5 +1,3 @@
-import currency from "currency-converter-module";
-
 export function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue,
@@ -81,10 +79,18 @@ export const updateItem = (data, id, post, type) => {
   return { type, payload: newData };
 };
 
-export const currcencyConvert = async (price) => {
-  var convertedValue = await currency.convertCurrencyByCode(
+// * Currency Convertor
+import currency from "currency-converter-module";
+export const currcencyConvert = (price) => {
+  var convertedValue = currency.convertCurrencyByCode(
     { value: price, code: "INR" },
     { code: "USD" }
   );
-  return await convertedValue;
+  return convertedValue;
 };
+
+// * Moment Library
+// * For Data Foramting
+import moment from "moment";
+export const formatDate = (date, dateFormat = "LL") =>
+  date && moment(date).format(dateFormat);

@@ -207,7 +207,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { pid } }) {
   const { product } = await getData(`product/get_by_id/${pid}`);
-  // console.log(product);
   return { props: { product }, revalidate: 1 };
 }
 

@@ -20,6 +20,7 @@ import {
   deleteItem,
   updateItem,
   currcencyConvert,
+  formatDate,
 } from "utils/helper.functions";
 
 const stagger = {
@@ -69,4 +70,5 @@ export {
   deleteItem,
   updateItem,
   currcencyConvert,
+  formatDate,
 };

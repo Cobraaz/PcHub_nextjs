@@ -22,7 +22,6 @@ const DetailOrder = () => {
     setOrderDetail(newArr);
   }, [orders]);
 
-  console.log(orderDetail);
   if (!auth.user) return null;
   return (
     <BaseLayout>

@@ -6,11 +6,11 @@ import {
   postData,
 } from "helpers/helper.functions";
 
-const paypalBtn = ({ order }) => {
+const paypalBtn = ({ order, total }) => {
   const refPaypalBtn = useRef();
   const { state, dispatch } = useContext(DataContext);
   const { auth, orders } = state;
-  // console.log("total", total);
+
   useEffect(() => {
     paypal
       .Buttons({
@@ -20,7 +20,7 @@ const paypalBtn = ({ order }) => {
             purchase_units: [
               {
                 amount: {
-                  value: order.total,
+                  value: total,
                 },
               },
             ],
@@ -34,7 +34,7 @@ const paypalBtn = ({ order }) => {
           // This function captures the funds from the transaction.
           return actions.order.capture().then(function (details) {
             // This function shows a transaction success message to your buyer.
-            console.log("details", details);
+
             patchData(`order/${order._id}`, null, auth.token).then((res) => {
               if (res.err)
                 dispatch({ type: "NOTIFY", payload: { error: res.err } });
@@ -59,7 +59,6 @@ const paypalBtn = ({ order }) => {
                 payload: { success: res.msg },
               });
             });
-            alert("Transaction completed by " + details.payer.name.given_name);
           });
         },
       })

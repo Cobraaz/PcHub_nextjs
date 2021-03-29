@@ -17,7 +17,7 @@ export default async (req, res) => {
 const githubLogin = async (req, res) => {
   try {
     const { code } = req.body;
-    console.log(code);
+
     const result = await axios.post(
       "https://github.com/login/oauth/access_token",
       {
@@ -43,7 +43,7 @@ const githubLogin = async (req, res) => {
       });
 
     const { email, name, avatar_url } = data;
-    // console.log({ email, name, avatar_url });
+
 
     const password = email + process.env.GITHUB_SECRET;
 

@@ -19,13 +19,14 @@ export default async (req, res) => {
 const getOrders = Authenticated(async (req, res) => {
   try {
     let orders;
-    if (req.user.role !== "admin" || req.user.role !== "root") {
+
+    if (req.user.role === "admin" || req.user.role === "root") {
+      orders = await Orders.find().populate("user", "-password");
+    } else {
       orders = await Orders.find({ user: req.user.id }).populate(
         "user",
         "-password"
       );
-    } else {
-      orders = await Orders.find().populate("user", "-password");
     }
 
     res.json({ orders });

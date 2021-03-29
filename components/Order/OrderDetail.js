@@ -1,15 +1,16 @@
-import { Link, Image } from "helpers/package.import";
+import { Link, Image, useEffect, useState } from "helpers/package.import";
 import { PaypalBtn } from "helpers/components.import";
 import {
   patchData,
   updateItem,
   numberWithCommas,
+  currcencyConvert,
+  formatDate,
 } from "helpers/helper.functions";
 
 const OrderDetail = ({ orderDetail, state, dispatch }) => {
   const { auth, orders } = state;
-  console.log(orders);
-
+  const [usdTotal, setUsdTotal] = useState(0);
   const handleDelivered = (order) => {
     dispatch({ type: "NOTIFY", payload: { loading: true } });
 
@@ -37,6 +38,14 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
       return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
     });
   };
+  // console.log(orderDetail);
+
+  useEffect(() => {
+    const convertCurrcency = async () => {
+      setUsdTotal(Math.round(await currcencyConvert(orderDetail[0].total)));
+    };
+    if (orderDetail && orderDetail[0]) convertCurrcency();
+  }, [orderDetail]);
 
   if (!auth.user) return null;
   return (
@@ -103,7 +112,9 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                         d-flex justify-content-between align-items-center`}
                   role="alert"
                 >
-                  {order.paid ? `Paid on ${order.dateOfPayment}` : "Not Paid"}
+                  {order.paid
+                    ? `Paid on ${formatDate(order.dateOfPayment, "LLLL")}`
+                    : "Not Paid"}
                 </div>
 
                 <h3>Order Items</h3>
@@ -186,7 +197,7 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                   <h2 className="mb-4 text-uppercase">
                     Total: {numberWithCommas(order.total)}
                   </h2>
-                  <PaypalBtn order={order} />
+                  {usdTotal > 0 && <PaypalBtn total={usdTotal} order={order} />}
                 </div>
               )}
           </div>
