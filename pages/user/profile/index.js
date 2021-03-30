@@ -9,7 +9,7 @@ import {
   imageCompression,
 } from "helpers/package.import";
 
-import { BaseLayout, BasePage } from "helpers/components.import";
+import { BaseLayout, BasePage, Modal } from "helpers/components.import";
 
 import {
   DataContext,
@@ -35,7 +35,9 @@ const Profile = () => {
   const { avatar, cf_password, name, password } = data;
 
   const { state, dispatch } = useContext(DataContext);
-  const { auth, notify, users, orders } = state;
+  const { auth, notify, users, orders, modal } = state;
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
 
   useEffect(() => {
     if (auth.user) setData({ ...data, name: auth.user.name });
@@ -58,11 +60,11 @@ const Profile = () => {
           return dispatch({ type: "NOTIFY", payload: { error: res.err } });
         dispatch({
           type: "GET_ALL_USERS",
-          payload: res,
+          payload: res.users,
         });
       });
     }
-  }, [auth.token, auth.user, callback]);
+  }, [callback]);
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
@@ -153,15 +155,25 @@ const Profile = () => {
     });
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (user) => {
     try {
-      if (auth.user.id !== id) {
-        if (window.confirm("Are you sure you want to delete this account?")) {
-          dispatch({ type: "NOTIFY", payload: { loading: true } });
-          const res = await deleteData(`user/delete_user/${id}`, auth.token);
-          dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-          setCallback(!callback);
-        }
+      if (auth.user.id !== user._id) {
+        toggleModal();
+        dispatch({
+          type: "ADD_MODAL",
+          payload: {
+            data: users,
+            id: user._id,
+            title: user.name,
+            type: "GET_ALL_USERS",
+          },
+        });
+        // if (window.confirm("Are you sure you want to delete this account?")) {
+        //   dispatch({ type: "NOTIFY", payload: { loading: true } });
+        //   const res = await deleteData(`user/delete_user/${id}`, auth.token);
+        //   dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+        //   setCallback(!callback);
+        // }
       }
     } catch (err) {
       console.log(err);
@@ -171,245 +183,267 @@ const Profile = () => {
   if (!auth.user) return null;
 
   return (
-    <BaseLayout>
-      <BasePage
-        className="profile-page"
-        header={`${(auth.user.role === "user"
-          ? "User Profile"
-          : auth.user.role === "admin"
-          ? "Admin Profile"
-          : "Root Profile"
-        ).toUpperCase()} `}
-      >
-        <section className="row text-secondary my-3">
-          <div className="col-md-4">
-            <div className="avatar">
-              <Image
-                src={avatar ? avatar : auth.user.avatar}
-                alt="avatar"
-                layout="fill"
-                quality={25}
-              />
-              <span>
-                <i
-                  className="ri-camera-2-line"
-                  style={{ fontSize: "1.3rem" }}
-                ></i>
-                <p>Change</p>
-                <input
-                  type="file"
-                  name="file"
-                  id="file_up"
-                  accept="image/*"
-                  onChange={changeAvatar}
+    <div onClick={() => showModal && toggleModal()}>
+      <BaseLayout>
+        <BasePage
+          className="profile-page"
+          header={`${(auth.user.role === "user"
+            ? "User Profile"
+            : auth.user.role === "admin"
+            ? "Admin Profile"
+            : "Root Profile"
+          ).toUpperCase()} `}
+        >
+          <Modal
+            dispatch={dispatch}
+            // modal={modal}
+            showModal={showModal}
+            toggleModal={toggleModal}
+            state={state}
+          />
+          <section className="row text-secondary my-3">
+            <div className="col-md-4">
+              <div className="avatar">
+                <Image
+                  src={avatar ? avatar : auth.user.avatar}
+                  alt="avatar"
+                  layout="fill"
+                  quality={25}
                 />
-              </span>
-            </div>
+                <span>
+                  <i
+                    className="ri-camera-2-line"
+                    style={{ fontSize: "1.3rem" }}
+                  ></i>
+                  <p>Change</p>
+                  <input
+                    type="file"
+                    name="file"
+                    id="file_up"
+                    accept="image/*"
+                    onChange={changeAvatar}
+                  />
+                </span>
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                name="name"
-                value={name}
-                className="form-control"
-                placeholder="Your name"
-                onChange={handleChange}
-              />
-            </div>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={name}
+                  className="form-control"
+                  placeholder="Your name"
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                name="email"
-                defaultValue={auth.user.email}
-                className="form-control"
-                disabled={true}
-              />
-            </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  name="email"
+                  defaultValue={auth.user.email}
+                  className="form-control"
+                  disabled={true}
+                />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="password">New Password</label>
-              <input
-                type="password"
-                name="password"
-                value={password}
-                className="form-control"
-                placeholder="Your new password"
-                onChange={handleChange}
-              />
-            </div>
+              <div className="form-group">
+                <label htmlFor="password">New Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  className="form-control"
+                  placeholder="Your new password"
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="cf_password">Confirm New Password</label>
-              <input
-                type="password"
-                name="cf_password"
-                value={cf_password}
-                className="form-control"
-                placeholder="Confirm new password"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group text-center">
-              <em style={{ color: "crimson" }}>
-                * If you update your password here, you will not be able to
-                login using google and facebook.
-              </em>
-            </div>
+              <div className="form-group">
+                <label htmlFor="cf_password">Confirm New Password</label>
+                <input
+                  type="password"
+                  name="cf_password"
+                  value={cf_password}
+                  className="form-control"
+                  placeholder="Confirm new password"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group text-center">
+                <em style={{ color: "crimson" }}>
+                  * If you update your password here, you will not be able to
+                  login using google and facebook.
+                </em>
+              </div>
 
-            <button
-              className="btn btn-info"
-              disabled={notify.loading}
-              onClick={handleUpdateProfile}
-            >
-              Update
-            </button>
-          </div>
-          <div className="col-md-8">
-            {users.length > 0 && (
-              <>
-                <h3
-                  className="text-uppercase font-weight-bold"
-                  style={{ marginTop: "30px" }}
-                >
-                  Users
-                </h3>
-                <div className="my-3 table-responsive">
-                  <table className="customers">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Admin</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {users &&
-                        users.map((user) => (
-                          <tr key={user._id}>
-                            <td>
+              <button
+                className="btn btn-info"
+                disabled={notify.loading}
+                onClick={handleUpdateProfile}
+              >
+                Update
+              </button>
+            </div>
+            <div className="col-md-8">
+              {users.length > 0 && (
+                <>
+                  <h3
+                    className="text-uppercase font-weight-bold"
+                    style={{ marginTop: "30px" }}
+                  >
+                    Users
+                  </h3>
+                  <div className="my-3 table-responsive">
+                    <table className="customers">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Admin</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {users &&
+                          users.length > 0 &&
+                          users.map((user) => (
+                            <tr key={user._id}>
+                              <td>
+                                {auth.user.id !== user._id ? (
+                                  <Link
+                                    // Bug
+                                    href={
+                                      auth.user.id &&
+                                      auth.user.email &&
+                                      user.email &&
+                                      user._id &&
+                                      auth.user.email !== user.email
+                                        ? `/user/profile/edit_user/${user._id}`
+                                        : "#!"
+                                    }
+                                  >
+                                    <a className="anchor-custom">
+                                      {user._id
+                                        .toString()
+                                        .split("")
+                                        .slice(0, 7)}
+                                      ...
+                                    </a>
+                                  </Link>
+                                ) : (
+                                  user._id.toString().split("").slice(0, 7)
+                                )}
+                              </td>
+                              <td>{user.name}</td>
+                              <td>{user.email}</td>
+                              <td>
+                                {user.role === "admin" ? (
+                                  <i
+                                    className="ri-check-double-fill"
+                                    title="Admin"
+                                    style={{ cursor: "default" }}
+                                  ></i>
+                                ) : (
+                                  <i
+                                    className="ri-close-fill"
+                                    title="User"
+                                    style={{ cursor: "default" }}
+                                  ></i>
+                                )}
+                              </td>
                               {auth.user.id !== user._id ? (
-                                <Link
-                                  href={`/user/profile/edit_user/${user._id}`}
-                                >
+                                <td>
+                                  <i
+                                    className="ri-delete-bin-line"
+                                    title="Remove"
+                                    onClick={() => handleDelete(user)}
+                                  ></i>
+                                </td>
+                              ) : (
+                                <td></td>
+                              )}
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              )}
+              {orders.length > 0 && (
+                <>
+                  <h3
+                    className="text-uppercase font-weight-bold"
+                    style={{ marginTop: "30px" }}
+                  >
+                    Orders
+                  </h3>
+                  <div className="my-3 table-responsive">
+                    <table className="customers">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Date</th>
+                          <th>Total</th>
+                          <th>Delivered</th>
+                          <th>Paid</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {orders &&
+                          orders.map((order) => (
+                            <tr key={order._id}>
+                              <td>
+                                <Link href={`/order/${order._id}`}>
                                   <a className="anchor-custom">
-                                    {user._id.toString().split("").slice(0, 7)}
+                                    {order._id.toString().split("").slice(0, 7)}
                                     ...
                                   </a>
                                 </Link>
-                              ) : (
-                                user._id.toString().split("").slice(0, 7)
-                              )}
-                            </td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>
-                              {user.role === "admin" ? (
-                                <i
-                                  className="ri-check-double-fill"
-                                  title="Admin"
-                                  style={{ cursor: "default" }}
-                                ></i>
-                              ) : (
-                                <i
-                                  className="ri-close-fill"
-                                  title="User"
-                                  style={{ cursor: "default" }}
-                                ></i>
-                              )}
-                            </td>
-                            {auth.user.id !== user._id ? (
-                              <td>
-                                <i
-                                  className="ri-delete-bin-line"
-                                  title="Remove"
-                                  onClick={() => handleDelete(user._id)}
-                                ></i>
                               </td>
-                            ) : (
-                              <td></td>
-                            )}
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </div>
-              </>
-            )}
-            {orders.length > 0 && (
-              <>
-                <h3
-                  className="text-uppercase font-weight-bold"
-                  style={{ marginTop: "30px" }}
-                >
-                  Orders
-                </h3>
-                <div className="my-3 table-responsive">
-                  <table className="customers">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                        <th>Delivered</th>
-                        <th>Paid</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {orders &&
-                        orders.map((order) => (
-                          <tr key={order._id}>
-                            <td>
-                              <Link href={`/order/${order._id}`}>
-                                <a className="anchor-custom">
-                                  {order._id.toString().split("").slice(0, 7)}
-                                  ...
-                                </a>
-                              </Link>
-                            </td>
-                            <td>{formatDate(order.createdAt)}</td>
-                            <td>{order.total}</td>
-                            <td>
-                              {order.delivered ? (
-                                <i
-                                  className="ri-check-double-fill text-success"
-                                  style={{ cursor: "default" }}
-                                ></i>
-                              ) : (
-                                <i
-                                  className="ri-close-fill text-danger"
-                                  style={{ cursor: "default" }}
-                                ></i>
-                              )}
-                            </td>
-                            <td>
-                              {order.paid ? (
-                                <i
-                                  className="ri-check-double-fill text-success"
-                                  style={{ cursor: "default" }}
-                                ></i>
-                              ) : (
-                                <i
-                                  className="ri-close-fill text-danger"
-                                  style={{ cursor: "default" }}
-                                ></i>
-                              )}
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </div>
-              </>
-            )}
-          </div>
-        </section>
-      </BasePage>
-    </BaseLayout>
+                              <td>{formatDate(order.createdAt)}</td>
+                              <td>{order.total}</td>
+                              <td>
+                                {order.delivered ? (
+                                  <i
+                                    className="ri-check-double-fill text-success"
+                                    style={{ cursor: "default" }}
+                                  ></i>
+                                ) : (
+                                  <i
+                                    className="ri-close-fill text-danger"
+                                    style={{ cursor: "default" }}
+                                  ></i>
+                                )}
+                              </td>
+                              <td>
+                                {order.paid ? (
+                                  <i
+                                    className="ri-check-double-fill text-success"
+                                    style={{ cursor: "default" }}
+                                  ></i>
+                                ) : (
+                                  <i
+                                    className="ri-close-fill text-danger"
+                                    style={{ cursor: "default" }}
+                                  ></i>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              )}
+            </div>
+          </section>
+        </BasePage>
+      </BaseLayout>
+    </div>
   );
 };
 

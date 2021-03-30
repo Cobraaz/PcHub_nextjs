@@ -30,21 +30,21 @@ const ResetPassword = () => {
   const [success, setSuccess] = useState("");
   const [callback, setCallback] = useState(false);
 
-  useEffect(() => {
-    if (auth.user && auth.user.role === "root") {
-      getData("user/all_infor", auth.token).then((res) => {
-        if (res.err)
-          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-        dispatch({
-          type: "GET_ALL_USERS",
-          payload: res,
-        });
-      });
-    }
-  }, [auth.token, auth.user, callback]);
+  // useEffect(() => {
+  //   if (auth.user && auth.user.role === "root") {
+  //     getData("user/all_infor", auth.token).then((res) => {
+  //       if (res.err)
+  //         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+  //       dispatch({
+  //         type: "GET_ALL_USERS",
+  //         payload: res.users,
+  //       });
+  //     });
+  //   }
+  // }, [auth.token, auth.user, callback]);
 
   useEffect(() => {
-    if (users.length !== 0) {
+    if (users && users.length !== 0) {
       users.forEach((user) => {
         if (user._id === id) {
           setEditUser(user);

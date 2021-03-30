@@ -1,22 +1,15 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { deleteItem } from "helpers/helper.functions";
+import { deleteItem, deleteData } from "helpers/helper.functions";
 
-const backdrop = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
-};
-
-const modal = {
-  hidden: { y: "-100vh", opacity: 0 },
-  visible: {
-    y: "200px",
-    opacity: 1,
-    transition: { delay: 0.5 },
-  },
-};
-const Modale = ({ modal, showModal, toggleModal, dispatch }) => {
-  const handleSubmit = () => {
+const Modale = ({ showModal, toggleModal, dispatch, state }) => {
+  const { modal, auth } = state;
+  const handleSubmit = async () => {
+    if (modal.type === "GET_ALL_USERS") {
+      dispatch({ type: "NOTIFY", payload: { loading: true } });
+      const res = await deleteData(`user/delete_user/${modal.id}`, auth.token);
+      dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      dispatch(deleteItem(modal.data, modal.id, modal.type));
+    }
     dispatch(deleteItem(modal.data, modal.id, modal.type));
     dispatch({ type: "ADD_MODAL", payload: [] });
   };

@@ -142,6 +142,7 @@ const Checkout = () => {
             modal={modal}
             showModal={showModal}
             toggleModal={toggleModal}
+            state={state}
           />
           <div className="row mx-auto">
             <div className="col-md-8 text-secondary">
