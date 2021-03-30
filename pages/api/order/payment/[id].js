@@ -16,13 +16,14 @@ const paymentOrder = Authenticated(async (req, res) => {
   try {
     if (req.user.role === "user") {
       const { id } = req.query;
+      const { paymentId } = req.body;
 
       await Orders.findOneAndUpdate(
         { _id: id },
         {
           paid: true,
           dateOfPayment: new Date().toISOString(),
-
+          paymentId,
           method: "Paypal",
         }
       );

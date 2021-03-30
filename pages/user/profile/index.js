@@ -294,9 +294,14 @@ const Profile = () => {
                                 <i
                                   className="ri-check-double-fill"
                                   title="Admin"
+                                  style={{ cursor: "default" }}
                                 ></i>
                               ) : (
-                                <i className="ri-close-fill" title="User"></i>
+                                <i
+                                  className="ri-close-fill"
+                                  title="User"
+                                  style={{ cursor: "default" }}
+                                ></i>
                               )}
                             </td>
                             {auth.user.id !== user._id ? (
@@ -345,23 +350,38 @@ const Profile = () => {
                           <tr key={order._id}>
                             <td>
                               <Link href={`/order/${order._id}`}>
-                                <a className="anchor-custom">{order._id}</a>
+                                <a className="anchor-custom">
+                                  {order._id.toString().split("").slice(0, 7)}
+                                  ...
+                                </a>
                               </Link>
                             </td>
                             <td>{formatDate(order.createdAt)}</td>
                             <td>{order.total}</td>
                             <td>
                               {order.delivered ? (
-                                <i className="ri-check-double-fill text-success"></i>
+                                <i
+                                  className="ri-check-double-fill text-success"
+                                  style={{ cursor: "default" }}
+                                ></i>
                               ) : (
-                                <i className="ri-close-fill text-danger"></i>
+                                <i
+                                  className="ri-close-fill text-danger"
+                                  style={{ cursor: "default" }}
+                                ></i>
                               )}
                             </td>
                             <td>
                               {order.paid ? (
-                                <i className="ri-check-double-fill text-success"></i>
+                                <i
+                                  className="ri-check-double-fill text-success"
+                                  style={{ cursor: "default" }}
+                                ></i>
                               ) : (
-                                <i className="ri-close-fill text-danger"></i>
+                                <i
+                                  className="ri-close-fill text-danger"
+                                  style={{ cursor: "default" }}
+                                ></i>
                               )}
                             </td>
                           </tr>

@@ -1,4 +1,10 @@
-import { Link, Image, useEffect, useState } from "helpers/package.import";
+import {
+  Link,
+  Image,
+  useEffect,
+  useState,
+  useRouter,
+} from "helpers/package.import";
 import { PaypalBtn } from "helpers/components.import";
 import {
   patchData,
@@ -11,6 +17,8 @@ import {
 const OrderDetail = ({ orderDetail, state, dispatch }) => {
   const { auth, orders } = state;
   const [usdTotal, setUsdTotal] = useState(0);
+  const router = useRouter();
+
   const handleDelivered = (order) => {
     dispatch({ type: "NOTIFY", payload: { loading: true } });
 
@@ -35,10 +43,10 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
         )
       );
 
-      return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      return router.push("/user/profile");
     });
   };
-  // console.log(orderDetail);
 
   useEffect(() => {
     const convertCurrcency = async () => {
@@ -78,7 +86,7 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                   role="alert"
                 >
                   {order.delivered
-                    ? `Deliverd on ${order.updatedAt}`
+                    ? `Deliverd on ${formatDate(order.updatedAt, "LLLL")}`
                     : "Not Delivered"}
                   {(auth.user.role === "root" || auth.user.role === "admin") &&
                     !order.delivered && (
@@ -184,6 +192,27 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                           </div>
                         );
                       })}
+                    </div>
+                    <div className="order-detail-AB-total-container font-weight-bold float-right">
+                      <div className="order-detail-AB-block-container "></div>
+                      <div className="order-detail-AB-block-container font-weight-bold"></div>
+                      <div className="order-detail-AB-block-container font-weight-bold"></div>
+                      <div className="order-detail-AB-block-container font-weight-bold"></div>
+                      <div
+                        style={{ float: "right" }}
+                        className="order-detail-AB-block-container font-weight-bold"
+                      >
+                        <span
+                          style={{
+                            float: "right",
+                            borderTop: "1px solid darkgrey",
+                            borderBottom: "1px solid darkgrey",
+                          }}
+                          className="ml-3"
+                        >
+                          {numberWithCommas(order.total)}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

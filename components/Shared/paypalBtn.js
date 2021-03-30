@@ -35,7 +35,13 @@ const paypalBtn = ({ order, total }) => {
           return actions.order.capture().then(function (details) {
             // This function shows a transaction success message to your buyer.
 
-            patchData(`order/${order._id}`, null, auth.token).then((res) => {
+            patchData(
+              `order/payment/${order._id}`,
+              {
+                paymentId: details.payer.payer_id,
+              },
+              auth.token
+            ).then((res) => {
               if (res.err)
                 dispatch({ type: "NOTIFY", payload: { error: res.err } });
 

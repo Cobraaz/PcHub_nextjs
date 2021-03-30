@@ -134,13 +134,31 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
             title="Profile"
           />
         </DropdownItem>
-        {/* <DropdownItem>
-          <BsNavLink
-            className="port-dropdown-item"
-            href="#"
-            title="Keyboards"
-          />
-        </DropdownItem> */}
+        {(auth.user.role === "admin" || auth.user.role === "root") && (
+          <>
+            <DropdownItem>
+              <BsNavLink
+                className="port-dropdown-item"
+                href="/users"
+                title="Users"
+              />
+            </DropdownItem>
+            <DropdownItem>
+              <BsNavLink
+                className="port-dropdown-item"
+                href="/create"
+                title="Products"
+              />
+            </DropdownItem>
+            <DropdownItem>
+              <BsNavLink
+                className="port-dropdown-item"
+                href="/categories"
+                title="Categories"
+              />
+            </DropdownItem>
+          </>
+        )}
         <DropdownItem divider />
         <DropdownItem onClick={handleLogout}>
           <BsNavLink className="port-dropdown-item" href="" title="Logout" />
@@ -149,3 +167,13 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
     </Dropdown>
   );
 };
+
+//<Link href="/users">
+//   <a className="dropdown-item">Users</a>
+// </Link>
+// <Link href="/create">
+//   <a className="dropdown-item">Products</a>
+// </Link>
+// <Link href="/categories">
+//   <a className="dropdown-item">Categories</a>
+// </Link>
