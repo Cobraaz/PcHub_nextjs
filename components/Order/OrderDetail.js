@@ -200,7 +200,7 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                       <div className="order-detail-AB-block-container font-weight-bold"></div>
                       <div
                         style={{ float: "right" }}
-                        className="order-detail-AB-block-container font-weight-bold"
+                        className="order-detail-AB-block2-container font-weight-bold"
                       >
                         <span
                           style={{

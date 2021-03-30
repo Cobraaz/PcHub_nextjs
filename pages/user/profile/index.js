@@ -270,7 +270,12 @@ const Profile = () => {
           <div className="col-md-8">
             {users.length > 0 && (
               <>
-                <h3 className="text-uppercase">Users</h3>
+                <h3
+                  className="text-uppercase font-weight-bold"
+                  style={{ marginTop: "30px" }}
+                >
+                  Users
+                </h3>
                 <div className="my-3 table-responsive">
                   <table className="customers">
                     <thead>
@@ -286,7 +291,20 @@ const Profile = () => {
                       {users &&
                         users.map((user) => (
                           <tr key={user._id}>
-                            <td>{user._id}</td>
+                            <td>
+                              {auth.user.id !== user._id ? (
+                                <Link
+                                  href={`/user/profile/edit_user/${user._id}`}
+                                >
+                                  <a className="anchor-custom">
+                                    {user._id.toString().split("").slice(0, 7)}
+                                    ...
+                                  </a>
+                                </Link>
+                              ) : (
+                                user._id.toString().split("").slice(0, 7)
+                              )}
+                            </td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>
@@ -306,14 +324,6 @@ const Profile = () => {
                             </td>
                             {auth.user.id !== user._id ? (
                               <td>
-                                <Link
-                                  href={`/user/profile/edit_user/${user._id}`}
-                                >
-                                  <i
-                                    className="ri-pencil-fill"
-                                    title="Edit"
-                                  ></i>
-                                </Link>
                                 <i
                                   className="ri-delete-bin-line"
                                   title="Remove"
@@ -332,7 +342,12 @@ const Profile = () => {
             )}
             {orders.length > 0 && (
               <>
-                <h3 className="text-uppercase">Orders</h3>
+                <h3
+                  className="text-uppercase font-weight-bold"
+                  style={{ marginTop: "30px" }}
+                >
+                  Orders
+                </h3>
                 <div className="my-3 table-responsive">
                   <table className="customers">
                     <thead>

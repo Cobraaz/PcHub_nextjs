@@ -82,7 +82,7 @@ const Header = ({
               <Brands />
               <Categories />
               <NavItem className="port-navbar-item">
-                <BsNavLink href="/" title="Pre build pc" />
+                <BsNavLink href="/pre-build-pc" title="Pre build pc" />
               </NavItem>
             </Nav>
             <Nav navbar>

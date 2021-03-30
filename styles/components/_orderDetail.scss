@@ -29,6 +29,18 @@
       font-size: 12px;
     }
   }
+  .order-detail-AB-block2-container {
+    text-transform: capitalize;
+    width: 100%;
+    font-size: 22px;
+    font-weight: bolder;
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      font-size: 16px;
+      font-weight: bolder;
+    }
+  }
 
   .order-detail-AB-item-container {
     width: 100%;
