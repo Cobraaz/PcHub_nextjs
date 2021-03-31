@@ -87,13 +87,6 @@ const ResetPassword = () => {
         {err && <div className="errMsg">{err}</div>}
         {success && <div className="successMsg">{success}</div>}
         <div className="mt-5">
-          <button
-            onClick={() => router.back()}
-            className="go_back btn btn-dark"
-          >
-            <i className="ri-arrow-left-fill"></i>
-            Go Back
-          </button>
           <Row>
             <Col
               md={{ size: 6, offset: 3 }}

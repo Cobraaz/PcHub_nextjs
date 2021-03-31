@@ -139,13 +139,6 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
             <DropdownItem>
               <BsNavLink
                 className="port-dropdown-item"
-                href="/users"
-                title="Users"
-              />
-            </DropdownItem>
-            <DropdownItem>
-              <BsNavLink
-                className="port-dropdown-item"
                 href="/create"
                 title="Products"
               />

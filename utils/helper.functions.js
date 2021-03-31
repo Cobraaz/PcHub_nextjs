@@ -94,3 +94,39 @@ export const currcencyConvert = (price) => {
 import moment from "moment";
 export const formatDate = (date, dateFormat = "LL") =>
   date && moment(date).format(dateFormat);
+
+// * Get photo from unsplash
+import { createApi } from "unsplash-js";
+export const getPhotoUnsplash = async () => {
+  const api = createApi({
+    accessKey: process.env.UNSPLASH_ACCESS_KEY,
+  });
+  const slideImages = [];
+
+  const unsplashResult = await api.search.getPhotos({
+    query: "gaming setup",
+    orientation: "landscape",
+    perPage: 20,
+  });
+  if (unsplashResult) {
+    unsplashResult.response.results.map((photo) =>
+      slideImages.push(photo.urls.regular)
+    );
+    shuffle(slideImages);
+    slideImages.unshift(
+      ...shuffle([
+        "/images/homepage_masthead.jpg",
+        "/images/homepage_masthead2.jpg",
+        "/images/homepage_masthead3.jpg",
+      ])
+    );
+    return slideImages;
+  }
+  return slideImages.unshift(
+    ...shuffle([
+      "/images/homepage_masthead.jpg",
+      "/images/homepage_masthead2.jpg",
+      "/images/homepage_masthead3.jpg",
+    ])
+  );
+};

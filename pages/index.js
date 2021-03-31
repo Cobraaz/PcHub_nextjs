@@ -1,4 +1,4 @@
-import { useState, createApi, Row, Col, motion } from "helpers/package.import";
+import { useState, Row, Col, motion } from "helpers/package.import";
 
 import {
   BaseLayout,
@@ -9,7 +9,12 @@ import {
 
 // import { productsFromDB } from "pages/api/product/all_products";
 
-import { shuffle, getData, stagger } from "helpers/helper.functions";
+import {
+  shuffle,
+  getData,
+  stagger,
+  getPhotoUnsplash,
+} from "helpers/helper.functions";
 
 const Home = ({ slideImages, products: resProducts, status }) => {
   const [products] = useState(resProducts);
@@ -57,40 +62,6 @@ const Home = ({ slideImages, products: resProducts, status }) => {
         </motion.div>
       </BasePage>
     </BaseLayout>
-  );
-};
-
-const getPhotoUnsplash = async () => {
-  const api = createApi({
-    accessKey: process.env.UNSPLASH_ACCESS_KEY,
-  });
-  const slideImages = [];
-
-  const unsplashResult = await api.search.getPhotos({
-    query: "gaming setup",
-    orientation: "landscape",
-    perPage: 20,
-  });
-  if (unsplashResult) {
-    unsplashResult.response.results.map((photo) =>
-      slideImages.push(photo.urls.regular)
-    );
-    shuffle(slideImages);
-    slideImages.unshift(
-      ...shuffle([
-        "/images/homepage_masthead.jpg",
-        "/images/homepage_masthead2.jpg",
-        "/images/homepage_masthead3.jpg",
-      ])
-    );
-    return slideImages;
-  }
-  return slideImages.unshift(
-    ...shuffle([
-      "/images/homepage_masthead.jpg",
-      "/images/homepage_masthead2.jpg",
-      "/images/homepage_masthead3.jpg",
-    ])
   );
 };
 

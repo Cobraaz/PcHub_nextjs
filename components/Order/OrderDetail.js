@@ -72,10 +72,10 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
 
               <div className="mt-4 text-secondary">
                 <h3>Shipping</h3>
-                <p>Name: {order.user.name}</p>
-                <p>Email: {order.user.email}</p>
-                <p>Address: {order.address}</p>
-                <p>Mobile: {order.mobile}</p>
+                <p>Name: {order.user ? order.user.name : "unknown"}</p>
+                <p>Email: {order.user ? order.user.email : "unknown"}</p>
+                <p>Address: {order.user ? order.user.address : "unknown"}</p>
+                <p>Mobile: {order.user ? order.user.mobile : "unknown"}</p>
 
                 <div
                   style={{ maxWidth: "600px" }}
@@ -148,8 +148,8 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                     <div>
                       {order.cart.map((item) => {
                         const {
-                          title,
-                          images,
+                          title = "unknown",
+                          images = "https://res.cloudinary.com/cobraaz/image/upload/v1595762337/gez4i626tlesoe3plwn7.jpg",
                           price,
                           quantity,
                           _id,

@@ -21,6 +21,7 @@ import {
   updateItem,
   currcencyConvert,
   formatDate,
+  getPhotoUnsplash,
 } from "utils/helper.functions";
 
 const stagger = {
@@ -71,4 +72,5 @@ export {
   updateItem,
   currcencyConvert,
   formatDate,
+  getPhotoUnsplash,
 };

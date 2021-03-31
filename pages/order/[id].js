@@ -3,8 +3,6 @@ import {
   useContext,
   useEffect,
   useRouter,
-  Head,
-  Link,
 } from "helpers/package.import";
 import { BaseLayout, BasePage, OrderDetail } from "helpers/components.import";
 import { DataContext } from "helpers/helper.functions";
@@ -26,19 +24,6 @@ const DetailOrder = () => {
   return (
     <BaseLayout>
       <BasePage className="wrapper Order-detail-AB">
-        <div>
-          <button
-            onClick={() => router.back()}
-            className="go_back btn btn-dark"
-            style={{
-              verticalAlign: "middle",
-            }}
-          >
-            <i className="ri-arrow-left-fill"></i>
-            Go Back
-          </button>
-        </div>
-
         <OrderDetail
           orderDetail={orderDetail}
           state={state}
