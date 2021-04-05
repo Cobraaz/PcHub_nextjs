@@ -10,6 +10,12 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
       dispatch({ type: "NOTIFY", payload: { success: res.msg } });
       dispatch(deleteItem(modal.data, modal.id, modal.type));
     }
+    if (modal.type === "ADD_CATEGORIES") {
+      dispatch({ type: "NOTIFY", payload: { loading: true } });
+      const res = await deleteData(`categories/${modal.id}`, auth.token);
+      dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      dispatch(deleteItem(modal.data, modal.id, modal.type));
+    }
     dispatch(deleteItem(modal.data, modal.id, modal.type));
     dispatch({ type: "ADD_MODAL", payload: [] });
   };
