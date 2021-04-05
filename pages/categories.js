@@ -1,4 +1,10 @@
-import { useContext, useState, Row, Col } from "helpers/package.import";
+import {
+  useContext,
+  useState,
+  Row,
+  Col,
+  parseCookies,
+} from "helpers/package.import";
 import { BaseLayout, BasePage, Modal } from "helpers/components.import";
 
 import {
@@ -6,6 +12,7 @@ import {
   DataContext,
   updateItem,
   putData,
+  withAuth,
 } from "helpers/helper.functions";
 
 const Categories = () => {
@@ -82,7 +89,7 @@ const Categories = () => {
   return (
     <div onClick={() => showModal && toggleModal()}>
       <BaseLayout>
-        <BasePage className="wrapper">
+        <BasePage className="wrapper" header="Categories">
           <Modal
             dispatch={dispatch}
             showModal={showModal}
@@ -139,5 +146,20 @@ const Categories = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  // some auth logic here
+  const { res } = ctx;
+  const { user } = parseCookies(ctx);
+  const isAuth = user ? JSON.parse(user) : false;
+
+  if (isAuth.role == "user" || isAuth.role == "" || !isAuth) {
+    withAuth(res, "/");
+  }
+
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
 
 export default Categories;

@@ -12,6 +12,7 @@ import {
   Button,
   InputGroup,
   Label,
+  FormGroup,
   Input,
 } from "reactstrap";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,4 +52,5 @@ export {
   imageCompression,
   AnimatePresence,
   useRef,
+  FormGroup,
 };
