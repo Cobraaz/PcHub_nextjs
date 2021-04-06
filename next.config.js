@@ -1,4 +1,7 @@
 module.exports = {
+  api: {
+    bodyParser: false,
+  },
   env: {
     BASE_URL: process.env.BASE_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,

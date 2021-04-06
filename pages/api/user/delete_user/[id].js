@@ -16,7 +16,6 @@ export default async (req, res) => {
 const deleteUser = Authenticated(
   AuthenticatedRoot(async (req, res) => {
     try {
-      console.log("heloooo");
       await Users.findByIdAndDelete(req.query.id);
 
       res.json({ msg: "Deleted Success!" });

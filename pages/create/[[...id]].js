@@ -11,10 +11,18 @@ import {
   FormGroup,
   Label,
   parseCookies,
+  imageCompression,
+  useEffect,
 } from "helpers/package.import";
 import { BaseLayout, BasePage } from "helpers/components.import";
 
-import { DataContext, withAuth } from "helpers/helper.functions";
+import {
+  DataContext,
+  withAuth,
+  postData,
+  putData,
+  getData,
+} from "helpers/helper.functions";
 const ProductsManager = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -33,6 +41,20 @@ const ProductsManager = () => {
   const [product, setProduct] = useState(initialState);
   const [onEdit, setOnEdit] = useState(false);
   const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    if (id) {
+      setOnEdit(true);
+      getData(`product/get_by_id/${id}`).then((res) => {
+        setProduct(res.product);
+        setImages(res.product.images);
+      });
+    } else {
+      setOnEdit(false);
+      setProduct(initialState);
+      setImages([]);
+    }
+  }, [id]);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -92,22 +114,83 @@ const ProductsManager = () => {
     category,
   } = product;
 
-  console.log(images);
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (auth.user.role === "user")
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Authentication is not valid." },
+      });
+
+    if (
+      !title ||
+      !price ||
+      !inStock ||
+      !description ||
+      !content ||
+      category === "all" ||
+      images.length === 0
+    )
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "Please add all the fields." },
+      });
+
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    let media = [];
+
+    const imgNewURL = images.filter((img) => img.name);
+    const imgOldURL = images.filter((img) => !img.name);
+
+    if (imgNewURL.length > 0) {
+      for (const item of imgNewURL) {
+        let file;
+        file = await imageCompression(item, {
+          maxSizeMB: 0.2,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true,
+          initialQuality: 0.3, // optional, initial quality value between 0 and 1 (default: 1)
+        });
+        media.push(await toBase64(file));
+      }
+    }
+    console.log(media, imgOldURL);
+    let res;
+    if (onEdit) {
+      res = await putData(
+        `product/get_by_id/${id}`,
+        { ...product, images: [...imgOldURL, ...media] },
+        auth.token
+      );
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+    } else {
+      res = await postData(
+        "product",
+        { ...product, images: [...imgOldURL, ...media] },
+        auth.token
+      );
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+    }
+
+    return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+  };
 
   return (
     <BaseLayout>
       <BasePage className="products_manager wrapper" header="Create Product">
-        <form>
+        <form onSubmit={handleSubmit}>
           <Row>
             <Col md={{ size: 6 }}>
-              <Input
-                type="text"
-                name="text"
-                value={product_id}
-                placeholder="Products ID"
-                className="d-block my-4 w-100 p-2"
-                onChange={handleChangeInput}
-              />
               <Input
                 type="text"
                 name="title"
@@ -208,18 +291,21 @@ const ProductsManager = () => {
                 </div>
               </InputGroup>
               <Row className="img-up mx-0">
-                {images.map((img, index) => (
-                  <div key={index} className="file_img my-1">
-                    <img
-                      src={img.url ? img.url : URL.createObjectURL(img)}
-                      alt=""
-                      className="img-thumbnail rounded"
-                      style={{ cursor: "default" }}
-                    />
+                {images.map((img, index) => {
+                  return (
+                    <div key={index} className="file_img my-1">
+                      <img
+                        // src={img.url ? img.url : URL.createObjectURL(img)}
+                        src={img.name ? URL.createObjectURL(img) : img}
+                        alt=""
+                        className="img-thumbnail rounded"
+                        style={{ cursor: "default" }}
+                      />
 
-                    <span onClick={() => deleteImage(index)}>X</span>
-                  </div>
-                ))}
+                      <span onClick={() => deleteImage(index)}>X</span>
+                    </div>
+                  );
+                })}
               </Row>
             </Col>
           </Row>

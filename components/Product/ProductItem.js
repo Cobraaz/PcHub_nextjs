@@ -9,7 +9,7 @@ import {
 
 const ProductItem = ({ product }) => {
   const { state, dispatch } = useContext(DataContext);
-  const { cart } = state;
+  const { cart, auth } = state;
   const router = useRouter();
   return (
     <>
@@ -74,20 +74,50 @@ const ProductItem = ({ product }) => {
           </div>
         </motion.div>
       </motion.div>
-      <motion.button
-        whileTap={{ scale: 0.85 }}
-        disabled={product.inStock === 0 ? true : false}
-        onClick={() => {
-          dispatch(addToCart(product, cart));
-          setTimeout(() => {
-            dispatch({ type: "NOTIFY", payload: {} });
-          }, 0);
-        }}
-        style={{ outline: "none" }}
-        className=" card-button-Ab border-0"
-      >
-        Add to cart
-      </motion.button>
+      {!auth.user || auth.user.role === "user" ? (
+        <motion.button
+          whileTap={{ scale: 0.85 }}
+          disabled={product.inStock === 0 ? true : false}
+          onClick={() => {
+            dispatch(addToCart(product, cart));
+            setTimeout(() => {
+              dispatch({ type: "NOTIFY", payload: {} });
+            }, 0);
+          }}
+          style={{ outline: "none" }}
+          className=" card-button-Ab border-0"
+        >
+          Add to cart
+        </motion.button>
+      ) : (
+        <>
+          <motion.button
+            whileTap={{ scale: 0.85 }}
+            disabled={product.inStock === 0 ? true : false}
+            onClick={() =>
+              router.push("/create/[id]", `/create/${product._id}`)
+            }
+            style={{ outline: "none", left: "8.6rem" }}
+            className=" card-button-Ab border-0"
+          >
+            Edit
+          </motion.button>
+          <motion.button
+            whileTap={{ scale: 0.85 }}
+            disabled={product.inStock === 0 ? true : false}
+            onClick={() => {
+              dispatch(addToCart(product, cart));
+              setTimeout(() => {
+                dispatch({ type: "NOTIFY", payload: {} });
+              }, 0);
+            }}
+            style={{ outline: "none" }}
+            className=" card-button-Ab border-0"
+          >
+            Delete
+          </motion.button>
+        </>
+      )}
     </>
   );
 };

@@ -89,7 +89,7 @@ const DetailProduct = ({ product }) => {
                       whileHover={{ scale: 1.2 }}
                       className={`img-thumbnail rounded ${isActive(index)} `}
                     >
-                      <Image
+                      <img
                         src={img}
                         alt="shoe image"
                         onClick={() => setTab(index)}
