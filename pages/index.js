@@ -43,7 +43,6 @@ const Home = ({ slideImages, products: resProducts, status }) => {
   const handleDeleteAll = async () => {
     try {
       if (auth.user.role !== "user") {
-        toggleModal();
         let deleteArr = [];
         products.forEach((product) => {
           if (product.checked) {
@@ -55,8 +54,10 @@ const Home = ({ slideImages, products: resProducts, status }) => {
             });
           }
         });
-
-        dispatch({ type: "ADD_MODAL", payload: deleteArr });
+        if (deleteArr.length !== 0) {
+          toggleModal();
+          dispatch({ type: "ADD_MODAL", payload: deleteArr });
+        }
       }
     } catch (err) {
       console.log(err);
