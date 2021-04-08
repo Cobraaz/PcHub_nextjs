@@ -25,10 +25,10 @@ import {
 } from "helpers/helper.functions";
 import { fakeProductsData } from "populate/FakeData";
 
-const DetailProduct = ({ product }) => {
+const DetailProduct = ({ product, products: resProducts }) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth } = state;
-  const [products] = useState(fakeProductsData);
+  const [products] = useState(resProducts);
   const [tab, setTab] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
@@ -262,13 +262,16 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { pid } }) {
   const { product } = await getData(`product/get_by_id/${pid}`);
-  return { props: { product }, revalidate: 1 };
+  const { products } = await getData(`product/random_data/${pid}`);
+  // console.log(products);
+  return { props: { product, products }, revalidate: 1 };
 }
 
-// export async function getServerSideProps({ params: { id } }) {
-//   const { product } = await getData(`product/get_by_id/${id}`); // server side rendering
+// export async function getServerSideProps({ params: { pid } }) {
+//   const { product } = await getData(`product/get_by_id/${pid}`); // server side rendering
+//   const { products } = await getData(`product/random_data/${pid}`);
 //   return {
-//     props: { product }, // will be passed to the page component as props
+//     props: { product, products }, // will be passed to the page component as props
 //   };
 // }
 

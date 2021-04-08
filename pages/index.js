@@ -161,21 +161,7 @@ const Home = ({ slideImages, products: resProducts, status }) => {
 //   };
 // }
 
-// export async function getStaticProps() {
-//   const { status, result, products } = await getData("product/all_products");
-
-//   return {
-//     props: {
-//       slideImages: await getPhotoUnsplash(),
-//       status,
-//       result,
-//       products,
-//     },
-//     revalidate: 1,
-//   };
-// }
-
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const { status, result, products } = await getData("product/all_products");
 
   return {
@@ -185,7 +171,21 @@ export async function getServerSideProps() {
       result,
       products,
     },
+    revalidate: 1,
   };
 }
+
+// export async function getServerSideProps() {
+//   const { status, result, products } = await getData("product/all_products");
+
+//   return {
+//     props: {
+//       slideImages: await getPhotoUnsplash(),
+//       status,
+//       result,
+//       products,
+//     },
+//   };
+// }
 
 export default Home;
