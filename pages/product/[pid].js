@@ -8,7 +8,12 @@ import {
   Head,
   Image,
 } from "helpers/package.import";
-import { BaseLayout, BasePage, ProductItem } from "helpers/components.import";
+import {
+  BaseLayout,
+  BasePage,
+  ProductItem,
+  Modal,
+} from "helpers/components.import";
 import {
   stagger,
   DataContext,
@@ -22,9 +27,11 @@ import { fakeProductsData } from "populate/FakeData";
 
 const DetailProduct = ({ product }) => {
   const { state, dispatch } = useContext(DataContext);
-  const { cart } = state;
+  const { cart, auth } = state;
   const [products] = useState(fakeProductsData);
   const [tab, setTab] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
 
   const isActive = (index) => {
     if (tab === index) return " active-img";
@@ -36,10 +43,38 @@ const DetailProduct = ({ product }) => {
     }, 3000);
     return () => clearInterval(id);
   }, [tab]);
+
+  const handleDelete = async (product) => {
+    try {
+      if (auth.user.role !== "user") {
+        toggleModal();
+        dispatch({
+          type: "ADD_MODAL",
+          payload: [
+            {
+              data: "",
+              id: product._id,
+              title: product.title,
+              type: "DELETE_PRODUCT",
+            },
+          ],
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   if (!product) return null;
   return (
     <BaseLayout>
       <BasePage indexPage className="product-detail-page">
+        <Modal
+          dispatch={dispatch}
+          showModal={showModal}
+          toggleModal={toggleModal}
+          state={state}
+        />
         <Head>
           <title>Product Card/Page</title>
         </Head>
@@ -140,33 +175,53 @@ const DetailProduct = ({ product }) => {
               </div>
 
               <motion.div variants={fadeInUp} className="purchase-info">
-                <input
+                {/* <input
                   type="number"
                   min="0"
                   //   value="1"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  type="button"
-                  className="btn"
-                  disabled={product.inStock === 0 ? true : false}
-                  onClick={() => {
-                    dispatch(addToCart(product, cart));
-                    setTimeout(() => {
-                      dispatch({ type: "NOTIFY", payload: {} });
-                    }, 0);
-                  }}
-                >
-                  Add to Cart{" "}
-                  <i
-                    className="ri-shopping-cart-fill"
-                    style={{
-                      fontSize: "1.2em",
-                      verticalAlign: "middle",
+                /> */}
+                {!auth.user || auth.user.role === "user" ? (
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    type="button"
+                    className="btn"
+                    disabled={product.inStock === 0 ? true : false}
+                    onClick={() => {
+                      dispatch(addToCart(product, cart));
+                      setTimeout(() => {
+                        dispatch({ type: "NOTIFY", payload: {} });
+                      }, 0);
                     }}
-                  ></i>
-                </motion.button>
+                  >
+                    Add to Cart{" "}
+                    <i
+                      className="ri-shopping-cart-fill"
+                      style={{
+                        fontSize: "1.2em",
+                        verticalAlign: "middle",
+                      }}
+                    ></i>
+                  </motion.button>
+                ) : (
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    type="button"
+                    className="btn text-bold"
+                    disabled={product.inStock === 0 ? true : false}
+                    onClick={() => handleDelete(product)}
+                  >
+                    DELETE
+                    <i
+                      className="ri-delete-bin-line "
+                      style={{
+                        fontSize: "1.3em",
+                        verticalAlign: "middle",
+                      }}
+                    ></i>
+                  </motion.button>
+                )}
               </motion.div>
             </div>
           </div>

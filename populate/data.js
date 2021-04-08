@@ -36,7 +36,7 @@ const data = {
         "1 Year Warranty on Parts and Labor | Lifetime Free Technical Support | Assembled in the INDIA | This powerful gaming PC is capable of running all your favorite games such as World of Warcraft, League of Legends, Grand Theft Auto V, Apex Legends, Fortnite, Roblox, PLAYERUNKNOWN’s Battlegrounds, Overwatch, Counter-Strike: Global Offensive, Battlefield V, Minecraft, The Division 2, and more at High to Ultra settings, crisp 1080p Full HD resolution and smooth 60+ FPS game play. 3 x RGB RING Fans for Maximum Air Flow | 500 Watt Power Supply | Gaming Case with Tempered Glass - White",
       content:
         "AMD Ryzen 7 2700 Desktop Processor 8 Cores up to 4.1GHz 20MB Cache AM4 Socket RX 580 Armor 8G OC Gaming Radeon RX 580 GDDR5 8GB Crossfire VR Ready FinFET DirectX 12 Graphics Card , High Speed Desktop for Advance Gaming 32GB DDR4 (16 x2) Gaming Memory with Heatsinks (16 x2) , 480GB SSD , 2TB HDD 7200RPM SATA 6Gb/s,500Watt SMPS, HD Audio, Gigabyte Ethernet",
-      category: "5faa35a88fdff228384d51d8",
+      category: "606b43989e268439b074f339",
     },
     {
       images: [
@@ -74,7 +74,7 @@ const data = {
         "( Intel Processor ) (Gigabyte, Asus, Motherboard ) ( Adata, Crucial RAM ) ( WD, Seagate Hard Disk ) (Iball, Finger, Antec gaming Cabinet With SMPS ) We use as per above company’s device for Assemble Computer. Image may different from original product. Installed Windows OS is trial version",
       content:
         "( Intel Processor ) (Gigabyte, Asus, Motherboard ) ( Adata, Crucial RAM ) ( WD, Seagate Hard Disk ) (Iball, Finger, Antec gaming Cabinet With SMPS ) We use as per above company’s device for Assemble Computer. Image may different from original product. Installed Windows OS is trial version",
-      category: "5faa35a88fdff228384d51d8",
+      category: "606b43989e268439b074f339",
     },
     {
       images: [
@@ -93,7 +93,7 @@ const data = {
         "Take your computing experience to the next level with this ASUS CPU. With its elegant design, featuring clean lines and sharp creases, this CPU looks sleek and solid.",
       description:
         "Its 9th Generation Intel Core i7 processor and NVIDIA Geforce GTX 1650 graphics will ensure smooth and fast loading speeds, while the customizable Aura Sync lighting of this CPU will enhance your overall gaming experience.",
-      category: "5faa35a88fdff228384d51d8",
+      category: "606b43989e268439b074f339",
     },
     {
       images: [
@@ -112,7 +112,7 @@ const data = {
         "The Asus GA15 is a battle-ready gaming machine that comes with a powerful AMD Ryzen 5-3600X 6-core processor and an 8 GB of RAM that makes gaming as well as other computing tasks an enjoyable experience. With an advanced cooling system, this gaming tower is designed inside and out for a thrilling gaming experience. It has thoughtful features like a handgrip that allows you to carry it around. ",
       description:
         "The robust headphone hook allows you to hang your gaming headset conveniently and keep your battle station clear of any hurdles so that you can use the free space efficiently for your mouse. Get home the Asus GA15 and give yourself a competitive edge over your gaming rivals.",
-      category: "5faa35a88fdff228384d51d8",
+      category: "606b43989e268439b074f339",
     },
   ],
 };

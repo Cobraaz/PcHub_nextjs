@@ -1,5 +1,11 @@
-import { motion, Image, useRouter, useContext } from "helpers/package.import";
-
+import {
+  motion,
+  Image,
+  useRouter,
+  useContext,
+  useState,
+} from "helpers/package.import";
+import { Modal } from "helpers/components.import";
 import {
   fadeInUp,
   numberWithCommas,
@@ -7,23 +13,62 @@ import {
   addToCart,
 } from "helpers/helper.functions";
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, handleCheck }) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth } = state;
   const router = useRouter();
+
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
+
+  const handleDelete = async (product) => {
+    try {
+      if (auth.user.role !== "user") {
+        toggleModal();
+        dispatch({
+          type: "ADD_MODAL",
+          payload: [
+            {
+              data: "",
+              id: product._id,
+              title: product.title,
+              type: "DELETE_PRODUCT",
+            },
+          ],
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
+      <Modal
+        dispatch={dispatch}
+        showModal={showModal}
+        toggleModal={toggleModal}
+        state={state}
+      />
+
       <motion.div initial="initial" animate="animate" exit={{ opacity: 0 }}>
         <motion.div
           variants={fadeInUp}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.95 }}
-          // className="card-body-wrapper"
         >
           <div className="card-body-wrapper-Ab card">
+            {auth.user && auth.user.role !== "user" && (
+              <input
+                type="checkbox"
+                checked={product.checked}
+                className="position-absolute"
+                style={{ height: "30px", width: "30px" }}
+                onChange={() => handleCheck(product._id)}
+              />
+            )}
             <motion.div
               variants={fadeInUp}
-              // className="view overlay"
               onClick={() =>
                 router.push("/product/[id]", `/product/${product._id}`)
               }
@@ -105,12 +150,7 @@ const ProductItem = ({ product }) => {
           <motion.button
             whileTap={{ scale: 0.85 }}
             disabled={product.inStock === 0 ? true : false}
-            onClick={() => {
-              dispatch(addToCart(product, cart));
-              setTimeout(() => {
-                dispatch({ type: "NOTIFY", payload: {} });
-              }, 0);
-            }}
+            onClick={() => handleDelete(product)}
             style={{ outline: "none" }}
             className=" card-button-Ab border-0"
           >

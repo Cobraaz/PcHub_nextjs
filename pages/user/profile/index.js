@@ -161,12 +161,14 @@ const Profile = () => {
         toggleModal();
         dispatch({
           type: "ADD_MODAL",
-          payload: {
-            data: users,
-            id: user._id,
-            title: user.name,
-            type: "GET_ALL_USERS",
-          },
+          payload: [
+            {
+              data: users,
+              id: user._id,
+              title: user.name,
+              type: "GET_ALL_USERS",
+            },
+          ],
         });
         // if (window.confirm("Are you sure you want to delete this account?")) {
         //   dispatch({ type: "NOTIFY", payload: { loading: true } });

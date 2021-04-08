@@ -11,6 +11,9 @@ export default async (req, res) => {
     case "PUT":
       await updateProduct(req, res);
       break;
+    case "DELETE":
+      await deleteProduct(req, res);
+      break;
   }
 };
 // * This is getStaticProps as at that point localhost is available
@@ -85,6 +88,21 @@ const updateProduct = Authenticated(async (req, res) => {
 
     res.json({ msg: "Success! Updated a product" });
   } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+});
+
+const deleteProduct = Authenticated(async (req, res) => {
+  try {
+    if (req.user.role === "user")
+      return res.status(400).json({ err: "Authentication is not valid." });
+
+    const { pid } = req.query;
+
+    await Products.findByIdAndDelete(pid);
+    res.json({ msg: "Deleted a product." });
+  } catch (err) {
+    console.log(err);
     return res.status(500).json({ err: err.message });
   }
 });

@@ -44,12 +44,14 @@ const CartItem = ({ item, dispatch, cart, toggleModal }) => {
             toggleModal();
             dispatch({
               type: "ADD_MODAL",
-              payload: {
-                data: cart,
-                id: _id,
-                title: title,
-                type: "ADD_CART",
-              },
+              payload: [
+                {
+                  data: cart,
+                  id: _id,
+                  title: title,
+                  type: "ADD_CART",
+                },
+              ],
             });
           }}
           className="RemoveButtonContainer float-right"
