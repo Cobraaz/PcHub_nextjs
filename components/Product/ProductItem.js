@@ -140,7 +140,10 @@ const ProductItem = ({ product, handleCheck }) => {
             whileTap={{ scale: 0.85 }}
             disabled={product.inStock === 0 ? true : false}
             onClick={() =>
-              router.push("/create/[id]", `/create/${product._id}`)
+              router.push(
+                "/create_product/[id]",
+                `/create_product/${product._id}`
+              )
             }
             style={{ outline: "none", left: "8.6rem" }}
             className=" card-button-Ab border-0"

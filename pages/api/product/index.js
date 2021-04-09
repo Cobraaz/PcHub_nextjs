@@ -6,9 +6,28 @@ connectDB();
 
 export default async (req, res) => {
   switch (req.method) {
+    case "GET":
+      await getAllProducts(req, res);
+      break;
     case "POST":
       await createProduct(req, res);
       break;
+  }
+};
+
+// * This is getAllproducts without API FEATURES for Detail Products
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await Products.find();
+
+    res.json({
+      status: "success",
+      result: products.length,
+      products,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ err: err.message });
   }
 };
 

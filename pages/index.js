@@ -1,4 +1,12 @@
-import { useState, Row, Col, motion, useContext } from "helpers/package.import";
+import {
+  useState,
+  Row,
+  Col,
+  motion,
+  useContext,
+  useRouter,
+  useEffect,
+} from "helpers/package.import";
 
 import {
   BaseLayout,
@@ -18,14 +26,26 @@ import {
   DataContext,
 } from "helpers/helper.functions";
 
-const Home = ({ slideImages, products: resProducts, status }) => {
+import filterSearch from "utils/filterSearch";
+
+const Home = ({ slideImages, result, products: resProducts, status }) => {
   const [products, setProducts] = useState(resProducts);
   const [isCheck, setIsCheck] = useState(false);
+  const router = useRouter();
 
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setProducts(resProducts);
+  }, [resProducts]);
+
+  useEffect(() => {
+    if (Object.keys(router.query).length === 0) setPage(1);
+  }, [router.query]);
 
   const handleCheck = (id) => {
     products.forEach((product) => {
@@ -84,6 +104,12 @@ const Home = ({ slideImages, products: resProducts, status }) => {
       </>
     );
   }
+
+  const handleLoadmore = () => {
+    setPage(page + 1);
+    filterSearch({ router, page: page + 1 });
+  };
+
   return (
     <BaseLayout header_bg="transparent">
       <Masthead slideImages={slideImages} />
@@ -136,6 +162,16 @@ const Home = ({ slideImages, products: resProducts, status }) => {
               ))
             )}
           </Row>
+          {result < page * 6 ? (
+            ""
+          ) : (
+            <button
+              className="btn btn-outline-info d-block mx-auto mb-4"
+              onClick={handleLoadmore}
+            >
+              Load more
+            </button>
+          )}
         </motion.div>
       </BasePage>
     </BaseLayout>
@@ -161,21 +197,7 @@ const Home = ({ slideImages, products: resProducts, status }) => {
 //   };
 // }
 
-export async function getStaticProps() {
-  const { status, result, products } = await getData("product/all_products");
-
-  return {
-    props: {
-      slideImages: await getPhotoUnsplash(),
-      status,
-      result,
-      products,
-    },
-    revalidate: 1,
-  };
-}
-
-// export async function getServerSideProps() {
+// export async function getStaticProps() {
 //   const { status, result, products } = await getData("product/all_products");
 
 //   return {
@@ -185,7 +207,30 @@ export async function getStaticProps() {
 //       result,
 //       products,
 //     },
+//     revalidate: 1,
 //   };
 // }
+
+export async function getServerSideProps({ query }) {
+  const page = query.page || 1;
+  const category = query.category || "all";
+  const sort = query.sort || "";
+  const search = query.search || "all";
+
+  const { status, result, products } = await getData(
+    `product/all_products?limit=${
+      page * 6
+    }&category=${category}&sort=${sort}&title=${search}`
+  );
+
+  return {
+    props: {
+      slideImages: await getPhotoUnsplash(),
+      status,
+      result,
+      products,
+    },
+  };
+}
 
 export default Home;
