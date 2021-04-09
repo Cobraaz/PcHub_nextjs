@@ -111,6 +111,7 @@ const Header = ({
               router={router}
               cartItems={cart}
               HeaderToggler={HeaderToggler}
+              auth={auth}
             />
           )}
         </Navbar>

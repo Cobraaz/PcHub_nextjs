@@ -23,7 +23,6 @@ import {
   countWords,
   addToCart,
 } from "helpers/helper.functions";
-import { fakeProductsData } from "populate/FakeData";
 
 const DetailProduct = ({ product, products: resProducts }) => {
   const { state, dispatch } = useContext(DataContext);
@@ -250,29 +249,29 @@ const DetailProduct = ({ product, products: resProducts }) => {
   );
 };
 
-// export async function getStaticPaths() {
-//   const { status, result, products } = await getData("product/all_products");
-//   const paths = products.map((product) => {
-//     return {
-//       params: { pid: product._id },
-//     };
-//   });
-//   return { paths, fallback: true };
-// }
-
-// export async function getStaticProps({ params: { pid } }) {
-//   const { product } = await getData(`product/get_by_id/${pid}`);
-//   const { products } = await getData(`product/random_data/${pid}`);
-//   // console.log(products);
-//   return { props: { product, products }, revalidate: 1 };
-// }
-
-export async function getServerSideProps({ params: { pid } }) {
-  const { product } = await getData(`product/get_by_id/${pid}`); // server side rendering
-  const { products } = await getData(`product/random_data/${pid}`);
-  return {
-    props: { product, products }, // will be passed to the page component as props
-  };
+export async function getStaticPaths() {
+  const { status, result, products } = await getData("product/all_products");
+  const paths = products.map((product) => {
+    return {
+      params: { pid: product._id },
+    };
+  });
+  return { paths, fallback: true };
 }
+
+export async function getStaticProps({ params: { pid } }) {
+  const { product } = await getData(`product/get_by_id/${pid}`);
+  const { products } = await getData(`product/random_data/${pid}`);
+
+  return { props: { product, products }, revalidate: 1 };
+}
+
+// export async function getServerSideProps({ params: { pid } }) {
+//   const { product } = await getData(`product/get_by_id/${pid}`); // server side rendering
+//   const { products } = await getData(`product/random_data/${pid}`);
+//   return {
+//     props: { product, products }, // will be passed to the page component as props
+//   };
+// }
 
 export default DetailProduct;

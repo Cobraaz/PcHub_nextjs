@@ -25,7 +25,7 @@ const createProduct = Authenticated(async (req, res) => {
       category,
       images,
     } = req.body;
-    console.log(images);
+
     if (
       !title ||
       !price ||

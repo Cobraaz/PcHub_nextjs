@@ -29,7 +29,6 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
   };
 
   const deleteProduct = async (item) => {
-    console.log(item);
     dispatch({ type: "NOTIFY", payload: { loading: true } });
     const res = await deleteData(`product/get_by_id/${item.id}`, auth.token);
 

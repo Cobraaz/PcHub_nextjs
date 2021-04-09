@@ -17,7 +17,7 @@ const data = {
         "The H200 TG RGB is designed for PC builders who want a clean and sleek look but crave for good cooling performance and tempered glass at the same time With an unique RGB light bar, the front panel of H200 TG RGB presents a smooth and elegant style Tempered Glass Window The tempered-glass hinge door is designed with a smart lock security system which secures the inner components of your case",
       content:
         "Superior Hardware Support The H200 TG RGB has outstanding expandability with support for a tower CPU cooler with maximum height 180mm, a dual VGA expansion slot of up to 320mm in length Excellent Cooling Capability Optimized for excellent cooling capability with one 120mm fan preinstalled",
-      category: "5faa35a88fdff228384d51d8",
+      category: "606b43989e268439b074f339",
     },
     {
       images: [
@@ -55,7 +55,7 @@ const data = {
         "Ports & CD drive: 1 HDMI, 1 VGA, 1 DVI, 6 USB 3.2, 6 USB 2.0 C | Without CD-drive",
       content:
         "Processor: Ryzen 5 Pro 4650G 6-Core 3.7GHz (4.20 GHz Max Turbo) Memory & Storage: 16GB DDR4 RAM with integrated Raedon graphics| Storage: 1TB HDD, 256GB NVME ",
-      category: "5faa35a88fdff228384d51d8",
+      category: "606b43989e268439b074f339",
     },
     {
       images: [

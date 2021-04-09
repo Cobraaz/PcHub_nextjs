@@ -14,7 +14,7 @@ import {
   imageCompression,
   useEffect,
 } from "helpers/package.import";
-import { BaseLayout, BasePage } from "helpers/components.import";
+import { BaseLayout, BasePage, Modal } from "helpers/components.import";
 
 import {
   DataContext,
@@ -41,6 +41,8 @@ const ProductsManager = () => {
   const [product, setProduct] = useState(initialState);
   const [onEdit, setOnEdit] = useState(false);
   const [images, setImages] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
 
   useEffect(() => {
     if (id) {
@@ -83,17 +85,17 @@ const ProductsManager = () => {
         return (err = "Image format is incorrect.");
 
       num += 1;
-      if (num <= 5) newImages.push(file);
+      if (num <= 4) newImages.push(file);
       return newImages;
     });
 
     if (err) dispatch({ type: "NOTIFY", payload: { error: err } });
 
     const imgCount = images.length;
-    if (imgCount + newImages.length > 5)
+    if (imgCount + newImages.length > 4)
       return dispatch({
         type: "NOTIFY",
-        payload: { error: "Select up to 5 images." },
+        payload: { error: "Select up to 4 images." },
       });
     setImages([...images, ...newImages]);
   };
@@ -104,15 +106,7 @@ const ProductsManager = () => {
     setImages(newArr);
   };
 
-  const {
-    product_id,
-    title,
-    price,
-    inStock,
-    description,
-    content,
-    category,
-  } = product;
+  const { title, price, inStock, description, content, category } = product;
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -162,7 +156,7 @@ const ProductsManager = () => {
         media.push(await toBase64(file));
       }
     }
-    console.log(media, imgOldURL);
+
     let res;
     if (onEdit) {
       res = await putData(
@@ -172,22 +166,53 @@ const ProductsManager = () => {
       );
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      router.push("/");
     } else {
       res = await postData(
         "product",
         { ...product, images: [...imgOldURL, ...media] },
         auth.token
       );
+
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      setProduct(initialState);
+      setImages([]);
     }
 
     return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
 
+  const handleDelete = async () => {
+    try {
+      if (auth.user.role !== "user") {
+        toggleModal();
+        dispatch({
+          type: "ADD_MODAL",
+          payload: [
+            {
+              data: "",
+              id: product._id,
+              title: product.title,
+              type: "DELETE_PRODUCT",
+            },
+          ],
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <BaseLayout>
       <BasePage className="products_manager wrapper" header="Create Product">
+        <Modal
+          dispatch={dispatch}
+          showModal={showModal}
+          toggleModal={toggleModal}
+          state={state}
+        />
         <form onSubmit={handleSubmit}>
           <Row>
             <Col md={{ size: 6 }}>
@@ -274,6 +299,15 @@ const ProductsManager = () => {
               <button type="submit" className="btn btn-info my-2 px-4">
                 {onEdit ? "Update" : "Create"}
               </button>
+              {onEdit && (
+                <a
+                  onClick={() => handleDelete()}
+                  className="btn btn-danger my-2 px-4 ml-3"
+                  style={{ color: "white" }}
+                >
+                  Delete
+                </a>
+              )}
             </Col>
             <Col md={{ size: 6 }} className="my-4">
               <InputGroup className="input-group">
