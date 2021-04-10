@@ -23,7 +23,7 @@ const DetailOrder = () => {
   if (!auth.user) return null;
   return (
     <BaseLayout>
-      <BasePage className="wrapper Order-detail-AB">
+      <BasePage className="wrapper Order-detail-AB" title="Proceed to Checkout">
         <OrderDetail
           orderDetail={orderDetail}
           state={state}

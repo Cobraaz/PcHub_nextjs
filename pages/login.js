@@ -135,7 +135,7 @@ const Login = () => {
 
   return (
     <BaseLayout>
-      <BasePage className="signin-page wrapper">
+      <BasePage className="signin-page wrapper" title="PcHub Sign In">
         <Row>
           <Col
             md={{ size: 6, offset: 3 }}

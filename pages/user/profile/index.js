@@ -195,6 +195,7 @@ const Profile = () => {
             ? "Admin Profile"
             : "Root Profile"
           ).toUpperCase()} `}
+          title={`PcHub ${name ? name : ""} Profile`}
         >
           <Modal
             dispatch={dispatch}
@@ -208,7 +209,7 @@ const Profile = () => {
               <div className="avatar">
                 <Image
                   src={avatar ? avatar : auth.user.avatar}
-                  alt="avatar"
+                  alt="Avatar"
                   layout="fill"
                   quality={25}
                 />

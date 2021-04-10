@@ -8,7 +8,7 @@ const CartItem = ({ item, dispatch, cart, toggleModal }) => {
     <div className="CheckoutItemContainer">
       <Link href={`/product/${_id}`}>
         <div className="ImageContainer">
-          <Image width={500} height={500} src={images[0]} alt="item" />
+          <Image width={500} height={500} src={images[0]} alt="checkout item" />
         </div>
       </Link>
       <span href={`/product/${_id}`} className="TextContainer mr-2">

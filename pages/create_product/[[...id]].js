@@ -331,7 +331,7 @@ const ProductsManager = () => {
                       <img
                         // src={img.url ? img.url : URL.createObjectURL(img)}
                         src={img.name ? URL.createObjectURL(img) : img}
-                        alt=""
+                        alt="Create Product Image"
                         className="img-thumbnail rounded"
                         style={{ cursor: "default" }}
                       />

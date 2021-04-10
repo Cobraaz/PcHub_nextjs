@@ -91,7 +91,11 @@ const Categories = () => {
   return (
     <div onClick={() => showModal && toggleModal()}>
       <BaseLayout>
-        <BasePage className="wrapper" header="Categories">
+        <BasePage
+          className="wrapper"
+          header="Categories"
+          title="PcHub Admin Categories Page"
+        >
           <Modal
             dispatch={dispatch}
             showModal={showModal}

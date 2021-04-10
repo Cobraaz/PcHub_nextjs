@@ -83,7 +83,12 @@ const ResetPassword = () => {
 
   return (
     <BaseLayout>
-      <BasePage className="signin-page wrapper">
+      <BasePage
+        className="signin-page wrapper"
+        title={`PcHub ${
+          editUser && editUser.name ? editUser.name : ""
+        } Profile`}
+      >
         {err && <div className="errMsg">{err}</div>}
         {success && <div className="successMsg">{success}</div>}
         <div className="mt-5">

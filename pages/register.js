@@ -45,7 +45,7 @@ const Register = () => {
 
   return (
     <BaseLayout>
-      <BasePage className="signin-page wrapper">
+      <BasePage className="signin-page wrapper" title="PcHub Registration">
         <Row>
           <Col
             md={{ size: 6, offset: 3 }}

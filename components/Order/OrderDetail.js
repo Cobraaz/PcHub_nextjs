@@ -166,7 +166,7 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                                   width={500}
                                   height={500}
                                   src={images[0]}
-                                  alt="item"
+                                  alt="Product Image"
                                 />
                               </div>
                             </Link>

@@ -5,7 +5,6 @@ import {
   Row,
   Col,
   motion,
-  Head,
   Image,
 } from "helpers/package.import";
 import {
@@ -67,17 +66,18 @@ const DetailProduct = ({ product, products: resProducts }) => {
   if (!product) return null;
   return (
     <BaseLayout>
-      <BasePage indexPage className="product-detail-page">
+      <BasePage
+        indexPage
+        className="product-detail-page"
+        title={`${product.title.split(" ").slice(0, 2).join(" ")}
+                ${countWords(product.title) > 2 && "..."}`}
+      >
         <Modal
           dispatch={dispatch}
           showModal={showModal}
           toggleModal={toggleModal}
           state={state}
         />
-        <Head>
-          <title>Product Card/Page</title>
-        </Head>
-
         <motion.div
           initial="initial"
           animate="animate"
@@ -99,7 +99,7 @@ const DetailProduct = ({ product, products: resProducts }) => {
                   <motion.div variants={fadeInUp}>
                     <Image
                       src={product.images[tab]}
-                      alt="shoe image"
+                      alt="Product image"
                       width={500}
                       height={400}
                     />
@@ -125,7 +125,7 @@ const DetailProduct = ({ product, products: resProducts }) => {
                     >
                       <img
                         src={img}
-                        alt="shoe image"
+                        alt="Product image"
                         onClick={() => setTab(index)}
                         width={120}
                         height={100}
@@ -249,29 +249,29 @@ const DetailProduct = ({ product, products: resProducts }) => {
   );
 };
 
-// export async function getStaticPaths() {
-//   const { status, result, products } = await getData("product");
-//   const paths = products.map((product) => {
-//     return {
-//       params: { pid: product._id },
-//     };
-//   });
-//   return { paths, fallback: true };
-// }
-
-// export async function getStaticProps({ params: { pid } }) {
-//   const { product } = await getData(`product/get_by_id/${pid}`);
-//   const { products } = await getData(`product/random_data/${pid}`);
-
-//   return { props: { product, products }, revalidate: 1 };
-// }
-
-export async function getServerSideProps({ params: { pid } }) {
-  const { product } = await getData(`product/get_by_id/${pid}`); // server side rendering
-  const { products } = await getData(`product/random_data/${pid}`);
-  return {
-    props: { product, products }, // will be passed to the page component as props
-  };
+export async function getStaticPaths() {
+  const { status, result, products } = await getData("product");
+  const paths = products.map((product) => {
+    return {
+      params: { pid: product._id },
+    };
+  });
+  return { paths, fallback: true };
 }
+
+export async function getStaticProps({ params: { pid } }) {
+  const { product } = await getData(`product/get_by_id/${pid}`);
+  const { products } = await getData(`product/random_data/${pid}`);
+
+  return { props: { product, products }, revalidate: 1 };
+}
+
+// export async function getServerSideProps({ params: { pid } }) {
+//   const { product } = await getData(`product/get_by_id/${pid}`); // server side rendering
+//   const { products } = await getData(`product/random_data/${pid}`);
+//   return {
+//     props: { product, products }, // will be passed to the page component as props
+//   };
+// }
 
 export default DetailProduct;

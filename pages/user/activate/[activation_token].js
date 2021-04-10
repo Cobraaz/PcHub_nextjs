@@ -69,7 +69,7 @@ const ActivationEmail = () => {
 
   return (
     <BaseLayout>
-      <BasePage className="">
+      <BasePage className="" title="PcHub Activate Your Account">
         {err && <div className="errMsg">{err}</div>}
         {success && <div className="successMsg">{success}</div>}
       </BasePage>

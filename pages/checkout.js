@@ -136,7 +136,7 @@ const Checkout = () => {
   return (
     <div onClick={() => showModal && toggleModal()}>
       <BaseLayout>
-        <BasePage className=" wrapper cart-item-AB ">
+        <BasePage className=" wrapper cart-item-AB" title="PcHub Checkout">
           <Modal
             dispatch={dispatch}
             modal={modal}
