@@ -7,10 +7,16 @@ const filterSearch = ({ router, page, category, sort, search }) => {
   if (search) query.search = search;
   if (sort) query.sort = sort;
 
-  router.push({
-    pathname: path,
-    query: query,
-  });
+  router.push(
+    {
+      pathname: path,
+      query: query,
+    },
+    null,
+    {
+      scroll: false,
+    }
+  );
 };
 
 export default filterSearch;

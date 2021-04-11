@@ -1,5 +1,10 @@
 import { Link, Image } from "helpers/package.import";
-import { decrease, increase, numberWithCommas } from "helpers/helper.functions";
+import {
+  decrease,
+  increase,
+  numberWithCommas,
+  capitalize,
+} from "helpers/helper.functions";
 
 const CartItem = ({ item, dispatch, cart, toggleModal }) => {
   const { title, images, price, quantity, _id, inStock } = item;
@@ -13,7 +18,7 @@ const CartItem = ({ item, dispatch, cart, toggleModal }) => {
       </Link>
       <span href={`/product/${_id}`} className="TextContainer mr-2">
         <Link href={`/product/${_id}`}>
-          <a> {title.split(" ").slice(0, 2).join(" ")}</a>
+          <a> {capitalize(title.split(" ").slice(0, 2).join(" "))}</a>
         </Link>
       </span>
       <div className="HeaderBlockContainer ">

@@ -22,6 +22,7 @@ import {
   currcencyConvert,
   formatDate,
   getPhotoUnsplash,
+  capitalize,
 } from "utils/helper.functions";
 import filterSearch from "utils/filterSearch";
 
@@ -75,4 +76,5 @@ export {
   formatDate,
   getPhotoUnsplash,
   filterSearch,
+  capitalize,
 };

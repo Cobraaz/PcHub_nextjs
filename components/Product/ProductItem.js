@@ -11,6 +11,7 @@ import {
   numberWithCommas,
   DataContext,
   addToCart,
+  capitalize,
 } from "helpers/helper.functions";
 
 const ProductItem = ({ product, handleCheck }) => {
@@ -89,7 +90,7 @@ const ProductItem = ({ product, handleCheck }) => {
                   className="card-title card-title-Ab mb-2"
                   title={product.title}
                 >
-                  {product.title.split(" ").slice(0, 2).join(" ")}
+                  {capitalize(product.title.split(" ").slice(0, 2).join(" "))}
                 </motion.div>
                 <motion.h6 className="card-subtitle mb-2 text-muted">
                   <motion.div

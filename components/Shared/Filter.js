@@ -47,6 +47,7 @@ const Filter = ({ state }) => {
           type="text"
           className="form-control"
           list="title_product"
+          placeholder="Search"
           value={search.toLowerCase()}
           onChange={(e) => setSearch(e.target.value)}
         />
