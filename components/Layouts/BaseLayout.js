@@ -26,7 +26,7 @@ const BaseLayout = (props) => {
           <div className="wrapper">{children}</div>
         </main>
       </div>
-      <Footer />
+      <Footer isOpen={isOpen} toggle={toggle} />
     </>
   );
 };

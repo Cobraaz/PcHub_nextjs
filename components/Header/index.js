@@ -70,7 +70,7 @@ const Header = ({
           />
 
           <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto ml-auto" navbar>
+            <Nav className=" ml-auto" navbar>
               <NavItem
                 className="port-navbar-item"
                 onClick={() => {
@@ -79,8 +79,8 @@ const Header = ({
               >
                 <BsNavLink href="/" title="Home" />
               </NavItem>
-              <Brands />
-              <Categories />
+              {/* <Brands /> */}
+              {/* <Categories /> */}
               <NavItem className="port-navbar-item">
                 <BsNavLink href="/pre-build-pc" title="Pre build pc" />
               </NavItem>

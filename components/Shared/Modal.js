@@ -24,8 +24,8 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
     if (res.err)
       return dispatch({ type: "NOTIFY", payload: { error: res.err } });
 
-    dispatch({ type: "NOTIFY", payload: { success: res.msg } });
     dispatch(deleteItem(item.data, item.id, item.type));
+    dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
 
   const deleteProduct = async (item) => {

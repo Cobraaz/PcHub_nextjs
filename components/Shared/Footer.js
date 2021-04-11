@@ -1,4 +1,4 @@
-const Footer = () => {
+const Footer = ({ isOpen, toggle }) => {
   return (
     <footer className="page-footer" onClick={() => isOpen && toggle()}>
       <div className="social-media">

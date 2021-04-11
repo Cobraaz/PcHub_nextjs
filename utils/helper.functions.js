@@ -106,8 +106,9 @@ export const getPhotoUnsplash = async () => {
   const unsplashResult = await api.search.getPhotos({
     query: "gaming setup",
     orientation: "landscape",
-    perPage: 20,
+    perPage: 5,
   });
+
   if (unsplashResult) {
     unsplashResult.response.results.map((photo) =>
       slideImages.push(photo.urls.regular)

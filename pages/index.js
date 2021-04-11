@@ -14,19 +14,18 @@ import {
   Masthead,
   ProductItem,
   Modal,
+  Filter,
 } from "helpers/components.import";
 
 // import { productsFromDB } from "pages/api/product/all_products";
 
 import {
-  shuffle,
   getData,
   stagger,
   getPhotoUnsplash,
   DataContext,
+  filterSearch,
 } from "helpers/helper.functions";
-
-import filterSearch from "utils/filterSearch";
 
 const Home = ({ slideImages, result, products: resProducts, status }) => {
   const [products, setProducts] = useState(resProducts);
@@ -120,12 +119,14 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
           toggleModal={toggleModal}
           state={state}
         />
+
         <motion.div
           initial="initial"
           animate="animate"
           exit={{ opacity: 0 }}
           variants={stagger}
         >
+          <Filter state={state} />
           {auth.user && auth.user.role !== "user" && (
             <div
               className="delete_all btn btn-danger mt-2"

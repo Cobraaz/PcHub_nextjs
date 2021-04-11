@@ -23,6 +23,7 @@ import {
   formatDate,
   getPhotoUnsplash,
 } from "utils/helper.functions";
+import filterSearch from "utils/filterSearch";
 
 const stagger = {
   animate: {
@@ -73,4 +74,5 @@ export {
   currcencyConvert,
   formatDate,
   getPhotoUnsplash,
+  filterSearch,
 };

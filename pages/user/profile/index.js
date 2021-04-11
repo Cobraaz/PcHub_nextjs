@@ -199,7 +199,6 @@ const Profile = () => {
         >
           <Modal
             dispatch={dispatch}
-            // modal={modal}
             showModal={showModal}
             toggleModal={toggleModal}
             state={state}
@@ -207,12 +206,13 @@ const Profile = () => {
           <section className="row text-secondary my-3">
             <div className="col-md-4">
               <div className="avatar">
-                <Image
+                <img src={avatar ? avatar : auth.user.avatar} alt="Avatar" />
+                {/* <Image
                   src={avatar ? avatar : auth.user.avatar}
                   alt="Avatar"
                   layout="fill"
                   quality={25}
-                />
+                /> */}
                 <span>
                   <i
                     className="ri-camera-2-line"

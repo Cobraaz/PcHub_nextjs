@@ -8,6 +8,7 @@ import CartItem from "components/CartIem";
 import Modal from "components/Shared/Modal";
 import PaypalBtn from "components/Shared/paypalBtn";
 import OrderDetail from "components/Order/OrderDetail";
+import Filter from "components/Shared/Filter";
 
 export {
   BaseLayout,
@@ -20,4 +21,5 @@ export {
   Modal,
   PaypalBtn,
   OrderDetail,
+  Filter,
 };
