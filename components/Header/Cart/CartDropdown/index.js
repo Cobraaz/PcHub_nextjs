@@ -10,35 +10,22 @@ export const CartDropdown = ({ router, cartItems, HeaderToggler, auth }) => (
           ))
         ) : (
           <span className="EmptyMessageContainer">
-            {auth.user && auth.user.role === "user"
-              ? "Your cart is empty"
-              : "You cannot add item to cart"}
+            {auth.user && auth.user.role === "root"
+              ? "You cannot add item to cart"
+              : "Your cart is empty"}
           </span>
         )}
       </div>
-      {auth.user && auth.user.role === "user" ? (
-        <button
-          className="btn-signin mt-3 btn btn-secondary btn-block"
-          disabled={cartItems.length === 0 ? true : false}
-          onClick={() => {
-            router.push("/checkout");
-            HeaderToggler();
-          }}
-        >
-          {cartItems.length === 0 ? "NO ITEM IN CART" : "GO TO CHECKOUT"}
-        </button>
-      ) : (
-        <button
-          className="btn-signin mt-3 btn btn-secondary btn-block"
-          disabled={true}
-          onClick={() => {
-            router.push("/checkout");
-            HeaderToggler();
-          }}
-        >
-          EMPTY
-        </button>
-      )}
+      <button
+        className="btn-signin mt-3 btn btn-secondary btn-block"
+        disabled={cartItems.length === 0 ? true : false}
+        onClick={() => {
+          router.push("/checkout");
+          HeaderToggler();
+        }}
+      >
+        {cartItems.length === 0 ? "NO ITEM IN CART" : "GO TO CHECKOUT"}
+      </button>
     </div>
   </div>
 );
