@@ -11,7 +11,6 @@ import {
 import {
   BaseLayout,
   BasePage,
-  Masthead,
   ProductItem,
   Modal,
   Filter,
@@ -27,6 +26,12 @@ import {
   filterSearch,
   fadeInUp,
 } from "helpers/helper.functions";
+
+import dynamic from "next/dynamic";
+const Masthead = dynamic(() => import("components/Shared/Masthead"), {
+  loading: () => <p>Loading...</p>,
+  ssr: false,
+});
 
 const Home = ({ slideImages, result, products: resProducts, status }) => {
   const [products, setProducts] = useState(resProducts);
@@ -113,6 +118,7 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
   return (
     <BaseLayout header_bg="transparent">
       <Masthead slideImages={slideImages} />
+
       <BasePage indexPage className="home-page">
         <Modal
           dispatch={dispatch}
