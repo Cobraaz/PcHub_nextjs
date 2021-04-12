@@ -29,7 +29,7 @@ import {
 
 import dynamic from "next/dynamic";
 const Masthead = dynamic(() => import("components/Shared/Masthead"), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <p>...</p>,
   ssr: false,
 });
 

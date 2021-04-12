@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container, Row } from "reactstrap";
 import { Slide } from "react-slideshow-image";
 
-const Masthead = ({ resSlideImages }) => {
+const Masthead = ({ slideImages: resSlideImages }) => {
   const [slideImages] = useState(
     resSlideImages ? resSlideImages : ["/images/homepage_masthead.jpg"]
   );
