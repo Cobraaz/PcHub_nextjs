@@ -1,51 +1,55 @@
 import { useState, useRouter, useEffect } from "helpers/package.import";
 
-import { getData, filterSearch } from "helpers/helper.functions";
+import { filterSearch } from "helpers/helper.functions";
 
-const Filter = ({ state }) => {
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+
+const Filter = ({ auth, handleCheckALL, handleDeleteAll, isCheck }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [featured, setFeatured] = useState("Featured");
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const [category, setCategory] = useState("");
   const router = useRouter();
-
-  const { categories } = state;
-
-  const handleCategory = (e) => {
-    setCategory(e.target.value);
-    filterSearch({ router, category: e.target.value });
-  };
-
-  const handleSort = (e) => {
-    setSort(e.target.value);
-    filterSearch({ router, sort: e.target.value });
-  };
 
   useEffect(() => {
     filterSearch({ router, search: search ? search.toLowerCase() : "all" });
   }, [search]);
 
+  const handleSort = (value, name) => {
+    setFeatured(name);
+    filterSearch({ router, sort: value });
+  };
+
   return (
     <div className="input-group">
-      <div className="input-group-prepend col-md-2 px-0 mt-2">
-        <select
-          className="custom-select text-capitalize"
-          value={category}
-          onChange={handleCategory}
-        >
-          <option value="all">All Products</option>
+      <div className="input-group-prepend col-md-7 px-0">
+        {auth.user && auth.user.role !== "user" && (
+          <div className="delete_all btn btn-danger mt-2">
+            <input
+              type="checkbox"
+              checked={isCheck}
+              onChange={handleCheckALL}
+              style={{
+                width: "25px",
+                height: "25px",
+                transform: "translateY(8px)",
+              }}
+            />
 
-          {categories.map((item) => (
-            <option key={item._id} value={item._id}>
-              {item.name}
-            </option>
-          ))}
-        </select>
+            <button className="btn btn-danger ml-2" onClick={handleDeleteAll}>
+              DELETE ALL
+            </button>
+          </div>
+        )}
       </div>
-
-      <form autoComplete="off" className="mt-2 col-md-8 px-0">
+      <form autoComplete="off" className="mt-2 col-md-3 px-2">
         <input
           type="text"
-          className="form-control"
+          className="form-control filter-dropdown"
           list="title_product"
           placeholder="Search"
           value={search.toLowerCase()}
@@ -53,18 +57,67 @@ const Filter = ({ state }) => {
         />
       </form>
 
-      <div className="input-group-prepend col-md-2 px-0 mt-2">
-        <select
-          className="custom-select text-capitalize"
-          value={sort}
-          onChange={handleSort}
-        >
-          <option value="-createdAt">Newest</option>
-          <option value="oldest">Oldest</option>
-          <option value="-sold">Best sales</option>
-          <option value="-price">Price: High-Low</option>
-          <option value="price">Price: Low-High</option>
-        </select>
+      <div className="input-group-prepend col-md-2 mt-2 ">
+        <div style={{ float: "right", marginLeft: "auto" }}>
+          <Dropdown isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
+            <DropdownToggle className="filter-dropdown" caret>
+              <span style={{ textTransform: "capitalize" }}>
+                Sort by: {featured}
+              </span>
+            </DropdownToggle>
+
+            <DropdownMenu>
+              <DropdownItem>
+                <span
+                  className="filter-dropdown-item"
+                  onClick={() => handleSort("-createdAt", "Featured")}
+                >
+                  Featured
+                </span>
+              </DropdownItem>
+              <DropdownItem>
+                <span
+                  className="filter-dropdown-item"
+                  onClick={() => handleSort("-createdAt", "Newest")}
+                >
+                  Newest
+                </span>
+              </DropdownItem>
+              <DropdownItem>
+                <span
+                  className="filter-dropdown-item"
+                  onClick={() => handleSort("oldest", "Oldest")}
+                >
+                  Oldest
+                </span>
+              </DropdownItem>
+              <DropdownItem>
+                <span
+                  className="filter-dropdown-item"
+                  onClick={() => handleSort("-sold", "Best sales")}
+                >
+                  Best sales
+                </span>
+              </DropdownItem>
+              <DropdownItem>
+                <span
+                  className="filter-dropdown-item"
+                  onClick={() => handleSort("-price", "Price: High-Low")}
+                >
+                  Price: High-Low
+                </span>
+              </DropdownItem>
+              <DropdownItem>
+                <span
+                  className="filter-dropdown-item"
+                  onClick={() => handleSort("price", "Price: Low-High")}
+                >
+                  Price: Low-High
+                </span>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </div>
       </div>
     </div>
   );

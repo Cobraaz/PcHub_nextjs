@@ -13,6 +13,7 @@ import {
   BasePage,
   ProductItem,
   Modal,
+  Filter,
 } from "helpers/components.import";
 
 // import { productsFromDB } from "pages/api/product/all_products";
@@ -132,27 +133,18 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
           exit={{ opacity: 0 }}
           variants={stagger}
         >
-          {auth.user && auth.user.role !== "user" && (
-            <div
-              className="delete_all btn btn-danger mt-2"
-              style={{ marginBottom: "10px" }}
-            >
-              <input
-                type="checkbox"
-                checked={isCheck}
-                onChange={handleCheckALL}
-                style={{
-                  width: "25px",
-                  height: "25px",
-                  transform: "translateY(8px)",
-                }}
-              />
-
-              <button className="btn btn-danger ml-2" onClick={handleDeleteAll}>
-                DELETE ALL
-              </button>
-            </div>
-          )}
+          <motion.div
+            className="text-right"
+            variants={fadeInUp}
+            style={{ marginTop: "15px", marginBottom: "2rem" }}
+          >
+            <Filter
+              auth={auth}
+              handleCheckALL={handleCheckALL}
+              handleDeleteAll={handleDeleteAll}
+              isCheck={isCheck}
+            />
+          </motion.div>
           <Row className="mt-3 mb-5">
             {products.length === 0 ? (
               <h2>No Products</h2>

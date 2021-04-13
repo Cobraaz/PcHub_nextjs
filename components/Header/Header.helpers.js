@@ -40,36 +40,38 @@ export const Brands = ({ brands, router }) => {
     filterSearch({ router, brand: value });
   };
   return (
-    <Dropdown
-      className="port-navbar-link port-dropdown-menu"
-      nav
-      isOpen={isOpen}
-      toggle={() => setIsOpen(!isOpen)}
-    >
-      <DropdownToggle className="port-dropdown-toggle" nav caret>
-        {brand}
-      </DropdownToggle>
-      <DropdownMenu>
-        <DropdownItem>
-          <span
-            onClick={() => handleBrand("all", "Categories")}
-            className="port-dropdown-item nav-link port-navbar-link"
-          >
-            All Products
-          </span>
-        </DropdownItem>
-        {brands.map((item) => (
-          <DropdownItem key={item._id}>
+    <div style={{ width: "8rem" }}>
+      <Dropdown
+        className="port-navbar-link port-dropdown-menu"
+        nav
+        isOpen={isOpen}
+        toggle={() => setIsOpen(!isOpen)}
+      >
+        <DropdownToggle className="port-dropdown-toggle" nav caret>
+          {brand}
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem>
             <span
-              onClick={() => handleBrand(item._id, item.name)}
+              onClick={() => handleBrand("all", "Brands")}
               className="port-dropdown-item nav-link port-navbar-link"
             >
-              {item.name}
+              All Products
             </span>
           </DropdownItem>
-        ))}
-      </DropdownMenu>
-    </Dropdown>
+          {brands.map((item) => (
+            <DropdownItem key={item._id}>
+              <span
+                onClick={() => handleBrand(item._id, item.name)}
+                className="port-dropdown-item nav-link port-navbar-link"
+              >
+                {item.name}
+              </span>
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      </Dropdown>
+    </div>
   );
 };
 
@@ -82,107 +84,38 @@ export const Categories = ({ categories, router }) => {
     filterSearch({ router, category: value });
   };
   return (
-    <Dropdown
-      className="port-navbar-link port-dropdown-menu"
-      nav
-      isOpen={isOpen}
-      toggle={() => setIsOpen(!isOpen)}
-    >
-      <DropdownToggle className="port-dropdown-toggle" nav caret>
-        {category}
-      </DropdownToggle>
-      <DropdownMenu>
-        <DropdownItem>
-          <span
-            onClick={() => handleCategory("all", "Categories")}
-            className="port-dropdown-item nav-link port-navbar-link"
-          >
-            All Products
-          </span>
-        </DropdownItem>
-        {categories.map((item) => (
-          <DropdownItem key={item._id}>
+    <div style={{ width: "10rem" }}>
+      <Dropdown
+        className="port-navbar-link port-dropdown-menu"
+        nav
+        isOpen={isOpen}
+        toggle={() => setIsOpen(!isOpen)}
+      >
+        <DropdownToggle className="port-dropdown-toggle" nav caret>
+          {category}
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem>
             <span
-              onClick={() => handleCategory(item._id, item.name)}
+              onClick={() => handleCategory("all", "Categories")}
               className="port-dropdown-item nav-link port-navbar-link"
             >
-              {item.name}
+              All Products
             </span>
           </DropdownItem>
-        ))}
-      </DropdownMenu>
-    </Dropdown>
-  );
-};
-export const Sort = ({ router }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [category, setCategory] = useState("Featured");
-
-  const handleSort = (value, name) => {
-    setCategory(name);
-    filterSearch({ router, sort: value });
-  };
-  return (
-    <Dropdown
-      className="port-navbar-link port-dropdown-menu"
-      nav
-      isOpen={isOpen}
-      toggle={() => setIsOpen(!isOpen)}
-    >
-      <DropdownToggle className="port-dropdown-toggle" nav caret>
-        <span style={{ textTransform: "capitalize" }}>Sort by: {category}</span>
-      </DropdownToggle>
-      <DropdownMenu>
-        <DropdownItem>
-          <span
-            onClick={() => handleSort("-createdAt", "Featured")}
-            className="port-dropdown-item nav-link port-navbar-link"
-          >
-            Featured
-          </span>
-        </DropdownItem>
-        <DropdownItem>
-          <span
-            onClick={() => handleSort("-createdAt", "Newest")}
-            className="port-dropdown-item nav-link port-navbar-link"
-          >
-            Newest
-          </span>
-        </DropdownItem>
-        <DropdownItem>
-          <span
-            onClick={() => handleSort("oldest", "Oldest")}
-            className="port-dropdown-item nav-link port-navbar-link"
-          >
-            Oldest
-          </span>
-        </DropdownItem>
-        <DropdownItem>
-          <span
-            onClick={() => handleSort("-sold", "Best sales")}
-            className="port-dropdown-item nav-link port-navbar-link"
-          >
-            Best sales
-          </span>
-        </DropdownItem>
-        <DropdownItem>
-          <span
-            onClick={() => handleSort("-price", "Price: High-Low")}
-            className="port-dropdown-item nav-link port-navbar-link"
-          >
-            Price: High-Low
-          </span>
-        </DropdownItem>
-        <DropdownItem>
-          <span
-            onClick={() => handleSort("price", "Price: Low-High")}
-            className="port-dropdown-item nav-link port-navbar-link"
-          >
-            Price: Low-High
-          </span>
-        </DropdownItem>
-      </DropdownMenu>
-    </Dropdown>
+          {categories.map((item) => (
+            <DropdownItem key={item._id}>
+              <span
+                onClick={() => handleCategory(item._id, item.name)}
+                className="port-dropdown-item nav-link port-navbar-link"
+              >
+                {item.name}
+              </span>
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      </Dropdown>
+    </div>
   );
 };
 
@@ -237,26 +170,5 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
-  );
-};
-
-export const SearchField = (props) => {
-  const { className = "", search, setSearch } = props;
-
-  return (
-    <ActiveLink activeClassName="active" href="#">
-      <div className={`nav-link port-navbar-link ${className}`}>
-        <form autoComplete="off">
-          <input
-            type="text"
-            className="form-control"
-            list="title_product"
-            placeholder="Search"
-            value={search.toLowerCase()}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </form>
-      </div>
-    </ActiveLink>
   );
 };

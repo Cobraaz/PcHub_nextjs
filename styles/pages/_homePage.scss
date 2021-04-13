@@ -23,6 +23,28 @@
       text-align: center;
     }
   }
+  .filter-dropdown {
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    border-radius: 50px;
+    outline: 0 !important;
+  }
+  .filter-dropdown-item {
+    margin-left: 7px;
+    margin-right: 7px;
+    font-size: 16px;
+    letter-spacing: 0.8px;
+    margin: 0px;
+
+    &.active {
+      color: #2c3e50;
+    }
+
+    &:hover,
+    &:focus {
+      color: #2c3e50;
+    }
+  }
 }
 
 .masthead {
