@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import ReactResizeDetector from "react-resize-detector";
 
 import {
@@ -8,6 +8,8 @@ import {
   BsNavBrand,
   Categories,
   LoggedInUser,
+  Sort,
+  SearchField,
 } from "components/Header/Header.helpers";
 import { DataContext } from "store/GlobalState";
 import { useRouter } from "next/router";
@@ -16,6 +18,7 @@ import Cookie from "js-cookie";
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 import CartIcon from "components/Header/Cart/CartIcon";
 import CartDropdown from "components/Header/Cart/CartDropdown";
+import { filterSearch } from "helpers/helper.functions";
 
 const Header = ({
   isOpen,
@@ -25,8 +28,9 @@ const Header = ({
   setCartDropdownHidden,
 }) => {
   const { state, dispatch } = useContext(DataContext);
-  const { cart, auth } = state;
+  const { cart, auth, categories, brands } = state;
   const router = useRouter();
+  const [search, setSearch] = useState("");
 
   const handleLogout = () => {
     Cookie.remove("refreshtoken", { path: "api/auth/accessToken" });
@@ -42,6 +46,11 @@ const Header = ({
     isOpen && toggle();
     !cartDropdownHidden && setCartDropdownHidden(!cartDropdownHidden);
   };
+
+  useEffect(() => {
+    if (router.pathname === "/")
+      filterSearch({ router, search: search ? search.toLowerCase() : "all" });
+  }, [search]);
 
   return (
     <ReactResizeDetector handleWidth>
@@ -70,7 +79,7 @@ const Header = ({
           />
 
           <Collapse isOpen={isOpen} navbar>
-            <Nav className=" ml-auto" navbar>
+            <Nav className="mr-auto ml-auto" navbar>
               <NavItem
                 className="port-navbar-item"
                 onClick={() => {
@@ -79,11 +88,17 @@ const Header = ({
               >
                 <BsNavLink href="/" title="Home" />
               </NavItem>
-              {/* <Brands /> */}
-              {/* <Categories /> */}
+              <Brands brands={brands} router={router} />
+              <Categories categories={categories} router={router} />
+              {router.pathname === "/" && <Sort router={router} />}
               <NavItem className="port-navbar-item">
                 <BsNavLink href="/pre-build-pc" title="Pre build pc" />
               </NavItem>
+              {router.pathname === "/" && (
+                <NavItem className="port-navbar-item">
+                  <SearchField search={search} setSearch={setSearch} />
+                </NavItem>
+              )}
             </Nav>
             <Nav navbar>
               {width > 768 && (

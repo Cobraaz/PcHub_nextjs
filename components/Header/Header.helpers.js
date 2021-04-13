@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 
 import ActiveLink from "components/Header/ActiveLink";
+import { filterSearch } from "helpers/helper.functions";
 
 export const BsNavLink = (props) => {
   const { href, title, className = "" } = props;
@@ -30,8 +31,14 @@ export const LoginLink = () => (
   </a>
 );
 
-export const Brands = () => {
+export const Brands = ({ brands, router }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [brand, setBrand] = useState("Brands");
+
+  const handleBrand = (value, name) => {
+    setBrand(name);
+    filterSearch({ router, brand: value });
+  };
   return (
     <Dropdown
       className="port-navbar-link port-dropdown-menu"
@@ -40,38 +47,40 @@ export const Brands = () => {
       toggle={() => setIsOpen(!isOpen)}
     >
       <DropdownToggle className="port-dropdown-toggle" nav caret>
-        Brand
+        {brand}
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="Razer" />
+          <span
+            onClick={() => handleBrand("all", "Categories")}
+            className="port-dropdown-item nav-link port-navbar-link"
+          >
+            All Products
+          </span>
         </DropdownItem>
-        <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="Asus" />
-        </DropdownItem>
-        <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="Corsair" />
-        </DropdownItem>
-        <DropdownItem>
-          <BsNavLink
-            className="port-dropdown-item"
-            href="#"
-            title="Cooler Master"
-          />
-        </DropdownItem>
-        <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="HyperX" />
-        </DropdownItem>
-        <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="NZXT" />
-        </DropdownItem>
+        {brands.map((item) => (
+          <DropdownItem key={item._id}>
+            <span
+              onClick={() => handleBrand(item._id, item.name)}
+              className="port-dropdown-item nav-link port-navbar-link"
+            >
+              {item.name}
+            </span>
+          </DropdownItem>
+        ))}
       </DropdownMenu>
     </Dropdown>
   );
 };
 
-export const Categories = () => {
+export const Categories = ({ categories, router }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [category, setCategory] = useState("Categories");
+
+  const handleCategory = (value, name) => {
+    setCategory(name);
+    filterSearch({ router, category: value });
+  };
   return (
     <Dropdown
       className="port-navbar-link port-dropdown-menu"
@@ -80,34 +89,97 @@ export const Categories = () => {
       toggle={() => setIsOpen(!isOpen)}
     >
       <DropdownToggle className="port-dropdown-toggle" nav caret>
-        Categories
+        {category}
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="Mouses" />
+          <span
+            onClick={() => handleCategory("all", "Categories")}
+            className="port-dropdown-item nav-link port-navbar-link"
+          >
+            All Products
+          </span>
+        </DropdownItem>
+        {categories.map((item) => (
+          <DropdownItem key={item._id}>
+            <span
+              onClick={() => handleCategory(item._id, item.name)}
+              className="port-dropdown-item nav-link port-navbar-link"
+            >
+              {item.name}
+            </span>
+          </DropdownItem>
+        ))}
+      </DropdownMenu>
+    </Dropdown>
+  );
+};
+export const Sort = ({ router }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [category, setCategory] = useState("Featured");
+
+  const handleSort = (value, name) => {
+    setCategory(name);
+    filterSearch({ router, sort: value });
+  };
+  return (
+    <Dropdown
+      className="port-navbar-link port-dropdown-menu"
+      nav
+      isOpen={isOpen}
+      toggle={() => setIsOpen(!isOpen)}
+    >
+      <DropdownToggle className="port-dropdown-toggle" nav caret>
+        <span style={{ textTransform: "capitalize" }}>Sort by: {category}</span>
+      </DropdownToggle>
+      <DropdownMenu>
+        <DropdownItem>
+          <span
+            onClick={() => handleSort("-createdAt", "Featured")}
+            className="port-dropdown-item nav-link port-navbar-link"
+          >
+            Featured
+          </span>
         </DropdownItem>
         <DropdownItem>
-          <BsNavLink
-            className="port-dropdown-item"
-            href="#"
-            title="Keyboards"
-          />
+          <span
+            onClick={() => handleSort("-createdAt", "Newest")}
+            className="port-dropdown-item nav-link port-navbar-link"
+          >
+            Newest
+          </span>
         </DropdownItem>
         <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="Cabinets" />
+          <span
+            onClick={() => handleSort("oldest", "Oldest")}
+            className="port-dropdown-item nav-link port-navbar-link"
+          >
+            Oldest
+          </span>
         </DropdownItem>
         <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="Laptops" />
+          <span
+            onClick={() => handleSort("-sold", "Best sales")}
+            className="port-dropdown-item nav-link port-navbar-link"
+          >
+            Best sales
+          </span>
         </DropdownItem>
         <DropdownItem>
-          <BsNavLink className="port-dropdown-item" href="#" title="HyperX" />
+          <span
+            onClick={() => handleSort("-price", "Price: High-Low")}
+            className="port-dropdown-item nav-link port-navbar-link"
+          >
+            Price: High-Low
+          </span>
         </DropdownItem>
         <DropdownItem>
-          <BsNavLink
-            className="port-dropdown-item"
-            href="#"
-            title="Graphics card"
-          />
+          <span
+            onClick={() => handleSort("price", "Price: Low-High")}
+            className="port-dropdown-item nav-link port-navbar-link"
+          >
+            Price: Low-High
+          </span>
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
@@ -168,12 +240,23 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
   );
 };
 
-//<Link href="/users">
-//   <a className="dropdown-item">Users</a>
-// </Link>
-// <Link href="/create">
-//   <a className="dropdown-item">Products</a>
-// </Link>
-// <Link href="/categories">
-//   <a className="dropdown-item">Categories</a>
-// </Link>
+export const SearchField = (props) => {
+  const { className = "", search, setSearch } = props;
+
+  return (
+    <ActiveLink activeClassName="active" href="#">
+      <div className={`nav-link port-navbar-link ${className}`}>
+        <form autoComplete="off">
+          <input
+            type="text"
+            className="form-control"
+            list="title_product"
+            placeholder="Search"
+            value={search.toLowerCase()}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </form>
+      </div>
+    </ActiveLink>
+  );
+};

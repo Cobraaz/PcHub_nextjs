@@ -13,7 +13,6 @@ import {
   BasePage,
   ProductItem,
   Modal,
-  Filter,
 } from "helpers/components.import";
 
 // import { productsFromDB } from "pages/api/product/all_products";
@@ -133,12 +132,6 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
           exit={{ opacity: 0 }}
           variants={stagger}
         >
-          <motion.div
-            variants={fadeInUp}
-            style={{ marginTop: "15px", marginBottom: "30px" }}
-          >
-            <Filter state={state} />
-          </motion.div>
           {auth.user && auth.user.role !== "user" && (
             <div
               className="delete_all btn btn-danger mt-2"

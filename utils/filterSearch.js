@@ -1,5 +1,5 @@
 const filterSearch = ({ router, page, category, sort, search, brand }) => {
-  const path = router.pathname;
+  // const path = router.pathname;
   const query = router.query;
 
   if (category) query.category = category;
@@ -10,7 +10,7 @@ const filterSearch = ({ router, page, category, sort, search, brand }) => {
 
   router.push(
     {
-      pathname: path,
+      pathname: "/",
       query: query,
     },
     null,
