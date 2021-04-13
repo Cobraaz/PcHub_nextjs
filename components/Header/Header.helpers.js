@@ -150,6 +150,13 @@ export const LoggedInUser = ({ auth, handleLogout }) => {
                 title="Categories"
               />
             </DropdownItem>
+            <DropdownItem>
+              <BsNavLink
+                className="port-dropdown-item"
+                href="/brand"
+                title="Brands"
+              />
+            </DropdownItem>
           </>
         )}
         <DropdownItem divider />

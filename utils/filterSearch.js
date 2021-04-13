@@ -1,4 +1,4 @@
-const filterSearch = ({ router, page, category, sort, search }) => {
+const filterSearch = ({ router, page, category, sort, search, brand }) => {
   const path = router.pathname;
   const query = router.query;
 
@@ -6,6 +6,7 @@ const filterSearch = ({ router, page, category, sort, search }) => {
   if (page) query.page = page;
   if (search) query.search = search;
   if (sort) query.sort = sort;
+  if (brand) query.brand = brand;
 
   router.push(
     {

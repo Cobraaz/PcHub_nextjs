@@ -41,6 +41,9 @@ class APIfeatures {
 
     if (queryObj.category !== "all")
       this.query.find({ category: queryObj.category });
+
+    if (queryObj.brand !== "all") this.query.find({ brand: queryObj.brand });
+
     if (queryObj.title !== "all")
       this.query.find({ title: { $regex: queryObj.title } });
 

@@ -191,49 +191,17 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
   );
 };
 
-// * This function is called during the build time
-// * Improved performance of page,
-// * It will create static page with dynamic data
-
-// export async function getStaticProps() {
-//   const { status, result, productsResponse: products } = JSON.parse(
-//     JSON.stringify(await productsFromDB())
-//   );
-//   return {
-//     props: {
-//       slideImages: await getPhotoUnsplash(),
-//       status,
-//       result,
-//       products,
-//     },
-//     revalidate: 1,
-//   };
-// }
-
-// export async function getStaticProps() {
-//   const { status, result, products } = await getData("product/all_products");
-
-//   return {
-//     props: {
-//       slideImages: await getPhotoUnsplash(),
-//       status,
-//       result,
-//       products,
-//     },
-//     revalidate: 1,
-//   };
-// }
-
 export async function getServerSideProps({ query }) {
   const page = query.page || 1;
   const category = query.category || "all";
   const sort = query.sort || "";
   const search = query.search || "all";
+  const brand = query.brand || "all";
 
   const { status, result, products } = await getData(
     `product/all_products?limit=${
       page * 6
-    }&category=${category}&sort=${sort}&title=${search}`
+    }&category=${category}&brand=${brand}&sort=${sort}&title=${search}`
   );
 
   return {

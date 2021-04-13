@@ -38,6 +38,11 @@ const reducers = (state, action) => {
         ...state,
         categories: action.payload,
       };
+    case ACTIONS.ADD_BRANDS:
+      return {
+        ...state,
+        brands: action.payload,
+      };
 
     default:
       return state;

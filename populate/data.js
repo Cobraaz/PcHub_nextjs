@@ -17,6 +17,7 @@ const data = {
       content:
         "Superior Hardware Support The H200 TG RGB has outstanding expandability with support for a tower CPU cooler with maximum height 180mm, a dual VGA expansion slot of up to 320mm in length Excellent Cooling Capability Optimized for excellent cooling capability with one 120mm fan preinstalled",
       category: "606b43989e268439b074f339",
+      brand: "6075394412c7f240c09fffa0",
     },
     {
       images: [
@@ -35,6 +36,7 @@ const data = {
       content:
         "AMD Ryzen 7 2700 Desktop Processor 8 Cores up to 4.1GHz 20MB Cache AM4 Socket RX 580 Armor 8G OC Gaming Radeon RX 580 GDDR5 8GB Crossfire VR Ready FinFET DirectX 12 Graphics Card , High Speed Desktop for Advance Gaming 32GB DDR4 (16 x2) Gaming Memory with Heatsinks (16 x2) , 480GB SSD , 2TB HDD 7200RPM SATA 6Gb/s,500Watt SMPS, HD Audio, Gigabyte Ethernet",
       category: "606b43989e268439b074f339",
+      brand: "6075394712c7f240c09fffa1",
     },
     {
       images: [
@@ -53,6 +55,7 @@ const data = {
       content:
         "Processor: Ryzen 5 Pro 4650G 6-Core 3.7GHz (4.20 GHz Max Turbo) Memory & Storage: 16GB DDR4 RAM with integrated Raedon graphics| Storage: 1TB HDD, 256GB NVME ",
       category: "606b43989e268439b074f339",
+      brand: "6075394d12c7f240c09fffa2",
     },
     {
       images: [
@@ -71,6 +74,7 @@ const data = {
       content:
         "( Intel Processor ) (Gigabyte, Asus, Motherboard ) ( Adata, Crucial RAM ) ( WD, Seagate Hard Disk ) (Iball, Finger, Antec gaming Cabinet With SMPS ) We use as per above company’s device for Assemble Computer. Image may different from original product. Installed Windows OS is trial version",
       category: "606b43989e268439b074f339",
+      brand: "6075394412c7f240c09fffa0",
     },
     {
       images: [
@@ -89,6 +93,7 @@ const data = {
       description:
         "Its 9th Generation Intel Core i7 processor and NVIDIA Geforce GTX 1650 graphics will ensure smooth and fast loading speeds, while the customizable Aura Sync lighting of this CPU will enhance your overall gaming experience.",
       category: "606b43989e268439b074f339",
+      brand: "6075394412c7f240c09fffa0",
     },
     {
       images: [
@@ -107,6 +112,7 @@ const data = {
       description:
         "The robust headphone hook allows you to hang your gaming headset conveniently and keep your battle station clear of any hurdles so that you can use the free space efficiently for your mouse. Get home the Asus GA15 and give yourself a competitive edge over your gaming rivals.",
       category: "606b43989e268439b074f339",
+      brand: "6075394712c7f240c09fffa1",
     },
   ],
 };

@@ -40,6 +40,17 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
     return (window.location.href = "/");
   };
 
+  const deleteBrand = async (item) => {
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    const res = await deleteData(`brand/${item.id}`, auth.token);
+
+    if (res.err)
+      return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+    dispatch(deleteItem(item.data, item.id, item.type));
+    dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+  };
+
   const handleSubmit = () => {
     if (modal.length !== 0) {
       for (const item of modal) {
@@ -52,6 +63,8 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
         if (item.type === "ADD_CATEGORIES") deleteCategories(item);
 
         if (item.type === "DELETE_PRODUCT") deleteProduct(item);
+
+        if (item.type === "ADD_BRANDS") deleteBrand(item);
 
         dispatch({ type: "ADD_MODAL", payload: [] });
       }
