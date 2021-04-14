@@ -16,6 +16,7 @@ import Cookie from "js-cookie";
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 import CartIcon from "components/Header/Cart/CartIcon";
 import CartDropdown from "components/Header/Cart/CartDropdown";
+import ThemeToggle from "components/Shared/ThemeToggle";
 
 const Header = ({
   isOpen,
@@ -101,6 +102,11 @@ const Header = ({
                 </NavItem>
               ) : (
                 <LoggedInUser auth={auth} handleLogout={handleLogout} />
+              )}
+              {width > 768 && (
+                <NavItem className="port-navbar-item">
+                  <ThemeToggle />
+                </NavItem>
               )}
             </Nav>
           </Collapse>

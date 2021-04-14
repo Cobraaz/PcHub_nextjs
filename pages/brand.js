@@ -129,25 +129,26 @@ const Brand = () => {
                 </button>
               </div>
 
-              {brands.map((brand) => (
-                <div key={brand._id} className="card my-2 text-capitalize">
-                  <div className="card-body d-flex justify-content-between">
-                    {brand.name}
+              {brands.length > 0 &&
+                brands.map((brand) => (
+                  <div key={brand._id} className="card my-2 text-capitalize">
+                    <div className="card-body d-flex justify-content-between">
+                      {brand.name}
 
-                    <div style={{ cursor: "pointer" }}>
-                      <i
-                        className="ri-pencil-fill mr-2 text-info"
-                        onClick={() => handleEditBrand(brand)}
-                      ></i>
+                      <div style={{ cursor: "pointer" }}>
+                        <i
+                          className="ri-pencil-fill mr-2 text-info"
+                          onClick={() => handleEditBrand(brand)}
+                        ></i>
 
-                      <i
-                        className="ri-delete-bin-line text-danger"
-                        onClick={() => handleDelete(brand)}
-                      ></i>
+                        <i
+                          className="ri-delete-bin-line text-danger"
+                          onClick={() => handleDelete(brand)}
+                        ></i>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </Col>
           </Row>
         </BasePage>

@@ -59,16 +59,17 @@ export const Brands = ({ brands, router }) => {
               All Products
             </span>
           </DropdownItem>
-          {brands.map((item) => (
-            <DropdownItem key={item._id}>
-              <span
-                onClick={() => handleBrand(item._id, item.name)}
-                className="port-dropdown-item nav-link port-navbar-link"
-              >
-                {item.name}
-              </span>
-            </DropdownItem>
-          ))}
+          {brands &&
+            brands.map((item) => (
+              <DropdownItem key={item._id}>
+                <span
+                  onClick={() => handleBrand(item._id, item.name)}
+                  className="port-dropdown-item nav-link port-navbar-link"
+                >
+                  {item.name}
+                </span>
+              </DropdownItem>
+            ))}
         </DropdownMenu>
       </Dropdown>
     </div>
@@ -103,16 +104,17 @@ export const Categories = ({ categories, router }) => {
               All Products
             </span>
           </DropdownItem>
-          {categories.map((item) => (
-            <DropdownItem key={item._id}>
-              <span
-                onClick={() => handleCategory(item._id, item.name)}
-                className="port-dropdown-item nav-link port-navbar-link"
-              >
-                {item.name}
-              </span>
-            </DropdownItem>
-          ))}
+          {categories &&
+            categories.map((item) => (
+              <DropdownItem key={item._id}>
+                <span
+                  onClick={() => handleCategory(item._id, item.name)}
+                  className="port-dropdown-item nav-link port-navbar-link"
+                >
+                  {item.name}
+                </span>
+              </DropdownItem>
+            ))}
         </DropdownMenu>
       </Dropdown>
     </div>
