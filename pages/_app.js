@@ -15,13 +15,13 @@ import Layout from "components/Layouts";
 import ThemeProvider from "providers/ThemeProvider";
 const App = ({ Component, pageProps }) => (
   <>
-    <ThemeProvider>
-      <DataProvider>
+    <DataProvider>
+      <ThemeProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </DataProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </DataProvider>
   </>
 );
 

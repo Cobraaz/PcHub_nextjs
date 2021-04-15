@@ -27,6 +27,7 @@ const Header = ({
   checkedTheme,
   setCheckedTheme,
   toggleTheme,
+  theme,
 }) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth, categories, brands } = state;
@@ -112,6 +113,7 @@ const Header = ({
                     checkedTheme={checkedTheme}
                     setCheckedTheme={setCheckedTheme}
                     onChange={toggleTheme}
+                    theme={theme}
                   />
                 </NavItem>
               )}

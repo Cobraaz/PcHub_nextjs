@@ -8,15 +8,16 @@ const ThemeToggle = ({
   setCheckedTheme,
   onChange,
   toggleTheme,
+  theme,
 }) => {
   const router = useRouter();
   useEffect(() => {
-    const theme = localStorage.getItem("theme");
+    const themes = localStorage.getItem("theme");
 
-    if (theme === "Dark") {
+    if (themes === "Dark") {
       if (!window.__isThemeLoaded) {
         window.__isThemeLoaded = true;
-        onChange();
+        !Boolean(theme.type === "dark") && onChange();
       }
       setCheckedTheme(true);
     }
