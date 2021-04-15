@@ -12,13 +12,16 @@ import "react-toggle/style.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { DataProvider } from "store/GlobalState";
 import Layout from "components/Layouts";
+import ThemeProvider from "providers/ThemeProvider";
 const App = ({ Component, pageProps }) => (
   <>
-    <DataProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </DataProvider>
+    <ThemeProvider>
+      <DataProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </DataProvider>
+    </ThemeProvider>
   </>
 );
 

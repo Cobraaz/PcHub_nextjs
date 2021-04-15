@@ -1,7 +1,13 @@
 const { default: ThemeToggle } = require("./ThemeToggle");
 import ReactResizeDetector from "react-resize-detector";
 
-const Footer = ({ isOpen, toggle }) => {
+const Footer = ({
+  isOpen,
+  toggle,
+  checkedTheme,
+  setCheckedTheme,
+  toggleTheme,
+}) => {
   return (
     <ReactResizeDetector handleWidth>
       {({ width }) => (
@@ -45,7 +51,11 @@ const Footer = ({ isOpen, toggle }) => {
             </a>
             {width < 768 && (
               <div className="social-icon">
-                <ThemeToggle />
+                <ThemeToggle
+                  checkedTheme={checkedTheme}
+                  setCheckedTheme={setCheckedTheme}
+                  onChange={toggleTheme}
+                />
               </div>
             )}
           </div>

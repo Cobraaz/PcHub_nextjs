@@ -24,6 +24,9 @@ const Header = ({
   header_bg,
   cartDropdownHidden,
   setCartDropdownHidden,
+  checkedTheme,
+  setCheckedTheme,
+  toggleTheme,
 }) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth, categories, brands } = state;
@@ -105,7 +108,11 @@ const Header = ({
               )}
               {width > 768 && (
                 <NavItem className="port-navbar-item">
-                  <ThemeToggle />
+                  <ThemeToggle
+                    checkedTheme={checkedTheme}
+                    setCheckedTheme={setCheckedTheme}
+                    onChange={toggleTheme}
+                  />
                 </NavItem>
               )}
             </Nav>

@@ -314,8 +314,8 @@ const Profile = () => {
                         {users &&
                           users.length > 0 &&
                           users.map((user) => (
-                            <tr key={user._id}>
-                              <td>
+                            <tr key={user._id} className="xyzz">
+                              <td className="xyzz">
                                 {auth.user.id !== user._id ? (
                                   <Link
                                     // Bug

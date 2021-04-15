@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Toggle from "react-toggle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 
-const ThemeToggle = () => {
-  const [checkedTheme, setCheckedTheme] = useState(false);
+const ThemeToggle = ({
+  checkedTheme,
+  setCheckedTheme,
+  onChange,
+  toggleTheme,
+}) => {
+  const router = useRouter();
+  useEffect(() => {
+    const theme = localStorage.getItem("theme");
+
+    if (theme === "Dark") {
+      if (!window.__isThemeLoaded) {
+        window.__isThemeLoaded = true;
+        onChange();
+      }
+      setCheckedTheme(true);
+    }
+  }, [router]);
 
   return (
     <label style={{ paddingTop: "10px" }}>
@@ -14,7 +31,9 @@ const ThemeToggle = () => {
           unchecked: <FontAwesomeIcon inverse icon="moon" />,
         }}
         onChange={() => {
+          onChange();
           setCheckedTheme(!checkedTheme);
+          localStorage.setItem("theme", checkedTheme ? "Light" : "Dark");
         }}
         checked={checkedTheme}
       />

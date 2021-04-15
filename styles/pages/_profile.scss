@@ -103,3 +103,11 @@
     color: hotpink;
   }
 }
+
+.dark {
+  tr > td {
+    background-color: #232129;
+    transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
+    color: #ecedee;
+  }
+}

@@ -195,3 +195,22 @@
 
   cursor: pointer;
 }
+
+.dark {
+  .card-body-wrapper-Ab {
+    background-color: #232129;
+    transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
+  }
+  .filter-dropdown {
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    border-radius: 50px;
+    outline: 0 !important;
+    background-color: #6c757d;
+    color: #fff;
+    transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
+  }
+  .filter-dropdown::placeholder {
+    color: #fff;
+  }
+}

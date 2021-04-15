@@ -146,3 +146,34 @@
 .port-navbar.transparent.is-close {
   transition: 1s;
 }
+
+.dark {
+  .port-navbar.port-default {
+    &.with-bg {
+      background-color: #455a64;
+    }
+
+    .port-navbar {
+      &-brand {
+        &.active {
+          color: #61dafb;
+        }
+
+        &:hover,
+        &:focus {
+          color: #61dafb;
+        }
+      }
+      &-link {
+        &.active {
+          color: #61dafb;
+        }
+
+        &:hover,
+        &:focus {
+          color: #61dafb;
+        }
+      }
+    }
+  }
+}

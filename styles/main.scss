@@ -148,3 +148,18 @@ body {
   z-index: -99;
   display: none;
 }
+
+.dark {
+  .form-control {
+    background-color: #232129;
+    transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
+    color: #ecedee;
+  }
+  h1 {
+    color: #b122e0;
+    transition: 0.3s;
+  }
+  h1:hover {
+    color: #d193e6;
+  }
+}
