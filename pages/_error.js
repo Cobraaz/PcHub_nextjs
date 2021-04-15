@@ -5,8 +5,8 @@ function Error({ statusCode }) {
     <>
       <div className="container">
         <div className="text-box">
-          <h1>{statusCode}</h1>
-          <h1>{statusCode}</h1>
+          <h1>{statusCode ? statusCode : "404"}</h1>
+          <h1>{statusCode ? statusCode : "404"}</h1>
         </div>
         <Link href="/">
           <a>Go back home</a>

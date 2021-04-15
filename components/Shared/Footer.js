@@ -7,6 +7,7 @@ const Footer = ({
   checkedTheme,
   setCheckedTheme,
   toggleTheme,
+  theme,
 }) => {
   return (
     <ReactResizeDetector handleWidth>
@@ -55,6 +56,7 @@ const Footer = ({
                   checkedTheme={checkedTheme}
                   setCheckedTheme={setCheckedTheme}
                   onChange={toggleTheme}
+                  theme={theme}
                 />
               </div>
             )}
