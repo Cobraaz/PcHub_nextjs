@@ -9,6 +9,7 @@
 .product-detail-page {
   padding-top: 70px !important;
   border-style: none !important;
+  // background-color: #fff;
 
   .card-wrapper {
     max-width: 1100px;
@@ -223,5 +224,21 @@
       //   padding-top: 0;
       padding-top: 70px;
     }
+  }
+}
+.dark {
+  .product-detail-page {
+    background-color: #2b2c38;
+    transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
+  }
+  .product-title {
+    color: #dcdcdc;
+  }
+  .related-product-title {
+    color: #b122e0;
+    transition: 0.3s;
+  }
+  .related-product-title:hover {
+    color: #d193e6;
   }
 }

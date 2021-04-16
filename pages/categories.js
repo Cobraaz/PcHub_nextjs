@@ -128,7 +128,7 @@ const Categories = () => {
 
               {categories.map((catogory) => (
                 <div key={catogory._id} className="card my-2 text-capitalize">
-                  <div className="card-body d-flex justify-content-between">
+                  <div className="card-body d-flex justify-content-between text-secondary">
                     {catogory.name}
 
                     <div style={{ cursor: "pointer" }}>

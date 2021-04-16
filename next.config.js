@@ -20,6 +20,7 @@ module.exports = {
       "rukminim1.flixcart.com",
       "avatars.githubusercontent.com",
       "platform-lookaside.fbsbx.com",
+      "images-eu.ssl-images-amazon.com",
     ],
   },
 };

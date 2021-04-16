@@ -1,5 +1,5 @@
 const filterSearch = ({ router, page, category, sort, search, brand }) => {
-  // const path = router.pathname;
+  const path = router.pathname;
   const query = router.query;
 
   if (category) query.category = category;
@@ -8,16 +8,28 @@ const filterSearch = ({ router, page, category, sort, search, brand }) => {
   if (sort) query.sort = sort;
   if (brand) query.brand = brand;
 
-  router.push(
-    {
-      pathname: "/",
-      query: query,
-    },
-    null,
-    {
-      scroll: false,
-    }
-  );
+  if (path === "/")
+    router.replace(
+      {
+        pathname: "/",
+        query: query,
+      },
+      null,
+      {
+        scroll: false,
+      }
+    );
+  else
+    router.push(
+      {
+        pathname: "/",
+        query: query,
+      },
+      null,
+      {
+        scroll: false,
+      }
+    );
 };
 
 export default filterSearch;

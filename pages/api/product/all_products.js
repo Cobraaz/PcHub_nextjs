@@ -1,6 +1,6 @@
 import connectDB from "utils/connectDB";
 import Products from "models/productModel";
-
+import { shuffle } from "helpers/helper.functions";
 connectDB();
 
 export default async (req, res) => {
@@ -77,7 +77,6 @@ const getAllProducts = async (req, res) => {
       .filtering()
       .sorting()
       .paginating();
-
     const products = await features.query;
 
     res.json({

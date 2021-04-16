@@ -74,11 +74,15 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
   return (
     <Modal isOpen={showModal} toggle={toggleModal}>
       <ModalHeader toggle={toggleModal}>
-        {modal.length > 0 &&
-          modal[0].title &&
-          modal[0].title.split(" ").slice(0, 4).join(" ")}
+        <span className="text-secondary">
+          {modal.length > 0 &&
+            modal[0].title &&
+            modal[0].title.split(" ").slice(0, 4).join(" ")}
+        </span>
       </ModalHeader>
-      <ModalBody>Do you want to delete this item?</ModalBody>
+      <ModalBody>
+        <span className="text-secondary">Do you want to delete this item?</span>
+      </ModalBody>
       <ModalFooter>
         <button
           className="buttonModal btn-danger"
