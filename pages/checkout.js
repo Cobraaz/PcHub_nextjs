@@ -136,7 +136,11 @@ const Checkout = () => {
   return (
     <div onClick={() => showModal && toggleModal()}>
       <BaseLayout>
-        <BasePage className=" wrapper cart-item-AB" title="PcHub Checkout">
+        <BasePage
+          className=" wrapper cart-item-AB"
+          header="SHOPPING CART"
+          title="PcHub Checkout"
+        >
           <Modal
             dispatch={dispatch}
             modal={modal}
@@ -146,8 +150,6 @@ const Checkout = () => {
           />
           <div className="row mx-auto">
             <div className="col-md-8 text-secondary">
-              <h2 className="text-uppercase font-weight-bold">Shopping Cart</h2>
-
               <div className="my-3 CheckoutPageContainer">
                 <div className="CheckoutHeaderContainer">
                   <div className="HeaderBlockContainer">

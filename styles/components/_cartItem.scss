@@ -136,3 +136,9 @@
     color: #808080;
   }
 }
+.dark {
+  .cart-item-AB {
+    background-color: #2b2c38 !important;
+    transition: color 0s ease-out 0s, background 0.2s ease-out 0s;
+  }
+}

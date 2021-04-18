@@ -9,7 +9,13 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-const Filter = ({ auth, handleCheckALL, handleDeleteAll, isCheck }) => {
+const Filter = ({
+  auth,
+  handleCheckALL,
+  handleDeleteAll,
+  isCheck,
+  productLength,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [featured, setFeatured] = useState("Featured");
   const [search, setSearch] = useState("");
@@ -23,7 +29,7 @@ const Filter = ({ auth, handleCheckALL, handleDeleteAll, isCheck }) => {
     setFeatured(name);
     filterSearch({ router, sort: value });
   };
-
+  if (productLength === 0) return <></>;
   return (
     <div className="input-group">
       <div className="input-group-prepend col-md-7 px-0">

@@ -74,7 +74,7 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
   return (
     <Modal isOpen={showModal} toggle={toggleModal}>
       <ModalHeader toggle={toggleModal}>
-        <span className="text-secondary">
+        <span className="text-secondary text-capitalize">
           {modal.length > 0 &&
             modal[0].title &&
             modal[0].title.split(" ").slice(0, 4).join(" ")}

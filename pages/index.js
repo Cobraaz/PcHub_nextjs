@@ -143,6 +143,7 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
               handleCheckALL={handleCheckALL}
               handleDeleteAll={handleDeleteAll}
               isCheck={isCheck}
+              productLength={products.length}
             />
           </motion.div>
           <Row className="mt-3 mb-5">
