@@ -123,7 +123,7 @@ const DetailProduct = ({ product, products: resProducts }) => {
                       whileHover={{ scale: 1.2 }}
                       className={`img-thumbnail rounded ${isActive(index)} `}
                     >
-                      <img
+                      <Image
                         src={img}
                         alt="Product image"
                         onClick={() => setTab(index)}
@@ -185,6 +185,7 @@ const DetailProduct = ({ product, products: resProducts }) => {
                     whileTap={{ scale: 0.9 }}
                     type="button"
                     className="btn"
+                    style={{ border: "none" }}
                     disabled={product.inStock === 0 ? true : false}
                     onClick={() => {
                       dispatch(addToCart(product, cart));
@@ -208,6 +209,7 @@ const DetailProduct = ({ product, products: resProducts }) => {
                     whileTap={{ scale: 0.9 }}
                     type="button"
                     className="btn text-bold"
+                    style={{ border: "none" }}
                     disabled={product.inStock === 0 ? true : false}
                     onClick={() => handleDelete(product)}
                   >

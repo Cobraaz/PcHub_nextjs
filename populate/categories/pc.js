@@ -113,6 +113,25 @@ const pc = [
     category: "6079b93dddf2d5405c0b8c35",
     brand: "6075394712c7f240c09fffa1",
   },
+  {
+    images: [
+      "https://images-na.ssl-images-amazon.com/images/I/61GEpJGlnJL._SL1500_.jpg",
+      "https://rukminim1.flixcart.com/image/416/416/kawtvgw0/cpu/p/a/x/rog-strix-g15dh-in008t-asus-original-imafsdbgw2fugvme.jpeg?q=70",
+      "https://images-na.ssl-images-amazon.com/images/I/61GEpJGlnJL._SL1500_.jpg",
+      "https://rukminim1.flixcart.com/image/416/416/kawtvgw0/cpu/p/a/x/rog-strix-g15dh-in008t-asus-original-imafsdbgaxztgqwg.jpeg?q=70",
+    ],
+    checked: false,
+    inStock: 13,
+    sold: 15,
+    title: "christ gaming-pc",
+    price: 99990,
+    content:
+      "Intel Core i5 3470 Processor with Base Frequency 3.2GHz, Max Turbo 3.6GHz, 4Cores, 4 Threads, 6MB Smart-cache H61 Motherboard with VGA& HDMI, 6x 2.0 USB Ports 8GB DDR3 Ram | 1TB Hard Disk 7200 RPM | DDR5 GT 710 2GB Graphic Card Windows 10 Trail version with Basic software, Adobe Reader, Chrome, VLC Etc...",
+    description:
+      "The robust headphone hook allows you to hang your gaming headset conveniently and keep your battle station clear of any hurdles so that you can use the free space efficiently for your mouse. Get home the Asus GA15 and give yourself a competitive edge over your gaming rivals.",
+    category: "6079b93dddf2d5405c0b8c35",
+    brand: "6075394712c7f240c09fffa1",
+  },
 ];
 
 module.exports = pc;

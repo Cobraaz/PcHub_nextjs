@@ -9,7 +9,7 @@ const keyboard = [
     checked: false,
     inStock: 10,
     sold: 11,
-    title: "Quantum QHM9800",
+    title: "quantum qhm9800",
     price: 1899,
     content:
       "PLUG & PLAY: Instant connect with the stable transmission that removes any scope for lags to occur.LED DESIGN: The LED-backlit keyboard allows multi-key to work simultaneously with high speed, and will never miss a single key-press or confuse your commands under any conditions.SPILL-PROOF: The keyboard protects against any accidental spills and accidental water splashes which makes it a safe bet for everyday usage.",
@@ -28,7 +28,7 @@ const keyboard = [
     checked: false,
     inStock: 11,
     sold: 12,
-    title: "Redgear Invador",
+    title: "redgear invador",
     price: 3499,
     content:
       "PLUG & PLAY: Instant connect with the stable transmission that removes any scope for lags to occur.LED DESIGN: The LED-backlit keyboard allows multi-key to work simultaneously with high speed, and will never miss a single key-press or confuse your commands under any conditions.SPILL-PROOF: The keyboard protects against any accidental spills and accidental water splashes which makes it a safe bet for everyday usage.",
@@ -47,7 +47,7 @@ const keyboard = [
     checked: false,
     inStock: 12,
     sold: 13,
-    title: "Zebronics Zeb-Transformer",
+    title: "zebronics zeb-transformer",
     price: 1299,
     content:
       "Multicolor LED ( 4 modes - 3 light modes and 1 off mode ),Integrated media control Windows key Disable / Enable function All Keys Disable / Enable function , All Keys Disable / Enable function 2-steps stand design, Laser keycaps Aluminum body, Backlight LED On / Off function Braided cable, high quality USB connector",
@@ -66,7 +66,7 @@ const keyboard = [
     checked: false,
     inStock: 13,
     sold: 14,
-    title: "Logitech G213",
+    title: "logitech g213",
     price: 3499,
     content:
       "Prodigy series Logitech G keyboard for advanced gaming-grade performance is up to 4x faster than standard keyboards, so every keypress is near instantaneous from fingers to screen Brilliant color spectrum illumination lets you easily personalize up to 5 lighting zones from over 16.8 million colours to match your style and gaming gear Tactile performance keys tuned for gaming with responsive and more",
@@ -85,7 +85,7 @@ const keyboard = [
     checked: false,
     inStock: 14,
     sold: 15,
-    title: "Redragon Karura",
+    title: "redragon karura",
     price: 1549,
     content:
       "QUIET GAMING KEYBOARD: 104 Key Gaming Keyboard with quiet Island-style Chiclet keys designed for longevity, durability and responsiveness. The keyboard keys offer less resistance and a short key travel hence requires less work to type and still deliver precise tactile feedback for a Flawless Gaming Performance RGB BACK LIGHTED KEYBOARD: with 6 different Lighting modes & effects, 4 backlight brightness levels, adjustable breathing speed, the illumination can be completely turned off. The Laser engraved keycaps offering clear uniform backlighting",
@@ -104,7 +104,7 @@ const keyboard = [
     checked: false,
     inStock: 15,
     sold: 16,
-    title: "Chiptronex Kranos",
+    title: "chiptronex kranos",
     price: 0999,
     content:
       "7 Different RGB Lighting Modes & Effects, Win Key Locked Enable: WIN key can be disabled for gaming, 10 multimedia shortcut keys, 5 Backlight Brightness Levels, Adjustable Breathing Speed. 1.8m braided cable Each key is laser engraved with superior painting, it's sweatproof and won't easily wear off. With millions of keystroke test, the lifespan of this keyboard is longer than that of normal keyboard.",

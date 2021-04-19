@@ -1,4 +1,12 @@
-import { useState, Row, Col, motion, useContext } from "helpers/package.import";
+import {
+  useState,
+  Row,
+  Col,
+  motion,
+  useContext,
+  useRouter,
+  useEffect,
+} from "helpers/package.import";
 
 import {
   BaseLayout,
@@ -7,15 +15,30 @@ import {
   Modal,
 } from "helpers/components.import";
 
-import { getData, stagger, DataContext } from "helpers/helper.functions";
+import {
+  getData,
+  stagger,
+  DataContext,
+  filterSearch,
+} from "helpers/helper.functions";
 
-const PreBuildPc = ({ products: resProducts, status }) => {
+const PreBuildPc = ({ products: resProducts, status, result }) => {
   const [products, setProducts] = useState(resProducts);
   const [isCheck, setIsCheck] = useState(false);
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
+  const [page, setPage] = useState(1);
+  const router = useRouter();
+
+  useEffect(() => {
+    setProducts(resProducts);
+  }, [resProducts]);
+
+  useEffect(() => {
+    if (Object.keys(router.query).length === 0) setPage(1);
+  }, [router.query]);
 
   const handleCheck = (id) => {
     products.forEach((product) => {
@@ -52,6 +75,11 @@ const PreBuildPc = ({ products: resProducts, status }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleLoadmore = () => {
+    setPage(page + 1);
+    filterSearch({ router, page: page + 1, prebuild: true });
   };
 
   if (!status === "success") {
@@ -127,15 +155,27 @@ const PreBuildPc = ({ products: resProducts, status }) => {
               ))
             )}
           </Row>
+          {result < page * 6 ? (
+            ""
+          ) : (
+            <button
+              className="btn btn-outline-info d-block mx-auto mb-4"
+              onClick={handleLoadmore}
+            >
+              Load more
+            </button>
+          )}
         </motion.div>
       </BasePage>
     </BaseLayout>
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
+  const page = query.page || 1;
+
   const { status, result, products } = await getData(
-    `product/get_prebuildpc/6079b93dddf2d5405c0b8c35`
+    `product/get_prebuildpc/6079b93dddf2d5405c0b8c35?limit=${page * 6}`
   );
 
   return {

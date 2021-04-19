@@ -9,7 +9,7 @@ const mouse = [
     checked: false,
     inStock: 11,
     sold: 12,
-    title: "Corsair Nightsword",
+    title: "corsair nightsword",
     price: 6499,
     content:
       "Smart Tunable Weight System: CORSAIR exclusive software automatically detects the mouse’s center of gravity in real time, allowing you to adjust weight between 119g and 141g and fine-tune balance CORSAIR’S Most Advanced Optical Sensor Yet: A custom Pixart PMW3391 native 18,000 DPI optical sensor, adjustable in 1 DPI resolution steps, gives you total sensitivity customization Professional Comfort: Built with a contoured shape that naturally fits your hand, with high-performance rubber grips inspired by pro sports equipment",
@@ -28,7 +28,7 @@ const mouse = [
     checked: false,
     inStock: 12,
     sold: 13,
-    title: "Zebronics Transformer",
+    title: "zebronics transformer",
     price: 420,
     content:
       "Zeb-Transformer-M is a Optical USB Gaming Mouse with 7 Colors LED Effect It has Compact & Ergonomic Design It has High Quality Button,High Precision and Gold Plated USB It includes Dedicated buttons for DPI,Forward and Backward Interface : USB Sensor : Optical Power Consumption : DC 5V,<100mA",
@@ -47,7 +47,7 @@ const mouse = [
     checked: false,
     inStock: 13,
     sold: 14,
-    title: "Redgear A-15",
+    title: "redgear a-15",
     price: 499,
     content:
       "Compatibility: Redgear A15 is compatible with PCs, laptops, notebooks and other devices with a similar input. Multi Programmable Buttons: The Redgear A15 is designed with multi programmable buttons and also has durable and semi honeycomb design for a better grip. Upto 6400 DPI: With Redgear A15 you can experience a DPI change of upto 6400 RGB Lighting: A15 comes equipped with customizable RGB mode",
@@ -66,7 +66,7 @@ const mouse = [
     checked: false,
     inStock: 14,
     sold: 15,
-    title: "Redragon M610",
+    title: "redragon m610",
     price: 849,
     content:
       "LED Backlit Gaming Mouse up to 3200 DPI (user adjustable 1000/1600/2400/3200 DPI) 6 programmable buttons including 2 customizable thumb buttons allow adjusting the mouse for its user's needs; Textured surface of the upper button decreases the risk of accidental «blind» hit High precision optical sensor with option of the chosen level of DPI speed indicated by the color of the scroll wheel",
@@ -85,7 +85,7 @@ const mouse = [
     checked: false,
     inStock: 15,
     sold: 16,
-    title: "Razer RZ01",
+    title: "razer rz01",
     price: 1599,
     content:
       "Proven history of performance True 6,400 dpi optical sensor for fast and precise swipes Classic ergonomic form factor Distinctive shape designed for extended hours of gaming Multi-award winning technology 5 hype response buttons durable up to 10 million clicks",
@@ -104,7 +104,7 @@ const mouse = [
     checked: false,
     inStock: 16,
     sold: 17,
-    title: "Logitech G402",
+    title: "logitech g402",
     price: 2299,
     content:
       "HIGH SPEED TRACKING : Fusion engine delivers one of the highest gaming mouse tracking speeds of up to 500 IPS 8 PROGRAMMABLE BUTTONS : Customise your Logitech wired gaming mouse and enjoy default configuration straight out of the box or set up one-button triggers personal to you and save them to your G402 USB gaming mouse ON-THE-FLY DPI : Shift through up to four DPI settings, from pixel-precise targeting (250 DPI) to lightning-fast manoeuvres (4000 DPI)",

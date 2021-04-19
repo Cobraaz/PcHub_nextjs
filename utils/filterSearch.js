@@ -1,4 +1,12 @@
-const filterSearch = ({ router, page, category, sort, search, brand }) => {
+const filterSearch = ({
+  router,
+  page,
+  category,
+  sort,
+  search,
+  brand,
+  prebuild = false,
+}) => {
   const path = router.pathname;
   const query = router.query;
 
@@ -8,8 +16,19 @@ const filterSearch = ({ router, page, category, sort, search, brand }) => {
   if (sort) query.sort = sort;
   if (brand) query.brand = brand;
 
+  if (prebuild)
+    return router.replace(
+      {
+        pathname: "/pre-build-pc",
+        query: query,
+      },
+      null,
+      {
+        scroll: false,
+      }
+    );
   if (path === "/")
-    router.replace(
+    return router.replace(
       {
         pathname: "/",
         query: query,
@@ -20,7 +39,7 @@ const filterSearch = ({ router, page, category, sort, search, brand }) => {
       }
     );
   else
-    router.push(
+    return router.push(
       {
         pathname: "/",
         query: query,

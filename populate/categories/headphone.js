@@ -9,7 +9,7 @@ const headphone = [
     checked: false,
     inStock: 11,
     sold: 12,
-    title: "HyperX CloudCore7.1",
+    title: "hyperx cloudcore7.1",
     price: 6499,
     content:
       "Virtual 7.1 surround sound - Hear positional audio better and get a more immersive audio experience thanks to virtual 7.1 surround sound delivered through the Cloud Core’s digital signal processing sound card. Advanced audio control box - The USB audio control box is powerful and easy-to-use. Conveniently access mic volume, headset volume, and mute the mic without having to dig into system menus Signature HyperX comfort with Durable aluminum frame - Game longer and more comfortably thanks to the comfort provided by HyperX memory foam. Built tough with a sturdy aluminum frame so it is better equipped to handle the wear and tear of daily use.",
@@ -28,7 +28,7 @@ const headphone = [
     checked: false,
     inStock: 12,
     sold: 13,
-    title: "Corsair HS35",
+    title: "corsair hs35",
     price: 2699,
     content:
       "Multi-platform compatible with PC, Xbox One, PS4, Nintendo Switch and mobile devices A pair of custom-tuned 50mm neodymium speaker drivers deliver excellent sound quality with wide range and reliable accuracy A fully detachable unidirectional microphone is optimized for voice quality while reducing ambient noise, so that you’re heard loud and clear",
@@ -47,7 +47,7 @@ const headphone = [
     checked: false,
     inStock: 13,
     sold: 14,
-    title: "Redgear Cosmo-7.1",
+    title: "redgear cosmo-7.1",
     price: 2599,
     content:
       "Sound Quality: Truly immerse yourself in your games with hardware-driven virtual 7.1 surround sound for precisely located audio Microphone: Redgear Cosmo 7.1 comes equipped with a high quality built-in noise cancelling microphone for a quick and stable communication Build Quality: It’s luxurious noise-isolating memory foam ear pads and adjustable split headband which reduces pressure and provides optimal comfort for long gaming sessions",
@@ -66,7 +66,7 @@ const headphone = [
     checked: false,
     inStock: 14,
     sold: 15,
-    title: "Redragon H120",
+    title: "redragon h120",
     price: 849,
     content:
       "HIGH SPEED TRACKING : Fusion engine delivers one of the highest gaming mouse tracking speeds of up to 500 IPS 8 PROGRAMMABLE BUTTONS : Customise your Logitech wired gaming mouse and enjoy default configuration straight out of the box or set up one-button triggers personal to you and save them to your G402 USB gaming mouse ON-THE-FLY DPI : Shift through up to four DPI settings, from pixel-precise targeting (250 DPI) to lightning-fast manoeuvres (4000 DPI)",
@@ -85,7 +85,7 @@ const headphone = [
     checked: false,
     inStock: 15,
     sold: 16,
-    title: "Cosmic GS410",
+    title: "cosmic gs410",
     price: 959,
     content:
       "Primary kind of gaming headset, perfect for playing games, listening music, etc. Soft cushion head-pad and ear-pad, as well as adjustable length hinges guarantee hours of gaming comfort Delivers clear sound and Deep Bass for Real Game. Little smart in-line Remote Control for sound and Mic",
@@ -104,7 +104,7 @@ const headphone = [
     checked: false,
     inStock: 16,
     sold: 17,
-    title: "Redgear Cloak",
+    title: "redgear cloak",
     price: 899,
     content:
       "Sound Quality: Redgear Cloak comes equipped with 50mm Driver with Enhanced audio bass and clarity which dramatically improves your in-game sound experience. Microphone: It comes equipped with a Omni-directional microphone which can be used as per you gaming situations. You can just put it up if it is not in use.",
