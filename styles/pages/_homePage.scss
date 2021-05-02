@@ -127,6 +127,19 @@
   }
 }
 
+.card-list-Ab {
+  min-height: 180px;
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  padding-bottom: 40px;
+
+  .card-header {
+    background-color: transparent;
+    padding-bottom: 5px;
+  }
+}
+
 .card-img-top-Ab {
   // height: 230px !important;
   // width: 100% !important;

@@ -1,0 +1,12 @@
+.card_main_title {
+  font-weight: bold;
+  font-size: 26px;
+  /* height: 60px; */
+}
+
+.text_opacity_description {
+  opacity: 0.6;
+}
+.text_opacity_subtitle {
+  opacity: 0.8;
+}

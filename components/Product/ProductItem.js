@@ -13,6 +13,7 @@ import {
   addToCart,
   capitalize,
 } from "helpers/helper.functions";
+import classes from "./Product.module.css";
 
 const ProductItem = ({ product, handleCheck }) => {
   const { state, dispatch } = useContext(DataContext);
@@ -92,29 +93,33 @@ const ProductItem = ({ product, handleCheck }) => {
                 >
                   {capitalize(product.title.split(" ").slice(0, 2).join(" "))}
                 </motion.div>
-                <motion.h6 className="card-subtitle mb-2 text-muted">
-                  <motion.div
-                    variants={fadeInUp}
-                    className="row justify-content-between mx-0"
+                <div>
+                  <motion.h6
+                    className={`card-subtitle mb-2 text-muted ${classes.text_opacity_subtitle}`}
                   >
-                    <h6 className="text-danger">
-                      {numberWithCommas(product.price)}
-                    </h6>
-                    {product.inStock > 0 ? (
+                    <motion.div
+                      variants={fadeInUp}
+                      className="row justify-content-between mx-0"
+                    >
                       <h6 className="text-danger">
-                        In Stock: {product.inStock}
+                        {numberWithCommas(product.price)}
                       </h6>
-                    ) : (
-                      <h6 className="text-danger">Out Stock</h6>
-                    )}
-                  </motion.div>
-                </motion.h6>
-                <motion.p
-                  className="card-text card-text-Ab"
-                  title={product.description}
-                >
-                  {product.description}
-                </motion.p>
+                      {product.inStock > 0 ? (
+                        <h6 className="text-danger">
+                          In Stock: {product.inStock}
+                        </h6>
+                      ) : (
+                        <h6 className="text-danger">Out Stock</h6>
+                      )}
+                    </motion.div>
+                  </motion.h6>
+                  <motion.p
+                    className={`card-text card-text-Ab ${classes.text_opacity_description}`}
+                    title={product.description}
+                  >
+                    {product.description}
+                  </motion.p>
+                </div>
               </motion.div>
             </motion.div>
           </div>

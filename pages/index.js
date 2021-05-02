@@ -12,6 +12,7 @@ import {
   BaseLayout,
   BasePage,
   ProductItem,
+  ProductListItem,
   Modal,
   Filter,
 } from "helpers/components.import";
@@ -43,7 +44,11 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
   const [page, setPage] = useState(1);
-
+  const [productToggle, setProductToggle] = useState("list");
+  const toggleProductToggle = () =>
+    setProductToggle((prevState) =>
+      prevState === "list" ? "border-all" : "list"
+    );
   useEffect(() => {
     setProducts(resProducts);
   }, [resProducts]);
@@ -143,21 +148,29 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
               handleCheckALL={handleCheckALL}
               handleDeleteAll={handleDeleteAll}
               isCheck={isCheck}
+              productToggle={productToggle}
+              toggleProductToggle={toggleProductToggle}
             />
+            <hr />
           </motion.div>
           <Row className="mt-3 mb-5">
             {products.length === 0 ? (
               <h2>No Products</h2>
             ) : (
-              products.map((product, index) => (
-                <Col key={index} lg="4" md="6" className="mb-5">
-                  <ProductItem
-                    key={index}
-                    product={product}
-                    handleCheck={handleCheck}
-                  />
-                </Col>
-              ))
+              products.map((product, index) =>
+                productToggle === "list" ? (
+                  <Col key={index} lg="4" md="6" className="mb-5">
+                    <ProductItem product={product} handleCheck={handleCheck} />
+                  </Col>
+                ) : (
+                  <Col key={index} md="9" className="mb-5">
+                    <ProductListItem
+                      product={product}
+                      handleCheck={handleCheck}
+                    />
+                  </Col>
+                )
+              )
             )}
           </Row>
           {result < page * 6 ? (

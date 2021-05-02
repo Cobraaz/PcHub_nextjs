@@ -1,6 +1,7 @@
 import { useState, useRouter, useEffect } from "helpers/package.import";
 
 import { filterSearch } from "helpers/helper.functions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
   Dropdown,
@@ -9,7 +10,14 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-const Filter = ({ auth, handleCheckALL, handleDeleteAll, isCheck }) => {
+const Filter = ({
+  auth,
+  handleCheckALL,
+  handleDeleteAll,
+  isCheck,
+  productToggle,
+  toggleProductToggle,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [featured, setFeatured] = useState("Featured");
   const [search, setSearch] = useState("");
@@ -26,6 +34,15 @@ const Filter = ({ auth, handleCheckALL, handleDeleteAll, isCheck }) => {
   return (
     <div className="input-group">
       <div className="input-group-prepend col-md-7 px-0">
+        <div className="btn mt-2">
+          <FontAwesomeIcon
+            className="clickable hoverable mr-3"
+            style={{ width: "2rem" }}
+            size="2x"
+            icon={productToggle}
+            onClick={toggleProductToggle}
+          />
+        </div>
         {auth.user && auth.user.role !== "user" && (
           <div className="delete_all btn btn-danger mt-2">
             <input
