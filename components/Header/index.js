@@ -115,6 +115,9 @@ const Header = ({
               ) : (
                 <LoggedInUser auth={auth} handleLogout={handleLogout} />
               )}
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/contact" title="Contact Us" />
+              </NavItem>
               {width > 768 && (
                 <NavItem className="port-navbar-item">
                   <ThemeToggle

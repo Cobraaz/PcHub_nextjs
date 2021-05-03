@@ -113,6 +113,7 @@ const ProductItem = ({ product, handleCheck }) => {
                       )}
                     </motion.div>
                   </motion.h6>
+                  <hr />
                   <motion.p
                     className={`card-text card-text-Ab ${classes.text_opacity_description}`}
                     title={product.description}
