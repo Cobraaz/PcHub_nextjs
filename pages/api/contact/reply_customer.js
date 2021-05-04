@@ -8,11 +8,8 @@ connectDB();
 
 export default async (req, res) => {
   switch (req.method) {
-    case "GET":
-      await getAllContact(req, res);
-      break;
     case "POST":
-      await contactUs(req, res);
+      await replyCustomer(req, res);
       break;
   }
 };
@@ -38,8 +35,10 @@ const sendEmail = (to, name) => {
             <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the PcHub Store.</h2>
             <p>Dear Sir,
             <br/>
-            Thank you Mr.${name} for your precious time for the review , 
-            in coming days we will try our level best to give more satisfaction to the customer, 
+            Thank you Mr.${name} for your precious time for the review, 
+            in coming days. I will try to remove the problem that you identify
+            <br/>
+            <span style="font-weight: bold;">Message from owner of the website i.e ANUJ BANSAL</span>
             <br/>
             Regards,
             <br/>
@@ -58,34 +57,16 @@ const sendEmail = (to, name) => {
   });
 };
 
-const contactUs = async (req, res) => {
-  try {
-    const { name, email, phone_no, message } = req.body;
-
-    if (!name || !email || !phone_no || !message)
-      return res.status(500).json({ err: "Please add all fields." });
-    if (!isEmail(email))
-      return res.status(500).json({ err: "Invalid emails." });
-
-    new ContactUs({
-      name,
-      email,
-      phone_no,
-      message,
-    }).save();
-    await sendEmail(email, name);
-    res.json({ msg: "check your email" });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ err: err.message });
-  }
-};
-
-const getAllContact = Authenticated(
+const replyCustomer = Authenticated(
   AuthenticatedRoot(async (req, res) => {
     try {
-      const contact = await ContactUs.find();
-      res.json({ contact });
+      const { name, email } = req.body;
+      if (!name || !email)
+        return res.status(500).json({ err: "Please add all fields." });
+      if (!isEmail(email))
+        return res.status(500).json({ err: "Invalid emails." });
+      await sendEmail(email, name);
+      res.json({ msg: "Thank you, Mail Send" });
     } catch (err) {
       console.log(err);
       return res.status(500).json({ err: err.message });

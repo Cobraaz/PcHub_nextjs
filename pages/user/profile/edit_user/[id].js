@@ -11,6 +11,7 @@ import {
   InputGroup,
   Label,
   Input,
+  parseCookies,
 } from "helpers/package.import";
 
 import { BaseLayout, BasePage } from "helpers/components.import";
@@ -183,5 +184,25 @@ const ResetPassword = () => {
     </BaseLayout>
   );
 };
+
+export async function getServerSideProps(ctx) {
+  // some auth logic here
+  const { res } = ctx;
+  const { user } = parseCookies(ctx);
+  const isAuth = user ? JSON.parse(user) : false;
+
+  if (
+    !isAuth ||
+    isAuth.role == "" ||
+    isAuth.role == "user" ||
+    !isAuth.role == "root"
+  ) {
+    withAuth(res, "/");
+  }
+
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
 
 export default ResetPassword;

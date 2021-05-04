@@ -35,7 +35,7 @@ const Profile = () => {
   const { avatar, cf_password, name, password } = data;
 
   const { state, dispatch } = useContext(DataContext);
-  const { auth, notify, users, orders, modal } = state;
+  const { auth, notify, users, orders, modal, contacts } = state;
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
 
@@ -61,6 +61,14 @@ const Profile = () => {
         dispatch({
           type: "GET_ALL_USERS",
           payload: res.users,
+        });
+      });
+      getData("contact", auth.token).then((res) => {
+        if (res.err)
+          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+        dispatch({
+          type: "ALL_CONTACT_US",
+          payload: res.contact,
         });
       });
     }
@@ -434,6 +442,51 @@ const Profile = () => {
                                     style={{ cursor: "default" }}
                                   ></i>
                                 )}
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              )}
+              {contacts.length > 0 && (
+                <>
+                  <h3
+                    className="text-uppercase font-weight-bold"
+                    style={{ marginTop: "30px" }}
+                  >
+                    Customers Message
+                  </h3>
+                  <div className="my-3 table-responsive">
+                    <table className="customers">
+                      <thead>
+                        <tr>
+                          <th>NAME</th>
+                          <th>EMAIL</th>
+                          <th>PHONE NO.</th>
+                          <th>MESSAGE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {contacts &&
+                          contacts.map((contact) => (
+                            <tr key={contact._id}>
+                              <td>
+                                <Link href={`/contact/${contact._id}`}>
+                                  <a className="anchor-custom">
+                                    {contact.name}
+                                  </a>
+                                </Link>
+                              </td>
+                              <td>{contact.email}</td>
+                              <td>{contact.phone_no}</td>
+                              <td>
+                                {contact.message
+                                  .split(" ")
+                                  .slice(0, 2)
+                                  .join(" ")}
+                                ...
                               </td>
                             </tr>
                           ))}

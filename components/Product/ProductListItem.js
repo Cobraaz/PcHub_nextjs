@@ -113,9 +113,10 @@ const ProductListItem = ({ product, handleCheck }) => {
                 disabled={product.inStock === 0 ? true : false}
                 onClick={() => {
                   dispatch(addToCart(product, cart));
-                  setTimeout(() => {
+                  let timer = setTimeout(() => {
                     dispatch({ type: "NOTIFY", payload: {} });
                   }, 0);
+                  clearTimeout(timer);
                 }}
                 style={{ outline: "none" }}
                 className=" card-button-Ab border-0"

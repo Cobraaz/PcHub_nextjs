@@ -50,6 +50,16 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
     dispatch(deleteItem(item.data, item.id, item.type));
     dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
+  const deleteContact = async (item) => {
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    const res = await deleteData(`contact/${item.id}`, auth.token);
+
+    if (res.err)
+      return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+    dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+    return router.push("/user/profile");
+  };
 
   const handleSubmit = () => {
     if (modal.length !== 0) {
@@ -65,6 +75,8 @@ const Modale = ({ showModal, toggleModal, dispatch, state }) => {
         if (item.type === "DELETE_PRODUCT") deleteProduct(item);
 
         if (item.type === "ADD_BRANDS") deleteBrand(item);
+
+        if (item.type === "DELETE_CONTACT") deleteContact(item);
 
         dispatch({ type: "ADD_MODAL", payload: [] });
       }

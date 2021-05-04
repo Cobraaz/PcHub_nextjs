@@ -43,6 +43,11 @@ const reducers = (state, action) => {
         ...state,
         brands: action.payload,
       };
+    case ACTIONS.ALL_CONTACT_US:
+      return {
+        ...state,
+        contacts: action.payload,
+      };
 
     default:
       return state;

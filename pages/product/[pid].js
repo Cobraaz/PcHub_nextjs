@@ -189,9 +189,10 @@ const DetailProduct = ({ product, products: resProducts }) => {
                     disabled={product.inStock === 0 ? true : false}
                     onClick={() => {
                       dispatch(addToCart(product, cart));
-                      setTimeout(() => {
+                      let timer = setTimeout(() => {
                         dispatch({ type: "NOTIFY", payload: {} });
                       }, 0);
+                      clearTimeout(timer);
                     }}
                   >
                     Add to Cart{" "}

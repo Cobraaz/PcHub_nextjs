@@ -56,9 +56,12 @@ const ActivationEmail = () => {
             type: "NOTIFY",
             payload: { success: res.msg },
           });
-          await setTimeout(() => {
+          let timer = setTimeout(() => {
             router.push("/");
           }, 2000);
+          return () => {
+            clearTimeout(timer);
+          };
         } catch (err) {
           setErr(err);
         }

@@ -14,6 +14,7 @@ export const DataProvider = ({ children }) => {
     orders: [],
     categories: [],
     brands: [],
+    contacts: [],
   };
   const [state, dispatch] = useReducer(reducers, initialState);
   const { cart, auth } = state;
