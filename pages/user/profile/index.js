@@ -20,6 +20,7 @@ import {
   patchData,
   formatDate,
 } from "helpers/helper.functions";
+import Hero from "components/Profile/Hero";
 
 const Profile = () => {
   const router = useRouter();
@@ -195,6 +196,11 @@ const Profile = () => {
   return (
     <div onClick={() => showModal && toggleModal()}>
       <BaseLayout>
+        <Hero
+          src={avatar ? avatar : auth.user.avatar}
+          name={name}
+          changeAvatar={changeAvatar}
+        />
         <BasePage
           className="profile-page"
           header={`${(auth.user.role === "user"
@@ -213,30 +219,9 @@ const Profile = () => {
           />
           <section className="row text-secondary my-3">
             <div className="col-md-4">
-              <div className="avatar">
-                <img src={avatar ? avatar : auth.user.avatar} alt="Avatar" />
-                {/* <Image
-                  src={avatar ? avatar : auth.user.avatar}
-                  alt="Avatar"
-                  layout="fill"
-                  quality={25}
-                /> */}
-                <span>
-                  <i
-                    className="ri-camera-2-line"
-                    style={{ fontSize: "1.3rem" }}
-                  ></i>
-                  <p>Change</p>
-                  <input
-                    type="file"
-                    name="file"
-                    id="file_up"
-                    accept="image/*"
-                    onChange={changeAvatar}
-                  />
-                </span>
-              </div>
-
+              <h3 className="text-uppercase font-weight-bold">
+                Edit Information
+              </h3>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input

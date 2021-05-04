@@ -181,7 +181,7 @@ const Login = () => {
                           <div
                             onClick={renderProps.onClick}
                             disabled={renderProps.disabled}
-                            className="social-icon"
+                            className="social-icon clickable"
                           >
                             <i
                               className="ri-google-fill"
@@ -211,7 +211,7 @@ const Login = () => {
                           <div
                             onClick={renderProps.onClick}
                             disabled={renderProps.disabled}
-                            className="social-icon"
+                            className="social-icon clickable"
                           >
                             <i
                               className="ri-facebook-fill"
