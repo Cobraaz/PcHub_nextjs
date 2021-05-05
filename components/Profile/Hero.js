@@ -1,6 +1,9 @@
 import classes from "./hero.module.css";
+import { useTheme } from "providers/ThemeProvider";
 
 const Hero = ({ src, name, changeAvatar }) => {
+  const { theme } = useTheme();
+
   return (
     <section className={`${classes.hero}`}>
       <div className={`${classes.image}`}>
@@ -17,7 +20,11 @@ const Hero = ({ src, name, changeAvatar }) => {
           />
         </span>
       </div>
-      <h1>Welcome {name}</h1>
+      {theme.type === "light" ? (
+        <h1 className={classes.light_h1}>Welcome {name}</h1>
+      ) : (
+        <h1 className={classes.dark_h1}>Welcome {name}</h1>
+      )}
     </section>
   );
 };

@@ -57,8 +57,15 @@
   cursor: pointer;
 }
 
-.hero h1 {
+.light_h1 {
   font-size: 2rem;
   margin: 1rem 0;
   color: hsl(265, 6%, 66%);
+  transition: 0.3s;
+}
+.dark_h1 {
+  font-size: 2rem;
+  margin: 1rem 0;
+  color: #b122e0;
+  transition: 0.3s;
 }
