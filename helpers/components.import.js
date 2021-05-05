@@ -10,6 +10,7 @@ import Modal from "components/Shared/Modal";
 import PaypalBtn from "components/Shared/paypalBtn";
 import OrderDetail from "components/Order/OrderDetail";
 import Filter from "components/Shared/Filter";
+import Comments from "components/Product/Comments";
 
 export {
   BaseLayout,
@@ -24,4 +25,5 @@ export {
   OrderDetail,
   Filter,
   ProductListItem,
+  Comments,
 };

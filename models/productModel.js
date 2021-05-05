@@ -44,6 +44,30 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    comments: [
+      {
+        user: {
+          type: mongoose.Types.ObjectId,
+          ref: "user",
+        },
+        text: {
+          type: String,
+          required: true,
+        },
+        name: {
+          type: String,
+        },
+        avatar: {
+          type: String,
+          default:
+            "https://res.cloudinary.com/cobraaz/image/upload/v1595762337/gez4i626tlesoe3plwn7.jpg",
+        },
+        date: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

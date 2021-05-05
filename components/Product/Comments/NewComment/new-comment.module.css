@@ -1,0 +1,51 @@
+.write_new {
+  margin: 80px auto 0;
+  width: 50%;
+}
+
+.write_new textarea {
+  font: inherit;
+  outline: 0;
+  border-radius: 3px;
+  box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.06);
+  overflow: auto;
+  width: 100%;
+  min-height: 80px;
+  padding: 15px 20px;
+  transition: 0.3s;
+}
+.write_new_light_textarea {
+  color: #444;
+  border: 1px solid #cecece;
+  background-color: #fefefe;
+}
+.write_new_dark_textarea {
+  color: #dcdcdc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.write_new img {
+  border-radius: 50%;
+  margin-top: 15px;
+}
+
+.write_new button {
+  float: right;
+  background-color: #9b5f5f;
+  box-shadow: 1px 2px 1px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 50px;
+  border: 0;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 25px;
+  margin-top: 18px;
+  outline: none !important;
+}
+
+@media (max-width: 800px) {
+  .write_new {
+    width: 100%;
+  }
+}

@@ -12,6 +12,7 @@ import {
   BasePage,
   ProductItem,
   Modal,
+  Comments,
 } from "helpers/components.import";
 import {
   stagger,
@@ -21,9 +22,10 @@ import {
   numberWithCommas,
   countWords,
   addToCart,
+  capitalize,
 } from "helpers/helper.functions";
 
-const DetailProduct = ({ product, products: resProducts }) => {
+const DetailProduct = ({ product, products: resProducts, pid: productId }) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth } = state;
   const [products] = useState(resProducts);
@@ -69,8 +71,9 @@ const DetailProduct = ({ product, products: resProducts }) => {
       <BasePage
         indexPage
         className="product-detail-page"
-        title={`${product.title.split(" ").slice(0, 2).join(" ")}
-                ${countWords(product.title) > 2 && "..."}`}
+        title={`${capitalize(
+          product.title.split(" ").slice(0, 2).join(" ")
+        )} ...`}
       >
         <Modal
           dispatch={dispatch}
@@ -102,6 +105,7 @@ const DetailProduct = ({ product, products: resProducts }) => {
                       alt="Product image"
                       width={500}
                       height={400}
+                      className="img-product"
                     />
                   </motion.div>
                 </div>
@@ -130,6 +134,7 @@ const DetailProduct = ({ product, products: resProducts }) => {
                         width={120}
                         height={100}
                         quality={25}
+                        className="img-product"
                       />
                     </motion.div>
                   </motion.div>
@@ -228,7 +233,7 @@ const DetailProduct = ({ product, products: resProducts }) => {
             </div>
           </div>
         </motion.div>
-
+        <Comments comments={product.comments} productId={productId} />
         <motion.h1
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
@@ -266,7 +271,7 @@ export async function getStaticProps({ params: { pid } }) {
   const { product } = await getData(`product/get_by_id/${pid}`);
   const { products } = await getData(`product/random_data/${pid}`);
 
-  return { props: { product, products }, revalidate: 1 };
+  return { props: { product, products, pid }, revalidate: 1 };
 }
 
 // export async function getServerSideProps({ params: { pid } }) {
