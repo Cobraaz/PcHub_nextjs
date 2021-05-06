@@ -52,7 +52,15 @@ function Comments({ comments: resComments, productId }) {
       if (!text.endsWith(".")) {
         text = text.concat(".");
       }
-
+      setComments([
+        {
+          text,
+          name: auth.user.name,
+          avatar: auth.user.avatar,
+          date: new Date(),
+        },
+        ...comments,
+      ]);
       const res = await postData(
         `product/comment/${productId}`,
         { text },
@@ -65,7 +73,6 @@ function Comments({ comments: resComments, productId }) {
       setNewComment("");
       setComments(res.comment);
       dispatch({ type: "NOTIFY", payload: { success: res.msg } });
-      console.log(res);
       return setCallback(!callback);
     } catch (err) {
       console.log(err);

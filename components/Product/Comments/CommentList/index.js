@@ -1,6 +1,7 @@
 import { formatDate } from "utils/helper.functions";
 import classes from "./comment-list.module.css";
 import { useTheme } from "providers/ThemeProvider";
+import CommentsButtons from "./CommentButtons";
 const ShowComments = ({ comments: { text, name, avatar, date }, extra }) => {
   const { theme } = useTheme();
   return (
@@ -19,9 +20,19 @@ const ShowComments = ({ comments: { text, name, avatar, date }, extra }) => {
       </div>
 
       {theme.type === "light" ? (
-        <section>{text}</section>
+        <section>
+          <div
+          //  style={{ width: "50%" }}
+          >
+            {text}
+          </div>
+          <CommentsButtons />
+        </section>
       ) : (
-        <section className={classes.comment_section}>{text}</section>
+        <section className={classes.comment_section}>
+          {text}
+          <CommentsButtons />
+        </section>
       )}
     </li>
   );
