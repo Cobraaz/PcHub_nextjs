@@ -2,10 +2,16 @@ import { formatDate } from "utils/helper.functions";
 import classes from "./comment-list.module.css";
 import { useTheme } from "providers/ThemeProvider";
 import CommentsButtons from "./CommentButtons";
-const ShowComments = ({ comments: { text, name, avatar, date }, extra }) => {
+const ShowComments = ({
+  comments: { text, name, avatar, date, _id: commentId, user: commentUserId },
+  index,
+  extra,
+  deleteComment,
+}) => {
   const { theme } = useTheme();
   return (
     <li
+      id={`${index}-comment-list`}
       className={`${classes.comment} ${
         extra ? classes.author_comment : classes.user_comment
       }`}
@@ -26,12 +32,20 @@ const ShowComments = ({ comments: { text, name, avatar, date }, extra }) => {
           >
             {text}
           </div>
-          <CommentsButtons />
+          <CommentsButtons
+            deleteComment={deleteComment}
+            commentId={commentId || ""}
+            commentUserId={commentUserId}
+          />
         </section>
       ) : (
         <section className={classes.comment_section}>
           {text}
-          <CommentsButtons />
+          <CommentsButtons
+            deleteComment={deleteComment}
+            commentId={commentId}
+            commentUserId={commentUserId}
+          />
         </section>
       )}
     </li>

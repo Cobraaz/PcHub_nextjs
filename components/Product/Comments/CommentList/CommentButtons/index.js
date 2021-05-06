@@ -1,19 +1,30 @@
-import { Button } from "reactstrap";
 import classes from "./comment-button.module.css";
-const CommentsButtons = () => {
+import { useContext, Button } from "helpers/package.import";
+
+import { DataContext } from "helpers/helper.functions";
+const CommentsButtons = ({ deleteComment, commentId, commentUserId }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
+  const loggedInUserId = (auth.user && auth.user.id) || "";
   return (
     <>
       <span className={classes.blog_likes_text}>
         <span style={{ fontWeight: "500" }}>Likes </span>50
         <div style={{ justifyContent: "space-around" }}>
-          <Button
-            outline
-            color="danger"
-            size="sm"
-            className={`ml-2 justify-content-end ${classes.blog_delete}`}
-          >
-            <i className={`ri-delete-bin-2-fill clickable icons `}></i>
-          </Button>
+          {(loggedInUserId === commentUserId || auth.user.role === "root") && (
+            <Button
+              outline
+              color="danger"
+              size="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                deleteComment(e, commentId);
+              }}
+              className={`ml-2 justify-content-end ${classes.blog_delete}`}
+            >
+              <i className={`ri-delete-bin-2-fill clickable icons `}></i>
+            </Button>
+          )}
 
           <button
             className={`btn btn-outline-secondary btn-sm ${classes.blog_like_unlike}`}

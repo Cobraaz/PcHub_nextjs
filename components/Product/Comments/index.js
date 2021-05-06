@@ -15,6 +15,8 @@ import {
   postData,
   DataContext,
   getData,
+  getPositionOfElement,
+  deleteData,
 } from "helpers/helper.functions";
 import NewComment from "./NewComment";
 
@@ -61,6 +63,14 @@ function Comments({ comments: resComments, productId }) {
         },
         ...comments,
       ]);
+
+      const el = document.getElementById("0-comment-list");
+      const position = getPositionOfElement(el);
+      window.scrollTo({
+        top: position[1] - 150,
+        behavior: "smooth",
+      });
+
       const res = await postData(
         `product/comment/${productId}`,
         { text },
@@ -76,6 +86,26 @@ function Comments({ comments: resComments, productId }) {
       return setCallback(!callback);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const deleteComment = async (e, commentId) => {
+    e.stopPropagation();
+
+    const isConfirm = confirm("Are you sure you want to delete this comment?");
+    if (isConfirm) {
+      setComments(comments.filter((p) => p._id !== commentId));
+      const res = await deleteData(
+        `product/comment/${productId}/${commentId}`,
+        auth.token
+      );
+
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+      dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      setComments(res.comment);
+      return setCallback(!callback);
     }
   };
 
@@ -103,6 +133,7 @@ function Comments({ comments: resComments, productId }) {
                     comments={comment}
                     index={index}
                     extra={Boolean(index % 2)}
+                    deleteComment={deleteComment}
                   />
                 </div>
               ))

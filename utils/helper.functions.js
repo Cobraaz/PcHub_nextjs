@@ -143,3 +143,16 @@ export const capitalize = (input) => {
   });
   return CapitalizedWords.join(" ");
 };
+
+// * Get postion of element to scroll
+export const getPositionOfElement = (elem) => {
+  var left = 0,
+    top = 0;
+
+  do {
+    left += elem.offsetLeft - elem.scrollLeft;
+    top += elem.offsetTop - elem.scrollTop;
+  } while ((elem = elem.offsetParent));
+
+  return [left, top];
+};

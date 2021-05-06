@@ -23,6 +23,7 @@ import {
   formatDate,
   getPhotoUnsplash,
   capitalize,
+  getPositionOfElement,
 } from "utils/helper.functions";
 import filterSearch from "utils/filterSearch";
 
@@ -77,4 +78,5 @@ export {
   getPhotoUnsplash,
   filterSearch,
   capitalize,
+  getPositionOfElement,
 };

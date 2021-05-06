@@ -64,13 +64,3 @@ const addComment = Authenticated(async (req, res) => {
     return res.status(500).json({ err: err.message });
   }
 });
-
-const sold = async (id, quantity, oldInStock, oldSold) => {
-  await Products.findOneAndUpdate(
-    { _id: id },
-    {
-      inStock: oldInStock - quantity,
-      sold: quantity + oldSold,
-    }
-  );
-};
