@@ -11,7 +11,8 @@ const CommentsButtons = ({ deleteComment, commentId, commentUserId }) => {
       <span className={classes.blog_likes_text}>
         <span style={{ fontWeight: "500" }}>Likes </span>50
         <div style={{ justifyContent: "space-around" }}>
-          {(loggedInUserId === commentUserId || auth.user.role === "root") && (
+          {(loggedInUserId === commentUserId ||
+            (auth && auth.user && auth.user.role === "root")) && (
             <Button
               outline
               color="danger"
