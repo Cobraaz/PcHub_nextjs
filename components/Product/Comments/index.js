@@ -29,11 +29,26 @@ function Comments({ comments: resComments, productId }) {
   const { theme } = useTheme();
   const { auth } = state;
 
+  const refreshComments = async () => {
+    const res = await getData(`product/comment/${productId}`);
+
+    setComments(res.comment);
+  };
+
   useEffect(async () => {
     if (showComments) {
       const res = await getData(`product/comment/${productId}`);
       setComments(res.comment);
+      window.addEventListener("focus", refreshComments);
     }
+    const interval = setInterval(() => {
+      refreshComments();
+    }, 10000);
+
+    return () => {
+      window.removeEventListener("focus", refreshComments);
+      clearInterval(interval);
+    };
   }, [showComments, callback]);
 
   const toggleCommentsHandler = () => {
@@ -49,6 +64,13 @@ function Comments({ comments: resComments, productId }) {
           type: "NOTIFY",
           payload: { error: "Please add a comment." },
         });
+      if (!auth || !auth.user || !auth.user.name) {
+        setNewComment("");
+        return dispatch({
+          type: "NOTIFY",
+          payload: { error: "Please Login first." },
+        });
+      }
 
       let text = newComment.trim();
       if (!text.endsWith(".")) {
@@ -60,6 +82,7 @@ function Comments({ comments: resComments, productId }) {
           name: auth.user.name,
           avatar: auth.user.avatar,
           date: new Date(),
+          likes: [{ user: auth.user.id }],
         },
         ...comments,
       ]);
@@ -89,9 +112,7 @@ function Comments({ comments: resComments, productId }) {
     }
   };
 
-  const deleteComment = async (e, commentId) => {
-    e.stopPropagation();
-
+  const deleteComment = async (commentId) => {
     const isConfirm = confirm("Are you sure you want to delete this comment?");
     if (isConfirm) {
       setComments(comments.filter((p) => p._id !== commentId));
@@ -134,6 +155,9 @@ function Comments({ comments: resComments, productId }) {
                     index={index}
                     extra={Boolean(index % 2)}
                     deleteComment={deleteComment}
+                    productId={productId}
+                    setCallback={setCallback}
+                    callback={callback}
                   />
                 </div>
               ))

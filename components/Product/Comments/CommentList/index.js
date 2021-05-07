@@ -3,11 +3,23 @@ import classes from "./comment-list.module.css";
 import { useTheme } from "providers/ThemeProvider";
 import CommentsButtons from "./CommentButtons";
 const ShowComments = ({
-  comments: { text, name, avatar, date, _id: commentId, user: commentUserId },
+  comments: {
+    text,
+    name,
+    avatar,
+    date,
+    _id: commentId,
+    user: commentUserId,
+    likes = [],
+  },
   index,
   extra,
   deleteComment,
+  productId,
+  setCallback,
+  callback,
 }) => {
+ 
   const { theme } = useTheme();
   return (
     <li
@@ -36,6 +48,10 @@ const ShowComments = ({
             deleteComment={deleteComment}
             commentId={commentId || ""}
             commentUserId={commentUserId}
+            likes={likes}
+            productId={productId}
+            setCallback={setCallback}
+            callback={callback}
           />
         </section>
       ) : (
@@ -43,8 +59,12 @@ const ShowComments = ({
           {text}
           <CommentsButtons
             deleteComment={deleteComment}
-            commentId={commentId}
+            commentId={commentId || ""}
             commentUserId={commentUserId}
+            likes={likes}
+            productId={productId}
+            setCallback={setCallback}
+            callback={callback}
           />
         </section>
       )}

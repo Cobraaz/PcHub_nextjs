@@ -66,6 +66,14 @@ const productSchema = new mongoose.Schema(
           type: Date,
           default: Date.now,
         },
+        likes: [
+          {
+            user: {
+              type: mongoose.Types.ObjectId,
+              ref: "user",
+            },
+          },
+        ],
       },
     ],
   },

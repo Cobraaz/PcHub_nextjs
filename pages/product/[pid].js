@@ -264,12 +264,18 @@ export async function getStaticPaths() {
       params: { pid: product._id },
     };
   });
-  return { paths, fallback: true };
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params: { pid } }) {
   const { product } = await getData(`product/get_by_id/${pid}`);
   const { products } = await getData(`product/random_data/${pid}`);
+
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
 
   return { props: { product, products, pid }, revalidate: 1 };
 }
