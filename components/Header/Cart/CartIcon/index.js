@@ -1,5 +1,6 @@
+import classes from "./cart-icon.module.css";
 export const CartIcon = ({ cartLength, className }) => (
-  <div className="CartIconContainer">
+  <div className={classes.cart_icon_container}>
     <img
       src="/shopping-bag.svg"
       style={{
@@ -8,7 +9,7 @@ export const CartIcon = ({ cartLength, className }) => (
         color: "white",
       }}
     />
-    <span className="CartIconItemCountContainer">{cartLength}</span>
+    <span className={classes.item_Count_container}>{cartLength}</span>
   </div>
 );
 

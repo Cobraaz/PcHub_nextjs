@@ -68,80 +68,8 @@
     }
   }
 
-  // Cart DropDown CSS
-  .CartDropdownContainer {
-    position: absolute;
-    width: 280px;
-    height: 340px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border: 1px solid black;
-    background-color: white;
-    top: 90px;
-    right: 40px;
-    z-index: 5;
-
-    @media screen and (max-width: 800px) {
-      width: 240px;
-    }
-  }
-  .EmptyMessageContainer {
-    font-size: 18px;
-    margin: 50px auto;
-  }
-  .CartItemsContainer {
-    height: 240px;
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
   .CartDropdownButton {
     background-color: #f47625;
-  }
-
-  .CartItemsContainer::-webkit-scrollbar {
-    display: none;
-  }
-
-  .CartItemDropdownContainer {
-    width: 100%;
-    display: flex;
-    height: 80px;
-    margin-bottom: 15px;
-    text-decoration: none;
-    color: #b122e0;
-    transition: 0.3s;
-  }
-  .CartItemDropdownContainer:hover {
-    color: #d193e6;
-  }
-  .CartItemDropdownDetailsContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 10px;
-  }
-
-  .CartIconContainer {
-    width: 45px;
-    height: 45px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-  .CartIconItemCountContainer {
-    position: absolute;
-    font-size: 10px;
-    font-weight: bold;
-    bottom: 12px;
-    color: white;
   }
 }
 

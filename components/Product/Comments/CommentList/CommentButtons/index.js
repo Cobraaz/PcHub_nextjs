@@ -14,7 +14,7 @@ const CommentsButtons = ({
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
   const [commentLikes, setCommentLikes] = useState(likes);
-  const [noOfLikes, setNoOfLikes] = useState(likes.length);
+  const [noOfLikes, setNoOfLikes] = useState(likes.length || 0);
 
   const loggedInUserId = (auth.user && auth.user.id) || "";
 

@@ -23,7 +23,7 @@ import NewComment from "./NewComment";
 function Comments({ comments: resComments, productId }) {
   const { state, dispatch } = useContext(DataContext);
   const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState(resComments);
+  const [comments, setComments] = useState(resComments || []);
   const [newComment, setNewComment] = useState("");
   const [callback, setCallback] = useState(false);
   const { theme } = useTheme();
@@ -31,7 +31,6 @@ function Comments({ comments: resComments, productId }) {
 
   const refreshComments = async () => {
     const res = await getData(`product/comment/${productId}`);
-
     setComments(res.comment);
   };
 

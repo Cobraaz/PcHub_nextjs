@@ -64,7 +64,14 @@ const Header = ({
               className="text-right cart-icon-mobile"
               onClick={() => setCartDropdownHidden(!cartDropdownHidden)}
             >
-              <CartIcon cartLength={cart.length} />
+              <CartIcon
+                cartLength={
+                  auth.user &&
+                  (auth.user.role === "root" || auth.user.role === "admin")
+                    ? 0
+                    : cart.length
+                }
+              />
             </div>
           )}
           <NavbarToggler
