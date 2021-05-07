@@ -44,6 +44,14 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    likes: [
+      {
+        user: {
+          type: mongoose.Types.ObjectId,
+          ref: "user",
+        },
+      },
+    ],
     comments: [
       {
         user: {

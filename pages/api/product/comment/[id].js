@@ -2,6 +2,7 @@ import connectDB from "utils/connectDB";
 import Users from "models/userModel";
 import Products from "models/productModel";
 import Authenticated from "middleware/Authenticated";
+import { formatDate } from "utils/helper.functions";
 
 connectDB();
 
@@ -23,6 +24,10 @@ const getCommentsById = async (req, res) => {
     const product = await Products.findById(id);
     if (!product)
       return res.status(400).json({ err: "This product does not exist." });
+
+    product.comments.sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
 
     res.json({ comment: product.comments });
   } catch (err) {
@@ -54,6 +59,10 @@ const addComment = Authenticated(async (req, res) => {
     product.comments.unshift(newComment);
 
     await product.save();
+
+    product.comments.sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
 
     res.json({
       msg: "Comment added",

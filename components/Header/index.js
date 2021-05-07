@@ -91,6 +91,16 @@ const Header = ({
               </NavItem>
             </Nav>
             <Nav navbar>
+              {Object.keys(auth).length === 0 ? (
+                <NavItem className="port-navbar-item">
+                  <LoginLink />
+                </NavItem>
+              ) : (
+                <LoggedInUser auth={auth} handleLogout={handleLogout} />
+              )}
+              <NavItem className="port-navbar-item">
+                <BsNavLink href="/contact" title="Contact Us" />
+              </NavItem>
               {width > 768 && (
                 <NavItem className="port-navbar-item">
                   <div
@@ -108,16 +118,6 @@ const Header = ({
                   </div>
                 </NavItem>
               )}
-              {Object.keys(auth).length === 0 ? (
-                <NavItem className="port-navbar-item">
-                  <LoginLink />
-                </NavItem>
-              ) : (
-                <LoggedInUser auth={auth} handleLogout={handleLogout} />
-              )}
-              <NavItem className="port-navbar-item">
-                <BsNavLink href="/contact" title="Contact Us" />
-              </NavItem>
               {width > 768 && (
                 <NavItem className="port-navbar-item">
                   <ThemeToggle

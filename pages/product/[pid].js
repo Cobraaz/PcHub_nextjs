@@ -23,16 +23,25 @@ import {
   countWords,
   addToCart,
   capitalize,
+  putData,
 } from "helpers/helper.functions";
 
-const DetailProduct = ({ product, products: resProducts, pid: productId }) => {
+const DetailProduct = ({
+  product: resProduct,
+  products: resProducts,
+  pid: productId,
+}) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth } = state;
+  const [product, setProduct] = useState(resProduct);
   const [products] = useState(resProducts);
   const [tab, setTab] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
-
+  const [postLikes, setPostLikes] = useState(product.likes);
+  const [noOfLikes, setNoOfLikes] = useState(product.likes.length);
+  const [callback, setCallback] = useState(false);
+  const loggedInUserId = (auth.user && auth.user.id) || "";
   const isActive = (index) => {
     if (tab === index) return " active-img";
     return "";
@@ -63,6 +72,102 @@ const DetailProduct = ({ product, products: resProducts, pid: productId }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  useEffect(async () => {
+    const res = await getData(`product/get_by_id/${productId}`);
+    setProduct(res.product);
+  }, [callback]);
+
+  const likeComment = async () => {
+    try {
+      if (!auth || !auth.user || !auth.user.name) {
+        return dispatch({
+          type: "NOTIFY",
+          payload: { error: "Please Login first." },
+        });
+      }
+      setNoOfLikes(noOfLikes + 1);
+      setPostLikes([{ user: auth.user.id.toString() }, ...postLikes]);
+
+      const res = await putData(`product/like/${productId}`, {}, auth.token);
+
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      setNoOfLikes(res.likes.length);
+      setPostLikes(res.likes);
+      return setCallback(!callback);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const unLikeComment = async () => {
+    try {
+      if (!auth || !auth.user || !auth.user.name) {
+        return dispatch({
+          type: "NOTIFY",
+          payload: { error: "Please Login first." },
+        });
+      }
+      setNoOfLikes(noOfLikes - 1);
+
+      const removeIndex = await postLikes
+        .map((like) => like.user.toString())
+        .indexOf(loggedInUserId);
+
+      if (removeIndex !== -1) {
+        setPostLikes((postLikes) =>
+          postLikes.filter((_, i) => i !== removeIndex)
+        );
+      }
+
+      const res = await putData(`product/unlike/${productId}`, {}, auth.token);
+
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      setNoOfLikes(res.likes.length);
+      setPostLikes(res.likes);
+      return setCallback(!callback);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const ShowLikeUnlikeButton = () => {
+    if (
+      postLikes.filter((like) => like.user.toString() === loggedInUserId)
+        .length > 0
+    ) {
+      return (
+        <span>
+          <i
+            onClick={unLikeComment}
+            style={{
+              fontSize: "1.4em",
+              verticalAlign: "middle",
+              color: "#f64749",
+            }}
+            className="ri-heart-2-line clickable"
+          ></i>
+        </span>
+      );
+    }
+    return (
+      <span>
+        <i
+          style={{
+            fontSize: "1.4em",
+            verticalAlign: "middle",
+            color: "#f64749",
+          }}
+          onClick={likeComment}
+          className="ri-heart-2-fill clickable"
+        ></i>
+      </span>
+    );
   };
 
   if (!product) return null;
@@ -184,6 +289,13 @@ const DetailProduct = ({ product, products: resProducts, pid: productId }) => {
                   min="0"
                   //   value="1"
                 /> */}
+                <span
+                  className="font-weight-bold pr-2"
+                  style={{ fontSize: "1.1em" }}
+                >
+                  {noOfLikes}
+                </span>
+                <ShowLikeUnlikeButton />
                 {!auth.user || auth.user.role === "user" ? (
                   <motion.button
                     whileHover={{ scale: 1.1 }}

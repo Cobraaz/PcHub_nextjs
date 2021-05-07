@@ -46,8 +46,8 @@ function Comments({ comments: resComments, productId }) {
     }, 10000);
 
     return () => {
-      window.removeEventListener("focus", refreshComments);
       clearInterval(interval);
+      window.removeEventListener("focus", refreshComments);
     };
   }, [showComments, callback]);
 

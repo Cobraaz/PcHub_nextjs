@@ -74,28 +74,30 @@ const ProductListItem = ({ product, handleCheck }) => {
               }
             >
               <CardHeader className="d-flex flex-row">
-                <CardTitle className={classes.card_main_title}>
-                  {capitalize(product.title.split(" ").slice(0, 2).join(" "))}
-                </CardTitle>
-                <motion.h6
-                  className={`card-subtitle text-muted ${classes.text_opacity_subtitle}`}
-                >
-                  <div
-                    variants={fadeInUp}
-                    className="row justify-content-between mx-0"
+                <div>
+                  <CardTitle className={classes.card_main_title}>
+                    {capitalize(product.title.split(" ").slice(0, 2).join(" "))}
+                  </CardTitle>
+                  <motion.h6
+                    className={`card-subtitle text-muted ${classes.text_opacity_subtitle}`}
                   >
-                    <h6 className="text-danger">
-                      {numberWithCommas(product.price)}
-                    </h6>
-                    {product.inStock > 0 ? (
+                    <div
+                      variants={fadeInUp}
+                      className="row justify-content-between mx-0"
+                    >
                       <h6 className="text-danger">
-                        In Stock: {product.inStock}
+                        {numberWithCommas(product.price)}
                       </h6>
-                    ) : (
-                      <h6 className="text-danger">Out Stock</h6>
-                    )}
-                  </div>
-                </motion.h6>
+                      {product.inStock > 0 ? (
+                        <h6 className="text-danger">
+                          In Stock: {product.inStock}
+                        </h6>
+                      ) : (
+                        <h6 className="text-danger">Out Stock</h6>
+                      )}
+                    </div>
+                  </motion.h6>
+                </div>
               </CardHeader>
               <CardBody>
                 <>

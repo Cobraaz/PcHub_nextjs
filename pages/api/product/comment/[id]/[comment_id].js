@@ -50,6 +50,10 @@ const deleteComment = Authenticated(async (req, res) => {
 
     await product.save();
 
+    product.comments.sort(function (a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
+
     res.json({
       msg: "Comment deleted",
       comment: product.comments,

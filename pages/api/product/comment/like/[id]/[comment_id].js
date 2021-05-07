@@ -1,5 +1,4 @@
 import connectDB from "utils/connectDB";
-import Users from "models/userModel";
 import Products from "models/productModel";
 import Authenticated from "middleware/Authenticated";
 
