@@ -17,6 +17,8 @@ const headphone = [
       "Detachable noise-cancelling mic and Multi-platform compatibility - The flexible, detachable, noise-cancelling mic is Discord and TeamSpeak certified, and will give you a clear line of communication with your squadmates. The USB audio control box is compatible with PC and PS4, and you can connect via 3.5mm cable to Xbox One, Nintendo Switch, and Mobile and VR systems that support the connection",
     category: "6079b954ddf2d5405c0b8c38",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -36,6 +38,8 @@ const headphone = [
       "Plush memory foam with adjustable earcups, combined with lightweight construction, provide the comfort you need for hours of gameplay On-ear volume and mute controls let you adjust on-the-fly without pulling you away from the game Discord-certified for crystal-clear communication and outstanding sound",
     category: "6079b954ddf2d5405c0b8c38",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -55,6 +59,8 @@ const headphone = [
       "Noise Cancellation: Redgear Cosmo 7.1 provides you a passive noise cancelling experience. It’s closed earcups design blocks any kind of distraction from outside which helps you keep focus during the game for as long as you want Other Features: This headset has an amazing RGB LED light effect on ear-ups and tip of the microphone. It also comes equipped with audio control which helps control volume",
     category: "6079b954ddf2d5405c0b8c38",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -74,6 +80,8 @@ const headphone = [
       "ADVANCED RESPONSE RATE : They will be communicated to the game at the highest possible speed COMFORTABLE DESIGN : Lightweight materials, rubber grips and low friction feet help ensure that your gaming sessions last as long as you can",
     category: "6079b954ddf2d5405c0b8c38",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -93,6 +101,8 @@ const headphone = [
       "Flexible microphone for exact positioning and mic with great sensitivity at picking up sounds, your partner can hear your words clearly. Single 3.5mm Jack for sound and mic",
     category: "6079b954ddf2d5405c0b8c38",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -112,6 +122,8 @@ const headphone = [
       "Build Quality: It’s luxurious noise-isolating memory foam ear pads and adjustable split headband reduces pressure and provides optimal comfort for long gaming sessions. Other Features: This headset has an amazing RGB LED light effect on ear-ups and tip of the microphone. It also comes equipped with volume control, so just scroll up or down to adjust it.",
     category: "6079b954ddf2d5405c0b8c38",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
 ];
 

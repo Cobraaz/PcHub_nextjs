@@ -38,8 +38,8 @@ const DetailProduct = ({
   const [tab, setTab] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
-  const [postLikes, setPostLikes] = useState(product.likes);
-  const [noOfLikes, setNoOfLikes] = useState(product.likes.length);
+  const [postLikes, setPostLikes] = useState(product.likes || []);
+  const [noOfLikes, setNoOfLikes] = useState(product.likes.length || 0);
   const [callback, setCallback] = useState(false);
   const loggedInUserId = (auth.user && auth.user.id) || "";
   const isActive = (index) => {
@@ -77,6 +77,8 @@ const DetailProduct = ({
   useEffect(async () => {
     const res = await getData(`product/get_by_id/${productId}`);
     setProduct(res.product);
+    setPostLikes(res.product.likes);
+    setNoOfLikes(res.product.likes.length);
   }, [callback]);
 
   const likeComment = async () => {

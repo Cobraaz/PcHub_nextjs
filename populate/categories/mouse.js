@@ -17,6 +17,8 @@ const mouse = [
       "Ten Fully Programmable Buttons: Customize your gaming with the in-game advantage of powerful macros and key remaps Precise Weight Calibration: Two sets of weights and six mounting locations offer 120 different weight and balance configurations Smart Tunable Weight System: CORSAIR exclusive software automatically detects the mouse’s center of gravity in real time, allowing you to adjust weight between 119g and 141g and fine-tune balance",
     category: "6079b94eddf2d5405c0b8c37",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -36,6 +38,8 @@ const mouse = [
       "Ten Fully Programmable Buttons: Customize your gaming with the in-game advantage of powerful macros and key remaps Precise Weight Calibration: Two sets of weights and six mounting locations offer 120 different weight and balance configurations Smart Tunable Weight System: CORSAIR exclusive software automatically detects the mouse’s center of gravity in real time, allowing you to adjust weight between 119g and 141g and fine-tune balance",
     category: "6079b94eddf2d5405c0b8c37",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -55,6 +59,8 @@ const mouse = [
       "Other Features: It comes with a gaming grade sensor for quick movements and reflexes. It also has extra durable switches and enhanced build quality to increase the durability of the mouse. Warranty: 1 year warranty against all manufacturing defects. Kindly reach out to us at +91-2249461882 for more information.",
     category: "6079b94eddf2d5405c0b8c37",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -74,6 +80,8 @@ const mouse = [
       "Specially invented Teflon formula ensures excellent gliding; Thanks to enlarged feet surface, balanced feet height and optimal place the mouse moves strictly horizontally Widened scroll wheel with special ribbed protector make the mouse control easier; The shape and the place of the scroll wheel are optimal for simultaneous movements of index finger from the left button to the wheel back and forth",
     category: "6079b94eddf2d5405c0b8c37",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -93,6 +101,8 @@ const mouse = [
       "Ten Fully Programmable Buttons: Customize your gaming with the in-game advantage of powerful macros and key remaps Precise Weight Calibration: Two sets of weights and six mounting locations offer 120 different weight and balance configurations Smart Tunable Weight System: CORSAIR exclusive software automatically detects the mouse’s center of gravity in real time, allowing you to adjust weight between 119g and 141g and fine-tune balance",
     category: "6079b94eddf2d5405c0b8c37",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -112,6 +122,8 @@ const mouse = [
       "ADVANCED RESPONSE RATE : They will be communicated to the game at the highest possible speed COMFORTABLE DESIGN : Lightweight materials, rubber grips and low friction feet help ensure that your gaming sessions last as long as you can",
     category: "6079b94eddf2d5405c0b8c37",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
 ];
 module.exports = mouse;

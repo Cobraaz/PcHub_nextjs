@@ -17,6 +17,8 @@ const keyboard = [
       "INDIVIDUAL SWITCHES: The QHM9800 has hot-swappable B23 switches with full key rollover. RAINBOW EFFECT: There are 6 LED RGB Colours with 12 adjustable light modes which provide the keyboard with funky illumination effects. HIGHLY DURABLE: The heavy-duty mechanical keyboard is made up of powerful robust materials which is what every gamer roots for.",
     category: "6079b947ddf2d5405c0b8c36",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -36,6 +38,8 @@ const keyboard = [
       "INDIVIDUAL SWITCHES: The QHM9800 has hot-swappable B23 switches with full key rollover. RAINBOW EFFECT: There are 6 LED RGB Colours with 12 adjustable light modes which provide the keyboard with funky illumination effects. HIGHLY DURABLE: The heavy-duty mechanical keyboard is made up of powerful robust materials which is what every gamer roots for.",
     category: "6079b947ddf2d5405c0b8c36",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -55,6 +59,8 @@ const keyboard = [
       "INDIVIDUAL SWITCHES: The QHM9800 has hot-swappable B23 switches with full key rollover. RAINBOW EFFECT: There are 6 LED RGB Colours with 12 adjustable light modes which provide the keyboard with funky illumination effects. HIGHLY DURABLE: The heavy-duty mechanical keyboard is made up of powerful robust materials which is what every gamer roots for.",
     category: "6079b947ddf2d5405c0b8c36",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -74,6 +80,8 @@ const keyboard = [
       "Dedicated media control let you quickly play, pause, skip and adjust the volume of music right from the keyboard Easily customize key lighting, 12 function keys with custom commands and more with free Logitech gaming software For any queries, please call toll free number 1800 572 4730 (9:00am to 6:00pm-Monday to Friday)",
     category: "6079b947ddf2d5405c0b8c36",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -93,6 +101,8 @@ const keyboard = [
       "EGRONOMIC SPLASH PROOF DESIGN: The PC Gaming Keyboard has been ergonomically designed to be a superb typing tool for office work as well. You’ll love the feel and keystroke accuracy, which leads to fewer errors and typos. The gaming Keyboard is built to withstand the average liquid spill. The integrated wrist rest gives you the comfort you need for marathon gaming sessions ANTI GHOSTING: The Redragon K502 has 25 conflict free (n-Key Rollover) 12 multimedia keys. Comes with Full numeric keypad and a gold-plated corrosion free USB connector for a reliable connection and ultimate Gaming performance",
     category: "6079b947ddf2d5405c0b8c36",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
   {
     images: [
@@ -112,6 +122,8 @@ const keyboard = [
       "INDIVIDUAL SWITCHES: The QHM9800 has hot-swappable B23 switches with full key rollover. RAINBOW EFFECT: There are 6 LED RGB Colours with 12 adjustable light modes which provide the keyboard with funky illumination effects. HIGHLY DURABLE: The heavy-duty mechanical keyboard is made up of powerful robust materials which is what every gamer roots for.",
     category: "6079b947ddf2d5405c0b8c36",
     brand: "6075394712c7f240c09fffa1",
+    likes: [],
+    comments: [],
   },
 ];
 
