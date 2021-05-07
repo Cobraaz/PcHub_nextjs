@@ -26,15 +26,11 @@ import {
   putData,
 } from "helpers/helper.functions";
 
-const DetailProduct = ({
-  product: resProduct,
-  products: resProducts,
-  pid: productId,
-}) => {
+const DetailProduct = ({ product, products, pid: productId }) => {
   const { state, dispatch } = useContext(DataContext);
   const { cart, auth } = state;
-  const [product, setProduct] = useState(resProduct);
-  const [products] = useState(resProducts);
+  // const [product, setProduct] = useState(resProduct);
+  // const [products] = useState(resProducts);
   const [tab, setTab] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
@@ -74,12 +70,12 @@ const DetailProduct = ({
     }
   };
 
-  useEffect(async () => {
-    const res = await getData(`product/get_by_id/${productId}`);
-    setProduct(res.product);
-    setPostLikes(res.product.likes);
-    setNoOfLikes(res.product.likes.length);
-  }, [callback]);
+  // useEffect(async () => {
+  //   const res = await getData(`product/get_by_id/${productId}`);
+  //   setProduct(res.product);
+  //   setPostLikes(res.product.likes);
+  //   setNoOfLikes(res.product.likes.length);
+  // }, [callback]);
 
   const likeComment = async () => {
     try {
