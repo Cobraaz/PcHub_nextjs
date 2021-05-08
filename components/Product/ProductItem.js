@@ -161,7 +161,10 @@ const ProductItem = ({ product, handleCheck }) => {
                 `/create_product/${product._id}`
               )
             }
-            style={{ outline: "none", left: "8.6rem" }}
+            style={{
+              outline: "none",
+              right: "45%",
+            }}
             className=" card-button-Ab border-0"
           >
             Edit

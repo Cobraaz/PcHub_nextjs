@@ -83,16 +83,20 @@ const Header = ({
 
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto ml-auto" navbar>
-              <NavItem
-                className="port-navbar-item"
-                onClick={() => {
-                  width < 768 && isOpen && toggle();
-                }}
-              >
-                <BsNavLink href="/" title="Home" />
-              </NavItem>
-              <Brands brands={brands} router={router} />
-              <Categories categories={categories} router={router} />
+              {(width > 1145 || width < 685) && (
+                <>
+                  <NavItem
+                    className="port-navbar-item"
+                    onClick={() => {
+                      width < 768 && isOpen && toggle();
+                    }}
+                  >
+                    <BsNavLink href="/" title="Home" />
+                  </NavItem>
+                  <Brands brands={brands} router={router} />
+                  <Categories categories={categories} router={router} />
+                </>
+              )}
               <NavItem className="port-navbar-item">
                 <BsNavLink href="/pre-build-pc" title="Pre build pc" />
               </NavItem>
