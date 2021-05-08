@@ -333,10 +333,21 @@ const ProductsManager = () => {
                         src={img.name ? URL.createObjectURL(img) : img}
                         alt="Create Product Image"
                         className="img-thumbnail rounded"
-                        style={{ cursor: "default" }}
+                        style={{
+                          cursor: "default",
+                          width: `${index === 0 ? "100%" : "90%"}`,
+                          marginLeft: `${index === 0 ? "0px" : "10px"}`,
+                        }}
                       />
 
-                      <span onClick={() => deleteImage(index)}>X</span>
+                      <span
+                        style={{
+                          margin: `3px ${index === 0 ? "1%" : "7%"} 0px 0px`,
+                        }}
+                        onClick={() => deleteImage(index)}
+                      >
+                        X
+                      </span>
                     </div>
                   );
                 })}

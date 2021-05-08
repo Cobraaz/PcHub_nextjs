@@ -70,7 +70,15 @@ const ProductListItem = ({ product, handleCheck }) => {
             )}
             <div
               onClick={() =>
-                router.push("/product/[id]", `/product/${product._id}`)
+                router.push(
+                  {
+                    pathname: `/product/${product._id}`,
+                  },
+                  null,
+                  {
+                    scroll: true,
+                  }
+                )
               }
             >
               <CardHeader className="d-flex flex-row">
@@ -132,8 +140,13 @@ const ProductListItem = ({ product, handleCheck }) => {
                   disabled={product.inStock === 0 ? true : false}
                   onClick={() =>
                     router.push(
-                      "/create_product/[id]",
-                      `/create_product/${product._id}`
+                      {
+                        pathname: `/create_product/${product._id}`,
+                      },
+                      null,
+                      {
+                        scroll: true,
+                      }
                     )
                   }
                   style={{ outline: "none", right: "8.6rem" }}

@@ -10,6 +10,8 @@ const CommentsButtons = ({
   productId,
   setCallback,
   callback,
+  editComment,
+  commentText,
 }) => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
@@ -122,7 +124,17 @@ const CommentsButtons = ({
               <i className={`ri-delete-bin-2-fill clickable icons `}></i>
             </Button>
           )}
-
+          <Button
+            outline
+            color="danger"
+            size="sm"
+            onClick={() => {
+              editComment(commentId, commentText);
+            }}
+            className={`ml-2 justify-content-end ${classes.blog_delete}`}
+          >
+            <i className={`ri-edit-2-fill clickable icons `}></i>
+          </Button>
           <ShowLikeUnlikeButton />
         </div>
       </span>

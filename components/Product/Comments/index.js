@@ -17,6 +17,7 @@ import {
   getData,
   getPositionOfElement,
   deleteData,
+  putData,
 } from "helpers/helper.functions";
 import NewComment from "./NewComment";
 
@@ -26,9 +27,30 @@ function Comments({ comments: resComments, productId }) {
   const [comments, setComments] = useState(resComments || []);
   const [newComment, setNewComment] = useState("");
   const [callback, setCallback] = useState(false);
+  const [onEdit, setOnEdit] = useState(false);
+  const [editCommentId, setEditCommentId] = useState("");
+  const [oldCommentText, setOldCommentText] = useState("");
   const { theme } = useTheme();
   const { auth } = state;
 
+  let interval;
+
+  useEffect(() => {
+    setShowComments(false);
+    return () => {
+      setComments([]);
+      setNewComment("");
+      setCallback(false);
+      setOnEdit(false);
+      setEditCommentId("");
+      setOldCommentText("");
+      setShowComments(false);
+
+      clearInterval(interval);
+      window.removeEventListener("focus", refreshComments);
+    };
+  }, [productId]);
+  console.log(onEdit);
   const refreshComments = async () => {
     const res = await getData(`product/comment/${productId}`);
     setComments(res.comment);
@@ -40,15 +62,21 @@ function Comments({ comments: resComments, productId }) {
       setComments(res.comment);
       window.addEventListener("focus", refreshComments);
     }
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
       refreshComments();
     }, 10000);
+  }, [showComments, callback, productId]);
 
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener("focus", refreshComments);
-    };
-  }, [showComments, callback]);
+  useEffect(() => {
+    if (newComment === "" && onEdit) {
+      setOnEdit(false);
+      setEditCommentId("");
+      console.log("useEffect", onEdit);
+    }
+    // return () => {
+    //   setOnEdit(false);
+    // };
+  }, [newComment]);
 
   const toggleCommentsHandler = () => {
     setShowComments((prevStatus) => !prevStatus);
@@ -75,23 +103,53 @@ function Comments({ comments: resComments, productId }) {
       if (!text.endsWith(".")) {
         text = text.concat(".");
       }
+      if (onEdit) {
+        if (newComment === oldCommentText)
+          return dispatch({
+            type: "NOTIFY",
+            payload: { error: "Please update the comment" },
+          });
+        const res = await putData(
+          `product/comment/edit/${productId}/${editCommentId}`,
+          { text },
+          auth.token
+        );
+
+        if (res.err)
+          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+        const el = document.getElementById(`${editCommentId}-comment-list`);
+        if (el) {
+          const position = getPositionOfElement(el);
+          window.scrollTo({
+            top: position[1] - 150,
+            behavior: "smooth",
+          });
+        }
+        setNewComment("");
+        setComments(res.comment);
+        dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+
+        return setCallback(!callback);
+      }
       setComments([
         {
           text,
           name: auth.user.name,
           avatar: auth.user.avatar,
           date: new Date(),
-          likes: [{ user: auth.user.id }],
+          likes: [],
         },
         ...comments,
       ]);
 
-      const el = document.getElementById("0-comment-list");
-      const position = getPositionOfElement(el);
-      window.scrollTo({
-        top: position[1] - 150,
-        behavior: "smooth",
-      });
+      const el = document.getElementById("show_button");
+      if (el) {
+        const position = getPositionOfElement(el);
+        window.scrollTo({
+          top: position[1] - 100,
+          behavior: "smooth",
+        });
+      }
 
       const res = await postData(
         `product/comment/${productId}`,
@@ -129,10 +187,26 @@ function Comments({ comments: resComments, productId }) {
     }
   };
 
+  const editComment = (commentId, commentText) => {
+    setNewComment(commentText);
+    setEditCommentId(commentId);
+    setOldCommentText(commentText);
+    setOnEdit(true);
+    const el = document.getElementById("new_comment_textarea");
+    if (el) {
+      const position = getPositionOfElement(el);
+      window.scrollTo({
+        top: position[1] - 150,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
       <div className={classes.comments}>
         <button
+          id="show_button"
           type="button"
           className={`btn btn-outline-success ${classes.button}`}
           onClick={toggleCommentsHandler}
@@ -151,12 +225,13 @@ function Comments({ comments: resComments, productId }) {
                 <div key={index}>
                   <CommentList
                     comments={comment}
-                    index={index}
                     extra={Boolean(index % 2)}
                     deleteComment={deleteComment}
                     productId={productId}
                     setCallback={setCallback}
                     callback={callback}
+                    editComment={editComment}
+                    index={index}
                   />
                 </div>
               ))

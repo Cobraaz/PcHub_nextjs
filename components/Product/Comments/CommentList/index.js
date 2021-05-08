@@ -18,12 +18,12 @@ const ShowComments = ({
   productId,
   setCallback,
   callback,
+  editComment,
 }) => {
- 
   const { theme } = useTheme();
   return (
     <li
-      id={`${index}-comment-list`}
+      id={`${commentId}-comment-list`}
       className={`${classes.comment} ${
         extra ? classes.author_comment : classes.user_comment
       }`}
@@ -52,6 +52,8 @@ const ShowComments = ({
             productId={productId}
             setCallback={setCallback}
             callback={callback}
+            editComment={editComment}
+            commentText={text}
           />
         </section>
       ) : (
@@ -65,6 +67,8 @@ const ShowComments = ({
             productId={productId}
             setCallback={setCallback}
             callback={callback}
+            editComment={editComment}
+            commentText={text}
           />
         </section>
       )}

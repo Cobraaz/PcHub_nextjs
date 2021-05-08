@@ -72,7 +72,15 @@ const ProductItem = ({ product, handleCheck }) => {
             <motion.div
               variants={fadeInUp}
               onClick={() =>
-                router.push("/product/[id]", `/product/${product._id}`)
+                router.push(
+                  {
+                    pathname: `/product/${product._id}`,
+                  },
+                  null,
+                  {
+                    scroll: true,
+                  }
+                )
               }
             >
               <motion.div variants={fadeInUp} className="card-img-top-Ab">

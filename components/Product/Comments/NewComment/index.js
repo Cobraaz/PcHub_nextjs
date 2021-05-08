@@ -11,6 +11,7 @@ const NewComment = ({ newComment, setNewComment, handleSubmit }) => {
       <form onSubmit={handleSubmit}>
         {theme.type === "light" ? (
           <textarea
+            id="new_comment_textarea"
             className={classes.write_new_light_textarea}
             placeholder="Write your comment here"
             name="comment"
@@ -20,6 +21,7 @@ const NewComment = ({ newComment, setNewComment, handleSubmit }) => {
           />
         ) : (
           <textarea
+            id="new_comment_textarea"
             className={classes.write_new_dark_textarea}
             placeholder="Write your comment here"
             name="comment"
