@@ -12,7 +12,6 @@ import {
   BasePage,
   ProductItem,
   Modal,
-  Comments,
 } from "helpers/components.import";
 import {
   stagger,
@@ -25,6 +24,8 @@ import {
   capitalize,
   putData,
 } from "helpers/helper.functions";
+
+import Comments from "components/Product/Comments";
 
 const DetailProduct = ({ product, products, pid: productId }) => {
   const { state, dispatch } = useContext(DataContext);

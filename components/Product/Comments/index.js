@@ -33,10 +33,9 @@ function Comments({ comments: resComments, productId }) {
   const { theme } = useTheme();
   const { auth } = state;
 
-  let interval;
-
   useEffect(() => {
     setShowComments(false);
+    window.addEventListener("focus", refreshComments);
     return () => {
       setComments([]);
       setNewComment("");
@@ -46,13 +45,14 @@ function Comments({ comments: resComments, productId }) {
       setOldCommentText("");
       setShowComments(false);
 
-      clearInterval(interval);
       window.removeEventListener("focus", refreshComments);
     };
   }, [productId]);
-  console.log(onEdit);
+
   const refreshComments = async () => {
     const res = await getData(`product/comment/${productId}`);
+    console.log(productId);
+    console.log("res refreshComments", res.comment);
     setComments(res.comment);
   };
 
@@ -60,11 +60,12 @@ function Comments({ comments: resComments, productId }) {
     if (showComments) {
       const res = await getData(`product/comment/${productId}`);
       setComments(res.comment);
+      console.log("res useEffect", res.comment);
       window.addEventListener("focus", refreshComments);
+      return () => {
+        window.removeEventListener("focus", refreshComments);
+      };
     }
-    interval = setInterval(() => {
-      refreshComments();
-    }, 10000);
   }, [showComments, callback, productId]);
 
   useEffect(() => {
