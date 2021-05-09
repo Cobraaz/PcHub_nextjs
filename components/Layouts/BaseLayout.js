@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Header from "components/Header";
 import Footer from "components/Shared/Footer";
 import { useTheme } from "providers/ThemeProvider";
 import Modal from "components/Modal/PopUpModal";
+import { DataContext } from "store/GlobalState";
 
 const BaseLayout = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,18 +15,33 @@ const BaseLayout = (props) => {
   const { className, children, header_bg = "with-bg" } = props;
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(false);
+  const { state, dispatch } = useContext(DataContext);
+  const { auth } = state;
   const router = useRouter();
-
+  // console.log(router);
   useEffect(() => {
     let timing = window.__isModalTiming || 5000;
-    const interval = setTimeout(() => {
-      window.__isModalTiming = timing * 3;
-      console.log(window.__isModalTiming);
-      if (window.__isModalTiming > 5000 * 3 * 3) {
-        window.__isModalTiming = 10000;
-      }
-      setShowModal(true);
-    }, timing);
+    const firstLogin = localStorage.getItem("firstLogin");
+    let interval;
+    if (
+      !firstLogin &&
+      Object.keys(auth).length === 0 &&
+      !auth.user &&
+      (router.pathname === "/" ||
+        router.pathname === "/product/[pid]" ||
+        router.pathname === "/pre-build-pc")
+    ) {
+      console.log("hello");
+      interval = setTimeout(() => {
+        window.__isModalTiming = timing * 3;
+        console.log(window.__isModalTiming);
+        if (window.__isModalTiming > 5000 * 3 * 3) {
+          window.__isModalTiming = 10000;
+        }
+
+        setShowModal(true);
+      }, timing);
+    }
     return () => {
       clearTimeout(interval);
     };
