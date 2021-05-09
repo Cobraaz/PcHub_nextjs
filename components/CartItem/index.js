@@ -12,11 +12,11 @@ const CartItem = ({ item, dispatch, cart, toggleModal }) => {
   return (
     <div className="CheckoutItemContainer">
       <Link href={`/product/${_id}`}>
-        <div className="ImageContainer">
+        <a className="ImageContainer">
           <Image width={500} height={500} src={images[0]} alt="checkout item" />
-        </div>
+        </a>
       </Link>
-      <span href={`/product/${_id}`} className="TextContainer mr-2">
+      <span className="TextContainer mr-2">
         <Link href={`/product/${_id}`}>
           <a> {capitalize(title.split(" ").slice(0, 2).join(" "))}</a>
         </Link>

@@ -26,9 +26,9 @@ export const BsNavBrand = () => (
 );
 
 export const LoginLink = () => (
-  <a className="nav-link port-navbar-link" href="/login">
-    Login
-  </a>
+  <Link href="/login">
+    <a className="nav-link port-navbar-link">Login</a>
+  </Link>
 );
 
 export const Brands = ({ brands, router }) => {

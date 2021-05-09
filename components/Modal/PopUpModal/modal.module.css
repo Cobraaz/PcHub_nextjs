@@ -30,12 +30,13 @@
   border: none;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 70px;
   outline: none !important;
 }
 .paragraph {
   color: #ffffff;
   font-weight: bold;
+  margin-bottom: 40px;
 }
 
 .x_touch {

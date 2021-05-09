@@ -10,8 +10,8 @@ import {
   patchData,
   updateItem,
   numberWithCommas,
-  currcencyConvert,
   formatDate,
+  getData,
 } from "helpers/helper.functions";
 
 const OrderDetail = ({ orderDetail, state, dispatch }) => {
@@ -50,9 +50,13 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
 
   useEffect(() => {
     const convertCurrcency = async () => {
-      setUsdTotal(Math.round(await currcencyConvert(orderDetail[0].total)));
+      const newTotal = orderDetail[0].total;
+      const res = await getData(`order/payment/get_amount/${newTotal}`);
+      setUsdTotal(Math.round(res.amount));
     };
-    if (orderDetail && orderDetail[0]) convertCurrcency();
+
+    if (orderDetail && orderDetail[0] && !Boolean(orderDetail[0].paid))
+      convertCurrcency();
   }, [orderDetail]);
 
   if (!auth.user) return null;
@@ -161,14 +165,14 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                             className="order-detail-AB-item-container"
                           >
                             <Link href={`/product/${_id}`}>
-                              <div className="image-container">
+                              <a className="image-container">
                                 <Image
                                   width={500}
                                   height={500}
                                   src={images[0]}
                                   alt="Product Image"
                                 />
-                              </div>
+                              </a>
                             </Link>
                             <span
                               href={`/product/${_id}`}

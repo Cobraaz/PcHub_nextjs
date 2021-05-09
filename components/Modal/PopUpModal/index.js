@@ -34,7 +34,7 @@ const Modal = ({ showModal }) => {
               Hey, you don't seem to logged in would you like to login?
             </p>
             <Link href="/login">
-              <button className={classes.button}>Login</button>
+              <a className={classes.button}>Login</a>
             </Link>
           </motion.div>
         </motion.div>

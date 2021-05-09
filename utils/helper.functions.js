@@ -79,16 +79,6 @@ export const updateItem = (data, id, post, type) => {
   return { type, payload: newData };
 };
 
-// * Currency Convertor
-import currency from "currency-converter-module";
-export const currcencyConvert = (price) => {
-  var convertedValue = currency.convertCurrencyByCode(
-    { value: price, code: "INR" },
-    { code: "USD" }
-  );
-  return convertedValue;
-};
-
 // * Moment Library
 // * For Data Foramting
 import moment from "moment";
