@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Header from "components/Header";
 import Footer from "components/Shared/Footer";
 import { useTheme } from "providers/ThemeProvider";
+import Modal from "components/Modal/PopUpModal";
+
 const BaseLayout = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartDropdownHidden, setCartDropdownHidden] = useState(true);
@@ -9,8 +12,31 @@ const BaseLayout = (props) => {
   const [checkedTheme, setCheckedTheme] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { className, children, header_bg = "with-bg" } = props;
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    let timing = window.__isModalTiming || 5000;
+    const interval = setTimeout(() => {
+      window.__isModalTiming = timing * 3;
+      console.log(window.__isModalTiming);
+      if (window.__isModalTiming > 5000 * 3 * 3) {
+        window.__isModalTiming = 10000;
+      }
+      setShowModal(true);
+    }, timing);
+    return () => {
+      clearTimeout(interval);
+    };
+  }, [router.asPath]);
+
   return (
-    <div className={`layout-container ${theme.type}`}>
+    <div
+      className={`layout-container ${theme.type}`}
+      onClick={() => showModal && toggleModal()}
+    >
+      <Modal showModal={showModal} />
       <Header
         header_bg={header_bg}
         toggle={toggle}

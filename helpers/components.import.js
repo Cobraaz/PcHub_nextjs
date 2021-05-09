@@ -6,7 +6,7 @@ import ProductListItem from "components/Product/ProductListItem";
 import SignInForm from "components/Auth/LoginForm";
 import RegisterForm from "components/Auth/RegisterForm";
 import CartItem from "components/CartItem";
-import Modal from "components/Shared/Modal";
+import Modal from "components/Modal";
 import PaypalBtn from "components/Shared/paypalBtn";
 import OrderDetail from "components/Order/OrderDetail";
 import Filter from "components/Shared/Filter";

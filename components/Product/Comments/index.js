@@ -237,10 +237,24 @@ function Comments({ comments: resComments, productId }) {
               ))
             ) : theme.type === "light" ? (
               <li className={`${classes.comment} ${classes.user_comment}`}>
+                <div style={{ visibility: "hidden" }}>
+                  <div href="#">No User</div>
+                </div>
+
+                <div href="#" style={{ visibility: "hidden" }}>
+                  <img width="35" alt="Profile Avatar" />
+                </div>
                 <section>No Comments</section>
               </li>
             ) : (
               <li className={`${classes.comment} ${classes.user_comment}`}>
+                <div style={{ visibility: "hidden" }}>
+                  <div href="#">No User</div>
+                </div>
+
+                <div href="#" style={{ visibility: "hidden" }}>
+                  <img width="35" alt="Profile Avatar" />
+                </div>
                 <section className={classes.no_comment_section}>
                   No Comments
                 </section>
