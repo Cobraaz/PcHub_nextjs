@@ -19,6 +19,7 @@ import {
   getData,
   patchData,
   formatDate,
+  numberWithCommas,
 } from "helpers/helper.functions";
 import Hero from "components/Profile/Hero";
 
@@ -73,7 +74,7 @@ const Profile = () => {
         });
       });
     }
-  }, [callback]);
+  }, []);
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
@@ -401,7 +402,7 @@ const Profile = () => {
                                 </Link>
                               </td>
                               <td>{formatDate(order.createdAt)}</td>
-                              <td>{order.total}</td>
+                              <td>{numberWithCommas(order.total)}</td>
                               <td>
                                 {order.delivered ? (
                                   <i

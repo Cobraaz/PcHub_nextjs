@@ -39,6 +39,7 @@ const Header = ({
     localStorage.removeItem("firstLogin");
     dispatch({ type: "AUTH", payload: {} });
     dispatch({ type: "GET_ALL_USERS", payload: [] });
+    dispatch({ type: "ALL_CONTACT_US", payload: [] });
     dispatch({ type: "NOTIFY", payload: { success: "Logged out!" } });
     return router.push("/");
   };
