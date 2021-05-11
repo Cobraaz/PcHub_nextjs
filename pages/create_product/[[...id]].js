@@ -206,7 +206,11 @@ const ProductsManager = () => {
 
   return (
     <BaseLayout>
-      <BasePage className="products_manager wrapper" header="Create Product">
+      <BasePage
+        className="products_manager wrapper"
+        title={`PcHub  ${onEdit ? "Update" : "Create"} Product`}
+        header="Create Product"
+      >
         <Modal
           dispatch={dispatch}
           showModal={showModal}

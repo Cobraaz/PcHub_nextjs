@@ -17,6 +17,8 @@ import {
   getData,
   postData,
 } from "helpers/helper.functions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactResizeDetector from "react-resize-detector";
 
 const Checkout = () => {
   const { state, dispatch } = useContext(DataContext);
@@ -120,17 +122,29 @@ const Checkout = () => {
 
   if (cart.length === 0)
     return (
-      <BaseLayout>
-        <div style={{ paddingTop: "150px" }}>
-          <BasePage indexPage noWrapper={true}>
-            <img
-              className="img-responsive w-100"
-              src="/empty-cart.jpg"
-              alt="Empty cart"
-            />
-          </BasePage>
-        </div>
-      </BaseLayout>
+      <ReactResizeDetector handleWidth>
+        {({ width }) => (
+          <BaseLayout>
+            <div style={{ paddingTop: "150px" }}>
+              <BasePage indexPage noWrapper={true}>
+                <div
+                  style={{
+                    textAlign: "center",
+                    margin: "auto",
+                    fontSize: `${width > 768 ? "30" : "20"}rem`,
+                  }}
+                >
+                  <FontAwesomeIcon
+                    style={{ color: "#b122e0" }}
+                    inverse
+                    icon="shopping-cart"
+                  />
+                </div>
+              </BasePage>
+            </div>
+          </BaseLayout>
+        )}
+      </ReactResizeDetector>
     );
 
   return (

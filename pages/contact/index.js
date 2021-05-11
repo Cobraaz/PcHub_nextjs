@@ -44,7 +44,7 @@ const Contact = () => {
 
   return (
     <BaseLayout>
-      <BasePage className="signin-page wrapper" title="PcHub Sign In">
+      <BasePage className="signin-page wrapper" title="PcHub Contact Us">
         <Row>
           <Col
             md={{ size: 6, offset: 3 }}

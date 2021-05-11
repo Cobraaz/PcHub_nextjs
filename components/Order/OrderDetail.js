@@ -174,10 +174,7 @@ const OrderDetail = ({ orderDetail, state, dispatch }) => {
                                 />
                               </a>
                             </Link>
-                            <span
-                              href={`/product/${_id}`}
-                              className="text-container mr-2"
-                            >
+                            <span className="text-container mr-2">
                               <Link href={`/product/${_id}`}>
                                 <a> {title.split(" ").slice(0, 2).join(" ")}</a>
                               </Link>

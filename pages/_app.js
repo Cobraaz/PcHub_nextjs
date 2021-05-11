@@ -5,10 +5,11 @@ import {
   faMoon,
   faList,
   faBorderAll,
+  faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 
 config.autoAddCss = false;
-library.add(faSun, faMoon, faList, faBorderAll);
+library.add(faSun, faMoon, faList, faBorderAll, faShoppingCart);
 import "remixicon/fonts/remixicon.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-slideshow-image/dist/styles.css";

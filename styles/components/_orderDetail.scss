@@ -90,22 +90,12 @@
 
     a {
       text-decoration: none;
-    }
-
-    a:link {
-      color: red;
-    }
-
-    a:visited {
-      color: green;
+      color: #b122e0;
+      transition: 0.3s;
     }
 
     a:hover {
-      color: hotpink;
-    }
-
-    a:active {
-      color: blue;
+      color: #d193e6;
     }
 
     @media screen and (max-width: 800px) {

@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row } from "reactstrap";
 import { Slide } from "react-slideshow-image";
 
 const Masthead = ({ slideImages: resSlideImages }) => {
-  const [slideImages] = useState(
-    resSlideImages ? resSlideImages : ["/images/homepage_masthead.jpg"]
-  );
+  const [slideImages, setSlideImages] = useState([
+    "/images/homepage_masthead.jpg",
+    "/images/homepage_masthead2.jpg",
+    "/images/homepage_masthead3.jpg",
+  ]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSlideImages([...slideImages, ...resSlideImages]);
+    }, 13000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
     <Slide

@@ -104,13 +104,6 @@ export const getPhotoUnsplash = async () => {
       slideImages.push(photo.urls.regular)
     );
     shuffle(slideImages);
-    slideImages.unshift(
-      ...shuffle([
-        "/images/homepage_masthead.jpg",
-        "/images/homepage_masthead2.jpg",
-        "/images/homepage_masthead3.jpg",
-      ])
-    );
     return slideImages;
   }
   return slideImages.unshift(
