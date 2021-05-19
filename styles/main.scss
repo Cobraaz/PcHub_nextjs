@@ -1,6 +1,5 @@
 // Components
 @import "./components/header";
-@import "./components/loading";
 @import "./components/cartItem";
 @import "./components/orderDetail";
 
@@ -148,7 +147,6 @@ body {
   z-index: -99;
   display: none;
 }
-
 
 .dark {
   .form-control {

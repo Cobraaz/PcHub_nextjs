@@ -1,7 +1,9 @@
+import classes from "./loading.module.css";
+
 const Loading = () => {
   return (
     <div
-      className="position-fixed w-100 h-100 text-center loading"
+      className={`position-fixed w-100 h-100 text-center ${classes.loading}`}
       style={{
         background: "#0008",
         color: "white",

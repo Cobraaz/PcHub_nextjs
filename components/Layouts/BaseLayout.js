@@ -31,7 +31,6 @@ const BaseLayout = (props) => {
         router.pathname === "/product/[pid]" ||
         router.pathname === "/pre-build-pc")
     ) {
-      console.log("hello");
       interval = setTimeout(() => {
         window.__isModalTiming = timing * 3;
         console.log(window.__isModalTiming);
@@ -45,7 +44,7 @@ const BaseLayout = (props) => {
     return () => {
       clearTimeout(interval);
     };
-  }, [router.asPath]);
+  }, [router.pathname]);
 
   return (
     <div

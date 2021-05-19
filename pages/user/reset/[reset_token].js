@@ -88,9 +88,9 @@ const ResetPassword = () => {
                   exit={{ opacity: 0 }}
                   variants={stagger}
                 >
-                  <motion.h2 variants={fadeInUp} className="mb-3">
+                  <motion.h1 variants={fadeInUp} className="mb-3">
                     Reset Your Password
-                  </motion.h2>
+                  </motion.h1>
                   <form className="mt-3" onSubmit={handleResetPassword}>
                     <motion.label
                       variants={fadeInUp}

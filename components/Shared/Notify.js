@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { DataContext } from "store/GlobalState";
-import Loading from "./Loading";
+import Loading from "components/Loading";
 import { toast } from "react-toastify";
 
 const Notify = () => {
