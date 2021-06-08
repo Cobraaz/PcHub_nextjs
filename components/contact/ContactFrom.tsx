@@ -1,7 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { InputGroupText, InputGroupAddon } from "reactstrap";
 import { motion } from "framer-motion";
-import Input from "reactstrap/lib/Input";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 
@@ -21,7 +20,20 @@ const fadeInUp = {
   },
 };
 
-const ContactForm = ({ onSubmit }) => {
+type ContactFormProps = {
+  onSubmit: (
+    e: React.FormEvent,
+    contactData: {
+      name: String;
+      email: String;
+      phone_no: String;
+      message: String;
+    },
+    clearFields: () => void
+  ) => void;
+};
+
+const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   const initialState = {
     name: "",
     email: "",
@@ -30,7 +42,10 @@ const ContactForm = ({ onSubmit }) => {
   };
   const [contactData, setContactData] = useState(initialState);
   const { email, name, message, phone_no } = contactData;
-  const handleChangeInput = (e) => {
+
+  const handleChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setContactData({ ...contactData, [name]: value });
   };
@@ -97,7 +112,7 @@ const ContactForm = ({ onSubmit }) => {
           </InputGroupText>
         </InputGroupAddon>
         <textarea
-          rows="2"
+          rows={2}
           className="form-control"
           name="message"
           placeholder="Message"

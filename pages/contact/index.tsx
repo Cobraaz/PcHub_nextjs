@@ -10,10 +10,20 @@ import {
   postData,
 } from "helpers/helper.functions";
 import ContactForm from "components/contact/ContactFrom";
-const Contact = () => {
+import React from "react";
+const Contact: React.FC = () => {
   const { dispatch } = useContext(DataContext);
 
-  const handleSubmit = async (e, contactData, clearFields) => {
+  const handleSubmit = async (
+    e: React.FormEvent,
+    contactData: {
+      name: String;
+      email: String;
+      phone_no: String;
+      message: String;
+    },
+    clearFields: () => void
+  ) => {
     e.preventDefault();
 
     try {
