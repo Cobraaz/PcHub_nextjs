@@ -1,6 +1,22 @@
 import classes from "./contact-detail.module.css";
 
-const ContactDetail = ({ item, onSubmit, onDelete }) => {
+type ContactDetailProps = {
+  item: {
+    name: string;
+    email: string;
+    phone_no: string;
+    message: string;
+    avatar: string;
+  };
+  onSubmit: (e: React.FormEvent) => void;
+  onDelete: () => void;
+};
+
+const ContactDetail: React.FC<ContactDetailProps> = ({
+  item,
+  onSubmit,
+  onDelete,
+}) => {
   const { name, email, phone_no, message, avatar } = item;
 
   const altAvatar =
@@ -49,10 +65,9 @@ const ContactDetail = ({ item, onSubmit, onDelete }) => {
       <div className="col-md-8">
         <h3 className="text-uppercase font-weight-bold">Message</h3>
         <textarea
-          rows="3"
+          rows={3}
           className="form-control"
           defaultValue={message}
-          className="form-control"
           disabled={true}
         />
         <form onSubmit={onSubmit} className="input-group mt-3">

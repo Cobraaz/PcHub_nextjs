@@ -4,22 +4,43 @@ import {
   useEffect,
   useRouter,
   parseCookies,
+  React,
 } from "helpers/package.import";
 
 import { BaseLayout, BasePage, Modal } from "helpers/components.import";
 
-import { DataContext, getData, postData } from "helpers/helper.functions";
+import {
+  DataContext,
+  getData,
+  postData,
+  withAuth,
+} from "helpers/helper.functions";
 
 import ContactDetail from "components/contact/ContactDetail";
+import { GetServerSideProps } from "next";
 
-const ContactReview = () => {
+interface CustomerResponse {
+  name: string;
+  email: string;
+  phone_no: string;
+  message: string;
+  avatar: string;
+}
+
+const ContactReview: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const { state, dispatch } = useContext(DataContext);
   const { auth, users } = state;
 
-  const [customerResponse, setCustomerResponse] = useState({});
+  const [customerResponse, setCustomerResponse] = useState<CustomerResponse>({
+    name: "",
+    email: "",
+    phone_no: "",
+    message: "",
+    avatar: "",
+  });
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
 
@@ -33,7 +54,7 @@ const ContactReview = () => {
     }
   }, [auth]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { name, email } = customerResponse;
     const res = await postData(
@@ -46,7 +67,7 @@ const ContactReview = () => {
     return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
 
-  const handleDelete = async (e) => {
+  const handleDelete = async () => {
     if (auth.user.role === "root") {
       toggleModal();
       dispatch({
@@ -97,24 +118,17 @@ const ContactReview = () => {
   );
 };
 
-export async function getServerSideProps(ctx) {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // some auth logic here
   const { res } = ctx;
   const { user } = parseCookies(ctx);
   const isAuth = user ? JSON.parse(user) : false;
 
-  if (
-    !isAuth ||
-    isAuth.role == "" ||
-    isAuth.role == "user" ||
-    !isAuth.role == "root"
-  ) {
-    withAuth(res, "/");
-  }
+  if (!isAuth || isAuth.role == "" || isAuth.role == "user") withAuth(res, "/");
 
   return {
     props: {}, // will be passed to the page component as props
   };
-}
+};
 
 export default ContactReview;

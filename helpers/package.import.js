@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -53,4 +53,5 @@ export {
   AnimatePresence,
   useRef,
   FormGroup,
+  React,
 };
