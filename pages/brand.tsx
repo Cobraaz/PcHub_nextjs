@@ -15,17 +15,23 @@ import {
   withAuth,
 } from "helpers/helper.functions";
 
-const Categories = () => {
+import { GetServerSideProps } from "next";
+
+interface brand {
+  _id: string;
+  name: string;
+}
+
+const Brand = () => {
   const [name, setName] = useState("");
 
   const { state, dispatch } = useContext(DataContext);
-  const { categories, auth } = state;
-
+  const { brands, auth } = state;
   const [id, setId] = useState("");
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
 
-  const createCategory = async () => {
+  const createBrand = async () => {
     if (auth.user.role === "user")
       return dispatch({
         type: "NOTIFY",
@@ -42,17 +48,21 @@ const Categories = () => {
 
     let res;
     if (id) {
-      res = await putData(`categories/${id}`, { name }, auth.token);
+      res = await putData(`brand/${id}`, { name }, auth.token);
+
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
-      dispatch(updateItem(categories, id, res.category, "ADD_CATEGORIES"));
+
+      dispatch(updateItem(brands, id, res.brand, "ADD_BRANDS"));
     } else {
-      res = await postData("categories", { name }, auth.token);
+      res = await postData("brand", { name }, auth.token);
+
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
       dispatch({
-        type: "ADD_CATEGORIES",
-        payload: [...categories, res.newCategory],
+        type: "ADD_BRANDS",
+        payload: [...brands, res.newBrand],
       });
     }
     setName("");
@@ -60,12 +70,12 @@ const Categories = () => {
     return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
 
-  const handleEditCategory = (catogory) => {
-    setId(catogory._id);
-    setName(catogory.name);
+  const handleEditBrand = (brand: brand) => {
+    setId(brand._id);
+    setName(brand.name);
   };
 
-  const handleDelete = async (catogory) => {
+  const handleDelete = async (brand: brand) => {
     try {
       if (auth.user.role !== "user") {
         toggleModal();
@@ -73,10 +83,10 @@ const Categories = () => {
           type: "ADD_MODAL",
           payload: [
             {
-              data: categories,
-              id: catogory._id,
-              title: catogory.name,
-              type: "ADD_CATEGORIES",
+              data: brands,
+              id: brand._id,
+              title: brand.name,
+              type: "ADD_BRANDS",
             },
           ],
         });
@@ -93,8 +103,8 @@ const Categories = () => {
       <BaseLayout>
         <BasePage
           className="wrapper"
-          header="Categories"
-          title="PcHub Admin Categories Page"
+          header="Brands"
+          title="PcHub Admin Brands Page"
         >
           <Modal
             dispatch={dispatch}
@@ -112,39 +122,40 @@ const Categories = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Add a new category"
+                  placeholder="Add a new Brand"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
 
                 <button
                   className="btn btn-secondary ml-1"
-                  onClick={createCategory}
+                  onClick={createBrand}
                 >
                   {id ? "Update" : "Create"}
                   Update
                 </button>
               </div>
 
-              {categories.map((catogory) => (
-                <div key={catogory._id} className="card my-2 text-capitalize">
-                  <div className="card-body d-flex justify-content-between text-secondary">
-                    {catogory.name}
+              {brands.length > 0 &&
+                brands.map((brand: brand) => (
+                  <div key={brand._id} className="card my-2 text-capitalize">
+                    <div className="card-body d-flex justify-content-between text-secondary">
+                      {brand.name}
 
-                    <div style={{ cursor: "pointer" }}>
-                      <i
-                        className="ri-pencil-fill mr-2 text-info"
-                        onClick={() => handleEditCategory(catogory)}
-                      ></i>
+                      <div style={{ cursor: "pointer" }}>
+                        <i
+                          className="ri-pencil-fill mr-2 text-info"
+                          onClick={() => handleEditBrand(brand)}
+                        ></i>
 
-                      <i
-                        className="ri-delete-bin-line text-danger"
-                        onClick={() => handleDelete(catogory)}
-                      ></i>
+                        <i
+                          className="ri-delete-bin-line text-danger"
+                          onClick={() => handleDelete(brand)}
+                        ></i>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </Col>
           </Row>
         </BasePage>
@@ -153,7 +164,7 @@ const Categories = () => {
   );
 };
 
-export async function getServerSideProps(ctx) {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // some auth logic here
   const { res } = ctx;
   const { user } = parseCookies(ctx);
@@ -166,6 +177,6 @@ export async function getServerSideProps(ctx) {
   return {
     props: {}, // will be passed to the page component as props
   };
-}
+};
 
-export default Categories;
+export default Brand;
