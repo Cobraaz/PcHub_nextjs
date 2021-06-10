@@ -68,7 +68,7 @@ const ContactReview: React.FC = () => {
   };
 
   const handleDelete = async () => {
-    if (auth.user.role === "root") {
+    if (auth.user!.role === "root") {
       toggleModal();
       dispatch({
         type: "ADD_MODAL",

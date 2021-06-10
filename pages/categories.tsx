@@ -32,7 +32,7 @@ const Categories = () => {
   const toggleModal = () => setShowModal(!showModal);
 
   const createCategory = async () => {
-    if (auth.user.role === "user")
+    if (auth.user!.role === "user")
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Authentication is not vaild." },
@@ -73,7 +73,7 @@ const Categories = () => {
 
   const handleDelete = async (catogory: catogory) => {
     try {
-      if (auth.user.role !== "user") {
+      if (auth.user!.role !== "user") {
         toggleModal();
         dispatch({
           type: "ADD_MODAL",

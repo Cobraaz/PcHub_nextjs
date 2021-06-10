@@ -32,7 +32,7 @@ const Brand = () => {
   const toggleModal = () => setShowModal(!showModal);
 
   const createBrand = async () => {
-    if (auth.user.role === "user")
+    if (auth.user!.role === "user")
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Authentication is not vaild." },
@@ -77,7 +77,7 @@ const Brand = () => {
 
   const handleDelete = async (brand: brand) => {
     try {
-      if (auth.user.role !== "user") {
+      if (auth.user!.role !== "user") {
         toggleModal();
         dispatch({
           type: "ADD_MODAL",
