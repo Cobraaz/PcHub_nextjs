@@ -1,6 +1,20 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const userSchema = new mongoose.Schema(
+export enum Role {
+  user = "user",
+  admin = "admin",
+  root = "root",
+}
+
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  role?: Role;
+  avatar?: string;
+}
+
+const userSchema = new Schema(
   {
     name: {
       type: String,
@@ -31,5 +45,5 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-let Dataset = mongoose.models.user || mongoose.model("user", userSchema);
+let Dataset = mongoose.models.user || mongoose.model<IUser>("user", userSchema);
 export default Dataset;

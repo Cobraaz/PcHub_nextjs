@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^15.12.2",
     "@types/react": "^17.0.9",
     "@types/reactstrap": "^8.5.1",

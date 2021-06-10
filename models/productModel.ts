@@ -1,6 +1,38 @@
-const mongoose = require("mongoose");
+import mongoose, { Document, Schema } from "mongoose";
+import { IUser } from "models/userModel";
+export interface IProduct extends Document {
+  title: string;
+  price: number;
+  description: string;
+  content: string;
+  images: [];
+  category: string;
+  checked?: boolean;
+  inStock?: number;
+  sold?: number;
+  brand: string;
+  likes: [
+    {
+      user: IUser["_id"];
+    }
+  ];
+  comments: [
+    {
+      user: IUser["_id"];
+      text: string;
+      name: string;
+      avatar?: string;
+      date?: Date;
+      likes: [
+        {
+          user: IUser["_id"];
+        }
+      ];
+    }
+  ];
+}
 
-const productSchema = new mongoose.Schema(
+const productSchema = new Schema(
   {
     title: {
       type: String,
@@ -91,5 +123,5 @@ const productSchema = new mongoose.Schema(
 );
 
 let Dataset =
-  mongoose.models.product || mongoose.model("product", productSchema);
+  mongoose.models.product || mongoose.model<IProduct>("product", productSchema);
 module.exports = Dataset;

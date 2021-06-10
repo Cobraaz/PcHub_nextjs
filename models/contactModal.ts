@@ -1,6 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const contactSchema = new mongoose.Schema(
+export interface IContact extends Document {
+  name: string;
+  email: string;
+  phone_no: string;
+  message: string;
+}
+
+const contactSchema = new Schema(
   {
     name: { type: String, maxlength: 46 },
     email: { type: String, required: true, maxlength: 96 },
@@ -13,5 +20,5 @@ const contactSchema = new mongoose.Schema(
 );
 
 let Dataset =
-  mongoose.models.contact || mongoose.model("contact", contactSchema);
+  mongoose.models.contact || mongoose.model<IContact>("contact", contactSchema);
 export default Dataset;
