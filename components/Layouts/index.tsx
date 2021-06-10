@@ -1,22 +1,19 @@
-import { createContext, useReducer, useEffect } from "react";
+import Notify from "components/Shared/Notify";
+import { useContext, useEffect } from "react";
+import { DataContext } from "store/GlobalState";
+import { ToastContainer } from "react-toastify";
 import Cookie from "js-cookie";
-import { getData } from "../utils/fetchData";
-import reducers from "./Reducers";
-export const DataContext = createContext();
+import { getData } from "utils/fetchData";
 
-export const DataProvider = ({ children }) => {
-  const initialState = {
-    notify: {},
-    auth: {},
-    users: [],
-    cart: [],
-    modal: [],
-    orders: [],
-    categories: [],
-    brands: [],
-    contacts: [],
-  };
-  const [state, dispatch] = useReducer(reducers, initialState);
+export type children = {
+  children: React.ReactNode;
+};
+export type auth = {
+  token: string;
+};
+
+const Layout = ({ children }: children) => {
+  const { state, dispatch } = useContext(DataContext);
   const { cart, auth } = state;
 
   useEffect(() => {
@@ -65,7 +62,7 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     const __next__cart01__cobraaz = JSON.parse(
-      localStorage.getItem("__next__cart01__cobraaz")
+      localStorage.getItem("__next__cart01__cobraaz")!
     );
 
     if (__next__cart01__cobraaz)
@@ -80,15 +77,21 @@ export const DataProvider = ({ children }) => {
     if (auth.token) {
       getData("order", auth.token).then((res) => {
         if (res.err)
-          return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+          return dispatch({
+            type: "NOTIFY",
+            payload: { error: res.err },
+          });
 
         dispatch({ type: "ADD_ORDERS", payload: res.orders });
       });
 
-      if (auth.user.role === "root") {
+      if (auth.user!.role === "root") {
         getData("user/all_infor", auth.token).then((res) => {
           if (res.err)
-            return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+            return dispatch({
+              type: "NOTIFY",
+              payload: { error: res.err },
+            });
           dispatch({
             type: "GET_ALL_USERS",
             payload: res.users,
@@ -102,8 +105,21 @@ export const DataProvider = ({ children }) => {
   }, [auth.token]);
 
   return (
-    <DataContext.Provider value={{ state, dispatch }}>
-      {children}
-    </DataContext.Provider>
+    <>
+      <Notify />
+
+      <main>{children}</main>
+      <ToastContainer
+        position="top-right"
+        autoClose={8000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        draggable={false}
+        closeOnClick
+        pauseOnHover
+      />
+    </>
   );
 };
+
+export default Layout;

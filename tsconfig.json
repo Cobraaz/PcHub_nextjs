@@ -19,6 +19,12 @@
     },
     "allowSyntheticDefaultImports": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/*.tsx",
+    "pages/*.tsx"
+  ],
   "exclude": ["node_modules"]
 }
