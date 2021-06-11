@@ -19,7 +19,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { DataProvider } from "store/GlobalState";
 import Layout from "components/Layouts";
 import ThemeProvider from "providers/ThemeProvider";
-const App = ({ Component, pageProps }) => (
+import type { AppProps } from "next/app";
+const App = ({ Component, pageProps }: AppProps) => (
   <>
     <DataProvider>
       <ThemeProvider>

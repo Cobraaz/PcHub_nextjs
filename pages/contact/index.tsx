@@ -1,16 +1,16 @@
 import { useContext, Row, Col, motion } from "helpers/package.import";
 
-import { BaseLayout, BasePage, SignInForm } from "helpers/components.import";
+import { BaseLayout, BasePage } from "helpers/components.import";
 import {
   stagger,
   fadeInUp,
   validateEmail as isEmail,
-  isLength,
   DataContext,
   postData,
 } from "helpers/helper.functions";
 import ContactForm from "components/contact/ContactFrom";
 import React from "react";
+
 const Contact: React.FC = () => {
   const { dispatch } = useContext(DataContext);
 

@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { NextPageContext } from "next";
 
-function Error({ statusCode }) {
+interface StatusCode {
+  statusCode: string;
+}
+
+const Error = ({ statusCode }: StatusCode) => {
   return (
     <>
       <div className="container">
@@ -78,9 +83,9 @@ function Error({ statusCode }) {
       `}</style>
     </>
   );
-}
+};
 
-Error.getInitialProps = ({ res, err }) => {
+Error.getInitialProps = ({ res, err }: NextPageContext) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
   return { statusCode };
 };
