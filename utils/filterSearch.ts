@@ -1,3 +1,15 @@
+import { NextRouter } from "next/router";
+
+interface FilterSearchProps {
+  router: NextRouter;
+  page?: number;
+  category?: string;
+  sort?: string;
+  search?: string;
+  brand?: string;
+  prebuild?: boolean;
+}
+
 const filterSearch = ({
   router,
   page,
@@ -6,12 +18,12 @@ const filterSearch = ({
   search,
   brand,
   prebuild = false,
-}) => {
+}: FilterSearchProps) => {
   const path = router.pathname;
   const query = router.query;
 
   if (category) query.category = category;
-  if (page) query.page = page;
+  if (page) query.page = page as any;
   if (search) query.search = search;
   if (sort) query.sort = sort;
   if (brand) query.brand = brand;
@@ -22,7 +34,7 @@ const filterSearch = ({
         pathname: "/pre-build-pc",
         query: query,
       },
-      null,
+      undefined,
       {
         scroll: false,
       }
@@ -33,7 +45,7 @@ const filterSearch = ({
         pathname: "/",
         query: query,
       },
-      null,
+      undefined,
       {
         scroll: false,
       }
@@ -44,7 +56,7 @@ const filterSearch = ({
         pathname: "/",
         query: query,
       },
-      null,
+      undefined,
       {
         scroll: false,
       }

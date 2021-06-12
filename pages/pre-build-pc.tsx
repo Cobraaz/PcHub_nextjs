@@ -22,7 +22,35 @@ import {
   filterSearch,
 } from "helpers/helper.functions";
 
-const PreBuildPc = ({ products: resProducts, status, result }) => {
+import { GetServerSideProps } from "next";
+
+interface PreBuildPCProps {
+  products: {
+    images: string[];
+    checked: boolean;
+    inStock: number;
+    sold: number;
+    _id: string;
+    title: string;
+    price: number;
+    description: string;
+    content: string;
+    category: string;
+    brand: string;
+    likes: [];
+    comments: [];
+    createdAt: string;
+    updatedAt: string;
+  }[];
+  status: string;
+  result: number;
+}
+
+const PreBuildPc = ({
+  products: resProducts,
+  status,
+  result,
+}: PreBuildPCProps) => {
   const [products, setProducts] = useState(resProducts);
   const [isCheck, setIsCheck] = useState(false);
   const { state, dispatch } = useContext(DataContext);
@@ -40,7 +68,7 @@ const PreBuildPc = ({ products: resProducts, status, result }) => {
     if (Object.keys(router.query).length === 0) setPage(1);
   }, [router.query]);
 
-  const handleCheck = (id) => {
+  const handleCheck = (id: string) => {
     products.forEach((product) => {
       if (product._id === id) product.checked = !product.checked;
     });
@@ -55,8 +83,14 @@ const PreBuildPc = ({ products: resProducts, status, result }) => {
 
   const handleDeleteAll = async () => {
     try {
-      if (auth.user.role !== "user") {
-        let deleteArr = [];
+      if (auth.user!.role !== "user") {
+        let deleteArr: {
+          data: string;
+          id: string;
+          title: string;
+          type: string;
+        }[] = [];
+
         products.forEach((product) => {
           if (product.checked) {
             deleteArr.push({
@@ -82,7 +116,7 @@ const PreBuildPc = ({ products: resProducts, status, result }) => {
     filterSearch({ router, page: page + 1, prebuild: true });
   };
 
-  if (!status === "success") {
+  if (status !== "success") {
     return (
       <>
         <BaseLayout>
@@ -171,13 +205,14 @@ const PreBuildPc = ({ products: resProducts, status, result }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
-  const page = query.page || 1;
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const page: any = query.page || 1;
 
   const { status, result, products } = await getData(
     `product/get_prebuildpc/6079b93dddf2d5405c0b8c35?limit=${page * 6}`
   );
 
+  console.log(products);
   return {
     props: {
       status,
@@ -185,6 +220,6 @@ export async function getServerSideProps({ query }) {
       products,
     },
   };
-}
+};
 
 export default PreBuildPc;

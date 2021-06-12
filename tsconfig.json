@@ -25,6 +25,6 @@
     "**/*.tsx",
     "components/*.tsx",
     "pages/*.tsx"
-  ],
+, "pages/pre-build-pc.tsx", "components/Shared/Filter.js", "components/Product/ProductItem.js"  ],
   "exclude": ["node_modules"]
 }
