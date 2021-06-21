@@ -27,14 +27,42 @@ import {
   filterSearch,
   fadeInUp,
 } from "helpers/helper.functions";
+import { GetServerSideProps } from "next";
 
 import dynamic from "next/dynamic";
 const Masthead = dynamic(() => import("components/Shared/Masthead"), {
   loading: () => <p>...</p>,
   ssr: false,
 });
+interface IndexProps {
+  products: {
+    images: string[];
+    checked: boolean;
+    inStock: number;
+    sold: number;
+    _id: string;
+    title: string;
+    price: number;
+    description: string;
+    content: string;
+    category: string;
+    brand: string;
+    likes: [];
+    comments: [];
+    createdAt: string;
+    updatedAt: string;
+  }[];
+  slideImages: string[];
+  status: string;
+  result: number;
+}
 
-const Home = ({ slideImages, result, products: resProducts, status }) => {
+const Home = ({
+  slideImages,
+  result,
+  products: resProducts,
+  status,
+}: IndexProps) => {
   const [products, setProducts] = useState(resProducts);
   const [isCheck, setIsCheck] = useState(false);
   const router = useRouter();
@@ -57,7 +85,7 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
     if (Object.keys(router.query).length === 0) setPage(1);
   }, [router.query]);
 
-  const handleCheck = (id) => {
+  const handleCheck = (id: string) => {
     products.forEach((product) => {
       if (product._id === id) product.checked = !product.checked;
     });
@@ -72,8 +100,13 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
 
   const handleDeleteAll = async () => {
     try {
-      if (auth.user.role !== "user") {
-        let deleteArr = [];
+      if (auth.user!.role !== "user") {
+        let deleteArr: {
+          data: string;
+          id: string;
+          title: string;
+          type: string;
+        }[] = [];
         products.forEach((product) => {
           if (product.checked) {
             deleteArr.push({
@@ -94,7 +127,7 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
     }
   };
 
-  if (!status === "success") {
+  if (status !== "success") {
     return (
       <>
         <BaseLayout>
@@ -189,8 +222,8 @@ const Home = ({ slideImages, result, products: resProducts, status }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
-  const page = query.page || 1;
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const page: any = query.page || 1;
   const category = query.category || "all";
   const sort = query.sort || "";
   const search = query.search || "all";
@@ -210,6 +243,6 @@ export async function getServerSideProps({ query }) {
       products,
     },
   };
-}
+};
 
 export default Home;

@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { Container, Row } from "reactstrap";
 import { Slide } from "react-slideshow-image";
 
-const Masthead = ({ slideImages: resSlideImages }) => {
+type MAstHead = {
+  slideImages: string[];
+};
+
+const Masthead = ({ slideImages: resSlideImages }: MAstHead) => {
   const [slideImages, setSlideImages] = useState([
     "/images/homepage_masthead.jpg",
     "/images/homepage_masthead2.jpg",
