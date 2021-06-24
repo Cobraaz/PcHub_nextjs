@@ -24,10 +24,10 @@ type ContactFormProps = {
   onSubmit: (
     e: React.FormEvent,
     contactData: {
-      name: String;
-      email: String;
-      phone_no: String;
-      message: String;
+      name: string;
+      email: string;
+      phone_no: string;
+      message: string;
     },
     clearFields: () => void
   ) => void;

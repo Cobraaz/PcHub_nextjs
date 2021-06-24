@@ -20,14 +20,26 @@ const fadeInUp = {
   },
 };
 
-const SignInForm = ({ onSubmit }) => {
+type LoginFormProps = {
+  onSubmit: (
+    e: React.FormEvent,
+    userData: {
+      email: string;
+      password: string;
+    }
+  ) => void;
+};
+
+const SignInForm = ({ onSubmit }: LoginFormProps) => {
   const initialState = {
     email: "",
     password: "",
   };
   const [userData, setUserData] = useState(initialState);
   const { email, password } = userData;
-  const handleChangeInput = (e) => {
+  const handleChangeInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };

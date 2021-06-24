@@ -3,13 +3,28 @@ import { Container } from "reactstrap";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-const PageHeader = ({ header }) => (
+type PageHeader = {
+  header: string;
+};
+
+const PageHeader = ({ header }: PageHeader) => (
   <div className="page-header">
     <h1 className="page-header-title">{header}</h1>
   </div>
 );
 
-const BasePage = (props) => {
+interface BasePageProps {
+  noWrapper?: boolean;
+  indexPage?: boolean;
+  className?: string;
+  title?: string;
+  metaDescription?: string;
+  canonicalPath?: string;
+  header?: string;
+  children: React.ReactChild | React.ReactChild[];
+}
+
+const BasePage = (props: BasePageProps) => {
   const {
     noWrapper,
     indexPage,
