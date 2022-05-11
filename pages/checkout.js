@@ -53,18 +53,20 @@ const Checkout = () => {
 
       const updateCart = async () => {
         for (const item of cartLocal) {
-          const res = await getData(`product/get_by_id/${item._id}`);
-          const { _id, title, images, price, inStock, sold } = res.product;
-          if (inStock > 0) {
-            newArr.push({
-              _id,
-              title,
-              images,
-              price,
-              inStock,
-              sold,
-              quantity: item.quantity > inStock ? 1 : item.quantity,
-            });
+          if (item._id) {
+            const res = await getData(`product/get_by_id/${item._id}`);
+            const { _id, title, images, price, inStock, sold } = res.product;
+            if (inStock > 0) {
+              newArr.push({
+                _id,
+                title,
+                images,
+                price,
+                inStock,
+                sold,
+                quantity: item.quantity > inStock ? 1 : item.quantity,
+              });
+            }
           }
         }
 
@@ -224,11 +226,11 @@ const Checkout = () => {
                   Total:{" "}
                   <span className="text-danger">{numberWithCommas(total)}</span>
                 </h3>
-                <Link href={auth.user ? "#!" : "/signin"}>
+                <Link href={auth.user ? "#!" : "/login"}>
                   <a
                     className="btn btn-dark my-2"
                     onClick={() => {
-                      handlePayment();
+                      auth.user && handlePayment();
                     }}
                   >
                     Proceed with payment

@@ -27,7 +27,7 @@ const ProductsManager = () => {
   const router = useRouter();
   const { id } = router.query;
   const { state, dispatch } = useContext(DataContext);
-  const { categories, auth } = state;
+  const { categories, auth, brands } = state;
   const initialState = {
     product_id: "",
     title: "",
@@ -35,7 +35,8 @@ const ProductsManager = () => {
     inStock: 0,
     description: "",
     content: "",
-    category: "",
+    category: "all",
+    brand: "all",
   };
 
   const [product, setProduct] = useState(initialState);
@@ -106,7 +107,8 @@ const ProductsManager = () => {
     setImages(newArr);
   };
 
-  const { title, price, inStock, description, content, category } = product;
+  const { title, price, inStock, description, content, category, brand } =
+    product;
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -115,7 +117,7 @@ const ProductsManager = () => {
       reader.onload = () => resolve(reader.result);
       reader.onerror = (error) => reject(error);
     });
-
+  console.log(product);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (auth.user.role === "user")
@@ -291,8 +293,26 @@ const ProductsManager = () => {
                   onChange={handleChangeInput}
                   className="custom-select text-capitalize"
                 >
-                  <option value="all">All Products</option>
+                  <option value="all">All Categories</option>
                   {categories.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </Input>
+              </div>
+
+              <div className="input-group-prepend px-0 my-2">
+                <Input
+                  type="select"
+                  name="brand"
+                  id="brand"
+                  value={brand}
+                  onChange={handleChangeInput}
+                  className="custom-select text-capitalize"
+                >
+                  <option value="all">All Brands</option>
+                  {brands.map((item) => (
                     <option key={item._id} value={item._id}>
                       {item.name}
                     </option>

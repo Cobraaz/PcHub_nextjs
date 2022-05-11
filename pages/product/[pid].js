@@ -368,35 +368,35 @@ const DetailProduct = ({ product, products, pid: productId }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const { status, result, products } = await getData("product");
-  const paths = products.map((product) => {
-    return {
-      params: { pid: product._id },
-    };
-  });
-  return { paths, fallback: "blocking" };
-}
-
-export async function getStaticProps({ params: { pid } }) {
-  const { product } = await getData(`product/get_by_id/${pid}`);
-  const { products } = await getData(`product/random_data/${pid}`);
-
-  if (!product) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return { props: { product, products, pid }, revalidate: 1 };
-}
-
-// export async function getServerSideProps({ params: { pid } }) {
-//   const { product } = await getData(`product/get_by_id/${pid}`); // server side rendering
-//   const { products } = await getData(`product/random_data/${pid}`);
-//   return {
-//     props: { product, products }, // will be passed to the page component as props
-//   };
+// export async function getStaticPaths() {
+//   const { status, result, products } = await getData("product");
+//   const paths = products.map((product) => {
+//     return {
+//       params: { pid: product._id },
+//     };
+//   });
+//   return { paths, fallback: "blocking" };
 // }
+
+// export async function getStaticProps({ params: { pid } }) {
+//   const { product } = await getData(`product/get_by_id/${pid}`);
+//   const { products } = await getData(`product/random_data/${pid}`);
+
+//   if (!product) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+
+//   return { props: { product, products, pid }, revalidate: 1 };
+// }
+
+export async function getServerSideProps({ params: { pid } }) {
+  const { product } = await getData(`product/get_by_id/${pid}`); // server side rendering
+  const { products } = await getData(`product/random_data/${pid}`);
+  return {
+    props: { product, products, pid }, // will be passed to the page component as props
+  };
+}
 
 export default DetailProduct;

@@ -28,8 +28,7 @@
     "pages/pre-build-pc.tsx",
     "components/Shared/Filter.js",
     "components/Product/ProductItem.js",
-    "pages/index.tsx",
-    "pages/register.tsx"
-, "pages/login.js", "pages/checkout.js", "components/Layouts/BaseLayout.js"  ],
+    "pages/index.tsx"
+  ],
   "exclude": ["node_modules"]
 }

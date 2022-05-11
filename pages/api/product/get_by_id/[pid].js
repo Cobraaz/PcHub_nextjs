@@ -60,6 +60,7 @@ const updateProduct = Authenticated(async (req, res) => {
       content,
       category,
       images,
+      brand,
     } = req.body;
 
     if (
@@ -69,6 +70,7 @@ const updateProduct = Authenticated(async (req, res) => {
       !description ||
       !content ||
       category === "all" ||
+      brand === "all" ||
       images.length === 0
     )
       return res.status(400).json({ err: "Please add all the fields." });
@@ -83,6 +85,7 @@ const updateProduct = Authenticated(async (req, res) => {
         content,
         category,
         images,
+        brand,
       }
     );
 

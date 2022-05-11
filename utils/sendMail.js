@@ -1,19 +1,30 @@
 var nodemailer = require("nodemailer");
 
-const sendEmail = (to, url, txt) => {
+const sendEmail = async (to, url, txt) => {
+  let testAccount = await nodemailer.createTestAccount();
+
+  // let transporter = nodemailer.createTransport({
+  //   host: "smtp.ethereal.email",
+  //   port: 587,
+  //   secure: false, // true for 465, false for other ports
+  //   auth: {
+  //     user: "bansalanuj1998@gmail.com", // generated ethereal user
+  //     pass: "9999347436", // generated ethereal password
+  //   },
+  // });
+
   var transporter = nodemailer.createTransport({
-    service: "gmail",
-    host: "smtp.example.com",
-    port: 587,
-    secure: false,
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // use SSL
     auth: {
-      user: "anujbansal077@gmail.com",
-      pass: process.env.SENDER_EMAIL_PASSWORD,
+      user: "bansalanuj1998@gmail.com", // generated ethereal user
+      pass: "9999347436", // generated ethereal password
     },
   });
 
   var mailOptions = {
-    from: "anujbansal077@gmail.com",
+    from: "bansalanuj1998@gmail.com",
     to: to,
     subject: "PcHub Store",
     html: `

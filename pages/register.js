@@ -6,7 +6,6 @@ import {
   Link,
   parseCookies,
   motion,
-  useRouter,
 } from "helpers/package.import";
 
 import { BaseLayout, BasePage, RegisterForm } from "helpers/components.import";
@@ -19,26 +18,16 @@ import {
   withAuth,
   valid,
 } from "helpers/helper.functions";
-import { GetServerSideProps } from "next";
 
 const Register = () => {
   const { state, dispatch } = useContext(DataContext);
   const { auth } = state;
-  const router = useRouter();
 
   useEffect(() => {
     if (Object.keys(auth).length !== 0) router.push("/");
   }, [auth]);
 
-  const handleSubmit = async (
-    e: React.FormEvent,
-    userData: {
-      name: string;
-      email: string;
-      password: string;
-      cf_password: string;
-    }
-  ) => {
+  const handleSubmit = async (e, userData) => {
     e.preventDefault();
     const { name, email, password, cf_password } = userData;
 
@@ -91,7 +80,7 @@ const Register = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
   // some auth logic here
   const { res } = ctx;
   const { user } = parseCookies(ctx);
@@ -103,6 +92,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
     props: {}, // will be passed to the page component as props
   };
-};
+}
 
 export default Register;

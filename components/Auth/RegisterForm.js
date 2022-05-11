@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { InputGroupText, InputGroupAddon } from "reactstrap";
 import { motion } from "framer-motion";
 
@@ -19,19 +19,7 @@ const fadeInUp = {
   },
 };
 
-type SigInFormProps = {
-  onSubmit: (
-    e: React.FormEvent,
-    userData: {
-      name: string;
-      email: string;
-      password: string;
-      cf_password: string;
-    }
-  ) => void;
-};
-
-const SignInForm = ({ onSubmit }: SigInFormProps) => {
+const SignInForm = ({ onSubmit }) => {
   const initialState = {
     name: "",
     email: "",
@@ -41,9 +29,7 @@ const SignInForm = ({ onSubmit }: SigInFormProps) => {
   const [userData, setUserData] = useState(initialState);
   const { name, email, password, cf_password } = userData;
 
-  const handleChangeInput = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
