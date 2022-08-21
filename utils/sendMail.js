@@ -19,7 +19,7 @@ const sendEmail = async (to, url, txt) => {
     secure: true, // use SSL
     auth: {
       user: "bansalanuj1998@gmail.com", // generated ethereal user
-      pass: "9999347436", // generated ethereal password
+      pass: "", // generated ethereal password
     },
   });
 
