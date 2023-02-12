@@ -16,7 +16,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.0",
     "browser-image-compression": "^1.0.14",
-    "currency-converter-lt": "^1.1.1",
+    "currency-converter-lt": "^2.0.0-beta.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "framer-motion": "^4.0.0",
